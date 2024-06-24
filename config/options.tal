@@ -1,0 +1,42 @@
+(
+@|config )
+
+%ENABLE { |00 }
+%DISABLE { |01 }
+
+(
+&|options )
+(
+All the options accept: `ENABLE` or `DISABLE`, except for `LOG-LEVEL` which
+accepts from least to most verbose: `OFF`, `ERROR`, `INFO`, `WARN` or `DEBUG`.
+
+ VALUE OPTION
+****************************************************************************** )
+DISABLE @PRINT-BANNER ( print merlin banner on startup )
+ENABLE @FORTH-PROMPT ( prompt is `ok`, ignore unicode and info prompt options )
+ENABLE @UNICODE-PROMPT ( print `փ >` instead of `uxn>` as prompt )
+DISABLE @UNICODE-BANNER ( disabling this option will print an ascii banner )
+
+(
+&|logger )
+DEBUG @LOG-LEVEL ( valid values: OFF ERROR INFO WARN DEBUG ( most verbose ) )
+DISABLE @ERROR-ABORT ( print an error each time an evaluation is aborted )
+DISABLE @INFO-STACKS ( print stacks after each evaluation )
+ENABLE @INFO-PROMPT ( print the heap's `head` pointer inside the prompt )
+DISABLE @INFO-ASSEMBLER-SUMMARY ( print the assembled definition summary )
+DISABLE @WARN-REDEFINITION ( warn on each redefinition )
+
+(
+ENABLE @WARN-LOW-MEMORY ( warn when there are less than 512 free bytes )
+ENABLE @WARN-LOW-ZERO-PAGE-MEMORY ( warn if there are less than 25 free bytes )
+ENABLE @LOG-FILE ( log session to a file )
+)
+
+(
+&|debugger )
+DISABLE @DEBUG-LENGTH ( print the assembled bytecode `length` )
+DISABLE @DEBUG-HEAD-POINTER ( print the head pointer )
+DISABLE @DEBUG-TAIL-POINTER ( print the tail pointer )
+DISABLE @DEBUG-INPUT ( print the input buffer )
+DISABLE @DEBUG-HEAP ( print the heap )
+DISABLE @DEBUG-SYMBOLS ( print the symbols )

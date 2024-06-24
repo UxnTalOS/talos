@@ -1,0 +1,12 @@
+(
+@|logger/info/stacks )
+
+;input ;input-ptr LDA2 EQU2 ?{
+	.LOG-LEVEL .Logger/error GTH NOT ?{
+		.INFO-STACKS ?{
+			( [ LIT2 &count $2 ] INC2 DUP2 ,&count STR2
+			{ "Prompt 20 "# 00 } STH2r pstr pdec <\n> )
+			( <\n> )
+
+			DBG } }
+	;input ;input-ptr STA2 ( reset input-ptr ) }

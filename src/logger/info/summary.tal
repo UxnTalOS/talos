@@ -1,0 +1,5 @@
+(
+@|logger/info/summary )
+
+.INFO-ASSEMBLER-SUMMARY ?{
+	<print-summary> }

@@ -1,0 +1,8 @@
+(
+@|lib/routines )
+
+~../lib/screen/routines.tal
+~../lib/system/routines.tal
+~../lib/memory/routines.tal
+~../lib/signed/routines.tal
+~../lib/string/routines.tal

@@ -1,0 +1,34 @@
+(
+@|logger/data )
+
+@Info [
+	"INFO: \s \0
+	&unused "-- \s "Unused: \s \0
+	&on-repl "expression \0
+	&assembled "Assembled \s \0
+	&in \s "in \s \0
+	&bytes \s "bytes. \n \0
+	&labels \s "labels 29 ". \n \0
+	&sym-ext ".sym \0
+]
+
+@Warning [
+	"WARNING: \s \0
+	&redefinition "Redefining: \0
+]
+
+@Error [
+	"ERROR: \s \0
+	&file "File \0
+	&number "Number \0
+	&length "Length \0
+	&reference "Unknown \s "reference: \0
+	&distance "Relative \s "distance \s "is \s "too \s "far \s "away: \0
+	&symbol "Invalid \s "symbol: \s \0
+	&token "Token \0
+	&sublabel "Sublabel \s "is \s "too \s "long: \s \0
+	&opcode "Invalid \s "opcode: \s \0
+	&nested "Nested \0
+	&zeropage "Zero-page \0
+	&label "Label \s "is \s "too \s "long: \s \0
+]

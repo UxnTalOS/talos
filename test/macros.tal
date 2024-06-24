@@ -1,0 +1,4 @@
+(
+@|test/macros )
+
+%EMIT ( c -- ) { .Console/write DEO }

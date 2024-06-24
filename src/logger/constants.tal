@@ -1,0 +1,10 @@
+(
+@|logger/constants )
+
+|0 @Logger [
+	&off $1
+	&error $1
+	&info $1
+	&warn $1
+	&debug $1
+]

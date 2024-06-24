@@ -1,0 +1,23 @@
+(
+@|logger/routines )
+
+@<set-error> ( name* -- )
+	;Error pstr/ pstr/
+	<\s>
+	;token/buf pstr/
+	;Info/in pstr/
+	;scope pstr/
+	[ LIT2 ". -Console/write ] DEO
+	<\n>
+	#01 ;abort STA
+	JMP2r
+
+@<set-warning> ( name* -- )
+	;Warning pstr/ pstr/
+	<\s>
+	;token/buf pstr/
+	;Info/in pstr/
+	;scope pstr/
+	[ LIT2 ". -Console/write ] DEO
+	<\n>
+	JMP2r

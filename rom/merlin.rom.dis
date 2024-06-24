@@ -1,0 +1,5542 @@
+
+@Main
+0000:   a0 12 19   LIT2 meta
+0003:   80 06      LIT 06
+0005:   37         DEO2
+0006:   a0 1b e0   LIT2 tail/end
+0009:   a0 14 93   LIT2 heap
+000c:   39         SUB2
+000d:   af         STH2k
+000e:   a0 00 00   LIT2 Logger
+0011:   a0 14 93   LIT2 heap
+0014:   a0 00 00   LIT2 Logger
+0017:   a0 fb 40   LIT2 syms
+001a:   ef         STH2kr
+001b:   39         SUB2
+001c:   af         STH2k
+001d:   60 0b b4   JSI mcpyl
+0020:   64         SWP2r
+0021:   6f         STH2r
+0022:   a0 00 00   LIT2 Logger
+0025:   a0 14 93   LIT2 heap
+0028:   60 0b 91   JSI mzero
+002b:   6f         STH2r
+002c:   a0 fb 5b   LIT2 tail-ptr
+002f:   35         STA2
+0030:   a0 14 93   LIT2 heap
+0033:   a0 fb 57   LIT2 head-ptr
+0036:   35         STA2
+0037:   a0 fc 00   LIT2 input
+003a:   a0 fb 55   LIT2 input-ptr
+003d:   35         STA2
+003e:   a0 2a e7   LIT2 2ae7
+0041:   80 08      LIT 08
+0043:   37         DEO2
+0044:   a0 0a 52   LIT2 0a52
+0047:   80 0a      LIT 0a
+0049:   37         DEO2
+004a:   a0 2a 37   LIT2 2a37
+004d:   80 0c      LIT 0c
+004f:   37         DEO2
+0050:   80 01      LIT 01
+0052:   20 00 1c   JCI λ00
+0055:   80 01      LIT 01
+0057:   20 00 06   JCI λ01
+005a:   a0 12 94   LIT2 banner-unicode
+005d:   40 00 03   JMI Main/continue
+
+@λ01
+0060:   a0 13 76   LIT2 banner-ascii
+
+@Main/continue
+0063:   60 0d 98   JSI pstr
+0066:   60 09 f4   JSI free
+0069:   a0 0a 18   LIT2 0a18
+006c:   17         DEO
+006d:   a0 0a 18   LIT2 0a18
+0070:   17         DEO
+
+@λ00
+0071:   80 00      LIT 00
+0073:   20 00 e8   JCI Startup/continue
+0076:   80 01      LIT 01
+0078:   80 00      LIT 00
+007a:   08         EQU
+007b:   20 00 e0   JCI Startup/continue
+007e:   80 01      LIT 01
+0080:   20 00 6e   JCI λ04
+0083:   60 0d 83   JSI pstr:
+0086:   20 20 20   JCI +8224
+0089:   20 20 20   JCI +8224
+008c:   20 4d 65   JCI +19813
+008f:   72         LDR2r
+0090:   6c         JMP2r
+0091:   69         NEQ2r
+0092:   6e         JSR2r
+0093:   20 4f 53   JCI +20307
+0096:   20 e2 80   JCI -7552
+0099:   94         LDAk
+009a:   20 76 30   JCI +30256
+009d:   2e         JSR2
+009e:   65         ROT2r
+009f:   20 28 31   JCI +10289
+00a2:   38         ADD2
+00a3:   4d         JCNr
+00a4:   30         LDZ2
+00a5:   36         DEI2
+00a6:   29         NEQ2
+00a7:   0a         GTH
+00a8:   20 20 20   JCI +8224
+00ab:   d6         DEIkr
+00ac:   83         NIPk
+00ad:   20 20 20   JCI +8224
+00b0:   c2         POPkr
+00b1:   a9         NEQ2k
+00b2:   20 32 30   JCI +12848
+00b5:   32         LDR2
+00b6:   34         LDA2
+00b7:   20 49 73   JCI +18803
+00ba:   6d         JCN2r
+00bb:   61         INC2r
+00bc:   65         ROT2r
+00bd:   6c         JMP2r
+00be:   20 56 65   JCI +22117
+00c1:   6e         JSR2r
+00c2:   65         ROT2r
+00c3:   67         OVR2r
+00c4:   61         INC2r
+00c5:   73         STR2r
+00c6:   20 43 61   JCI +17249
+00c9:   73         STR2r
+00ca:   74         LDA2r
+00cb:   65         ROT2r
+00cc:   6c         JMP2r
+00cd:   6c         JMP2r
+00ce:   c3         NIPkr
+00cf:   b3         STR2k
+00d0:   0a         GTH
+00d1:   20 20 20   JCI +8224
+00d4:   20 20 20   JCI +8224
+00d7:   20 54 79   JCI +21625
+00da:   70         LDZ2r
+00db:   65         ROT2r
+00dc:   20 60 62   JCI +24674
+00df:   79         SUB2r
+00e0:   65         ROT2r
+00e1:   60 20 74   JSI +8308
+00e4:   6f         STH2r
+00e5:   20 65 78   JCI +25976
+00e8:   69         NEQ2r
+00e9:   74         LDA2r
+00ea:   2e         JSR2
+00eb:   0a         GTH
+00ec:   0a         GTH
+00ed:   00         BRK
+00ee:   40 00 6d   JMI Startup/continue
+
+@λ04
+00f1:   60 0d 15   JSI pstr:
+00f4:   0a         GTH
+00f5:   20 20 20   JCI +8224
+00f8:   7c         AND2r
+00f9:   5f         SFTr
+00fa:   20 20 20   JCI +8224
+00fd:   4d         JCNr
+00fe:   65         ROT2r
+00ff:   72         LDR2r
+0100:   6c         JMP2r
+0101:   69         NEQ2r
+0102:   6e         JSR2r
+0103:   20 4f 53   JCI +20307
+0106:   20 2d 2d   JCI +11565
+0109:   20 76 30   JCI +30256
+010c:   2e         JSR2
+010d:   65         ROT2r
+010e:   20 28 31   JCI +10289
+0111:   38         ADD2
+0112:   4d         JCNr
+0113:   30         LDZ2
+0114:   36         DEI2
+0115:   29         NEQ2
+0116:   0a         GTH
+0117:   20 7c 5f   JCI +31839
+011a:   7c         AND2r
+011b:   20 7c 20   JCI +31776
+011e:   20 28 63   JCI +10339
+0121:   29         NEQ2
+0122:   20 32 30   JCI +12848
+0125:   32         LDR2
+0126:   34         LDA2
+0127:   20 49 73   JCI +18803
+012a:   6d         JCN2r
+012b:   61         INC2r
+012c:   65         ROT2r
+012d:   6c         JMP2r
+012e:   20 56 65   JCI +22117
+0131:   6e         JSR2r
+0132:   65         ROT2r
+0133:   67         OVR2r
+0134:   61         INC2r
+0135:   73         STR2r
+0136:   20 43 61   JCI +17249
+0139:   73         STR2r
+013a:   74         LDA2r
+013b:   65         ROT2r
+013c:   6c         JMP2r
+013d:   6c         JMP2r
+013e:   6f         STH2r
+013f:   0a         GTH
+0140:   20 20 20   JCI +8224
+0143:   7c         AND2r
+0144:   20 20 20   JCI +8224
+0147:   20 54 79   JCI +21625
+014a:   70         LDZ2r
+014b:   65         ROT2r
+014c:   20 60 62   JCI +24674
+014f:   79         SUB2r
+0150:   65         ROT2r
+0151:   60 20 74   JSI +8308
+0154:   6f         STH2r
+0155:   20 65 78   JCI +25976
+0158:   69         NEQ2r
+0159:   74         LDA2r
+015a:   2e         JSR2
+015b:   0a         GTH
+015c:   0a         GTH
+015d:   00         BRK
+
+@Startup/continue
+015e:   60 0d ec   JSI greeting
+0161:   60 0d dc   JSI ready
+0164:   80 00      LIT 00
+0166:   80 00      LIT 00
+0168:   08         EQU
+0169:   20 00 03   JCI Main/no-first-prompt
+016c:   60 08 3f   JSI <print-prompt>
+
+@Main/no-first-prompt
+016f:   a0 06 b0   LIT2 REPL
+0172:   80 10      LIT 10
+0174:   37         DEO2
+0175:   00         BRK
+
+@<assemble>
+0176:   67         OVR2r
+0177:   80 01      LIT 01
+0179:   60 00 07   JSI handle-pass
+017c:   80 00      LIT 00
+017e:   60 00 02   JSI handle-pass
+0181:   62         POP2r
+0182:   6c         JMP2r
+
+@handle-pass
+0183:   a0 fb 50   LIT2 scan
+0186:   15         STA
+0187:   67         OVR2r
+0188:   6f         STH2r
+0189:   60 01 5f   JSI <set-head-ptr>
+018c:   80 00      LIT 00
+018e:   a0 06 32   LIT2 Lambda/count
+0191:   15         STA
+0192:   a0 11 1a   LIT2 Info/on-repl
+0195:   60 02 34   JSI <set-scope>
+0198:   60 00 01   JSI handle-input
+019b:   6c         JMP2r
+
+@handle-input
+019c:   a0 fc 00   LIT2 input
+
+@handle-input/loop
+019f:   94         LDAk
+01a0:   60 00 7a   JSI handle-char
+01a3:   21         INC2
+01a4:   94         LDAk
+01a5:   20 ff f7   JCI handle-input/loop
+01a8:   80 0a      LIT 0a
+01aa:   60 00 70   JSI handle-char
+01ad:   22         POP2
+01ae:   6c         JMP2r
+
+@handle-file
+01af:   80 00      LIT 00
+01b1:   a0 03 43   LIT2 <print-summary>/include
+01b4:   15         STA
+01b5:   80 a8      LIT a8
+01b7:   37         DEO2
+01b8:   a0 00 01   LIT2 Logger/error
+01bb:   80 aa      LIT aa
+01bd:   37         DEO2
+01be:   a0 00 00   LIT2 Logger
+
+@handle-file/>s
+01c1:   a0 02 cc   LIT2 handle-file/c
+01c4:   60 0a ef   JSI feof
+01c7:   20 00 3f   JCI handle-file/end
+01ca:   21         INC2
+01cb:   80 00      LIT 00
+01cd:   06         DUP
+01ce:   80 40      LIT 40
+01d0:   09         NEQ
+01d1:   20 00 06   JCI λ05
+01d4:   80 01      LIT 01
+01d6:   a0 08 e5   LIT2 REPL/expression
+01d9:   15         STA
+
+@λ05
+01da:   06         DUP
+01db:   80 5b      LIT 5b
+01dd:   09         NEQ
+01de:   20 00 07   JCI λ06
+01e1:   80 15      LIT 15
+01e3:   12         LDR
+01e4:   01         INC
+01e5:   80 11      LIT 11
+01e7:   13         STR
+
+@λ06
+01e8:   06         DUP
+01e9:   80 5d      LIT 5d
+01eb:   09         NEQ
+01ec:   20 00 14   JCI λ08
+01ef:   80 07      LIT 07
+01f1:   12         LDR
+01f2:   80 01      LIT 01
+01f4:   19         SUB
+01f5:   80 01      LIT 01
+01f7:   13         STR
+01f8:   80 00      LIT 00
+01fa:   20 00 06   JCI λ08
+01fd:   80 01      LIT 01
+01ff:   a0 08 e5   LIT2 REPL/expression
+0202:   15         STA
+
+@λ08
+0203:   60 00 17   JSI handle-char
+0206:   40 ff b8   JMI handle-file/>s
+
+@handle-file/end
+0209:   1d         ORA
+020a:   20 00 0f   JCI λ09
+020d:   a0 fb d6   LIT2 include
+0210:   a0 fb 5d   LIT2 token
+0213:   60 0b 50   JSI scpy
+0216:   a0 11 6c   LIT2 Error/file
+0219:   40 03 3e   JMI <set-error>
+
+@λ09
+021c:   6c         JMP2r
+
+@handle-char
+021d:   a0 fb 5d   LIT2 token
+0220:   60 0a 9e   JSI store-key
+0223:   20 00 01   JCI λ0a
+0226:   6c         JMP2r
+
+@λ0a
+0227:   a0 fb 5e   LIT2 token/buf
+022a:   26         DUP2
+022b:   60 0c 55   JSI parse-token
+022e:   40 0b 44   JMI sclr
+
+@<print-summary>
+0231:   a0 fb 52   LIT2 length
+0234:   34         LDA2
+0235:   a0 00 00   LIT2 Logger
+0238:   28         EQU2
+0239:   20 00 2f   JCI λ0b
+023c:   a0 11 25   LIT2 Info/assembled
+023f:   60 0b c1   JSI pstr/
+0242:   80 01      LIT 01
+0244:   20 00 06   JCI λ0c
+0247:   a0 fb d6   LIT2 include
+024a:   40 00 03   JMI <print-summary>/continue
+
+@λ0c
+024d:   a0 fb 8e   LIT2 scope
+
+@<print-summary>/continue
+0250:   60 0b b0   JSI pstr/
+0253:   80 01      LIT 01
+0255:   80 eb      LIT eb
+0257:   13         STR
+0258:   a0 11 30   LIT2 Info/in
+025b:   60 0b a5   JSI pstr/
+025e:   a0 fb 52   LIT2 length
+0261:   34         LDA2
+0262:   60 0b b0   JSI pdec
+0265:   a0 11 35   LIT2 Info/bytes
+0268:   40 0b 98   JMI pstr/
+
+@λ0b
+026b:   6c         JMP2r
+
+@<write-str>
+026c:   94         LDAk
+026d:   60 00 70   JSI <write>
+0270:   21         INC2
+
+@<write-str>/
+0271:   94         LDAk
+0272:   20 ff f7   JCI <write-str>
+0275:   22         POP2
+0276:   6c         JMP2r
+
+@<write-opcode>
+0277:   60 00 ca   JSI find-opcode
+027a:   40 00 63   JMI <write>
+
+@<write-lithex>
+027d:   60 00 82   JSI is-hex
+0280:   20 00 06   JCI λ0d
+0283:   a0 11 71   LIT2 Error/number
+0286:   60 02 d1   JSI <set-error>
+
+@λ0d
+0289:   26         DUP2
+028a:   60 0a 6c   JSI slen
+028d:   03         NIP
+028e:   06         DUP
+028f:   80 04      LIT 04
+0291:   08         EQU
+0292:   80 50      LIT 50
+0294:   1f         SFT
+0295:   80 80      LIT 80
+0297:   1d         ORA
+0298:   60 00 45   JSI <write>
+029b:   40 00 05   JMI <write-hex>
+
+@<write-rawhex>
+029e:   26         DUP2
+029f:   60 0a 57   JSI slen
+02a2:   03         NIP
+
+@<write-hex>
+02a3:   06         DUP
+02a4:   80 02      LIT 02
+02a6:   09         NEQ
+02a7:   20 00 08   JCI λ0e
+02aa:   02         POP
+02ab:   60 0a a2   JSI shex
+02ae:   03         NIP
+02af:   40 00 2e   JMI <write>
+
+@λ0e
+02b2:   80 04      LIT 04
+02b4:   09         NEQ
+02b5:   20 00 06   JCI λ0f
+02b8:   60 0a 95   JSI shex
+02bb:   40 00 1e   JMI <write-short>
+
+@λ0f
+02be:   22         POP2
+02bf:   a0 11 71   LIT2 Error/number
+02c2:   40 02 95   JMI <set-error>
+
+@<write-call>
+02c5:   0f         STH
+02c6:   60 01 fa   JSI get-ref
+02c9:   a1         INC2k
+02ca:   1d         ORA
+02cb:   20 00 03   JCI λ10
+02ce:   42         POPr
+02cf:   22         POP2
+02d0:   6c         JMP2r
+
+@λ10
+02d1:   4f         STHr
+02d2:   60 00 0b   JSI <write>
+02d5:   a0 fb 57   LIT2 head-ptr
+02d8:   34         LDA2
+02d9:   21         INC2
+02da:   21         INC2
+02db:   39         SUB2
+
+@<write-short>
+02dc:   04         SWP
+02dd:   60 00 00   JSI <write>
+
+@<write>
+02e0:   a0 fb 57   LIT2 head-ptr
+02e3:   34         LDA2
+02e4:   a1         INC2k
+02e5:   2f         STH2
+02e6:   15         STA
+02e7:   60 00 06   JSI <set-length>
+02ea:   6f         STH2r
+
+@<set-head-ptr>
+02eb:   a0 fb 57   LIT2 head-ptr
+02ee:   35         STA2
+02ef:   6c         JMP2r
+
+@<set-length>
+02f0:   a0 fb 50   LIT2 scan
+02f3:   14         LDA
+02f4:   20 00 01   JCI λ11
+02f7:   6c         JMP2r
+
+@λ11
+02f8:   a0 fb 52   LIT2 length
+02fb:   34         LDA2
+02fc:   21         INC2
+02fd:   a0 fb 52   LIT2 length
+0300:   35         STA2
+0301:   6c         JMP2r
+
+@is-hex
+0302:   26         DUP2
+
+@is-hex/>w
+0303:   94         LDAk
+0304:   60 0a 1e   JSI chex
+0307:   01         INC
+0308:   20 00 04   JCI λ12
+030b:   22         POP2
+030c:   80 00      LIT 00
+030e:   6c         JMP2r
+
+@λ12
+030f:   21         INC2
+0310:   94         LDAk
+0311:   20 ff ef   JCI is-hex/>w
+0314:   22         POP2
+0315:   80 01      LIT 01
+0317:   6c         JMP2r
+
+@is-opcode
+0318:   26         DUP2
+0319:   60 00 28   JSI find-opcode
+031c:   20 00 07   JCI λ13
+031f:   26         DUP2
+0320:   a0 10 cb   LIT2 opcodes/brk
+0323:   40 09 f0   JMI scmp3
+
+@λ13
+0326:   80 01      LIT 01
+0328:   6c         JMP2r
+
+@is-runic
+0329:   94         LDAk
+032a:   80 08      LIT 08
+032c:   13         STR
+032d:   a0 11 07   LIT2 runes/end
+0330:   a0 10 ce   LIT2 runes
+
+@is-runic/loop
+0333:   94         LDAk
+0334:   80 00      LIT 00
+0336:   08         EQU
+0337:   20 00 08   JCI is-runic/end
+033a:   a0 00 03   LIT2 Logger/warn
+033d:   38         ADD2
+033e:   aa         GTH2k
+033f:   20 ff f1   JCI is-runic/loop
+
+@is-runic/end
+0342:   29         NEQ2
+0343:   6c         JMP2r
+
+@find-opcode
+0344:   2f         STH2
+0345:   a0 20 00   LIT2 2000
+
+@find-opcode/loop
+0348:   80 00      LIT 00
+034a:   07         OVR
+034b:   80 03      LIT 03
+034d:   1a         MUL
+034e:   a0 10 6b   LIT2 opcodes
+0351:   38         ADD2
+0352:   ef         STH2kr
+0353:   60 09 c0   JSI scmp3
+0356:   20 00 0a   JCI find-opcode/on-found
+0359:   01         INC
+035a:   8a         GTHk
+035b:   20 ff ea   JCI find-opcode/loop
+035e:   22         POP2
+035f:   62         POP2r
+0360:   80 00      LIT 00
+0362:   6c         JMP2r
+
+@find-opcode/on-found
+0363:   03         NIP
+0364:   06         DUP
+0365:   80 00      LIT 00
+0367:   08         EQU
+0368:   80 70      LIT 70
+036a:   1f         SFT
+036b:   1d         ORA
+036c:   6f         STH2r
+036d:   a0 00 03   LIT2 Logger/warn
+0370:   38         ADD2
+0371:   c0 00      LITr 00
+
+@find-opcode/while
+0373:   94         LDAk
+0374:   80 20      LIT 20
+0376:   07         OVR
+0377:   80 32      LIT 32
+0379:   08         EQU
+037a:   20 00 21   JCI find-opcode/end
+037d:   06         DUP
+037e:   18         ADD
+037f:   07         OVR
+0380:   80 72      LIT 72
+0382:   08         EQU
+0383:   20 00 18   JCI find-opcode/end
+0386:   06         DUP
+0387:   18         ADD
+0388:   07         OVR
+0389:   80 6b      LIT 6b
+038b:   08         EQU
+038c:   20 00 0f   JCI find-opcode/end
+038f:   06         DUP
+0390:   18         ADD
+0391:   07         OVR
+0392:   80 00      LIT 00
+0394:   08         EQU
+0395:   20 00 06   JCI find-opcode/end
+0398:   a0 11 e3   LIT2 Error/opcode
+039b:   60 01 bc   JSI <set-error>
+
+@find-opcode/end
+039e:   0f         STH
+039f:   02         POP
+03a0:   5d         ORAr
+03a1:   21         INC2
+03a2:   94         LDAk
+03a3:   20 ff cd   JCI find-opcode/while
+03a6:   22         POP2
+03a7:   4f         STHr
+03a8:   18         ADD
+03a9:   6c         JMP2r
+
+@get-sublabel
+03aa:   26         DUP2
+03ab:   60 09 4b   JSI slen
+03ae:   a0 fb be   LIT2 sublabel
+03b1:   60 09 45   JSI slen
+03b4:   38         ADD2
+03b5:   a0 00 30   LIT2 Audio0
+03b8:   2b         LTH2
+03b9:   20 00 06   JCI λ14
+03bc:   a0 11 cc   LIT2 Error/sublabel
+03bf:   40 01 98   JMI <set-error>
+
+@λ14
+03c2:   a0 00 00   LIT2 Logger
+03c5:   60 09 9e   JSI scpy
+03c8:   a0 fb be   LIT2 sublabel
+03cb:   6c         JMP2r
+
+@<set-scope>
+03cc:   26         DUP2
+03cd:   e0 fb 8e   LIT2r scope
+
+@<set-scope>/>w
+03d0:   94         LDAk
+03d1:   80 2f      LIT 2f
+03d3:   08         EQU
+03d4:   20 00 09   JCI <set-scope>/end
+03d7:   94         LDAk
+03d8:   ef         STH2kr
+03d9:   15         STA
+03da:   61         INC2r
+03db:   21         INC2
+03dc:   94         LDAk
+03dd:   20 ff f0   JCI <set-scope>/>w
+
+@<set-scope>/end
+03e0:   22         POP2
+03e1:   80 00      LIT 00
+03e3:   6f         STH2r
+03e4:   15         STA
+03e5:   a0 fb 8e   LIT2 scope
+03e8:   a0 fb be   LIT2 sublabel
+03eb:   60 09 78   JSI scpy
+03ee:   a0 2f 00   LIT2 2f00
+03f1:   a0 fb be   LIT2 sublabel
+03f4:   60 08 fd   JSI scap/
+03f7:   a1         INC2k
+03f8:   80 c8      LIT c8
+03fa:   33         STR2
+03fb:   35         STA2
+
+@<create-symbol>
+03fc:   a0 fb 50   LIT2 scan
+03ff:   14         LDA
+0400:   20 00 02   JCI λ15
+0403:   22         POP2
+0404:   6c         JMP2r
+
+@λ15
+0405:   26         DUP2
+0406:   a0 11 1a   LIT2 Info/on-repl
+0409:   60 08 f4   JSI scmp
+040c:   20 00 72   JCI λ16
+040f:   60 fe f0   JSI is-hex
+0412:   20 00 6e   JCI <create-symbol>/invalid
+0415:   60 ff 00   JSI is-opcode
+0418:   20 00 68   JCI <create-symbol>/invalid
+041b:   60 ff 0b   JSI is-runic
+041e:   20 00 62   JCI <create-symbol>/invalid
+0421:   26         DUP2
+0422:   60 00 65   JSI find-symbol
+0425:   21         INC2
+0426:   1d         ORA
+0427:   80 00      LIT 00
+0429:   08         EQU
+042a:   20 00 16   JCI λ19
+042d:   80 04      LIT 04
+042f:   80 02      LIT 02
+0431:   0a         GTH
+0432:   80 00      LIT 00
+0434:   08         EQU
+0435:   20 00 0b   JCI λ19
+0438:   80 01      LIT 01
+043a:   20 00 06   JCI λ19
+043d:   a0 11 58   LIT2 Warning/redefinition
+0440:   60 01 45   JSI <set-warning>
+
+@λ19
+0443:   26         DUP2
+0444:   60 08 b2   JSI slen
+0447:   21         INC2
+0448:   a0 fb 5b   LIT2 tail-ptr
+044b:   34         LDA2
+044c:   24         SWP2
+044d:   39         SUB2
+044e:   a0 fb 5b   LIT2 tail-ptr
+0451:   35         STA2
+0452:   a0 fb 5b   LIT2 tail-ptr
+0455:   34         LDA2
+0456:   60 09 0d   JSI scpy
+0459:   80 00      LIT 00
+045b:   a0 fb 5b   LIT2 tail-ptr
+045e:   34         LDA2
+045f:   a0 00 01   LIT2 Logger/error
+0462:   39         SUB2
+0463:   26         DUP2
+0464:   a0 fb 5b   LIT2 tail-ptr
+0467:   35         STA2
+0468:   15         STA
+0469:   a0 fb 57   LIT2 head-ptr
+046c:   34         LDA2
+046d:   a0 fb 5b   LIT2 tail-ptr
+0470:   b4         LDA2k
+0471:   a0 00 02   LIT2 Logger/info
+0474:   39         SUB2
+0475:   26         DUP2
+0476:   25         ROT2
+0477:   35         STA2
+0478:   35         STA2
+0479:   a0 00 00   LIT2 Logger
+047c:   21         INC2
+047d:   80 fa      LIT fa
+047f:   33         STR2
+0480:   6c         JMP2r
+
+@λ16
+0481:   22         POP2
+0482:   6c         JMP2r
+
+@<create-symbol>/invalid
+0483:   22         POP2
+0484:   a0 11 b5   LIT2 Error/symbol
+0487:   40 00 d0   JMI <set-error>
+
+@find-symbol
+048a:   80 11      LIT 11
+048c:   33         STR2
+048d:   a0 fb 40   LIT2 syms
+0490:   a0 fb 5b   LIT2 tail-ptr
+0493:   34         LDA2
+
+@find-symbol/loop
+0494:   a8         EQU2k
+0495:   20 00 16   JCI find-symbol/end
+0498:   a0 00 03   LIT2 Logger/warn
+049b:   38         ADD2
+049c:   26         DUP2
+049d:   a0 00 00   LIT2 Logger
+04a0:   60 08 5d   JSI scmp
+04a3:   20 00 0e   JCI find-symbol/found
+04a6:   60 08 4b   JSI scap/
+04a9:   21         INC2
+04aa:   aa         GTH2k
+04ab:   20 ff e6   JCI find-symbol/loop
+
+@find-symbol/end
+04ae:   22         POP2
+04af:   22         POP2
+04b0:   a0 ff ff   LIT2 ffff
+04b3:   6c         JMP2r
+
+@find-symbol/found
+04b4:   a0 00 03   LIT2 Logger/warn
+04b7:   39         SUB2
+04b8:   23         NIP2
+04b9:   6c         JMP2r
+
+@get-any
+04ba:   60 fe 45   JSI is-hex
+04bd:   20 08 90   JCI shex
+04c0:   40 00 12   JMI get-ref/eager
+
+@get-ref
+04c3:   94         LDAk
+04c4:   80 7b      LIT 7b
+04c6:   09         NEQ
+04c7:   20 00 04   JCI λ1a
+04ca:   22         POP2
+04cb:   60 00 63   JSI Lambda/push
+
+@λ1a
+04ce:   a0 fb 50   LIT2 scan
+04d1:   14         LDA
+04d2:   20 00 30   JCI get-ref/scan
+
+@get-ref/eager
+04d5:   94         LDAk
+04d6:   80 2f      LIT 2f
+04d8:   09         NEQ
+04d9:   20 00 04   JCI λ1b
+04dc:   21         INC2
+04dd:   60 fe ca   JSI get-sublabel
+
+@λ1b
+04e0:   94         LDAk
+04e1:   80 26      LIT 26
+04e3:   09         NEQ
+04e4:   20 00 04   JCI λ1c
+04e7:   21         INC2
+04e8:   60 fe bf   JSI get-sublabel
+
+@λ1c
+04eb:   60 ff 9c   JSI find-symbol
+04ee:   a1         INC2k
+04ef:   a0 00 00   LIT2 Logger
+04f2:   28         EQU2
+04f3:   20 00 09   JCI λ1d
+04f6:   a1         INC2k
+04f7:   21         INC2
+04f8:   94         LDAk
+04f9:   01         INC
+04fa:   05         ROT
+04fb:   05         ROT
+04fc:   15         STA
+04fd:   34         LDA2
+04fe:   6c         JMP2r
+
+@λ1d
+04ff:   a0 11 7f   LIT2 Error/reference
+0502:   60 00 55   JSI <set-error>
+
+@get-ref/scan
+0505:   6c         JMP2r
+
+@get-rel
+0506:   60 ff ba   JSI get-ref
+0509:   a0 fb 57   LIT2 head-ptr
+050c:   34         LDA2
+050d:   21         INC2
+050e:   21         INC2
+050f:   39         SUB2
+0510:   26         DUP2
+0511:   a0 00 80   LIT2 Control
+0514:   38         ADD2
+0515:   02         POP
+0516:   20 00 02   JCI λ1e
+0519:   03         NIP
+051a:   6c         JMP2r
+
+@λ1e
+051b:   a0 fb 50   LIT2 scan
+051e:   14         LDA
+051f:   20 00 06   JCI λ1f
+0522:   a0 11 92   LIT2 Error/distance
+0525:   60 00 32   JSI <set-error>
+
+@λ1f
+0528:   22         POP2
+0529:   80 ff      LIT ff
+052b:   6c         JMP2r
+
+@Lambda
+052c:   ce         JSRkr
+052d:   bb         DIV2k
+
+@Lambda/id
+052e:   00         BRK
+052f:   00         BRK
+0530:   00         BRK
+
+@Lambda/push
+0531:   80 00      LIT 00
+0533:   81         INCk
+0534:   80 fb      LIT fb
+0536:   13         STR
+
+@Lambda/name
+0537:   06         DUP
+0538:   80 04      LIT 04
+053a:   1f         SFT
+053b:   60 07 ff   JSI hexc
+053e:   04         SWP
+053f:   60 07 fb   JSI hexc
+0542:   80 e9      LIT e9
+0544:   33         STR2
+0545:   a0 06 2c   LIT2 Lambda
+0548:   6c         JMP2r
+
+@Lambda/pop
+0549:   80 e6      LIT e6
+054b:   12         LDR
+054c:   80 01      LIT 01
+054e:   19         SUB
+054f:   06         DUP
+0550:   80 df      LIT df
+0552:   13         STR
+0553:   60 ff e1   JSI Lambda/name
+0556:   60 fe a3   JSI <create-symbol>
+0559:   6c         JMP2r
+
+@<set-error>
+055a:   a0 11 64   LIT2 Error
+055d:   60 08 a3   JSI pstr/
+0560:   60 08 a0   JSI pstr/
+0563:   a0 20 18   LIT2 2018
+0566:   17         DEO
+0567:   a0 fb 5e   LIT2 token/buf
+056a:   60 08 96   JSI pstr/
+056d:   a0 11 30   LIT2 Info/in
+0570:   60 08 90   JSI pstr/
+0573:   a0 fb 8e   LIT2 scope
+0576:   60 08 8a   JSI pstr/
+0579:   a0 2e 18   LIT2 2e18
+057c:   17         DEO
+057d:   a0 0a 18   LIT2 0a18
+0580:   17         DEO
+0581:   80 01      LIT 01
+0583:   a0 fb 51   LIT2 abort
+0586:   15         STA
+0587:   6c         JMP2r
+
+@<set-warning>
+0588:   a0 11 4e   LIT2 Warning
+058b:   60 08 75   JSI pstr/
+058e:   60 08 72   JSI pstr/
+0591:   a0 20 18   LIT2 2018
+0594:   17         DEO
+0595:   a0 fb 5e   LIT2 token/buf
+0598:   60 08 68   JSI pstr/
+059b:   a0 11 30   LIT2 Info/in
+059e:   60 08 62   JSI pstr/
+05a1:   a0 fb 8e   LIT2 scope
+05a4:   60 08 5c   JSI pstr/
+05a7:   a0 2e 18   LIT2 2e18
+05aa:   17         DEO
+05ab:   a0 0a 18   LIT2 0a18
+05ae:   17         DEO
+05af:   6c         JMP2r
+
+@REPL
+05b0:   80 12      LIT 12
+05b2:   16         DEI
+05b3:   06         DUP
+05b4:   80 40      LIT 40
+05b6:   09         NEQ
+05b7:   20 00 06   JCI λ20
+05ba:   80 01      LIT 01
+05bc:   a0 08 e5   LIT2 REPL/expression
+05bf:   15         STA
+
+@λ20
+05c0:   06         DUP
+05c1:   80 5b      LIT 5b
+05c3:   09         NEQ
+05c4:   20 00 0c   JCI λ21
+05c7:   80 00      LIT 00
+05c9:   80 51      LIT 51
+05cb:   13         STR
+05cc:   80 53      LIT 53
+05ce:   12         LDR
+05cf:   01         INC
+05d0:   80 4f      LIT 4f
+05d2:   13         STR
+
+@λ21
+05d3:   06         DUP
+05d4:   80 5d      LIT 5d
+05d6:   09         NEQ
+05d7:   20 00 09   JCI λ22
+05da:   80 45      LIT 45
+05dc:   12         LDR
+05dd:   80 01      LIT 01
+05df:   19         SUB
+05e0:   80 3f      LIT 3f
+05e2:   13         STR
+
+@λ22
+05e3:   06         DUP
+05e4:   80 28      LIT 28
+05e6:   09         NEQ
+05e7:   20 00 07   JCI λ23
+05ea:   80 00      LIT 00
+05ec:   80 18      LIT 18
+05ee:   13         STR
+05ef:   02         POP
+05f0:   00         BRK
+
+@λ23
+05f1:   06         DUP
+05f2:   80 29      LIT 29
+05f4:   09         NEQ
+05f5:   20 00 07   JCI λ24
+05f8:   80 01      LIT 01
+05fa:   80 0a      LIT 0a
+05fc:   13         STR
+05fd:   02         POP
+05fe:   00         BRK
+
+@λ24
+05ff:   06         DUP
+0600:   80 0a      LIT 0a
+0602:   08         EQU
+0603:   20 00 16   JCI λ25
+0606:   80 01      LIT 01
+0608:   20 00 02   JCI λ26
+060b:   02         POP
+060c:   00         BRK
+
+@λ26
+060d:   a0 fb 55   LIT2 input-ptr
+0610:   34         LDA2
+0611:   15         STA
+0612:   a0 fb 55   LIT2 input-ptr
+0615:   34         LDA2
+0616:   21         INC2
+0617:   a0 fb 55   LIT2 input-ptr
+061a:   35         STA2
+061b:   00         BRK
+
+@λ25
+061c:   80 01      LIT 01
+061e:   20 00 79   JCI λ27
+0621:   80 00      LIT 00
+0623:   20 00 08   JCI λ28
+0626:   80 01      LIT 01
+0628:   80 f2      LIT f2
+062a:   13         STR
+062b:   40 00 6c   JMI λ27
+
+@λ28
+062e:   80 00      LIT 00
+0630:   20 00 03   JCI λ29
+0633:   40 00 55   JMI REPL/no-multiline-prompt
+
+@λ29
+0636:   80 04      LIT 04
+0638:   80 01      LIT 01
+063a:   0a         GTH
+063b:   80 00      LIT 00
+063d:   08         EQU
+063e:   20 00 2d   JCI λ2b
+0641:   80 00      LIT 00
+0643:   20 00 28   JCI λ2b
+0646:   80 00      LIT 00
+0648:   20 00 11   JCI λ2c
+064b:   60 00 0b   JSI λ2d
+064e:   20 20 20   JCI +8224
+0651:   20 20 20   JCI +8224
+0654:   2e         JSR2
+0655:   2e         JSR2
+0656:   2e         JSR2
+0657:   20 00 40   JCI λ27
+065a:   00         BRK
+065b:   2b         LTH2
+
+@λ2c
+065c:   60 00 0c   JSI λ2e
+065f:   20 20 20   JCI +8224
+0662:   20 20 20   JCI +8224
+0665:   20 2e 2e   JCI +11822
+0668:   2e         JSR2
+0669:   20 00 40   JCI +64
+066c:   00         BRK
+066d:   19         SUB
+
+@λ2b
+066e:   80 00      LIT 00
+0670:   20 00 0b   JCI λ2f
+0673:   60 00 05   JSI λ30
+0676:   2e         JSR2
+0677:   61         INC2r
+0678:   2e         JSR2
+0679:   20 00 40   JCI +64
+067c:   00         BRK
+067d:   09         NEQ
+
+@λ2f
+067e:   60 00 06   JSI λ31
+0681:   20 2e 61   JCI +11873
+0684:   2e         JSR2
+0685:   20 00 6f   JCI +111
+0688:   60 07 73   JSI pstr
+
+@REPL/no-multiline-prompt
+068b:   a0 fb 55   LIT2 input-ptr
+068e:   34         LDA2
+068f:   15         STA
+0690:   a0 fb 55   LIT2 input-ptr
+0693:   34         LDA2
+0694:   21         INC2
+0695:   a0 fb 55   LIT2 input-ptr
+0698:   35         STA2
+0699:   00         BRK
+
+@λ27
+069a:   02         POP
+069b:   a0 00 00   LIT2 Logger
+069e:   a0 fb 52   LIT2 length
+06a1:   35         STA2
+06a2:   80 04      LIT 04
+06a4:   80 03      LIT 03
+06a6:   0a         GTH
+06a7:   80 00      LIT 00
+06a9:   08         EQU
+06aa:   20 01 1b   JCI λ3d
+06ad:   80 01      LIT 01
+06af:   20 00 24   JCI λ33
+06b2:   60 00 1b   JSI λ34
+06b5:   44         SWPr
+06b6:   45         ROTr
+06b7:   42         POPr
+06b8:   55         STAr
+06b9:   47         OVRr
+06ba:   3a         MUL2
+06bb:   20 69 6e   JCI +26990
+06be:   70         LDZ2r
+06bf:   75         STA2r
+06c0:   74         LDA2r
+06c1:   20 62 65   JCI +25189
+06c4:   66         DUP2r
+06c5:   6f         STH2r
+06c6:   72         LDR2r
+06c7:   65         ROT2r
+06c8:   20 65 76   JCI +25974
+06cb:   61         INC2r
+06cc:   6c         JMP2r
+06cd:   3a         MUL2
+06ce:   0a         GTH
+06cf:   00         BRK
+
+@λ34
+06d0:   a0 fc 00   LIT2 input
+06d3:   60 04 3e   JSI pobj
+
+@λ33
+06d6:   80 01      LIT 01
+06d8:   20 00 30   JCI λ35
+06db:   60 00 1e   JSI λ36
+06de:   44         SWPr
+06df:   45         ROTr
+06e0:   42         POPr
+06e1:   55         STAr
+06e2:   47         OVRr
+06e3:   3a         MUL2
+06e4:   20 68 65   JCI +26725
+06e7:   61         INC2r
+06e8:   64         SWP2r
+06e9:   2d         JCN2
+06ea:   70         LDZ2r
+06eb:   74         LDA2r
+06ec:   72         LDR2r
+06ed:   20 62 65   JCI +25189
+06f0:   66         DUP2r
+06f1:   6f         STH2r
+06f2:   72         LDR2r
+06f3:   65         ROT2r
+06f4:   20 65 76   JCI +25974
+06f7:   61         INC2r
+06f8:   6c         JMP2r
+06f9:   3a         MUL2
+06fa:   20 00 6f   JCI +111
+06fd:   60 06 fe   JSI pstr
+0700:   a0 fb 57   LIT2 head-ptr
+0703:   34         LDA2
+0704:   60 05 92   JSI phex
+0707:   a0 0a 18   LIT2 0a18
+070a:   17         DEO
+
+@λ35
+070b:   80 01      LIT 01
+070d:   20 00 23   JCI λ37
+0710:   60 00 1a   JSI λ38
+0713:   44         SWPr
+0714:   45         ROTr
+0715:   42         POPr
+0716:   55         STAr
+0717:   47         OVRr
+0718:   3a         MUL2
+0719:   20 68 65   JCI +26725
+071c:   61         INC2r
+071d:   70         LDZ2r
+071e:   20 62 65   JCI +25189
+0721:   66         DUP2r
+0722:   6f         STH2r
+0723:   72         LDR2r
+0724:   65         ROT2r
+0725:   20 65 76   JCI +25974
+0728:   61         INC2r
+0729:   6c         JMP2r
+072a:   3a         MUL2
+072b:   0a         GTH
+072c:   00         BRK
+
+@λ38
+072d:   a0 14 93   LIT2 heap
+0730:   60 03 e1   JSI pobj
+
+@λ37
+0733:   80 01      LIT 01
+0735:   20 00 30   JCI λ39
+0738:   60 00 1e   JSI λ3a
+073b:   44         SWPr
+073c:   45         ROTr
+073d:   42         POPr
+073e:   55         STAr
+073f:   47         OVRr
+0740:   3a         MUL2
+0741:   20 74 61   JCI +29793
+0744:   69         NEQ2r
+0745:   6c         JMP2r
+0746:   2d         JCN2
+0747:   70         LDZ2r
+0748:   74         LDA2r
+0749:   72         LDR2r
+074a:   20 62 65   JCI +25189
+074d:   66         DUP2r
+074e:   6f         STH2r
+074f:   72         LDR2r
+0750:   65         ROT2r
+0751:   20 65 76   JCI +25974
+0754:   61         INC2r
+0755:   6c         JMP2r
+0756:   3a         MUL2
+0757:   20 00 6f   JCI +111
+075a:   60 06 a1   JSI pstr
+075d:   a0 fb 5b   LIT2 tail-ptr
+0760:   34         LDA2
+0761:   60 05 35   JSI phex
+0764:   a0 0a 18   LIT2 0a18
+0767:   17         DEO
+
+@λ39
+0768:   80 01      LIT 01
+076a:   20 00 27   JCI λ3b
+076d:   60 00 1d   JSI λ3c
+0770:   44         SWPr
+0771:   45         ROTr
+0772:   42         POPr
+0773:   55         STAr
+0774:   47         OVRr
+0775:   3a         MUL2
+0776:   20 73 79   JCI +29561
+0779:   6d         JCN2r
+077a:   62         POP2r
+077b:   6f         STH2r
+077c:   6c         JMP2r
+077d:   73         STR2r
+077e:   20 62 65   JCI +25189
+0781:   66         DUP2r
+0782:   6f         STH2r
+0783:   72         LDR2r
+0784:   65         ROT2r
+0785:   20 65 76   JCI +25974
+0788:   61         INC2r
+0789:   6c         JMP2r
+078a:   3a         MUL2
+078b:   0a         GTH
+078c:   00         BRK
+
+@λ3c
+078d:   a0 fb 5b   LIT2 tail-ptr
+0790:   34         LDA2
+0791:   60 03 80   JSI pobj
+
+@λ3b
+0794:   80 01      LIT 01
+0796:   20 00 2f   JCI λ3d
+0799:   60 00 1d   JSI λ3e
+079c:   0a         GTH
+079d:   44         SWPr
+079e:   45         ROTr
+079f:   42         POPr
+07a0:   55         STAr
+07a1:   47         OVRr
+07a2:   3a         MUL2
+07a3:   20 6c 65   JCI +27749
+07a6:   6e         JSR2r
+07a7:   67         OVR2r
+07a8:   74         LDA2r
+07a9:   68         EQU2r
+07aa:   20 62 65   JCI +25189
+07ad:   66         DUP2r
+07ae:   6f         STH2r
+07af:   72         LDR2r
+07b0:   65         ROT2r
+07b1:   20 65 76   JCI +25974
+07b4:   61         INC2r
+07b5:   6c         JMP2r
+07b6:   3a         MUL2
+07b7:   20 00 6f   JCI +111
+07ba:   60 06 41   JSI pstr
+07bd:   a0 fb 52   LIT2 length
+07c0:   34         LDA2
+07c1:   60 06 51   JSI pdec
+07c4:   a0 0a 18   LIT2 0a18
+07c7:   17         DEO
+
+@λ3d
+07c8:   a0 fb 57   LIT2 head-ptr
+07cb:   34         LDA2
+07cc:   26         DUP2
+07cd:   a0 fb 59   LIT2 prev-head
+07d0:   35         STA2
+07d1:   2f         STH2
+07d2:   60 f9 a1   JSI <assemble>
+07d5:   a0 fb 51   LIT2 abort
+07d8:   14         LDA
+07d9:   20 01 77   JCI REPL/expr-abort
+07dc:   80 01      LIT 01
+07de:   20 00 03   JCI λ3f
+07e1:   60 fa 4d   JSI <print-summary>
+
+@λ3f
+07e4:   80 00      LIT 00
+07e6:   20 00 23   JCI λ40
+07e9:   a0 fb 57   LIT2 head-ptr
+07ec:   34         LDA2
+07ed:   2f         STH2
+07ee:   80 a0      LIT a0
+07f0:   ef         STH2kr
+07f1:   15         STA
+07f2:   a0 09 0d   LIT2 REPL/expr-return
+07f5:   ef         STH2kr
+07f6:   21         INC2
+07f7:   35         STA2
+07f8:   80 2c      LIT 2c
+07fa:   6f         STH2r
+07fb:   21         INC2
+07fc:   21         INC2
+07fd:   21         INC2
+07fe:   15         STA
+07ff:   ef         STH2kr
+0800:   a0 fb 57   LIT2 head-ptr
+0803:   35         STA2
+0804:   a0 0a 8a   LIT2 REPL/on-eval
+0807:   80 10      LIT 10
+0809:   37         DEO2
+080a:   6f         STH2r
+080b:   2c         JMP2
+
+@λ40
+080c:   62         POP2r
+
+@REPL/expr-return
+080d:   a0 06 b0   LIT2 REPL
+0810:   80 10      LIT 10
+0812:   37         DEO2
+0813:   80 00      LIT 00
+0815:   80 cd      LIT cd
+0817:   13         STR
+0818:   a0 04 00   LIT2 0400
+081b:   a0 00 00   LIT2 Logger
+081e:   a0 fc 00   LIT2 input
+0821:   60 03 98   JSI mzero
+0824:   80 04      LIT 04
+0826:   80 03      LIT 03
+0828:   0a         GTH
+0829:   80 00      LIT 00
+082b:   08         EQU
+082c:   20 00 ed   JCI λ4a
+082f:   80 01      LIT 01
+0831:   20 00 2f   JCI λ42
+0834:   60 00 1d   JSI λ43
+0837:   44         SWPr
+0838:   45         ROTr
+0839:   42         POPr
+083a:   55         STAr
+083b:   47         OVRr
+083c:   3a         MUL2
+083d:   20 68 65   JCI +26725
+0840:   61         INC2r
+0841:   64         SWP2r
+0842:   2d         JCN2
+0843:   70         LDZ2r
+0844:   74         LDA2r
+0845:   72         LDR2r
+0846:   20 61 66   JCI +24934
+0849:   74         LDA2r
+084a:   65         ROT2r
+084b:   72         LDR2r
+084c:   20 65 76   JCI +25974
+084f:   61         INC2r
+0850:   6c         JMP2r
+0851:   3a         MUL2
+0852:   20 00 6f   JCI +111
+0855:   60 05 a6   JSI pstr
+0858:   a0 fb 57   LIT2 head-ptr
+085b:   34         LDA2
+085c:   60 04 3a   JSI phex
+085f:   a0 0a 18   LIT2 0a18
+0862:   17         DEO
+
+@λ42
+0863:   80 01      LIT 01
+0865:   20 00 22   JCI λ44
+0868:   60 00 19   JSI λ45
+086b:   44         SWPr
+086c:   45         ROTr
+086d:   42         POPr
+086e:   55         STAr
+086f:   47         OVRr
+0870:   3a         MUL2
+0871:   20 68 65   JCI +26725
+0874:   61         INC2r
+0875:   70         LDZ2r
+0876:   20 61 66   JCI +24934
+0879:   74         LDA2r
+087a:   65         ROT2r
+087b:   72         LDR2r
+087c:   20 65 76   JCI +25974
+087f:   61         INC2r
+0880:   6c         JMP2r
+0881:   3a         MUL2
+0882:   0a         GTH
+0883:   00         BRK
+
+@λ45
+0884:   a0 14 93   LIT2 heap
+0887:   60 02 8a   JSI pobj
+
+@λ44
+088a:   80 01      LIT 01
+088c:   20 00 2f   JCI λ46
+088f:   60 00 1d   JSI λ47
+0892:   44         SWPr
+0893:   45         ROTr
+0894:   42         POPr
+0895:   55         STAr
+0896:   47         OVRr
+0897:   3a         MUL2
+0898:   20 74 61   JCI +29793
+089b:   69         NEQ2r
+089c:   6c         JMP2r
+089d:   2d         JCN2
+089e:   70         LDZ2r
+089f:   74         LDA2r
+08a0:   72         LDR2r
+08a1:   20 61 66   JCI +24934
+08a4:   74         LDA2r
+08a5:   65         ROT2r
+08a6:   72         LDR2r
+08a7:   20 65 76   JCI +25974
+08aa:   61         INC2r
+08ab:   6c         JMP2r
+08ac:   3a         MUL2
+08ad:   20 00 6f   JCI +111
+08b0:   60 05 4b   JSI pstr
+08b3:   a0 fb 5b   LIT2 tail-ptr
+08b6:   34         LDA2
+08b7:   60 03 df   JSI phex
+08ba:   a0 0a 18   LIT2 0a18
+08bd:   17         DEO
+
+@λ46
+08be:   80 01      LIT 01
+08c0:   20 00 26   JCI λ48
+08c3:   60 00 1c   JSI λ49
+08c6:   44         SWPr
+08c7:   45         ROTr
+08c8:   42         POPr
+08c9:   55         STAr
+08ca:   47         OVRr
+08cb:   3a         MUL2
+08cc:   20 73 79   JCI +29561
+08cf:   6d         JCN2r
+08d0:   62         POP2r
+08d1:   6f         STH2r
+08d2:   6c         JMP2r
+08d3:   73         STR2r
+08d4:   20 61 66   JCI +24934
+08d7:   74         LDA2r
+08d8:   65         ROT2r
+08d9:   72         LDR2r
+08da:   20 65 76   JCI +25974
+08dd:   61         INC2r
+08de:   6c         JMP2r
+08df:   3a         MUL2
+08e0:   0a         GTH
+08e1:   00         BRK
+
+@λ49
+08e2:   a0 fb 5b   LIT2 tail-ptr
+08e5:   34         LDA2
+08e6:   60 02 2b   JSI pobj
+
+@λ48
+08e9:   80 01      LIT 01
+08eb:   20 00 2e   JCI λ4a
+08ee:   60 00 1c   JSI λ4b
+08f1:   0a         GTH
+08f2:   44         SWPr
+08f3:   45         ROTr
+08f4:   42         POPr
+08f5:   55         STAr
+08f6:   47         OVRr
+08f7:   3a         MUL2
+08f8:   20 6c 65   JCI +27749
+08fb:   6e         JSR2r
+08fc:   67         OVR2r
+08fd:   74         LDA2r
+08fe:   68         EQU2r
+08ff:   20 61 66   JCI +24934
+0902:   74         LDA2r
+0903:   65         ROT2r
+0904:   72         LDR2r
+0905:   20 65 76   JCI +25974
+0908:   61         INC2r
+0909:   6c         JMP2r
+090a:   3a         MUL2
+090b:   20 00 6f   JCI +111
+090e:   60 04 ed   JSI pstr
+0911:   a0 fb 52   LIT2 length
+0914:   34         LDA2
+0915:   60 04 fd   JSI pdec
+0918:   a0 0a 18   LIT2 0a18
+091b:   17         DEO
+
+@λ4a
+091c:   a0 fc 00   LIT2 input
+091f:   a0 fb 55   LIT2 input-ptr
+0922:   34         LDA2
+0923:   28         EQU2
+0924:   20 00 1b   JCI λ4c
+0927:   80 04      LIT 04
+0929:   80 01      LIT 01
+092b:   0a         GTH
+092c:   80 00      LIT 00
+092e:   08         EQU
+092f:   20 00 09   JCI λ4e
+0932:   80 01      LIT 01
+0934:   20 00 04   JCI λ4e
+0937:   a0 00 0e   LIT2 System/debug
+093a:   17         DEO
+
+@λ4e
+093b:   a0 fc 00   LIT2 input
+093e:   a0 fb 55   LIT2 input-ptr
+0941:   35         STA2
+
+@λ4c
+0942:   80 00      LIT 00
+0944:   20 00 04   JCI λ4f
+0947:   60 00 64   JSI <print-prompt>
+094a:   00         BRK
+
+@λ4f
+094b:   a0 0a 18   LIT2 0a18
+094e:   17         DEO
+094f:   60 00 5c   JSI <print-prompt>
+0952:   00         BRK
+
+@REPL/expr-abort
+0953:   80 04      LIT 04
+0955:   80 00      LIT 00
+0957:   0a         GTH
+0958:   80 00      LIT 00
+095a:   08         EQU
+095b:   20 00 20   JCI λ51
+095e:   80 01      LIT 01
+0960:   20 00 1b   JCI λ51
+0963:   60 00 14   JSI λ52
+0966:   45         ROTr
+0967:   52         LDRr
+0968:   52         LDRr
+0969:   4f         STHr
+096a:   52         LDRr
+096b:   3a         MUL2
+096c:   20 41 62   JCI +16738
+096f:   6f         STH2r
+0970:   72         LDR2r
+0971:   74         LDA2r
+0972:   69         NEQ2r
+0973:   6e         JSR2r
+0974:   67         OVR2r
+0975:   2e         JSR2
+0976:   2e         JSR2
+0977:   2e         JSR2
+0978:   0a         GTH
+0979:   00         BRK
+
+@λ52
+097a:   6f         STH2r
+097b:   60 04 80   JSI pstr
+
+@λ51
+097e:   60 00 ab   JSI <>!
+0981:   80 00      LIT 00
+0983:   a0 fb 51   LIT2 abort
+0986:   15         STA
+0987:   40 fe 83   JMI REPL/expr-return
+
+@REPL/on-eval
+098a:   80 12      LIT 12
+098c:   16         DEI
+098d:   80 0a      LIT 0a
+098f:   09         NEQ
+0990:   20 00 15   JCI λ53
+0993:   80 00      LIT 00
+0995:   81         INCk
+0996:   80 fb      LIT fb
+0998:   13         STR
+0999:   80 02      LIT 02
+099b:   09         NEQ
+099c:   20 00 08   JCI λ54
+099f:   80 00      LIT 00
+09a1:   80 f0      LIT f0
+09a3:   13         STR
+09a4:   40 ff ac   JMI REPL/expr-abort
+
+@λ54
+09a7:   00         BRK
+
+@λ53
+09a8:   80 00      LIT 00
+09aa:   80 e7      LIT e7
+09ac:   13         STR
+09ad:   00         BRK
+
+@<print-prompt>
+09ae:   80 00      LIT 00
+09b0:   20 00 06   JCI λ55
+09b3:   a0 0a ef   LIT2 <print-prompt>/ok
+09b6:   40 04 45   JMI pstr
+
+@λ55
+09b9:   80 00      LIT 00
+09bb:   20 00 06   JCI λ56
+09be:   a0 0a f9   LIT2 <print-prompt>/prompt-start-unicode
+09c1:   40 00 03   JMI <print-prompt>/continue
+
+@λ56
+09c4:   a0 0a f5   LIT2 <print-prompt>/prompt-start
+
+@<print-prompt>/continue
+09c7:   60 04 34   JSI pstr
+09ca:   80 04      LIT 04
+09cc:   80 02      LIT 02
+09ce:   0a         GTH
+09cf:   80 00      LIT 00
+09d1:   08         EQU
+09d2:   20 00 14   JCI λ58
+09d5:   80 00      LIT 00
+09d7:   20 00 0f   JCI λ58
+09da:   a0 5b 18   LIT2 5b18
+09dd:   17         DEO
+09de:   a0 fb 57   LIT2 head-ptr
+09e1:   34         LDA2
+09e2:   60 02 b4   JSI phex
+09e5:   a0 5d 18   LIT2 5d18
+09e8:   17         DEO
+
+@λ58
+09e9:   a0 0a fd   LIT2 <print-prompt>/prompt-end
+09ec:   40 04 0f   JMI pstr
+
+@<print-prompt>/ok
+09ef:   20 20 6f   JCI +8303
+09f2:   6b         LTH2r
+09f3:   0a         GTH
+09f4:   00         BRK
+
+@<print-prompt>/prompt-start
+09f5:   75         STA2r
+09f6:   78         ADD2r
+09f7:   6e         JSR2r
+09f8:   00         BRK
+
+@<print-prompt>/prompt-start-unicode
+09f9:   d6         DEIkr
+09fa:   83         NIPk
+09fb:   20 00 3e   JCI +62
+09fe:   20 00 0f   JCI +15
+0a01:   80 2a      LIT 2a
+0a03:   37         DEO2
+0a04:   80 28      LIT 28
+0a06:   37         DEO2
+0a07:   4f         STHr
+0a08:   80 2e      LIT 2e
+0a0a:   17         DEO
+0a0b:   6c         JMP2r
+
+@<draw-sprite>
+0a0c:   0f         STH
+0a0d:   80 2a      LIT 2a
+0a0f:   37         DEO2
+0a10:   80 28      LIT 28
+0a12:   37         DEO2
+0a13:   80 2c      LIT 2c
+0a15:   37         DEO2
+0a16:   4f         STHr
+0a17:   80 2f      LIT 2f
+0a19:   17         DEO
+0a1a:   6c         JMP2r
+
+@bye
+0a1b:   a0 80 0f   LIT2 800f
+0a1e:   17         DEO
+0a1f:   00         BRK
+
+@<>
+0a20:   6f         STH2r
+0a21:   80 05      LIT 05
+0a23:   33         STR2
+0a24:   a0 00 0e   LIT2 System/debug
+0a27:   17         DEO
+0a28:   a0 00 00   LIT2 Logger
+0a2b:   2c         JMP2
+
+@<>!
+0a2c:   6f         STH2r
+0a2d:   80 2a      LIT 2a
+0a2f:   33         STR2
+0a30:   e0 80 00   LIT2r 8000
+
+@<>!/loop-wst
+0a33:   a0 00 00   LIT2 Logger
+0a36:   41         INCr
+0a37:   c9         NEQkr
+0a38:   4f         STHr
+0a39:   20 ff f7   JCI <>!/loop-wst
+0a3c:   a0 00 00   LIT2 Logger
+0a3f:   62         POP2r
+0a40:   80 00      LIT 00
+0a42:   80 04      LIT 04
+0a44:   17         DEO
+0a45:   a0 80 00   LIT2 8000
+
+@<>!/loop-rst
+0a48:   e0 00 00   LIT2r Logger
+0a4b:   01         INC
+0a4c:   89         NEQk
+0a4d:   20 ff f8   JCI <>!/loop-rst
+0a50:   e0 00 00   LIT2r Logger
+0a53:   22         POP2
+0a54:   80 00      LIT 00
+0a56:   80 05      LIT 05
+0a58:   17         DEO
+0a59:   a0 00 00   LIT2 Logger
+0a5c:   2c         JMP2
+
+@free
+0a5d:   a0 01 00   LIT2 Main
+0a60:   a0 fb 54   LIT2 zp-ptr
+0a63:   14         LDA
+0a64:   80 00      LIT 00
+0a66:   04         SWP
+0a67:   39         SUB2
+0a68:   af         STH2k
+0a69:   a0 0b f1   LIT2 free/free
+0a6c:   60 03 8f   JSI pstr
+0a6f:   a0 fb 5b   LIT2 tail-ptr
+0a72:   34         LDA2
+0a73:   a0 fb 57   LIT2 head-ptr
+0a76:   34         LDA2
+0a77:   39         SUB2
+0a78:   ef         STH2kr
+0a79:   38         ADD2
+0a7a:   60 03 98   JSI pdec
+0a7d:   a0 42 18   LIT2 4218
+0a80:   17         DEO
+0a81:   a0 20 18   LIT2 2018
+0a84:   17         DEO
+0a85:   a0 28 18   LIT2 2818
+0a88:   17         DEO
+0a89:   a0 0c 0f   LIT2 free/ZP
+0a8c:   60 03 6f   JSI pstr
+0a8f:   ef         STH2kr
+0a90:   60 03 82   JSI pdec
+0a93:   a0 42 18   LIT2 4218
+0a96:   17         DEO
+0a97:   a0 29 18   LIT2 2918
+0a9a:   17         DEO
+0a9b:   a0 0b f8   LIT2 free/used
+0a9e:   60 03 5d   JSI pstr
+0aa1:   a0 fb 57   LIT2 head-ptr
+0aa4:   34         LDA2
+0aa5:   a0 01 00   LIT2 Main
+0aa8:   39         SUB2
+0aa9:   af         STH2k
+0aaa:   38         ADD2
+0aab:   a0 fb 40   LIT2 syms
+0aae:   a0 fb 5b   LIT2 tail-ptr
+0ab1:   34         LDA2
+0ab2:   39         SUB2
+0ab3:   af         STH2k
+0ab4:   38         ADD2
+0ab5:   a0 04 00   LIT2 0400
+0ab8:   38         ADD2
+0ab9:   65         ROT2r
+0aba:   6f         STH2r
+0abb:   39         SUB2
+0abc:   60 03 56   JSI pdec
+0abf:   a0 42 18   LIT2 4218
+0ac2:   17         DEO
+0ac3:   a0 20 18   LIT2 2018
+0ac6:   17         DEO
+0ac7:   a0 28 18   LIT2 2818
+0aca:   17         DEO
+0acb:   a0 0c 00   LIT2 free/heap
+0ace:   60 03 2d   JSI pstr
+0ad1:   64         SWP2r
+0ad2:   6f         STH2r
+0ad3:   60 03 3f   JSI pdec
+0ad6:   a0 42 18   LIT2 4218
+0ad9:   17         DEO
+0ada:   a0 0c 07   LIT2 free/syms
+0add:   60 03 1e   JSI pstr
+0ae0:   6f         STH2r
+0ae1:   60 03 31   JSI pdec
+0ae4:   a0 42 18   LIT2 4218
+0ae7:   17         DEO
+0ae8:   a0 29 18   LIT2 2918
+0aeb:   17         DEO
+0aec:   a0 2e 18   LIT2 2e18
+0aef:   17         DEO
+0af0:   6c         JMP2r
+
+@free/free
+0af1:   46         DUPr
+0af2:   72         LDR2r
+0af3:   65         ROT2r
+0af4:   65         ROT2r
+0af5:   3a         MUL2
+0af6:   20 00 2f   JCI +47
+0af9:   55         STAr
+0afa:   73         STR2r
+0afb:   65         ROT2r
+0afc:   64         SWP2r
+0afd:   3a         MUL2
+0afe:   20 00 68   JCI +104
+0b01:   65         ROT2r
+0b02:   61         INC2r
+0b03:   70         LDZ2r
+0b04:   3a         MUL2
+0b05:   20 00 2f   JCI +47
+0b08:   73         STR2r
+0b09:   79         SUB2r
+0b0a:   6d         JCN2r
+0b0b:   73         STR2r
+0b0c:   3a         MUL2
+0b0d:   20 00 5a   JCI +90
+0b10:   50         LDZr
+0b11:   3a         MUL2
+0b12:   20 00 a0   JCI mfill/length
+0b15:   0a         GTH
+0b16:   18         ADD
+0b17:   17         DEO
+0b18:   64         SWP2r
+0b19:   6f         STH2r
+0b1a:   60 02 e1   JSI pstr
+0b1d:   60 00 05   JSI pmem
+0b20:   a0 0a 18   LIT2 0a18
+0b23:   17         DEO
+0b24:   6c         JMP2r
+
+@pmem
+0b25:   af         STH2k
+0b26:   26         DUP2
+0b27:   60 01 6f   JSI phex
+0b2a:   a0 20 18   LIT2 2018
+0b2d:   17         DEO
+0b2e:   a0 20 18   LIT2 2018
+0b31:   17         DEO
+0b32:   a0 00 00   LIT2 Logger
+
+@pmem/>loop-bytes
+0b35:   b8         ADD2k
+0b36:   14         LDA
+0b37:   60 01 63   JSI phex/byte
+0b3a:   06         DUP
+0b3b:   80 0f      LIT 0f
+0b3d:   1c         AND
+0b3e:   06         DUP
+0b3f:   80 07      LIT 07
+0b41:   09         NEQ
+0b42:   20 00 04   JCI λ59
+0b45:   a0 20 18   LIT2 2018
+0b48:   17         DEO
+
+@λ59
+0b49:   80 0f      LIT 0f
+0b4b:   09         NEQ
+0b4c:   20 00 41   JCI λ5a
+0b4f:   a0 20 18   LIT2 2018
+0b52:   17         DEO
+0b53:   a0 20 18   LIT2 2018
+0b56:   17         DEO
+0b57:   a0 7c 18   LIT2 7c18
+0b5a:   17         DEO
+0b5b:   b8         ADD2k
+0b5c:   26         DUP2
+0b5d:   21         INC2
+0b5e:   24         SWP2
+0b5f:   a0 00 0f   LIT2 System/state
+0b62:   39         SUB2
+
+@pmem/>loop-chars
+0b63:   94         LDAk
+0b64:   86         DUPk
+0b65:   80 20      LIT 20
+0b67:   0a         GTH
+0b68:   04         SWP
+0b69:   80 7f      LIT 7f
+0b6b:   0b         LTH
+0b6c:   1c         AND
+0b6d:   20 00 03   JCI λ5b
+0b70:   02         POP
+0b71:   80 2e      LIT 2e
+
+@λ5b
+0b73:   80 18      LIT 18
+0b75:   17         DEO
+0b76:   21         INC2
+0b77:   aa         GTH2k
+0b78:   20 ff e8   JCI pmem/>loop-chars
+0b7b:   22         POP2
+0b7c:   22         POP2
+0b7d:   a0 7c 18   LIT2 7c18
+0b80:   17         DEO
+0b81:   a0 0a 18   LIT2 0a18
+0b84:   17         DEO
+0b85:   26         DUP2
+0b86:   21         INC2
+0b87:   ef         STH2kr
+0b88:   38         ADD2
+0b89:   60 01 0d   JSI phex
+0b8c:   a0 20 18   LIT2 2018
+0b8f:   17         DEO
+
+@λ5a
+0b90:   a0 20 18   LIT2 2018
+0b93:   17         DEO
+0b94:   01         INC
+0b95:   89         NEQk
+0b96:   20 ff 9c   JCI pmem/>loop-bytes
+0b99:   22         POP2
+0b9a:   22         POP2
+0b9b:   62         POP2r
+0b9c:   a0 0a 18   LIT2 0a18
+0b9f:   17         DEO
+0ba0:   6c         JMP2r
+
+@mfill
+0ba1:   80 17      LIT 17
+0ba3:   13         STR
+0ba4:   80 12      LIT 12
+0ba6:   33         STR2
+0ba7:   80 0d      LIT 0d
+0ba9:   33         STR2
+0baa:   80 08      LIT 08
+0bac:   33         STR2
+0bad:   a0 0c b4   LIT2 mfill/cmd
+0bb0:   80 02      LIT 02
+0bb2:   37         DEO2
+0bb3:   6c         JMP2r
+
+@mfill/cmd
+0bb4:   00         BRK
+
+@mfill/length
+0bb5:   00         BRK
+0bb6:   00         BRK
+
+@mfill/bank
+0bb7:   00         BRK
+0bb8:   00         BRK
+
+@mfill/addr
+0bb9:   00         BRK
+0bba:   00         BRK
+
+@mfill/value
+0bbb:   00         BRK
+
+@mzero
+0bbc:   80 12      LIT 12
+0bbe:   33         STR2
+0bbf:   80 0d      LIT 0d
+0bc1:   33         STR2
+0bc2:   80 08      LIT 08
+0bc4:   33         STR2
+0bc5:   a0 0c cc   LIT2 mzero/cmd
+0bc8:   80 02      LIT 02
+0bca:   37         DEO2
+0bcb:   6c         JMP2r
+
+@mzero/cmd
+0bcc:   00         BRK
+
+@mzero/length
+0bcd:   00         BRK
+0bce:   00         BRK
+
+@mzero/bank
+0bcf:   00         BRK
+0bd0:   00         BRK
+
+@mzero/addr
+0bd1:   00         BRK
+0bd2:   00         BRK
+0bd3:   00         BRK
+
+@mcpyl
+0bd4:   80 1c      LIT 1c
+0bd6:   33         STR2
+0bd7:   80 17      LIT 17
+0bd9:   33         STR2
+0bda:   80 12      LIT 12
+0bdc:   33         STR2
+0bdd:   80 0d      LIT 0d
+0bdf:   33         STR2
+0be0:   80 08      LIT 08
+0be2:   33         STR2
+0be3:   a0 0c ea   LIT2 mcpyl/cmd
+0be6:   80 02      LIT 02
+0be8:   37         DEO2
+0be9:   6c         JMP2r
+
+@mcpyl/cmd
+0bea:   01         INC
+
+@mcpyl/length
+0beb:   00         BRK
+0bec:   00         BRK
+
+@mcpyl/src-bank
+0bed:   00         BRK
+0bee:   00         BRK
+
+@mcpyl/src
+0bef:   00         BRK
+0bf0:   00         BRK
+
+@mcpyl/dst-bank
+0bf1:   00         BRK
+0bf2:   00         BRK
+
+@mcpyl/dst
+0bf3:   00         BRK
+0bf4:   00         BRK
+
+@mcpyr
+0bf5:   80 1c      LIT 1c
+0bf7:   33         STR2
+0bf8:   80 17      LIT 17
+0bfa:   33         STR2
+0bfb:   80 12      LIT 12
+0bfd:   33         STR2
+0bfe:   80 0d      LIT 0d
+0c00:   33         STR2
+0c01:   80 08      LIT 08
+0c03:   33         STR2
+0c04:   a0 0d 0b   LIT2 mcpyr/cmd
+0c07:   80 02      LIT 02
+0c09:   37         DEO2
+0c0a:   6c         JMP2r
+
+@mcpyr/cmd
+0c0b:   02         POP
+
+@mcpyr/length
+0c0c:   00         BRK
+0c0d:   00         BRK
+
+@mcpyr/src-bank
+0c0e:   00         BRK
+0c0f:   00         BRK
+
+@mcpyr/src
+0c10:   00         BRK
+0c11:   00         BRK
+
+@mcpyr/dst-bank
+0c12:   00         BRK
+0c13:   00         BRK
+
+@mcpyr/dst
+0c14:   00         BRK
+0c15:   00         BRK
+
+@LDBk
+0c16:   27         OVR2
+0c17:   27         OVR2
+
+@LDB
+0c18:   80 12      LIT 12
+0c1a:   33         STR2
+0c1b:   80 0d      LIT 0d
+0c1d:   33         STR2
+0c1e:   a0 0d 28   LIT2 LDB/cmd
+0c21:   80 02      LIT 02
+0c23:   37         DEO2
+0c24:   80 0c      LIT 0c
+0c26:   12         LDR
+0c27:   6c         JMP2r
+
+@LDB/cmd
+0c28:   01         INC
+0c29:   00         BRK
+0c2a:   01         INC
+
+@LDB/src-bank
+0c2b:   00         BRK
+0c2c:   00         BRK
+
+@LDB/src
+0c2d:   00         BRK
+0c2e:   00         BRK
+0c2f:   00         BRK
+0c30:   00         BRK
+0c31:   0d         JCN
+0c32:   33         STR2
+
+@LDB/val
+0c33:   00         BRK
+
+@LDBr
+0c34:   6f         STH2r
+0c35:   6f         STH2r
+0c36:   24         SWP2
+0c37:   40 ff de   JMI LDB
+
+@LDB2
+0c3a:   80 12      LIT 12
+0c3c:   33         STR2
+0c3d:   80 0d      LIT 0d
+0c3f:   33         STR2
+0c40:   a0 0d 4a   LIT2 LDB2/cmd
+0c43:   80 02      LIT 02
+0c45:   37         DEO2
+0c46:   80 0c      LIT 0c
+0c48:   32         LDR2
+0c49:   6c         JMP2r
+
+@LDB2/cmd
+0c4a:   01         INC
+0c4b:   00         BRK
+0c4c:   02         POP
+
+@LDB2/src-bank
+0c4d:   00         BRK
+0c4e:   00         BRK
+
+@LDB2/src
+0c4f:   00         BRK
+0c50:   00         BRK
+0c51:   00         BRK
+0c52:   00         BRK
+0c53:   0d         JCN
+0c54:   55         STAr
+
+@LDB2/val
+0c55:   00         BRK
+0c56:   00         BRK
+
+@STB
+0c57:   80 16      LIT 16
+0c59:   33         STR2
+0c5a:   80 11      LIT 11
+0c5c:   33         STR2
+0c5d:   80 12      LIT 12
+0c5f:   13         STR
+0c60:   a0 0d 67   LIT2 STB/cmd
+0c63:   80 02      LIT 02
+0c65:   37         DEO2
+0c66:   6c         JMP2r
+
+@STB/cmd
+0c67:   01         INC
+0c68:   00         BRK
+0c69:   01         INC
+0c6a:   00         BRK
+0c6b:   00         BRK
+0c6c:   0d         JCN
+0c6d:   72         LDR2r
+
+@STB/dst-bank
+0c6e:   00         BRK
+0c6f:   00         BRK
+
+@STB/dst
+0c70:   00         BRK
+0c71:   00         BRK
+
+@STB/val
+0c72:   00         BRK
+
+@STB2
+0c73:   80 16      LIT 16
+0c75:   33         STR2
+0c76:   80 11      LIT 11
+0c78:   33         STR2
+0c79:   80 12      LIT 12
+0c7b:   33         STR2
+0c7c:   a0 0d 83   LIT2 STB2/cmd
+0c7f:   80 02      LIT 02
+0c81:   37         DEO2
+0c82:   6c         JMP2r
+
+@STB2/cmd
+0c83:   01         INC
+0c84:   00         BRK
+0c85:   02         POP
+0c86:   00         BRK
+0c87:   00         BRK
+0c88:   0d         JCN
+0c89:   8e         JSRk
+
+@STB2/dst-bank
+0c8a:   00         BRK
+0c8b:   00         BRK
+
+@STB2/dst
+0c8c:   00         BRK
+0c8d:   00         BRK
+
+@STB2/val
+0c8e:   00         BRK
+0c8f:   00         BRK
+
+@NEG
+0c90:   80 ff      LIT ff
+0c92:   1a         MUL
+0c93:   6c         JMP2r
+
+@NEG2
+0c94:   a0 ff ff   LIT2 ffff
+0c97:   3a         MUL2
+0c98:   6c         JMP2r
+
+@phex
+0c99:   04         SWP
+0c9a:   60 00 00   JSI phex/byte
+
+@phex/byte
+0c9d:   06         DUP
+0c9e:   80 04      LIT 04
+0ca0:   1f         SFT
+0ca1:   60 00 00   JSI phex/nibble
+
+@phex/nibble
+0ca4:   80 0f      LIT 0f
+0ca6:   1c         AND
+0ca7:   06         DUP
+0ca8:   80 09      LIT 09
+0caa:   0a         GTH
+0cab:   80 27      LIT 27
+0cad:   1a         MUL
+0cae:   18         ADD
+0caf:   80 30      LIT 30
+0cb1:   18         ADD
+0cb2:   80 18      LIT 18
+0cb4:   17         DEO
+0cb5:   6c         JMP2r
+
+@feof
+0cb6:   80 ac      LIT ac
+0cb8:   37         DEO2
+0cb9:   80 a2      LIT a2
+0cbb:   36         DEI2
+0cbc:   a0 00 00   LIT2 Logger
+0cbf:   28         EQU2
+0cc0:   6c         JMP2r
+
+@store-key
+0cc1:   85         ROTk
+0cc2:   03         NIP
+0cc3:   03         NIP
+0cc4:   80 21      LIT 21
+0cc6:   0b         LTH
+0cc7:   20 00 21   JCI store-key/eval
+0cca:   94         LDAk
+0ccb:   80 2f      LIT 2f
+0ccd:   08         EQU
+0cce:   20 00 14   JCI store-key/overflow
+0cd1:   2f         STH2
+0cd2:   80 00      LIT 00
+0cd4:   ef         STH2kr
+0cd5:   94         LDAk
+0cd6:   80 00      LIT 00
+0cd8:   04         SWP
+0cd9:   38         ADD2
+0cda:   21         INC2
+0cdb:   35         STA2
+0cdc:   6f         STH2r
+0cdd:   94         LDAk
+0cde:   01         INC
+0cdf:   05         ROT
+0ce0:   05         ROT
+0ce1:   15         STA
+0ce2:   80 00      LIT 00
+0ce4:   6c         JMP2r
+
+@store-key/overflow
+0ce5:   a0 12 05   LIT2 Error/label
+0ce8:   60 f8 6f   JSI <set-error>
+
+@store-key/eval
+0ceb:   05         ROT
+0cec:   02         POP
+0ced:   94         LDAk
+0cee:   80 00      LIT 00
+0cf0:   24         SWP2
+0cf1:   15         STA
+0cf2:   6c         JMP2r
+
+@scap
+0cf3:   21         INC2
+
+@scap/
+0cf4:   94         LDAk
+0cf5:   20 ff fb   JCI scap
+0cf8:   6c         JMP2r
+
+@slen
+0cf9:   26         DUP2
+0cfa:   60 ff f7   JSI scap/
+0cfd:   24         SWP2
+0cfe:   39         SUB2
+0cff:   6c         JMP2r
+
+@scmp
+0d00:   2f         STH2
+
+@scmp/l
+0d01:   94         LDAk
+0d02:   20 00 05   JCI λ5c
+
+@scmp/d
+0d05:   14         LDA
+0d06:   54         LDAr
+0d07:   4f         STHr
+0d08:   08         EQU
+0d09:   6c         JMP2r
+
+@λ5c
+0d0a:   94         LDAk
+0d0b:   d4         LDAkr
+0d0c:   4f         STHr
+0d0d:   09         NEQ
+0d0e:   20 ff f4   JCI scmp/d
+0d11:   21         INC2
+0d12:   61         INC2r
+0d13:   40 ff eb   JMI scmp/l
+
+@scmp3
+0d16:   2f         STH2
+0d17:   d4         LDAkr
+0d18:   94         LDAk
+0d19:   4f         STHr
+0d1a:   09         NEQ
+0d1b:   20 00 02   JCI λ5d
+0d1e:   61         INC2r
+0d1f:   21         INC2
+
+@λ5d
+0d20:   74         LDA2r
+0d21:   34         LDA2
+0d22:   6f         STH2r
+0d23:   28         EQU2
+0d24:   6c         JMP2r
+
+@chex
+0d25:   80 30      LIT 30
+0d27:   19         SUB
+0d28:   06         DUP
+0d29:   80 0a      LIT 0a
+0d2b:   0b         LTH
+0d2c:   20 00 0d   JCI chex/end
+0d2f:   80 27      LIT 27
+0d31:   19         SUB
+0d32:   06         DUP
+0d33:   80 10      LIT 10
+0d35:   0b         LTH
+0d36:   20 00 03   JCI chex/end
+0d39:   02         POP
+0d3a:   80 ff      LIT ff
+
+@chex/end
+0d3c:   6c         JMP2r
+
+@hexc
+0d3d:   80 0f      LIT 0f
+0d3f:   1c         AND
+0d40:   80 0a      LIT 0a
+0d42:   8b         LTHk
+0d43:   20 00 05   JCI λ5e
+0d46:   19         SUB
+0d47:   80 61      LIT 61
+0d49:   18         ADD
+0d4a:   6c         JMP2r
+
+@λ5e
+0d4b:   02         POP
+0d4c:   80 30      LIT 30
+0d4e:   18         ADD
+0d4f:   6c         JMP2r
+
+@shex
+0d50:   e0 00 00   LIT2r Logger
+
+@shex/>w
+0d53:   c0 40      LITr 40
+0d55:   7f         SFT2r
+0d56:   94         LDAk
+0d57:   60 ff cb   JSI chex
+0d5a:   c0 00      LITr 00
+0d5c:   0f         STH
+0d5d:   78         ADD2r
+0d5e:   21         INC2
+0d5f:   94         LDAk
+0d60:   20 ff f0   JCI shex/>w
+0d63:   22         POP2
+0d64:   6f         STH2r
+0d65:   6c         JMP2r
+
+@scpy
+0d66:   2f         STH2
+
+@scpy/>w
+0d67:   94         LDAk
+0d68:   80 00      LIT 00
+0d6a:   ef         STH2kr
+0d6b:   35         STA2
+0d6c:   61         INC2r
+0d6d:   21         INC2
+0d6e:   94         LDAk
+0d6f:   20 ff f5   JCI scpy/>w
+0d72:   22         POP2
+0d73:   62         POP2r
+0d74:   6c         JMP2r
+
+@sclr
+0d75:   80 00      LIT 00
+0d77:   05         ROT
+0d78:   05         ROT
+
+@sclr/>w
+0d79:   95         STAk
+0d7a:   21         INC2
+0d7b:   94         LDAk
+0d7c:   20 ff fa   JCI sclr/>w
+0d7f:   15         STA
+0d80:   6c         JMP2r
+
+@key
+0d81:   a0 0e 88   LIT2 key/on-key
+0d84:   80 10      LIT 10
+0d86:   37         DEO2
+0d87:   00         BRK
+
+@key/on-key
+0d88:   80 12      LIT 12
+0d8a:   16         DEI
+0d8b:   06         DUP
+0d8c:   80 0a      LIT 0a
+0d8e:   09         NEQ
+0d8f:   20 00 01   JCI λ5f
+0d92:   6c         JMP2r
+
+@λ5f
+0d93:   a0 0e 9a   LIT2 key/on-ignore
+0d96:   80 10      LIT 10
+0d98:   37         DEO2
+0d99:   00         BRK
+
+@key/on-ignore
+0d9a:   80 12      LIT 12
+0d9c:   16         DEI
+0d9d:   80 0a      LIT 0a
+0d9f:   09         NEQ
+0da0:   20 00 01   JCI λ60
+0da3:   6c         JMP2r
+
+@λ60
+0da4:   00         BRK
+
+@keys
+0da5:   c0 2a      LITr 2a
+0da7:   73         STR2r
+0da8:   a0 0e af   LIT2 keys/on-keys
+0dab:   80 10      LIT 10
+0dad:   37         DEO2
+0dae:   00         BRK
+
+@keys/on-keys
+0daf:   80 12      LIT 12
+0db1:   16         DEI
+0db2:   06         DUP
+0db3:   80 0a      LIT 0a
+0db5:   09         NEQ
+0db6:   20 00 1c   JCI λ61
+0db9:   c0 1a      LITr 1a
+0dbb:   52         LDRr
+0dbc:   c0 00      LITr 00
+0dbe:   40 00 03   JMI keys/
+
+@keys/loop
+0dc1:   45         ROTr
+0dc2:   4f         STHr
+0dc3:   41         INCr
+
+@keys/
+0dc4:   ca         GTHkr
+0dc5:   4f         STHr
+0dc6:   20 ff f8   JCI keys/loop
+0dc9:   4f         STHr
+0dca:   01         INC
+0dcb:   42         POPr
+0dcc:   80 00      LIT 00
+0dce:   80 05      LIT 05
+0dd0:   13         STR
+0dd1:   e0 00 00   LIT2r Logger
+0dd4:   6c         JMP2r
+
+@λ61
+0dd5:   80 00      LIT 00
+0dd7:   01         INC
+0dd8:   80 fb      LIT fb
+0dda:   13         STR
+0ddb:   0f         STH
+0ddc:   00         BRK
+
+@echo
+0ddd:   a0 0e f7   LIT2 echo/prompt
+0de0:   60 00 1b   JSI pstr
+
+@echo/loop
+0de3:   60 ff 9b   JSI key
+0de6:   06         DUP
+0de7:   80 0a      LIT 0a
+0de9:   08         EQU
+0dea:   20 00 06   JCI λ62
+0ded:   80 18      LIT 18
+0def:   17         DEO
+0df0:   40 ff f0   JMI echo/loop
+
+@λ62
+0df3:   80 18      LIT 18
+0df5:   17         DEO
+0df6:   6c         JMP2r
+
+@echo/prompt
+0df7:   65         ROT2r
+0df8:   63         NIP2r
+0df9:   68         EQU2r
+0dfa:   6f         STH2r
+0dfb:   3e         EOR2
+0dfc:   20 00 94   JCI +148
+0dff:   80 18      LIT 18
+0e01:   17         DEO
+0e02:   21         INC2
+
+@pstr/
+0e03:   94         LDAk
+0e04:   20 ff f7   JCI pstr
+0e07:   22         POP2
+0e08:   6c         JMP2r
+
+@pstr:
+0e09:   6f         STH2r
+
+@pstr:/loop
+0e0a:   94         LDAk
+0e0b:   80 18      LIT 18
+0e0d:   17         DEO
+0e0e:   21         INC2
+
+@pstr:/
+0e0f:   94         LDAk
+0e10:   20 ff f7   JCI pstr:/loop
+0e13:   21         INC2
+0e14:   2c         JMP2
+
+@pdec
+0e15:   26         DUP2
+0e16:   a0 00 00   LIT2 Logger
+0e19:   29         NEQ2
+0e1a:   20 00 07   JCI λ63
+0e1d:   80 30      LIT 30
+0e1f:   80 18      LIT 18
+0e21:   17         DEO
+0e22:   22         POP2
+0e23:   6c         JMP2r
+
+@λ63
+0e24:   a0 27 10   LIT2 2710
+0e27:   e0 00 fb   LIT2r 00fb
+
+@pdec/>w
+0e2a:   bb         DIV2k
+0e2b:   a0 00 0a   LIT2 System/g
+0e2e:   bb         DIV2k
+0e2f:   3a         MUL2
+0e30:   39         SUB2
+0e31:   44         SWPr
+0e32:   88         EQUk
+0e33:   07         OVR
+0e34:   cf         STHkr
+0e35:   08         EQU
+0e36:   1c         AND
+0e37:   20 00 08   JCI λ64
+0e3a:   06         DUP
+0e3b:   80 30      LIT 30
+0e3d:   18         ADD
+0e3e:   80 18      LIT 18
+0e40:   17         DEO
+0e41:   41         INCr
+
+@λ64
+0e42:   22         POP2
+0e43:   a0 00 0a   LIT2 System/g
+0e46:   3b         DIV2
+0e47:   44         SWPr
+0e48:   41         INCr
+0e49:   cf         STHkr
+0e4a:   20 ff dd   JCI pdec/>w
+0e4d:   62         POP2r
+0e4e:   22         POP2
+0e4f:   22         POP2
+0e50:   6c         JMP2r
+
+@wait-enter
+0e51:   60 00 1b   JSI λ65
+0e54:   54         LDAr
+0e55:   79         SUB2r
+0e56:   70         LDZ2r
+0e57:   65         ROT2r
+0e58:   20 45 4e   JCI +17742
+0e5b:   54         LDAr
+0e5c:   45         ROTr
+0e5d:   52         LDRr
+0e5e:   20 74 6f   JCI +29807
+0e61:   20 63 6f   JCI +25455
+0e64:   6e         JSR2r
+0e65:   74         LDA2r
+0e66:   69         NEQ2r
+0e67:   6e         JSR2r
+0e68:   75         STA2r
+0e69:   65         ROT2r
+0e6a:   2e         JSR2
+0e6b:   2e         JSR2
+0e6c:   2e         JSR2
+0e6d:   20 00 6f   JCI +111
+0e70:   60 ff 8b   JSI pstr
+0e73:   60 ff 0b   JSI key
+0e76:   80 0a      LIT 0a
+0e78:   09         NEQ
+0e79:   20 00 03   JCI λ66
+0e7c:   40 00 03   JMI wait-enter/end
+
+@λ66
+0e7f:   40 ff cf   JMI wait-enter
+
+@wait-enter/end
+0e82:   6c         JMP2r
+
+@parse-token
+0e83:   94         LDAk
+0e84:   80 08      LIT 08
+0e86:   13         STR
+0e87:   a0 11 07   LIT2 runes/end
+0e8a:   a0 10 ce   LIT2 runes
+
+@parse-token/loop
+0e8d:   94         LDAk
+0e8e:   80 00      LIT 00
+0e90:   09         NEQ
+0e91:   20 00 04   JCI λ67
+0e94:   23         NIP2
+0e95:   21         INC2
+0e96:   34         LDA2
+0e97:   2c         JMP2
+
+@λ67
+0e98:   a0 00 03   LIT2 Logger/warn
+0e9b:   38         ADD2
+0e9c:   aa         GTH2k
+0e9d:   20 ff ed   JCI parse-token/loop
+0ea0:   22         POP2
+0ea1:   22         POP2
+0ea2:   60 f4 5d   JSI is-hex
+0ea5:   20 f3 f6   JCI <write-rawhex>
+0ea8:   60 f4 6d   JSI is-opcode
+0eab:   20 f3 c9   JCI <write-opcode>
+0eae:   40 00 6d   JMI Lib/litjsi
+
+@walk-comment
+0eb1:   a0 0f bb   LIT2 walk-comment/c
+0eb4:   60 fd ff   JSI feof
+0eb7:   20 fe bb   JCI sclr
+0eba:   a0 00 28   LIT2 Screen/x
+0ebd:   89         NEQk
+0ebe:   20 00 06   JCI λ68
+0ec1:   a0 11 f4   LIT2 Error/nested
+0ec4:   60 f6 93   JSI <set-error>
+
+@λ68
+0ec7:   01         INC
+0ec8:   09         NEQ
+0ec9:   20 ff e5   JCI walk-comment
+0ecc:   40 fe a6   JMI sclr
+
+@Lib
+0ecf:   21         INC2
+0ed0:   60 f5 e7   JSI get-any
+0ed3:   40 f4 15   JMI <set-head-ptr>
+
+@Lib/padrel
+0ed6:   21         INC2
+0ed7:   60 f5 e0   JSI get-any
+0eda:   a0 fb 57   LIT2 head-ptr
+0edd:   34         LDA2
+0ede:   38         ADD2
+0edf:   40 f4 09   JMI <set-head-ptr>
+
+@Lib/toplab
+0ee2:   21         INC2
+0ee3:   40 f4 e6   JMI <set-scope>
+
+@Lib/sublab
+0ee6:   21         INC2
+0ee7:   60 f4 c0   JSI get-sublabel
+0eea:   40 f5 0f   JMI <create-symbol>
+
+@Lib/litrel
+0eed:   80 80      LIT 80
+0eef:   60 f3 ee   JSI <write>
+
+@Lib/rawrel
+0ef2:   21         INC2
+0ef3:   60 f6 10   JSI get-rel
+0ef6:   40 f3 e7   JMI <write>
+
+@Lib/litzep
+0ef9:   80 80      LIT 80
+0efb:   60 f3 e2   JSI <write>
+
+@Lib/rawzep
+0efe:   21         INC2
+0eff:   60 f5 c1   JSI get-ref
+0f02:   03         NIP
+0f03:   40 f3 da   JMI <write>
+
+@Lib/litabs
+0f06:   80 a0      LIT a0
+0f08:   60 f3 d5   JSI <write>
+
+@Lib/rawabs
+0f0b:   21         INC2
+0f0c:   60 f5 b4   JSI get-ref
+0f0f:   40 f3 ca   JMI <write-short>
+
+@Lib/litjci
+0f12:   21         INC2
+0f13:   80 20      LIT 20
+0f15:   40 f3 ad   JMI <write-call>
+
+@Lib/litjmi
+0f18:   21         INC2
+0f19:   80 40      LIT 40
+0f1b:   40 f3 a7   JMI <write-call>
+
+@Lib/litjsi
+0f1e:   80 60      LIT 60
+0f20:   40 f3 a2   JMI <write-call>
+
+@Lib/lithex
+0f23:   21         INC2
+0f24:   40 f3 56   JMI <write-lithex>
+
+@Lib/rawstr
+0f27:   21         INC2
+0f28:   40 f3 46   JMI <write-str>/
+
+@Lib/lambda
+0f2b:   22         POP2
+0f2c:   40 f6 1a   JMI Lambda/pop
+
+@Lib/inc
+0f2f:   a1         INC2k
+0f30:   a0 fb d6   LIT2 include
+0f33:   af         STH2k
+0f34:   60 fe 2f   JSI scpy
+0f37:   60 fe 3b   JSI sclr
+0f3a:   6f         STH2r
+0f3b:   40 f2 71   JMI handle-file
+
+@Lib/ignore
+0f3e:   22         POP2
+0f3f:   6c         JMP2r
+
+@ready
+0f40:   a0 10 46   LIT2 ready/ready
+0f43:   40 fe b8   JMI pstr
+
+@ready/ready
+0f46:   52         LDRr
+0f47:   65         ROT2r
+0f48:   61         INC2r
+0f49:   64         SWP2r
+0f4a:   79         SUB2r
+0f4b:   0a         GTH
+0f4c:   00         BRK
+
+@greeting
+0f4d:   a0 10 5f   LIT2 greeting/hello
+0f50:   60 fe ab   JSI pstr
+0f53:   a0 14 8c   LIT2 uname
+0f56:   60 fe a5   JSI pstr
+0f59:   a0 10 68   LIT2 greeting/end
+0f5c:   40 fe 9f   JMI pstr
+
+@greeting/hello
+0f5f:   57         DEOr
+0f60:   65         ROT2r
+0f61:   6c         JMP2r
+0f62:   63         NIP2r
+0f63:   6f         STH2r
+0f64:   6d         JCN2r
+0f65:   65         ROT2r
+0f66:   20 00 21   JCI +33
+0f69:   0a         GTH
+0f6a:   00         BRK
+
+@opcodes
+0f6b:   4c         JMPr
+0f6c:   49         NEQr
+0f6d:   54         LDAr
+0f6e:   49         NEQr
+0f6f:   4e         JSRr
+0f70:   43         NIPr
+0f71:   50         LDZr
+0f72:   4f         STHr
+0f73:   50         LDZr
+0f74:   4e         JSRr
+0f75:   49         NEQr
+0f76:   50         LDZr
+0f77:   53         STRr
+0f78:   57         DEOr
+0f79:   50         LDZr
+0f7a:   52         LDRr
+0f7b:   4f         STHr
+0f7c:   54         LDAr
+0f7d:   44         SWPr
+0f7e:   55         STAr
+0f7f:   50         LDZr
+0f80:   4f         STHr
+0f81:   56         DEIr
+0f82:   52         LDRr
+0f83:   45         ROTr
+0f84:   51         STZr
+0f85:   55         STAr
+0f86:   4e         JSRr
+0f87:   45         ROTr
+0f88:   51         STZr
+0f89:   47         OVRr
+0f8a:   54         LDAr
+0f8b:   48         EQUr
+0f8c:   4c         JMPr
+0f8d:   54         LDAr
+0f8e:   48         EQUr
+0f8f:   4a         GTHr
+0f90:   4d         JCNr
+0f91:   50         LDZr
+0f92:   4a         GTHr
+0f93:   43         NIPr
+0f94:   4e         JSRr
+0f95:   4a         GTHr
+0f96:   53         STRr
+0f97:   52         LDRr
+0f98:   53         STRr
+0f99:   54         LDAr
+0f9a:   48         EQUr
+0f9b:   4c         JMPr
+0f9c:   44         SWPr
+0f9d:   5a         MULr
+0f9e:   53         STRr
+0f9f:   54         LDAr
+0fa0:   5a         MULr
+0fa1:   4c         JMPr
+0fa2:   44         SWPr
+0fa3:   52         LDRr
+0fa4:   53         STRr
+0fa5:   54         LDAr
+0fa6:   52         LDRr
+0fa7:   4c         JMPr
+0fa8:   44         SWPr
+0fa9:   41         INCr
+0faa:   53         STRr
+0fab:   54         LDAr
+0fac:   41         INCr
+0fad:   44         SWPr
+0fae:   45         ROTr
+0faf:   49         NEQr
+0fb0:   44         SWPr
+0fb1:   45         ROTr
+0fb2:   4f         STHr
+0fb3:   41         INCr
+0fb4:   44         SWPr
+0fb5:   44         SWPr
+0fb6:   53         STRr
+0fb7:   55         STAr
+0fb8:   42         POPr
+0fb9:   4d         JCNr
+0fba:   55         STAr
+0fbb:   4c         JMPr
+0fbc:   44         SWPr
+0fbd:   49         NEQr
+0fbe:   56         DEIr
+0fbf:   41         INCr
+0fc0:   4e         JSRr
+0fc1:   44         SWPr
+0fc2:   4f         STHr
+0fc3:   52         LDRr
+0fc4:   41         INCr
+0fc5:   45         ROTr
+0fc6:   4f         STHr
+0fc7:   52         LDRr
+0fc8:   53         STRr
+0fc9:   46         DUPr
+0fca:   54         LDAr
+
+@opcodes/brk
+0fcb:   42         POPr
+0fcc:   52         LDRr
+0fcd:   4b         LTHr
+
+@runes
+0fce:   7c         AND2r
+0fcf:   0f         STH
+0fd0:   cf         STHkr
+0fd1:   24         SWP2
+0fd2:   0f         STH
+0fd3:   d6         DEIkr
+0fd4:   7d         ORA2r
+0fd5:   10         LDZ
+0fd6:   2b         LTH2
+0fd7:   28         EQU2
+0fd8:   0f         STH
+0fd9:   b1         STZ2k
+0fda:   40 0f e2   JMI +4066
+0fdd:   26         DUP2
+0fde:   0f         STH
+0fdf:   e6         DUP2kr
+0fe0:   2c         JMP2
+0fe1:   0f         STH
+0fe2:   ed         JCN2kr
+0fe3:   5f         SFTr
+0fe4:   0f         STH
+0fe5:   f2         LDR2kr
+0fe6:   2e         JSR2
+0fe7:   0f         STH
+0fe8:   f9         SUB2kr
+0fe9:   2d         JCN2
+0fea:   0f         STH
+0feb:   fe         EOR2kr
+0fec:   3b         DIV2
+0fed:   10         LDZ
+0fee:   06         DUP
+0fef:   3d         ORA2
+0ff0:   10         LDZ
+0ff1:   0b         LTH
+0ff2:   3f         SFT2
+0ff3:   10         LDZ
+0ff4:   12         LDR
+0ff5:   21         INC2
+0ff6:   10         LDZ
+0ff7:   18         ADD
+0ff8:   5b         DIVr
+0ff9:   10         LDZ
+0ffa:   3e         EOR2
+0ffb:   5d         ORAr
+0ffc:   10         LDZ
+0ffd:   3e         EOR2
+0ffe:   23         NIP2
+0fff:   10         LDZ
+1000:   23         NIP2
+1001:   22         POP2
+1002:   10         LDZ
+1003:   27         OVR2
+1004:   7e         EOR2r
+1005:   10         LDZ
+1006:   2f         STH2
+
+@runes/end
+1007:   49         NEQr
+1008:   4e         JSRr
+1009:   46         DUPr
+100a:   4f         STHr
+100b:   3a         MUL2
+100c:   20 00 2d   JCI +45
+100f:   2d         JCN2
+1010:   20 55 6e   JCI +21870
+1013:   75         STA2r
+1014:   73         STR2r
+1015:   65         ROT2r
+1016:   64         SWP2r
+1017:   3a         MUL2
+1018:   20 00 65   JCI +101
+101b:   78         ADD2r
+101c:   70         LDZ2r
+101d:   72         LDR2r
+101e:   65         ROT2r
+101f:   73         STR2r
+1020:   73         STR2r
+1021:   69         NEQ2r
+1022:   6f         STH2r
+1023:   6e         JSR2r
+1024:   00         BRK
+
+@Info/assembled
+1025:   41         INCr
+1026:   73         STR2r
+1027:   73         STR2r
+1028:   65         ROT2r
+1029:   6d         JCN2r
+102a:   62         POP2r
+102b:   6c         JMP2r
+102c:   65         ROT2r
+102d:   64         SWP2r
+102e:   20 00 20   JCI +32
+1031:   69         NEQ2r
+1032:   6e         JSR2r
+1033:   20 00 20   JCI +32
+1036:   62         POP2r
+1037:   79         SUB2r
+1038:   74         LDA2r
+1039:   65         ROT2r
+103a:   73         STR2r
+103b:   2e         JSR2
+103c:   0a         GTH
+103d:   00         BRK
+
+@Info/labels
+103e:   20 6c 61   JCI +27745
+1041:   62         POP2r
+1042:   65         ROT2r
+1043:   6c         JMP2r
+1044:   73         STR2r
+1045:   29         NEQ2
+1046:   2e         JSR2
+1047:   0a         GTH
+1048:   00         BRK
+
+@Info/sym-ext
+1049:   2e         JSR2
+104a:   73         STR2r
+104b:   79         SUB2r
+104c:   6d         JCN2r
+104d:   00         BRK
+
+@Warning
+104e:   57         DEOr
+104f:   41         INCr
+1050:   52         LDRr
+1051:   4e         JSRr
+1052:   49         NEQr
+1053:   4e         JSRr
+1054:   47         OVRr
+1055:   3a         MUL2
+1056:   20 00 52   JCI +82
+1059:   65         ROT2r
+105a:   64         SWP2r
+105b:   65         ROT2r
+105c:   66         DUP2r
+105d:   69         NEQ2r
+105e:   6e         JSR2r
+105f:   69         NEQ2r
+1060:   6e         JSR2r
+1061:   67         OVR2r
+1062:   3a         MUL2
+1063:   00         BRK
+
+@Error
+1064:   45         ROTr
+1065:   52         LDRr
+1066:   52         LDRr
+1067:   4f         STHr
+1068:   52         LDRr
+1069:   3a         MUL2
+106a:   20 00 46   JCI +70
+106d:   69         NEQ2r
+106e:   6c         JMP2r
+106f:   65         ROT2r
+1070:   00         BRK
+
+@Error/number
+1071:   4e         JSRr
+1072:   75         STA2r
+1073:   6d         JCN2r
+1074:   62         POP2r
+1075:   65         ROT2r
+1076:   72         LDR2r
+1077:   00         BRK
+
+@Error/length
+1078:   4c         JMPr
+1079:   65         ROT2r
+107a:   6e         JSR2r
+107b:   67         OVR2r
+107c:   74         LDA2r
+107d:   68         EQU2r
+107e:   00         BRK
+
+@Error/reference
+107f:   55         STAr
+1080:   6e         JSR2r
+1081:   6b         LTH2r
+1082:   6e         JSR2r
+1083:   6f         STH2r
+1084:   77         DEO2r
+1085:   6e         JSR2r
+1086:   20 72 65   JCI +29285
+1089:   66         DUP2r
+108a:   65         ROT2r
+108b:   72         LDR2r
+108c:   65         ROT2r
+108d:   6e         JSR2r
+108e:   63         NIP2r
+108f:   65         ROT2r
+1090:   3a         MUL2
+1091:   00         BRK
+
+@Error/distance
+1092:   52         LDRr
+1093:   65         ROT2r
+1094:   6c         JMP2r
+1095:   61         INC2r
+1096:   74         LDA2r
+1097:   69         NEQ2r
+1098:   76         DEI2r
+1099:   65         ROT2r
+109a:   20 64 69   JCI +25705
+109d:   73         STR2r
+109e:   74         LDA2r
+109f:   61         INC2r
+10a0:   6e         JSR2r
+10a1:   63         NIP2r
+10a2:   65         ROT2r
+10a3:   20 69 73   JCI +26995
+10a6:   20 74 6f   JCI +29807
+10a9:   6f         STH2r
+10aa:   20 66 61   JCI +26209
+10ad:   72         LDR2r
+10ae:   20 61 77   JCI +24951
+10b1:   61         INC2r
+10b2:   79         SUB2r
+10b3:   3a         MUL2
+10b4:   00         BRK
+
+@Error/symbol
+10b5:   49         NEQr
+10b6:   6e         JSR2r
+10b7:   76         DEI2r
+10b8:   61         INC2r
+10b9:   6c         JMP2r
+10ba:   69         NEQ2r
+10bb:   64         SWP2r
+10bc:   20 73 79   JCI +29561
+10bf:   6d         JCN2r
+10c0:   62         POP2r
+10c1:   6f         STH2r
+10c2:   6c         JMP2r
+10c3:   3a         MUL2
+10c4:   20 00 54   JCI +84
+10c7:   6f         STH2r
+10c8:   6b         LTH2r
+10c9:   65         ROT2r
+10ca:   6e         JSR2r
+10cb:   00         BRK
+
+@Error/sublabel
+10cc:   53         STRr
+10cd:   75         STA2r
+10ce:   62         POP2r
+10cf:   6c         JMP2r
+10d0:   61         INC2r
+10d1:   62         POP2r
+10d2:   65         ROT2r
+10d3:   6c         JMP2r
+10d4:   20 69 73   JCI +26995
+10d7:   20 74 6f   JCI +29807
+10da:   6f         STH2r
+10db:   20 6c 6f   JCI +27759
+10de:   6e         JSR2r
+10df:   67         OVR2r
+10e0:   3a         MUL2
+10e1:   20 00 49   JCI +73
+10e4:   6e         JSR2r
+10e5:   76         DEI2r
+10e6:   61         INC2r
+10e7:   6c         JMP2r
+10e8:   69         NEQ2r
+10e9:   64         SWP2r
+10ea:   20 6f 70   JCI +28528
+10ed:   63         NIP2r
+10ee:   6f         STH2r
+10ef:   64         SWP2r
+10f0:   65         ROT2r
+10f1:   3a         MUL2
+10f2:   20 00 4e   JCI +78
+10f5:   65         ROT2r
+10f6:   73         STR2r
+10f7:   74         LDA2r
+10f8:   65         ROT2r
+10f9:   64         SWP2r
+10fa:   00         BRK
+
+@Error/zeropage
+10fb:   5a         MULr
+10fc:   65         ROT2r
+10fd:   72         LDR2r
+10fe:   6f         STH2r
+10ff:   2d         JCN2
+1100:   70         LDZ2r
+1101:   61         INC2r
+1102:   67         OVR2r
+1103:   65         ROT2r
+1104:   00         BRK
+
+@Error/label
+1105:   4c         JMPr
+1106:   61         INC2r
+1107:   62         POP2r
+1108:   65         ROT2r
+1109:   6c         JMP2r
+110a:   20 69 73   JCI +26995
+110d:   20 74 6f   JCI +29807
+1110:   6f         STH2r
+1111:   20 6c 6f   JCI +27759
+1114:   6e         JSR2r
+1115:   67         OVR2r
+1116:   3a         MUL2
+1117:   20 00 00   JCI +0
+111a:   4d         JCNr
+111b:   65         ROT2r
+111c:   72         LDR2r
+111d:   6c         JMP2r
+111e:   69         NEQ2r
+111f:   6e         JSR2r
+1120:   20 2d 2d   JCI +11565
+1123:   20 56 65   JCI +22117
+1126:   72         LDR2r
+1127:   73         STR2r
+1128:   69         NEQ2r
+1129:   6f         STH2r
+112a:   6e         JSR2r
+112b:   20 30 2e   JCI +12334
+112e:   65         ROT2r
+112f:   20 28 31   JCI +10289
+1132:   38         ADD2
+1133:   4d         JCNr
+1134:   30         LDZ2
+1135:   36         DEI2
+1136:   29         NEQ2
+1137:   0a         GTH
+1138:   56         DEIr
+1139:   61         INC2r
+113a:   72         LDR2r
+113b:   76         DEI2r
+113c:   61         INC2r
+113d:   72         LDR2r
+113e:   61         INC2r
+113f:   27         OVR2
+1140:   73         STR2r
+1141:   20 55 78   JCI +21880
+1144:   6e         JSR2r
+1145:   74         LDA2r
+1146:   61         INC2r
+1147:   6c         JMP2r
+1148:   20 4f 70   JCI +20336
+114b:   65         ROT2r
+114c:   72         LDR2r
+114d:   61         INC2r
+114e:   74         LDA2r
+114f:   69         NEQ2r
+1150:   6e         JSR2r
+1151:   67         OVR2r
+1152:   20 53 79   JCI +21369
+1155:   73         STR2r
+1156:   74         LDA2r
+1157:   65         ROT2r
+1158:   6d         JCN2r
+1159:   2e         JSR2
+115a:   0a         GTH
+115b:   42         POPr
+115c:   79         SUB2r
+115d:   20 49 73   JCI +18803
+1160:   6d         JCN2r
+1161:   61         INC2r
+1162:   65         ROT2r
+1163:   6c         JMP2r
+1164:   20 56 65   JCI +22117
+1167:   6e         JSR2r
+1168:   65         ROT2r
+1169:   67         OVR2r
+116a:   61         INC2r
+116b:   73         STR2r
+116c:   20 43 61   JCI +17249
+116f:   73         STR2r
+1170:   74         LDA2r
+1171:   65         ROT2r
+1172:   6c         JMP2r
+1173:   6c         JMP2r
+1174:   6f         STH2r
+1175:   20 61 6e   JCI +24942
+1178:   64         SWP2r
+1179:   20 43 6f   JCI +17263
+117c:   6e         JSR2r
+117d:   74         LDA2r
+117e:   72         LDR2r
+117f:   69         NEQ2r
+1180:   62         POP2r
+1181:   75         STA2r
+1182:   74         LDA2r
+1183:   6f         STH2r
+1184:   72         LDR2r
+1185:   73         STR2r
+1186:   2e         JSR2
+1187:   0a         GTH
+1188:   32         LDR2
+1189:   30         LDZ2
+118a:   32         LDR2
+118b:   34         LDA2
+118c:   20 4a 75   JCI +19061
+118f:   6e         JSR2r
+1190:   20 32 33   JCI +12851
+1193:   00         BRK
+
+@banner-unicode
+1194:   20 20 20   JCI +8224
+1197:   20 20 20   JCI +8224
+119a:   20 4d 65   JCI +19813
+119d:   72         LDR2r
+119e:   6c         JMP2r
+119f:   69         NEQ2r
+11a0:   6e         JSR2r
+11a1:   20 e2 80   JCI -7552
+11a4:   94         LDAk
+11a5:   20 56 65   JCI +22117
+11a8:   72         LDR2r
+11a9:   73         STR2r
+11aa:   69         NEQ2r
+11ab:   6f         STH2r
+11ac:   6e         JSR2r
+11ad:   20 30 2e   JCI +12334
+11b0:   65         ROT2r
+11b1:   20 28 31   JCI +10289
+11b4:   38         ADD2
+11b5:   4d         JCNr
+11b6:   30         LDZ2
+11b7:   36         DEI2
+11b8:   29         NEQ2
+11b9:   0a         GTH
+11ba:   20 20 20   JCI +8224
+11bd:   e2         POP2kr
+11be:   96         DEIk
+11bf:   88         EQUk
+11c0:   e2         POP2kr
+11c1:   96         DEIk
+11c2:   84         SWPk
+11c3:   20 20 56   JCI +8278
+11c6:   61         INC2r
+11c7:   72         LDR2r
+11c8:   76         DEI2r
+11c9:   61         INC2r
+11ca:   72         LDR2r
+11cb:   61         INC2r
+11cc:   27         OVR2
+11cd:   73         STR2r
+11ce:   20 55 78   JCI +21880
+11d1:   6e         JSR2r
+11d2:   74         LDA2r
+11d3:   61         INC2r
+11d4:   6c         JMP2r
+11d5:   20 4f 70   JCI +20336
+11d8:   65         ROT2r
+11d9:   72         LDR2r
+11da:   61         INC2r
+11db:   74         LDA2r
+11dc:   69         NEQ2r
+11dd:   6e         JSR2r
+11de:   67         OVR2r
+11df:   20 53 79   JCI +21369
+11e2:   73         STR2r
+11e3:   74         LDA2r
+11e4:   65         ROT2r
+11e5:   6d         JCN2r
+11e6:   2e         JSR2
+11e7:   0a         GTH
+11e8:   20 e2 96   JCI -7530
+11eb:   90         LDZk
+11ec:   20 e2 96   JCI -7530
+11ef:   88         EQUk
+11f0:   20 e2 96   JCI -7530
+11f3:   8c         JMPk
+11f4:   20 c2 a9   JCI -15703
+11f7:   20 32 30   JCI +12848
+11fa:   32         LDR2
+11fb:   34         LDA2
+11fc:   20 49 73   JCI +18803
+11ff:   6d         JCN2r
+1200:   61         INC2r
+1201:   65         ROT2r
+1202:   6c         JMP2r
+1203:   20 56 65   JCI +22117
+1206:   6e         JSR2r
+1207:   65         ROT2r
+1208:   67         OVR2r
+1209:   61         INC2r
+120a:   73         STR2r
+120b:   20 43 61   JCI +17249
+120e:   73         STR2r
+120f:   74         LDA2r
+1210:   65         ROT2r
+1211:   6c         JMP2r
+1212:   6c         JMP2r
+1213:   c3         NIPkr
+1214:   b3         STR2k
+1215:   20 61 6e   JCI +24942
+1218:   64         SWP2r
+1219:   20 43 6f   JCI +17263
+121c:   6e         JSR2r
+121d:   74         LDA2r
+121e:   72         LDR2r
+121f:   69         NEQ2r
+1220:   62         POP2r
+1221:   75         STA2r
+1222:   74         LDA2r
+1223:   6f         STH2r
+1224:   72         LDR2r
+1225:   73         STR2r
+1226:   2e         JSR2
+1227:   0a         GTH
+1228:   20 20 e2   JCI +8418
+122b:   96         DEIk
+122c:   80 e2      LIT e2
+122e:   96         DEIk
+122f:   88         EQUk
+1230:   20 20 20   JCI +8224
+1233:   54         LDAr
+1234:   79         SUB2r
+1235:   70         LDZ2r
+1236:   65         ROT2r
+1237:   20 22 68   JCI +8808
+123a:   65         ROT2r
+123b:   6c         JMP2r
+123c:   70         LDZ2r
+123d:   22         POP2
+123e:   2c         JMP2
+123f:   20 22 63   JCI +8803
+1242:   72         LDR2r
+1243:   65         ROT2r
+1244:   64         SWP2r
+1245:   69         NEQ2r
+1246:   74         LDA2r
+1247:   73         STR2r
+1248:   22         POP2
+1249:   2c         JMP2
+124a:   20 6f 72   JCI +28530
+124d:   20 22 6c   JCI +8812
+1250:   69         NEQ2r
+1251:   63         NIP2r
+1252:   65         ROT2r
+1253:   6e         JSR2r
+1254:   73         STR2r
+1255:   65         ROT2r
+1256:   22         POP2
+1257:   20 66 6f   JCI +26223
+125a:   72         LDR2r
+125b:   20 6d 6f   JCI +28015
+125e:   72         LDR2r
+125f:   65         ROT2r
+1260:   20 69 6e   JCI +26990
+1263:   66         DUP2r
+1264:   6f         STH2r
+1265:   72         LDR2r
+1266:   6d         JCN2r
+1267:   61         INC2r
+1268:   74         LDA2r
+1269:   69         NEQ2r
+126a:   6f         STH2r
+126b:   6e         JSR2r
+126c:   2e         JSR2
+126d:   0a         GTH
+126e:   20 20 20   JCI +8224
+1271:   20 20 20   JCI +8224
+1274:   20 00 20   JCI +32
+1277:   20 20 20   JCI +8224
+127a:   20 20 20   JCI +8224
+127d:   5f         SFTr
+127e:   0a         GTH
+127f:   20 20 20   JCI +8224
+1282:   20 20 20   JCI +8224
+1285:   7c         AND2r
+1286:   20 7c 5f   JCI +31839
+1289:   5f         SFTr
+128a:   5f         SFTr
+128b:   20 20 20   JCI +8224
+128e:   4d         JCNr
+128f:   65         ROT2r
+1290:   72         LDR2r
+1291:   6c         JMP2r
+1292:   69         NEQ2r
+1293:   6e         JSR2r
+1294:   20 2d 2d   JCI +11565
+1297:   20 56 65   JCI +22117
+129a:   72         LDR2r
+129b:   73         STR2r
+129c:   69         NEQ2r
+129d:   6f         STH2r
+129e:   6e         JSR2r
+129f:   20 30 2e   JCI +12334
+12a2:   65         ROT2r
+12a3:   20 28 31   JCI +10289
+12a6:   38         ADD2
+12a7:   4d         JCNr
+12a8:   30         LDZ2
+12a9:   36         DEI2
+12aa:   29         NEQ2
+12ab:   0a         GTH
+12ac:   20 20 20   JCI +8224
+12af:   5f         SFTr
+12b0:   20 20 7c   JCI +8316
+12b3:   20 20 5f   JCI +8287
+12b6:   20 20 7c   JCI +8316
+12b9:   20 20 56   JCI +8278
+12bc:   61         INC2r
+12bd:   72         LDR2r
+12be:   76         DEI2r
+12bf:   61         INC2r
+12c0:   72         LDR2r
+12c1:   61         INC2r
+12c2:   27         OVR2
+12c3:   73         STR2r
+12c4:   20 55 78   JCI +21880
+12c7:   6e         JSR2r
+12c8:   74         LDA2r
+12c9:   61         INC2r
+12ca:   6c         JMP2r
+12cb:   20 4f 70   JCI +20336
+12ce:   65         ROT2r
+12cf:   72         LDR2r
+12d0:   61         INC2r
+12d1:   74         LDA2r
+12d2:   69         NEQ2r
+12d3:   6e         JSR2r
+12d4:   67         OVR2r
+12d5:   20 53 79   JCI +21369
+12d8:   73         STR2r
+12d9:   74         LDA2r
+12da:   65         ROT2r
+12db:   6d         JCN2r
+12dc:   2e         JSR2
+12dd:   0a         GTH
+12de:   20 20 7c   JCI +8316
+12e1:   20 7c 20   JCI +31776
+12e4:   7c         AND2r
+12e5:   20 7c 20   JCI +31776
+12e8:   7c         AND2r
+12e9:   20 7c 20   JCI +31776
+12ec:   20 28 63   JCI +10339
+12ef:   29         NEQ2
+12f0:   20 32 30   JCI +12848
+12f3:   32         LDR2
+12f4:   34         LDA2
+12f5:   20 49 73   JCI +18803
+12f8:   6d         JCN2r
+12f9:   61         INC2r
+12fa:   65         ROT2r
+12fb:   6c         JMP2r
+12fc:   20 56 65   JCI +22117
+12ff:   6e         JSR2r
+1300:   65         ROT2r
+1301:   67         OVR2r
+1302:   61         INC2r
+1303:   73         STR2r
+1304:   20 43 61   JCI +17249
+1307:   73         STR2r
+1308:   74         LDA2r
+1309:   65         ROT2r
+130a:   6c         JMP2r
+130b:   6c         JMP2r
+130c:   6f         STH2r
+130d:   20 61 6e   JCI +24942
+1310:   64         SWP2r
+1311:   20 43 6f   JCI +17263
+1314:   6e         JSR2r
+1315:   74         LDA2r
+1316:   72         LDR2r
+1317:   69         NEQ2r
+1318:   62         POP2r
+1319:   75         STA2r
+131a:   74         LDA2r
+131b:   6f         STH2r
+131c:   72         LDR2r
+131d:   73         STR2r
+131e:   2e         JSR2
+131f:   0a         GTH
+1320:   20 20 7c   JCI +8316
+1323:   20 7c 5f   JCI +31839
+1326:   7c         AND2r
+1327:   20 7c 20   JCI +31776
+132a:   7c         AND2r
+132b:   5f         SFTr
+132c:   7c         AND2r
+132d:   20 20 54   JCI +8276
+1330:   79         SUB2r
+1331:   70         LDZ2r
+1332:   65         ROT2r
+1333:   20 22 68   JCI +8808
+1336:   65         ROT2r
+1337:   6c         JMP2r
+1338:   70         LDZ2r
+1339:   22         POP2
+133a:   2c         JMP2
+133b:   20 22 63   JCI +8803
+133e:   72         LDR2r
+133f:   65         ROT2r
+1340:   64         SWP2r
+1341:   69         NEQ2r
+1342:   74         LDA2r
+1343:   73         STR2r
+1344:   22         POP2
+1345:   2c         JMP2
+1346:   20 6f 72   JCI +28530
+1349:   20 22 6c   JCI +8812
+134c:   69         NEQ2r
+134d:   63         NIP2r
+134e:   65         ROT2r
+134f:   6e         JSR2r
+1350:   73         STR2r
+1351:   65         ROT2r
+1352:   22         POP2
+1353:   20 66 6f   JCI +26223
+1356:   72         LDR2r
+1357:   20 6d 6f   JCI +28015
+135a:   72         LDR2r
+135b:   65         ROT2r
+135c:   20 69 6e   JCI +26990
+135f:   66         DUP2r
+1360:   6f         STH2r
+1361:   72         LDR2r
+1362:   6d         JCN2r
+1363:   61         INC2r
+1364:   74         LDA2r
+1365:   69         NEQ2r
+1366:   6f         STH2r
+1367:   6e         JSR2r
+1368:   2e         JSR2
+1369:   0a         GTH
+136a:   20 20 7c   JCI +8316
+136d:   5f         SFTr
+136e:   5f         SFTr
+136f:   5f         SFTr
+1370:   20 20 7c   JCI +8316
+1373:   0a         GTH
+1374:   20 20 20   JCI +8224
+1377:   20 20 20   JCI +8224
+137a:   7c         AND2r
+137b:   5f         SFTr
+137c:   7c         AND2r
+137d:   20 20 20   JCI +8224
+1380:   20 20 20   JCI +8224
+1383:   00         BRK
+
+@heart
+1384:   00         BRK
+1385:   66         DUP2r
+1386:   ff         SFT2kr
+1387:   ff         SFT2kr
+1388:   ff         SFT2kr
+1389:   7e         EOR2r
+138a:   3c         AND2
+138b:   18         ADD
+
+@uname
+138c:   49         NEQr
+138d:   73         STR2r
+138e:   6d         JCN2r
+138f:   61         INC2r
+1390:   65         ROT2r
+1391:   6c         JMP2r
+1392:   00         BRK
+
+@heap
+1393:   10         LDZ
+1394:   4d         JCNr
+1395:   00         BRK
+1396:   67         OVR2r
+1397:   72         LDR2r
+1398:   65         ROT2r
+1399:   65         ROT2r
+139a:   74         LDA2r
+139b:   69         NEQ2r
+139c:   6e         JSR2r
+139d:   67         OVR2r
+139e:   00         BRK
+139f:   10         LDZ
+13a0:   40 00 72   JMI +114
+13a3:   65         ROT2r
+13a4:   61         INC2r
+13a5:   64         SWP2r
+13a6:   79         SUB2r
+13a7:   00         BRK
+13a8:   14         LDA
+13a9:   8c         JMPk
+13aa:   00         BRK
+13ab:   75         STA2r
+13ac:   6e         JSR2r
+13ad:   61         INC2r
+13ae:   6d         JCN2r
+13af:   65         ROT2r
+13b0:   00         BRK
+13b1:   fb         DIV2kr
+13b2:   40 00 62   JMI +98
+13b5:   75         STA2r
+13b6:   66         DUP2r
+13b7:   66         DUP2r
+13b8:   00         BRK
+13b9:   00         BRK
+13ba:   00         BRK
+13bb:   00         BRK
+13bc:   44         SWPr
+13bd:   45         ROTr
+13be:   42         POPr
+13bf:   55         STAr
+13c0:   47         OVRr
+13c1:   00         BRK
+13c2:   12         LDR
+13c3:   19         SUB
+13c4:   00         BRK
+13c5:   6d         JCN2r
+13c6:   65         ROT2r
+13c7:   74         LDA2r
+13c8:   61         INC2r
+13c9:   00         BRK
+13ca:   fc         AND2kr
+13cb:   00         BRK
+13cc:   00         BRK
+13cd:   69         NEQ2r
+13ce:   6e         JSR2r
+13cf:   70         LDZ2r
+13d0:   75         STA2r
+13d1:   74         LDA2r
+13d2:   00         BRK
+13d3:   14         LDA
+13d4:   93         STRk
+13d5:   00         BRK
+13d6:   68         EQU2r
+13d7:   65         ROT2r
+13d8:   61         INC2r
+13d9:   64         SWP2r
+13da:   00         BRK
+13db:   fb         DIV2kr
+13dc:   57         DEOr
+13dd:   00         BRK
+13de:   68         EQU2r
+13df:   65         ROT2r
+13e0:   61         INC2r
+13e1:   64         SWP2r
+13e2:   2a         GTH2
+13e3:   00         BRK
+13e4:   fb         DIV2kr
+13e5:   5b         DIVr
+13e6:   00         BRK
+13e7:   74         LDA2r
+13e8:   61         INC2r
+13e9:   69         NEQ2r
+13ea:   6c         JMP2r
+13eb:   2a         GTH2
+13ec:   00         BRK
+13ed:   fb         DIV2kr
+13ee:   55         STAr
+13ef:   00         BRK
+13f0:   69         NEQ2r
+13f1:   6e         JSR2r
+13f2:   70         LDZ2r
+13f3:   75         STA2r
+13f4:   74         LDA2r
+13f5:   2a         GTH2
+13f6:   00         BRK
+13f7:   0d         JCN
+13f8:   18         ADD
+13f9:   00         BRK
+13fa:   4c         JMPr
+13fb:   44         SWPr
+13fc:   42         POPr
+13fd:   00         BRK
+13fe:   0d         JCN
+13ff:   3a         MUL2
+1400:   00         BRK
+1401:   4c         JMPr
+1402:   44         SWPr
+1403:   42         POPr
+1404:   32         LDR2
+1405:   00         BRK
+1406:   0d         JCN
+1407:   57         DEOr
+1408:   00         BRK
+1409:   53         STRr
+140a:   54         LDAr
+140b:   42         POPr
+140c:   00         BRK
+140d:   0d         JCN
+140e:   73         STR2r
+140f:   00         BRK
+1410:   53         STRr
+1411:   54         LDAr
+1412:   42         POPr
+1413:   32         LDR2
+1414:   00         BRK
+1415:   0e         JSR
+1416:   81         INCk
+1417:   00         BRK
+1418:   6b         LTH2r
+1419:   65         ROT2r
+141a:   79         SUB2r
+141b:   00         BRK
+141c:   0e         JSR
+141d:   a5         ROT2k
+141e:   00         BRK
+141f:   6b         LTH2r
+1420:   65         ROT2r
+1421:   79         SUB2r
+1422:   73         STR2r
+1423:   00         BRK
+1424:   0f         STH
+1425:   51         STZr
+1426:   00         BRK
+1427:   77         DEO2r
+1428:   61         INC2r
+1429:   69         NEQ2r
+142a:   74         LDA2r
+142b:   00         BRK
+142c:   0e         JSR
+142d:   dd         ORAkr
+142e:   00         BRK
+142f:   65         ROT2r
+1430:   63         NIP2r
+1431:   68         EQU2r
+1432:   6f         STH2r
+1433:   00         BRK
+1434:   0b         LTH
+1435:   00         BRK
+1436:   00         BRK
+1437:   70         LDZ2r
+1438:   69         NEQ2r
+1439:   78         ADD2r
+143a:   65         ROT2r
+143b:   6c         JMP2r
+143c:   00         BRK
+143d:   0b         LTH
+143e:   0c         JMP
+143f:   00         BRK
+1440:   73         STR2r
+1441:   70         LDZ2r
+1442:   72         LDR2r
+1443:   69         NEQ2r
+1444:   74         LDA2r
+1445:   65         ROT2r
+1446:   00         BRK
+1447:   14         LDA
+1448:   84         SWPk
+1449:   00         BRK
+144a:   68         EQU2r
+144b:   65         ROT2r
+144c:   61         INC2r
+144d:   72         LDR2r
+144e:   74         LDA2r
+144f:   00         BRK
+1450:   0b         LTH
+1451:   1b         DIV
+1452:   00         BRK
+1453:   62         POP2r
+1454:   79         SUB2r
+1455:   65         ROT2r
+1456:   00         BRK
+1457:   0d         JCN
+1458:   90         LDZk
+1459:   00         BRK
+145a:   4e         JSRr
+145b:   45         ROTr
+145c:   47         OVRr
+145d:   00         BRK
+145e:   0d         JCN
+145f:   94         LDAk
+1460:   00         BRK
+1461:   4e         JSRr
+1462:   45         ROTr
+1463:   47         OVRr
+1464:   32         LDR2
+1465:   00         BRK
+1466:   0b         LTH
+1467:   5d         ORAr
+1468:   00         BRK
+1469:   66         DUP2r
+146a:   72         LDR2r
+146b:   65         ROT2r
+146c:   65         ROT2r
+146d:   00         BRK
+146e:   0c         JMP
+146f:   bc         AND2k
+1470:   00         BRK
+1471:   6d         JCN2r
+1472:   7a         MUL2r
+1473:   65         ROT2r
+1474:   72         LDR2r
+1475:   6f         STH2r
+1476:   00         BRK
+1477:   0c         JMP
+1478:   a1         INC2k
+1479:   00         BRK
+147a:   6d         JCN2r
+147b:   66         DUP2r
+147c:   69         NEQ2r
+147d:   6c         JMP2r
+147e:   6c         JMP2r
+147f:   00         BRK
+1480:   0c         JMP
+1481:   d4         LDAkr
+1482:   00         BRK
+1483:   6d         JCN2r
+1484:   63         NIP2r
+1485:   70         LDZ2r
+1486:   79         SUB2r
+1487:   6c         JMP2r
+1488:   00         BRK
+1489:   0c         JMP
+148a:   f5         STA2kr
+148b:   00         BRK
+148c:   6d         JCN2r
+148d:   63         NIP2r
+148e:   70         LDZ2r
+148f:   79         SUB2r
+1490:   72         LDR2r
+1491:   00         BRK
+1492:   0b         LTH
+1493:   20 00 3a   JCI +58
+1496:   00         BRK
+1497:   0b         LTH
+1498:   2c         JMP2
+1499:   00         BRK
+149a:   3a         MUL2
+149b:   21         INC2
+149c:   00         BRK
+149d:   0c         JMP
+149e:   14         LDA
+149f:   00         BRK
+14a0:   70         LDZ2r
+14a1:   6f         STH2r
+14a2:   62         POP2r
+14a3:   6a         GTH2r
+14a4:   00         BRK
+14a5:   0c         JMP
+14a6:   25         ROT2
+14a7:   00         BRK
+14a8:   70         LDZ2r
+14a9:   6d         JCN2r
+14aa:   65         ROT2r
+14ab:   6d         JCN2r
+14ac:   00         BRK
+14ad:   0e         JSR
+14ae:   fe         EOR2kr
+14af:   00         BRK
+14b0:   70         LDZ2r
+14b1:   73         STR2r
+14b2:   74         LDA2r
+14b3:   72         LDR2r
+14b4:   00         BRK
+14b5:   0f         STH
+14b6:   09         NEQ
+14b7:   00         BRK
+14b8:   70         LDZ2r
+14b9:   73         STR2r
+14ba:   74         LDA2r
+14bb:   72         LDR2r
+14bc:   3a         MUL2
+14bd:   00         BRK
+14be:   0f         STH
+14bf:   15         STA
+14c0:   00         BRK
+14c1:   70         LDZ2r
+14c2:   64         SWP2r
+14c3:   65         ROT2r
+14c4:   63         NIP2r
+14c5:   00         BRK
+14c6:   0d         JCN
+14c7:   99         SUBk
+14c8:   00         BRK
+14c9:   70         LDZ2r
+14ca:   68         EQU2r
+14cb:   65         ROT2r
+14cc:   78         ADD2r
+14cd:   00         BRK
+14ce:   0e         JSR
+14cf:   50         LDZr
+14d0:   00         BRK
+14d1:   73         STR2r
+14d2:   68         EQU2r
+14d3:   65         ROT2r
+14d4:   78         ADD2r
+14d5:   00         BRK
+14d6:   0e         JSR
+14d7:   25         ROT2
+14d8:   00         BRK
+14d9:   63         NIP2r
+14da:   68         EQU2r
+14db:   65         ROT2r
+14dc:   78         ADD2r
+14dd:   00         BRK
+14de:   0e         JSR
+14df:   00         BRK
+14e0:   00         BRK
+14e1:   73         STR2r
+14e2:   63         NIP2r
+14e3:   6d         JCN2r
+14e4:   70         LDZ2r
+14e5:   00         BRK
+14e6:   0d         JCN
+14e7:   f9         SUB2kr
+14e8:   00         BRK
+14e9:   73         STR2r
+14ea:   6c         JMP2r
+14eb:   65         ROT2r
+14ec:   6e         JSR2r
+14ed:   00         BRK
+14ee:   0d         JCN
+14ef:   f3         STR2kr
+14f0:   00         BRK
+14f1:   73         STR2r
+14f2:   63         NIP2r
+14f3:   61         INC2r
+14f4:   70         LDZ2r
+14f5:   00         BRK
+14f6:   0e         JSR
+14f7:   66         DUP2r
+14f8:   00         BRK
+14f9:   73         STR2r
+14fa:   63         NIP2r
+14fb:   70         LDZ2r
+14fc:   79         SUB2r
+14fd:   00         BRK
+14fe:   0e         JSR
+14ff:   75         STA2r
+1500:   00         BRK
+1501:   73         STR2r
+1502:   63         NIP2r
+1503:   6c         JMP2r
+1504:   72         LDR2r
+1505:   00         BRK
+1506:   00         BRK
+1507:   02         POP
+1508:   00         BRK
+1509:   53         STRr
+150a:   79         SUB2r
+150b:   73         STR2r
+150c:   74         LDA2r
+150d:   65         ROT2r
+150e:   6d         JCN2r
+150f:   2f         STH2
+1510:   65         ROT2r
+1511:   78         ADD2r
+1512:   70         LDZ2r
+1513:   61         INC2r
+1514:   6e         JSR2r
+1515:   73         STR2r
+1516:   69         NEQ2r
+1517:   6f         STH2r
+1518:   6e         JSR2r
+1519:   00         BRK
+151a:   00         BRK
+151b:   04         SWP
+151c:   00         BRK
+151d:   53         STRr
+151e:   79         SUB2r
+151f:   73         STR2r
+1520:   74         LDA2r
+1521:   65         ROT2r
+1522:   6d         JCN2r
+1523:   2f         STH2
+1524:   77         DEO2r
+1525:   73         STR2r
+1526:   74         LDA2r
+1527:   00         BRK
+1528:   00         BRK
+1529:   05         ROT
+152a:   00         BRK
+152b:   53         STRr
+152c:   79         SUB2r
+152d:   73         STR2r
+152e:   74         LDA2r
+152f:   65         ROT2r
+1530:   6d         JCN2r
+1531:   2f         STH2
+1532:   72         LDR2r
+1533:   73         STR2r
+1534:   74         LDA2r
+1535:   00         BRK
+1536:   00         BRK
+1537:   06         DUP
+1538:   00         BRK
+1539:   53         STRr
+153a:   79         SUB2r
+153b:   73         STR2r
+153c:   74         LDA2r
+153d:   65         ROT2r
+153e:   6d         JCN2r
+153f:   2f         STH2
+1540:   6d         JCN2r
+1541:   65         ROT2r
+1542:   74         LDA2r
+1543:   61         INC2r
+1544:   64         SWP2r
+1545:   61         INC2r
+1546:   74         LDA2r
+1547:   61         INC2r
+1548:   00         BRK
+1549:   00         BRK
+154a:   08         EQU
+154b:   00         BRK
+154c:   53         STRr
+154d:   79         SUB2r
+154e:   73         STR2r
+154f:   74         LDA2r
+1550:   65         ROT2r
+1551:   6d         JCN2r
+1552:   2f         STH2
+1553:   72         LDR2r
+1554:   00         BRK
+1555:   00         BRK
+1556:   0a         GTH
+1557:   00         BRK
+1558:   53         STRr
+1559:   79         SUB2r
+155a:   73         STR2r
+155b:   74         LDA2r
+155c:   65         ROT2r
+155d:   6d         JCN2r
+155e:   2f         STH2
+155f:   67         OVR2r
+1560:   00         BRK
+1561:   00         BRK
+1562:   0c         JMP
+1563:   00         BRK
+1564:   53         STRr
+1565:   79         SUB2r
+1566:   73         STR2r
+1567:   74         LDA2r
+1568:   65         ROT2r
+1569:   6d         JCN2r
+156a:   2f         STH2
+156b:   62         POP2r
+156c:   00         BRK
+156d:   00         BRK
+156e:   0e         JSR
+156f:   00         BRK
+1570:   53         STRr
+1571:   79         SUB2r
+1572:   73         STR2r
+1573:   74         LDA2r
+1574:   65         ROT2r
+1575:   6d         JCN2r
+1576:   2f         STH2
+1577:   64         SWP2r
+1578:   65         ROT2r
+1579:   62         POP2r
+157a:   75         STA2r
+157b:   67         OVR2r
+157c:   00         BRK
+157d:   00         BRK
+157e:   0f         STH
+157f:   00         BRK
+1580:   53         STRr
+1581:   79         SUB2r
+1582:   73         STR2r
+1583:   74         LDA2r
+1584:   65         ROT2r
+1585:   6d         JCN2r
+1586:   2f         STH2
+1587:   73         STR2r
+1588:   74         LDA2r
+1589:   61         INC2r
+158a:   74         LDA2r
+158b:   65         ROT2r
+158c:   00         BRK
+158d:   00         BRK
+158e:   10         LDZ
+158f:   00         BRK
+1590:   43         NIPr
+1591:   6f         STH2r
+1592:   6e         JSR2r
+1593:   73         STR2r
+1594:   6f         STH2r
+1595:   6c         JMP2r
+1596:   65         ROT2r
+1597:   2f         STH2
+1598:   76         DEI2r
+1599:   65         ROT2r
+159a:   63         NIP2r
+159b:   74         LDA2r
+159c:   6f         STH2r
+159d:   72         LDR2r
+159e:   00         BRK
+159f:   00         BRK
+15a0:   12         LDR
+15a1:   00         BRK
+15a2:   43         NIPr
+15a3:   6f         STH2r
+15a4:   6e         JSR2r
+15a5:   73         STR2r
+15a6:   6f         STH2r
+15a7:   6c         JMP2r
+15a8:   65         ROT2r
+15a9:   2f         STH2
+15aa:   72         LDR2r
+15ab:   65         ROT2r
+15ac:   61         INC2r
+15ad:   64         SWP2r
+15ae:   00         BRK
+15af:   00         BRK
+15b0:   17         DEO
+15b1:   00         BRK
+15b2:   43         NIPr
+15b3:   6f         STH2r
+15b4:   6e         JSR2r
+15b5:   73         STR2r
+15b6:   6f         STH2r
+15b7:   6c         JMP2r
+15b8:   65         ROT2r
+15b9:   2f         STH2
+15ba:   74         LDA2r
+15bb:   79         SUB2r
+15bc:   70         LDZ2r
+15bd:   65         ROT2r
+15be:   00         BRK
+15bf:   00         BRK
+15c0:   18         ADD
+15c1:   00         BRK
+15c2:   43         NIPr
+15c3:   6f         STH2r
+15c4:   6e         JSR2r
+15c5:   73         STR2r
+15c6:   6f         STH2r
+15c7:   6c         JMP2r
+15c8:   65         ROT2r
+15c9:   2f         STH2
+15ca:   77         DEO2r
+15cb:   72         LDR2r
+15cc:   69         NEQ2r
+15cd:   74         LDA2r
+15ce:   65         ROT2r
+15cf:   00         BRK
+15d0:   00         BRK
+15d1:   19         SUB
+15d2:   00         BRK
+15d3:   43         NIPr
+15d4:   6f         STH2r
+15d5:   6e         JSR2r
+15d6:   73         STR2r
+15d7:   6f         STH2r
+15d8:   6c         JMP2r
+15d9:   65         ROT2r
+15da:   2f         STH2
+15db:   65         ROT2r
+15dc:   72         LDR2r
+15dd:   72         LDR2r
+15de:   6f         STH2r
+15df:   72         LDR2r
+15e0:   00         BRK
+15e1:   00         BRK
+15e2:   20 00 53   JCI +83
+15e5:   63         NIP2r
+15e6:   72         LDR2r
+15e7:   65         ROT2r
+15e8:   65         ROT2r
+15e9:   6e         JSR2r
+15ea:   2f         STH2
+15eb:   76         DEI2r
+15ec:   65         ROT2r
+15ed:   63         NIP2r
+15ee:   74         LDA2r
+15ef:   6f         STH2r
+15f0:   72         LDR2r
+15f1:   00         BRK
+15f2:   00         BRK
+15f3:   22         POP2
+15f4:   00         BRK
+15f5:   53         STRr
+15f6:   63         NIP2r
+15f7:   72         LDR2r
+15f8:   65         ROT2r
+15f9:   65         ROT2r
+15fa:   6e         JSR2r
+15fb:   2f         STH2
+15fc:   77         DEO2r
+15fd:   69         NEQ2r
+15fe:   64         SWP2r
+15ff:   74         LDA2r
+1600:   68         EQU2r
+1601:   00         BRK
+1602:   00         BRK
+1603:   24         SWP2
+1604:   00         BRK
+1605:   53         STRr
+1606:   63         NIP2r
+1607:   72         LDR2r
+1608:   65         ROT2r
+1609:   65         ROT2r
+160a:   6e         JSR2r
+160b:   2f         STH2
+160c:   68         EQU2r
+160d:   65         ROT2r
+160e:   69         NEQ2r
+160f:   67         OVR2r
+1610:   68         EQU2r
+1611:   74         LDA2r
+1612:   00         BRK
+1613:   00         BRK
+1614:   26         DUP2
+1615:   00         BRK
+1616:   53         STRr
+1617:   63         NIP2r
+1618:   72         LDR2r
+1619:   65         ROT2r
+161a:   65         ROT2r
+161b:   6e         JSR2r
+161c:   2f         STH2
+161d:   61         INC2r
+161e:   75         STA2r
+161f:   74         LDA2r
+1620:   6f         STH2r
+1621:   00         BRK
+1622:   00         BRK
+1623:   28         EQU2
+1624:   00         BRK
+1625:   53         STRr
+1626:   63         NIP2r
+1627:   72         LDR2r
+1628:   65         ROT2r
+1629:   65         ROT2r
+162a:   6e         JSR2r
+162b:   2f         STH2
+162c:   78         ADD2r
+162d:   00         BRK
+162e:   00         BRK
+162f:   2a         GTH2
+1630:   00         BRK
+1631:   53         STRr
+1632:   63         NIP2r
+1633:   72         LDR2r
+1634:   65         ROT2r
+1635:   65         ROT2r
+1636:   6e         JSR2r
+1637:   2f         STH2
+1638:   79         SUB2r
+1639:   00         BRK
+163a:   00         BRK
+163b:   2c         JMP2
+163c:   00         BRK
+163d:   53         STRr
+163e:   63         NIP2r
+163f:   72         LDR2r
+1640:   65         ROT2r
+1641:   65         ROT2r
+1642:   6e         JSR2r
+1643:   2f         STH2
+1644:   61         INC2r
+1645:   64         SWP2r
+1646:   64         SWP2r
+1647:   72         LDR2r
+1648:   00         BRK
+1649:   00         BRK
+164a:   2e         JSR2
+164b:   00         BRK
+164c:   53         STRr
+164d:   63         NIP2r
+164e:   72         LDR2r
+164f:   65         ROT2r
+1650:   65         ROT2r
+1651:   6e         JSR2r
+1652:   2f         STH2
+1653:   70         LDZ2r
+1654:   69         NEQ2r
+1655:   78         ADD2r
+1656:   65         ROT2r
+1657:   6c         JMP2r
+1658:   00         BRK
+1659:   00         BRK
+165a:   2f         STH2
+165b:   00         BRK
+165c:   53         STRr
+165d:   63         NIP2r
+165e:   72         LDR2r
+165f:   65         ROT2r
+1660:   65         ROT2r
+1661:   6e         JSR2r
+1662:   2f         STH2
+1663:   73         STR2r
+1664:   70         LDZ2r
+1665:   72         LDR2r
+1666:   69         NEQ2r
+1667:   74         LDA2r
+1668:   65         ROT2r
+1669:   00         BRK
+166a:   00         BRK
+166b:   30         LDZ2
+166c:   00         BRK
+166d:   41         INCr
+166e:   75         STA2r
+166f:   64         SWP2r
+1670:   69         NEQ2r
+1671:   6f         STH2r
+1672:   30         LDZ2
+1673:   2f         STH2
+1674:   76         DEI2r
+1675:   65         ROT2r
+1676:   63         NIP2r
+1677:   74         LDA2r
+1678:   6f         STH2r
+1679:   72         LDR2r
+167a:   00         BRK
+167b:   00         BRK
+167c:   32         LDR2
+167d:   00         BRK
+167e:   41         INCr
+167f:   75         STA2r
+1680:   64         SWP2r
+1681:   69         NEQ2r
+1682:   6f         STH2r
+1683:   30         LDZ2
+1684:   2f         STH2
+1685:   70         LDZ2r
+1686:   6f         STH2r
+1687:   73         STR2r
+1688:   69         NEQ2r
+1689:   74         LDA2r
+168a:   69         NEQ2r
+168b:   6f         STH2r
+168c:   6e         JSR2r
+168d:   00         BRK
+168e:   00         BRK
+168f:   34         LDA2
+1690:   00         BRK
+1691:   41         INCr
+1692:   75         STA2r
+1693:   64         SWP2r
+1694:   69         NEQ2r
+1695:   6f         STH2r
+1696:   30         LDZ2
+1697:   2f         STH2
+1698:   6f         STH2r
+1699:   75         STA2r
+169a:   74         LDA2r
+169b:   70         LDZ2r
+169c:   75         STA2r
+169d:   74         LDA2r
+169e:   00         BRK
+169f:   00         BRK
+16a0:   38         ADD2
+16a1:   00         BRK
+16a2:   41         INCr
+16a3:   75         STA2r
+16a4:   64         SWP2r
+16a5:   69         NEQ2r
+16a6:   6f         STH2r
+16a7:   30         LDZ2
+16a8:   2f         STH2
+16a9:   61         INC2r
+16aa:   64         SWP2r
+16ab:   73         STR2r
+16ac:   72         LDR2r
+16ad:   00         BRK
+16ae:   00         BRK
+16af:   3a         MUL2
+16b0:   00         BRK
+16b1:   41         INCr
+16b2:   75         STA2r
+16b3:   64         SWP2r
+16b4:   69         NEQ2r
+16b5:   6f         STH2r
+16b6:   30         LDZ2
+16b7:   2f         STH2
+16b8:   6c         JMP2r
+16b9:   65         ROT2r
+16ba:   6e         JSR2r
+16bb:   67         OVR2r
+16bc:   74         LDA2r
+16bd:   68         EQU2r
+16be:   00         BRK
+16bf:   00         BRK
+16c0:   3c         AND2
+16c1:   00         BRK
+16c2:   41         INCr
+16c3:   75         STA2r
+16c4:   64         SWP2r
+16c5:   69         NEQ2r
+16c6:   6f         STH2r
+16c7:   30         LDZ2
+16c8:   2f         STH2
+16c9:   61         INC2r
+16ca:   64         SWP2r
+16cb:   64         SWP2r
+16cc:   72         LDR2r
+16cd:   00         BRK
+16ce:   00         BRK
+16cf:   3e         EOR2
+16d0:   00         BRK
+16d1:   41         INCr
+16d2:   75         STA2r
+16d3:   64         SWP2r
+16d4:   69         NEQ2r
+16d5:   6f         STH2r
+16d6:   30         LDZ2
+16d7:   2f         STH2
+16d8:   76         DEI2r
+16d9:   6f         STH2r
+16da:   6c         JMP2r
+16db:   75         STA2r
+16dc:   6d         JCN2r
+16dd:   65         ROT2r
+16de:   00         BRK
+16df:   00         BRK
+16e0:   3f         SFT2
+16e1:   00         BRK
+16e2:   41         INCr
+16e3:   75         STA2r
+16e4:   64         SWP2r
+16e5:   69         NEQ2r
+16e6:   6f         STH2r
+16e7:   30         LDZ2
+16e8:   2f         STH2
+16e9:   70         LDZ2r
+16ea:   69         NEQ2r
+16eb:   74         LDA2r
+16ec:   63         NIP2r
+16ed:   68         EQU2r
+16ee:   00         BRK
+16ef:   00         BRK
+16f0:   40 00 41   JMI +65
+16f3:   75         STA2r
+16f4:   64         SWP2r
+16f5:   69         NEQ2r
+16f6:   6f         STH2r
+16f7:   31         STZ2
+16f8:   2f         STH2
+16f9:   76         DEI2r
+16fa:   65         ROT2r
+16fb:   63         NIP2r
+16fc:   74         LDA2r
+16fd:   6f         STH2r
+16fe:   72         LDR2r
+16ff:   00         BRK
+1700:   00         BRK
+1701:   42         POPr
+1702:   00         BRK
+1703:   41         INCr
+1704:   75         STA2r
+1705:   64         SWP2r
+1706:   69         NEQ2r
+1707:   6f         STH2r
+1708:   31         STZ2
+1709:   2f         STH2
+170a:   70         LDZ2r
+170b:   6f         STH2r
+170c:   73         STR2r
+170d:   69         NEQ2r
+170e:   74         LDA2r
+170f:   69         NEQ2r
+1710:   6f         STH2r
+1711:   6e         JSR2r
+1712:   00         BRK
+1713:   00         BRK
+1714:   44         SWPr
+1715:   00         BRK
+1716:   41         INCr
+1717:   75         STA2r
+1718:   64         SWP2r
+1719:   69         NEQ2r
+171a:   6f         STH2r
+171b:   31         STZ2
+171c:   2f         STH2
+171d:   6f         STH2r
+171e:   75         STA2r
+171f:   74         LDA2r
+1720:   70         LDZ2r
+1721:   75         STA2r
+1722:   74         LDA2r
+1723:   00         BRK
+1724:   00         BRK
+1725:   48         EQUr
+1726:   00         BRK
+1727:   41         INCr
+1728:   75         STA2r
+1729:   64         SWP2r
+172a:   69         NEQ2r
+172b:   6f         STH2r
+172c:   31         STZ2
+172d:   2f         STH2
+172e:   61         INC2r
+172f:   64         SWP2r
+1730:   73         STR2r
+1731:   72         LDR2r
+1732:   00         BRK
+1733:   00         BRK
+1734:   4a         GTHr
+1735:   00         BRK
+1736:   41         INCr
+1737:   75         STA2r
+1738:   64         SWP2r
+1739:   69         NEQ2r
+173a:   6f         STH2r
+173b:   31         STZ2
+173c:   2f         STH2
+173d:   6c         JMP2r
+173e:   65         ROT2r
+173f:   6e         JSR2r
+1740:   67         OVR2r
+1741:   74         LDA2r
+1742:   68         EQU2r
+1743:   00         BRK
+1744:   00         BRK
+1745:   4c         JMPr
+1746:   00         BRK
+1747:   41         INCr
+1748:   75         STA2r
+1749:   64         SWP2r
+174a:   69         NEQ2r
+174b:   6f         STH2r
+174c:   31         STZ2
+174d:   2f         STH2
+174e:   61         INC2r
+174f:   64         SWP2r
+1750:   64         SWP2r
+1751:   72         LDR2r
+1752:   00         BRK
+1753:   00         BRK
+1754:   4e         JSRr
+1755:   00         BRK
+1756:   41         INCr
+1757:   75         STA2r
+1758:   64         SWP2r
+1759:   69         NEQ2r
+175a:   6f         STH2r
+175b:   31         STZ2
+175c:   2f         STH2
+175d:   76         DEI2r
+175e:   6f         STH2r
+175f:   6c         JMP2r
+1760:   75         STA2r
+1761:   6d         JCN2r
+1762:   65         ROT2r
+1763:   00         BRK
+1764:   00         BRK
+1765:   4f         STHr
+1766:   00         BRK
+1767:   41         INCr
+1768:   75         STA2r
+1769:   64         SWP2r
+176a:   69         NEQ2r
+176b:   6f         STH2r
+176c:   31         STZ2
+176d:   2f         STH2
+176e:   70         LDZ2r
+176f:   69         NEQ2r
+1770:   74         LDA2r
+1771:   63         NIP2r
+1772:   68         EQU2r
+1773:   00         BRK
+1774:   00         BRK
+1775:   50         LDZr
+1776:   00         BRK
+1777:   41         INCr
+1778:   75         STA2r
+1779:   64         SWP2r
+177a:   69         NEQ2r
+177b:   6f         STH2r
+177c:   32         LDR2
+177d:   2f         STH2
+177e:   76         DEI2r
+177f:   65         ROT2r
+1780:   63         NIP2r
+1781:   74         LDA2r
+1782:   6f         STH2r
+1783:   72         LDR2r
+1784:   00         BRK
+1785:   00         BRK
+1786:   52         LDRr
+1787:   00         BRK
+1788:   41         INCr
+1789:   75         STA2r
+178a:   64         SWP2r
+178b:   69         NEQ2r
+178c:   6f         STH2r
+178d:   32         LDR2
+178e:   2f         STH2
+178f:   70         LDZ2r
+1790:   6f         STH2r
+1791:   73         STR2r
+1792:   69         NEQ2r
+1793:   74         LDA2r
+1794:   69         NEQ2r
+1795:   6f         STH2r
+1796:   6e         JSR2r
+1797:   00         BRK
+1798:   00         BRK
+1799:   54         LDAr
+179a:   00         BRK
+179b:   41         INCr
+179c:   75         STA2r
+179d:   64         SWP2r
+179e:   69         NEQ2r
+179f:   6f         STH2r
+17a0:   32         LDR2
+17a1:   2f         STH2
+17a2:   6f         STH2r
+17a3:   75         STA2r
+17a4:   74         LDA2r
+17a5:   70         LDZ2r
+17a6:   75         STA2r
+17a7:   74         LDA2r
+17a8:   00         BRK
+17a9:   00         BRK
+17aa:   58         ADDr
+17ab:   00         BRK
+17ac:   41         INCr
+17ad:   75         STA2r
+17ae:   64         SWP2r
+17af:   69         NEQ2r
+17b0:   6f         STH2r
+17b1:   32         LDR2
+17b2:   2f         STH2
+17b3:   61         INC2r
+17b4:   64         SWP2r
+17b5:   73         STR2r
+17b6:   72         LDR2r
+17b7:   00         BRK
+17b8:   00         BRK
+17b9:   5a         MULr
+17ba:   00         BRK
+17bb:   41         INCr
+17bc:   75         STA2r
+17bd:   64         SWP2r
+17be:   69         NEQ2r
+17bf:   6f         STH2r
+17c0:   32         LDR2
+17c1:   2f         STH2
+17c2:   6c         JMP2r
+17c3:   65         ROT2r
+17c4:   6e         JSR2r
+17c5:   67         OVR2r
+17c6:   74         LDA2r
+17c7:   68         EQU2r
+17c8:   00         BRK
+17c9:   00         BRK
+17ca:   5c         ANDr
+17cb:   00         BRK
+17cc:   41         INCr
+17cd:   75         STA2r
+17ce:   64         SWP2r
+17cf:   69         NEQ2r
+17d0:   6f         STH2r
+17d1:   32         LDR2
+17d2:   2f         STH2
+17d3:   61         INC2r
+17d4:   64         SWP2r
+17d5:   64         SWP2r
+17d6:   72         LDR2r
+17d7:   00         BRK
+17d8:   00         BRK
+17d9:   5e         EORr
+17da:   00         BRK
+17db:   41         INCr
+17dc:   75         STA2r
+17dd:   64         SWP2r
+17de:   69         NEQ2r
+17df:   6f         STH2r
+17e0:   32         LDR2
+17e1:   2f         STH2
+17e2:   76         DEI2r
+17e3:   6f         STH2r
+17e4:   6c         JMP2r
+17e5:   75         STA2r
+17e6:   6d         JCN2r
+17e7:   65         ROT2r
+17e8:   00         BRK
+17e9:   00         BRK
+17ea:   5f         SFTr
+17eb:   00         BRK
+17ec:   41         INCr
+17ed:   75         STA2r
+17ee:   64         SWP2r
+17ef:   69         NEQ2r
+17f0:   6f         STH2r
+17f1:   32         LDR2
+17f2:   2f         STH2
+17f3:   70         LDZ2r
+17f4:   69         NEQ2r
+17f5:   74         LDA2r
+17f6:   63         NIP2r
+17f7:   68         EQU2r
+17f8:   00         BRK
+17f9:   00         BRK
+17fa:   60 00 41   JSI +65
+17fd:   75         STA2r
+17fe:   64         SWP2r
+17ff:   69         NEQ2r
+1800:   6f         STH2r
+1801:   33         STR2
+1802:   2f         STH2
+1803:   76         DEI2r
+1804:   65         ROT2r
+1805:   63         NIP2r
+1806:   74         LDA2r
+1807:   6f         STH2r
+1808:   72         LDR2r
+1809:   00         BRK
+180a:   00         BRK
+180b:   62         POP2r
+180c:   00         BRK
+180d:   41         INCr
+180e:   75         STA2r
+180f:   64         SWP2r
+1810:   69         NEQ2r
+1811:   6f         STH2r
+1812:   33         STR2
+1813:   2f         STH2
+1814:   70         LDZ2r
+1815:   6f         STH2r
+1816:   73         STR2r
+1817:   69         NEQ2r
+1818:   74         LDA2r
+1819:   69         NEQ2r
+181a:   6f         STH2r
+181b:   6e         JSR2r
+181c:   00         BRK
+181d:   00         BRK
+181e:   64         SWP2r
+181f:   00         BRK
+1820:   41         INCr
+1821:   75         STA2r
+1822:   64         SWP2r
+1823:   69         NEQ2r
+1824:   6f         STH2r
+1825:   33         STR2
+1826:   2f         STH2
+1827:   6f         STH2r
+1828:   75         STA2r
+1829:   74         LDA2r
+182a:   70         LDZ2r
+182b:   75         STA2r
+182c:   74         LDA2r
+182d:   00         BRK
+182e:   00         BRK
+182f:   68         EQU2r
+1830:   00         BRK
+1831:   41         INCr
+1832:   75         STA2r
+1833:   64         SWP2r
+1834:   69         NEQ2r
+1835:   6f         STH2r
+1836:   33         STR2
+1837:   2f         STH2
+1838:   61         INC2r
+1839:   64         SWP2r
+183a:   73         STR2r
+183b:   72         LDR2r
+183c:   00         BRK
+183d:   00         BRK
+183e:   6a         GTH2r
+183f:   00         BRK
+1840:   41         INCr
+1841:   75         STA2r
+1842:   64         SWP2r
+1843:   69         NEQ2r
+1844:   6f         STH2r
+1845:   33         STR2
+1846:   2f         STH2
+1847:   6c         JMP2r
+1848:   65         ROT2r
+1849:   6e         JSR2r
+184a:   67         OVR2r
+184b:   74         LDA2r
+184c:   68         EQU2r
+184d:   00         BRK
+184e:   00         BRK
+184f:   6c         JMP2r
+1850:   00         BRK
+1851:   41         INCr
+1852:   75         STA2r
+1853:   64         SWP2r
+1854:   69         NEQ2r
+1855:   6f         STH2r
+1856:   33         STR2
+1857:   2f         STH2
+1858:   61         INC2r
+1859:   64         SWP2r
+185a:   64         SWP2r
+185b:   72         LDR2r
+185c:   00         BRK
+185d:   00         BRK
+185e:   6e         JSR2r
+185f:   00         BRK
+1860:   41         INCr
+1861:   75         STA2r
+1862:   64         SWP2r
+1863:   69         NEQ2r
+1864:   6f         STH2r
+1865:   33         STR2
+1866:   2f         STH2
+1867:   76         DEI2r
+1868:   6f         STH2r
+1869:   6c         JMP2r
+186a:   75         STA2r
+186b:   6d         JCN2r
+186c:   65         ROT2r
+186d:   00         BRK
+186e:   00         BRK
+186f:   6f         STH2r
+1870:   00         BRK
+1871:   41         INCr
+1872:   75         STA2r
+1873:   64         SWP2r
+1874:   69         NEQ2r
+1875:   6f         STH2r
+1876:   33         STR2
+1877:   2f         STH2
+1878:   70         LDZ2r
+1879:   69         NEQ2r
+187a:   74         LDA2r
+187b:   63         NIP2r
+187c:   68         EQU2r
+187d:   00         BRK
+187e:   00         BRK
+187f:   80 00      LIT 00
+1881:   43         NIPr
+1882:   6f         STH2r
+1883:   6e         JSR2r
+1884:   74         LDA2r
+1885:   72         LDR2r
+1886:   6f         STH2r
+1887:   6c         JMP2r
+1888:   2f         STH2
+1889:   76         DEI2r
+188a:   65         ROT2r
+188b:   63         NIP2r
+188c:   74         LDA2r
+188d:   6f         STH2r
+188e:   72         LDR2r
+188f:   00         BRK
+1890:   00         BRK
+1891:   82         POPk
+1892:   00         BRK
+1893:   43         NIPr
+1894:   6f         STH2r
+1895:   6e         JSR2r
+1896:   74         LDA2r
+1897:   72         LDR2r
+1898:   6f         STH2r
+1899:   6c         JMP2r
+189a:   2f         STH2
+189b:   62         POP2r
+189c:   75         STA2r
+189d:   74         LDA2r
+189e:   74         LDA2r
+189f:   6f         STH2r
+18a0:   6e         JSR2r
+18a1:   00         BRK
+18a2:   00         BRK
+18a3:   83         NIPk
+18a4:   00         BRK
+18a5:   43         NIPr
+18a6:   6f         STH2r
+18a7:   6e         JSR2r
+18a8:   74         LDA2r
+18a9:   72         LDR2r
+18aa:   6f         STH2r
+18ab:   6c         JMP2r
+18ac:   2f         STH2
+18ad:   6b         LTH2r
+18ae:   65         ROT2r
+18af:   79         SUB2r
+18b0:   00         BRK
+18b1:   00         BRK
+18b2:   90         LDZk
+18b3:   00         BRK
+18b4:   4d         JCNr
+18b5:   6f         STH2r
+18b6:   75         STA2r
+18b7:   73         STR2r
+18b8:   65         ROT2r
+18b9:   2f         STH2
+18ba:   76         DEI2r
+18bb:   65         ROT2r
+18bc:   63         NIP2r
+18bd:   74         LDA2r
+18be:   6f         STH2r
+18bf:   72         LDR2r
+18c0:   00         BRK
+18c1:   00         BRK
+18c2:   92         LDRk
+18c3:   00         BRK
+18c4:   4d         JCNr
+18c5:   6f         STH2r
+18c6:   75         STA2r
+18c7:   73         STR2r
+18c8:   65         ROT2r
+18c9:   2f         STH2
+18ca:   78         ADD2r
+18cb:   00         BRK
+18cc:   00         BRK
+18cd:   94         LDAk
+18ce:   00         BRK
+18cf:   4d         JCNr
+18d0:   6f         STH2r
+18d1:   75         STA2r
+18d2:   73         STR2r
+18d3:   65         ROT2r
+18d4:   2f         STH2
+18d5:   79         SUB2r
+18d6:   00         BRK
+18d7:   00         BRK
+18d8:   96         DEIk
+18d9:   00         BRK
+18da:   4d         JCNr
+18db:   6f         STH2r
+18dc:   75         STA2r
+18dd:   73         STR2r
+18de:   65         ROT2r
+18df:   2f         STH2
+18e0:   73         STR2r
+18e1:   74         LDA2r
+18e2:   61         INC2r
+18e3:   74         LDA2r
+18e4:   65         ROT2r
+18e5:   00         BRK
+18e6:   00         BRK
+18e7:   97         DEOk
+18e8:   00         BRK
+18e9:   4d         JCNr
+18ea:   6f         STH2r
+18eb:   75         STA2r
+18ec:   73         STR2r
+18ed:   65         ROT2r
+18ee:   2f         STH2
+18ef:   63         NIP2r
+18f0:   68         EQU2r
+18f1:   6f         STH2r
+18f2:   72         LDR2r
+18f3:   64         SWP2r
+18f4:   00         BRK
+18f5:   00         BRK
+18f6:   9c         ANDk
+18f7:   00         BRK
+18f8:   4d         JCNr
+18f9:   6f         STH2r
+18fa:   75         STA2r
+18fb:   73         STR2r
+18fc:   65         ROT2r
+18fd:   2f         STH2
+18fe:   73         STR2r
+18ff:   63         NIP2r
+1900:   72         LDR2r
+1901:   6f         STH2r
+1902:   6c         JMP2r
+1903:   6c         JMP2r
+1904:   79         SUB2r
+1905:   00         BRK
+1906:   00         BRK
+1907:   9c         ANDk
+1908:   00         BRK
+1909:   4d         JCNr
+190a:   6f         STH2r
+190b:   75         STA2r
+190c:   73         STR2r
+190d:   65         ROT2r
+190e:   2f         STH2
+190f:   73         STR2r
+1910:   63         NIP2r
+1911:   72         LDR2r
+1912:   6f         STH2r
+1913:   6c         JMP2r
+1914:   6c         JMP2r
+1915:   79         SUB2r
+1916:   2d         JCN2
+1917:   68         EQU2r
+1918:   62         POP2r
+1919:   00         BRK
+191a:   00         BRK
+191b:   9d         ORAk
+191c:   00         BRK
+191d:   4d         JCNr
+191e:   6f         STH2r
+191f:   75         STA2r
+1920:   73         STR2r
+1921:   65         ROT2r
+1922:   2f         STH2
+1923:   73         STR2r
+1924:   63         NIP2r
+1925:   72         LDR2r
+1926:   6f         STH2r
+1927:   6c         JMP2r
+1928:   6c         JMP2r
+1929:   79         SUB2r
+192a:   2d         JCN2
+192b:   6c         JMP2r
+192c:   62         POP2r
+192d:   00         BRK
+192e:   00         BRK
+192f:   a0 00 46   LIT2 0046
+1932:   69         NEQ2r
+1933:   6c         JMP2r
+1934:   65         ROT2r
+1935:   30         LDZ2
+1936:   2f         STH2
+1937:   76         DEI2r
+1938:   65         ROT2r
+1939:   63         NIP2r
+193a:   74         LDA2r
+193b:   6f         STH2r
+193c:   72         LDR2r
+193d:   00         BRK
+193e:   00         BRK
+193f:   a2         POP2k
+1940:   00         BRK
+1941:   46         DUPr
+1942:   69         NEQ2r
+1943:   6c         JMP2r
+1944:   65         ROT2r
+1945:   30         LDZ2
+1946:   2f         STH2
+1947:   73         STR2r
+1948:   75         STA2r
+1949:   63         NIP2r
+194a:   63         NIP2r
+194b:   65         ROT2r
+194c:   73         STR2r
+194d:   73         STR2r
+194e:   00         BRK
+194f:   00         BRK
+1950:   a4         SWP2k
+1951:   00         BRK
+1952:   46         DUPr
+1953:   69         NEQ2r
+1954:   6c         JMP2r
+1955:   65         ROT2r
+1956:   30         LDZ2
+1957:   2f         STH2
+1958:   73         STR2r
+1959:   74         LDA2r
+195a:   61         INC2r
+195b:   74         LDA2r
+195c:   00         BRK
+195d:   00         BRK
+195e:   a6         DUP2k
+195f:   00         BRK
+1960:   46         DUPr
+1961:   69         NEQ2r
+1962:   6c         JMP2r
+1963:   65         ROT2r
+1964:   30         LDZ2
+1965:   2f         STH2
+1966:   64         SWP2r
+1967:   65         ROT2r
+1968:   6c         JMP2r
+1969:   65         ROT2r
+196a:   74         LDA2r
+196b:   65         ROT2r
+196c:   00         BRK
+196d:   00         BRK
+196e:   a7         OVR2k
+196f:   00         BRK
+1970:   46         DUPr
+1971:   69         NEQ2r
+1972:   6c         JMP2r
+1973:   65         ROT2r
+1974:   30         LDZ2
+1975:   2f         STH2
+1976:   61         INC2r
+1977:   70         LDZ2r
+1978:   70         LDZ2r
+1979:   65         ROT2r
+197a:   6e         JSR2r
+197b:   64         SWP2r
+197c:   00         BRK
+197d:   00         BRK
+197e:   a8         EQU2k
+197f:   00         BRK
+1980:   46         DUPr
+1981:   69         NEQ2r
+1982:   6c         JMP2r
+1983:   65         ROT2r
+1984:   30         LDZ2
+1985:   2f         STH2
+1986:   6e         JSR2r
+1987:   61         INC2r
+1988:   6d         JCN2r
+1989:   65         ROT2r
+198a:   00         BRK
+198b:   00         BRK
+198c:   aa         GTH2k
+198d:   00         BRK
+198e:   46         DUPr
+198f:   69         NEQ2r
+1990:   6c         JMP2r
+1991:   65         ROT2r
+1992:   30         LDZ2
+1993:   2f         STH2
+1994:   6c         JMP2r
+1995:   65         ROT2r
+1996:   6e         JSR2r
+1997:   67         OVR2r
+1998:   74         LDA2r
+1999:   68         EQU2r
+199a:   00         BRK
+199b:   00         BRK
+199c:   ac         JMP2k
+199d:   00         BRK
+199e:   46         DUPr
+199f:   69         NEQ2r
+19a0:   6c         JMP2r
+19a1:   65         ROT2r
+19a2:   30         LDZ2
+19a3:   2f         STH2
+19a4:   72         LDR2r
+19a5:   65         ROT2r
+19a6:   61         INC2r
+19a7:   64         SWP2r
+19a8:   00         BRK
+19a9:   00         BRK
+19aa:   ae         JSR2k
+19ab:   00         BRK
+19ac:   46         DUPr
+19ad:   69         NEQ2r
+19ae:   6c         JMP2r
+19af:   65         ROT2r
+19b0:   30         LDZ2
+19b1:   2f         STH2
+19b2:   77         DEO2r
+19b3:   72         LDR2r
+19b4:   69         NEQ2r
+19b5:   74         LDA2r
+19b6:   65         ROT2r
+19b7:   00         BRK
+19b8:   00         BRK
+19b9:   b0         LDZ2k
+19ba:   00         BRK
+19bb:   46         DUPr
+19bc:   69         NEQ2r
+19bd:   6c         JMP2r
+19be:   65         ROT2r
+19bf:   31         STZ2
+19c0:   2f         STH2
+19c1:   76         DEI2r
+19c2:   65         ROT2r
+19c3:   63         NIP2r
+19c4:   74         LDA2r
+19c5:   6f         STH2r
+19c6:   72         LDR2r
+19c7:   00         BRK
+19c8:   00         BRK
+19c9:   b2         LDR2k
+19ca:   00         BRK
+19cb:   46         DUPr
+19cc:   69         NEQ2r
+19cd:   6c         JMP2r
+19ce:   65         ROT2r
+19cf:   31         STZ2
+19d0:   2f         STH2
+19d1:   73         STR2r
+19d2:   75         STA2r
+19d3:   63         NIP2r
+19d4:   63         NIP2r
+19d5:   65         ROT2r
+19d6:   73         STR2r
+19d7:   73         STR2r
+19d8:   00         BRK
+19d9:   00         BRK
+19da:   b4         LDA2k
+19db:   00         BRK
+19dc:   46         DUPr
+19dd:   69         NEQ2r
+19de:   6c         JMP2r
+19df:   65         ROT2r
+19e0:   31         STZ2
+19e1:   2f         STH2
+19e2:   73         STR2r
+19e3:   74         LDA2r
+19e4:   61         INC2r
+19e5:   74         LDA2r
+19e6:   00         BRK
+19e7:   00         BRK
+19e8:   b6         DEI2k
+19e9:   00         BRK
+19ea:   46         DUPr
+19eb:   69         NEQ2r
+19ec:   6c         JMP2r
+19ed:   65         ROT2r
+19ee:   31         STZ2
+19ef:   2f         STH2
+19f0:   64         SWP2r
+19f1:   65         ROT2r
+19f2:   6c         JMP2r
+19f3:   65         ROT2r
+19f4:   74         LDA2r
+19f5:   65         ROT2r
+19f6:   00         BRK
+19f7:   00         BRK
+19f8:   b7         DEO2k
+19f9:   00         BRK
+19fa:   46         DUPr
+19fb:   69         NEQ2r
+19fc:   6c         JMP2r
+19fd:   65         ROT2r
+19fe:   31         STZ2
+19ff:   2f         STH2
+1a00:   61         INC2r
+1a01:   70         LDZ2r
+1a02:   70         LDZ2r
+1a03:   65         ROT2r
+1a04:   6e         JSR2r
+1a05:   64         SWP2r
+1a06:   00         BRK
+1a07:   00         BRK
+1a08:   b8         ADD2k
+1a09:   00         BRK
+1a0a:   46         DUPr
+1a0b:   69         NEQ2r
+1a0c:   6c         JMP2r
+1a0d:   65         ROT2r
+1a0e:   31         STZ2
+1a0f:   2f         STH2
+1a10:   6e         JSR2r
+1a11:   61         INC2r
+1a12:   6d         JCN2r
+1a13:   65         ROT2r
+1a14:   00         BRK
+1a15:   00         BRK
+1a16:   ba         MUL2k
+1a17:   00         BRK
+1a18:   46         DUPr
+1a19:   69         NEQ2r
+1a1a:   6c         JMP2r
+1a1b:   65         ROT2r
+1a1c:   31         STZ2
+1a1d:   2f         STH2
+1a1e:   6c         JMP2r
+1a1f:   65         ROT2r
+1a20:   6e         JSR2r
+1a21:   67         OVR2r
+1a22:   74         LDA2r
+1a23:   68         EQU2r
+1a24:   00         BRK
+1a25:   00         BRK
+1a26:   bc         AND2k
+1a27:   00         BRK
+1a28:   46         DUPr
+1a29:   69         NEQ2r
+1a2a:   6c         JMP2r
+1a2b:   65         ROT2r
+1a2c:   31         STZ2
+1a2d:   2f         STH2
+1a2e:   72         LDR2r
+1a2f:   65         ROT2r
+1a30:   61         INC2r
+1a31:   64         SWP2r
+1a32:   00         BRK
+1a33:   00         BRK
+1a34:   be         EOR2k
+1a35:   00         BRK
+1a36:   46         DUPr
+1a37:   69         NEQ2r
+1a38:   6c         JMP2r
+1a39:   65         ROT2r
+1a3a:   31         STZ2
+1a3b:   2f         STH2
+1a3c:   77         DEO2r
+1a3d:   72         LDR2r
+1a3e:   69         NEQ2r
+1a3f:   74         LDA2r
+1a40:   65         ROT2r
+1a41:   00         BRK
+1a42:   00         BRK
+1a43:   c0 00      LITr 00
+1a45:   44         SWPr
+1a46:   61         INC2r
+1a47:   74         LDA2r
+1a48:   65         ROT2r
+1a49:   54         LDAr
+1a4a:   69         NEQ2r
+1a4b:   6d         JCN2r
+1a4c:   65         ROT2r
+1a4d:   2f         STH2
+1a4e:   79         SUB2r
+1a4f:   65         ROT2r
+1a50:   61         INC2r
+1a51:   72         LDR2r
+1a52:   00         BRK
+1a53:   00         BRK
+1a54:   c2         POPkr
+1a55:   00         BRK
+1a56:   44         SWPr
+1a57:   61         INC2r
+1a58:   74         LDA2r
+1a59:   65         ROT2r
+1a5a:   54         LDAr
+1a5b:   69         NEQ2r
+1a5c:   6d         JCN2r
+1a5d:   65         ROT2r
+1a5e:   2f         STH2
+1a5f:   6d         JCN2r
+1a60:   6f         STH2r
+1a61:   6e         JSR2r
+1a62:   74         LDA2r
+1a63:   68         EQU2r
+1a64:   00         BRK
+1a65:   00         BRK
+1a66:   c3         NIPkr
+1a67:   00         BRK
+1a68:   44         SWPr
+1a69:   61         INC2r
+1a6a:   74         LDA2r
+1a6b:   65         ROT2r
+1a6c:   54         LDAr
+1a6d:   69         NEQ2r
+1a6e:   6d         JCN2r
+1a6f:   65         ROT2r
+1a70:   2f         STH2
+1a71:   64         SWP2r
+1a72:   61         INC2r
+1a73:   79         SUB2r
+1a74:   00         BRK
+1a75:   00         BRK
+1a76:   c4         SWPkr
+1a77:   00         BRK
+1a78:   44         SWPr
+1a79:   61         INC2r
+1a7a:   74         LDA2r
+1a7b:   65         ROT2r
+1a7c:   54         LDAr
+1a7d:   69         NEQ2r
+1a7e:   6d         JCN2r
+1a7f:   65         ROT2r
+1a80:   2f         STH2
+1a81:   68         EQU2r
+1a82:   6f         STH2r
+1a83:   75         STA2r
+1a84:   72         LDR2r
+1a85:   00         BRK
+1a86:   00         BRK
+1a87:   c5         ROTkr
+1a88:   00         BRK
+1a89:   44         SWPr
+1a8a:   61         INC2r
+1a8b:   74         LDA2r
+1a8c:   65         ROT2r
+1a8d:   54         LDAr
+1a8e:   69         NEQ2r
+1a8f:   6d         JCN2r
+1a90:   65         ROT2r
+1a91:   2f         STH2
+1a92:   6d         JCN2r
+1a93:   69         NEQ2r
+1a94:   6e         JSR2r
+1a95:   75         STA2r
+1a96:   74         LDA2r
+1a97:   65         ROT2r
+1a98:   00         BRK
+1a99:   00         BRK
+1a9a:   c6         DUPkr
+1a9b:   00         BRK
+1a9c:   44         SWPr
+1a9d:   61         INC2r
+1a9e:   74         LDA2r
+1a9f:   65         ROT2r
+1aa0:   54         LDAr
+1aa1:   69         NEQ2r
+1aa2:   6d         JCN2r
+1aa3:   65         ROT2r
+1aa4:   2f         STH2
+1aa5:   73         STR2r
+1aa6:   65         ROT2r
+1aa7:   63         NIP2r
+1aa8:   6f         STH2r
+1aa9:   6e         JSR2r
+1aaa:   64         SWP2r
+1aab:   00         BRK
+1aac:   00         BRK
+1aad:   c7         OVRkr
+1aae:   00         BRK
+1aaf:   44         SWPr
+1ab0:   61         INC2r
+1ab1:   74         LDA2r
+1ab2:   65         ROT2r
+1ab3:   54         LDAr
+1ab4:   69         NEQ2r
+1ab5:   6d         JCN2r
+1ab6:   65         ROT2r
+1ab7:   2f         STH2
+1ab8:   64         SWP2r
+1ab9:   6f         STH2r
+1aba:   74         LDA2r
+1abb:   77         DEO2r
+1abc:   00         BRK
+1abd:   00         BRK
+1abe:   c8         EQUkr
+1abf:   00         BRK
+1ac0:   44         SWPr
+1ac1:   61         INC2r
+1ac2:   74         LDA2r
+1ac3:   65         ROT2r
+1ac4:   54         LDAr
+1ac5:   69         NEQ2r
+1ac6:   6d         JCN2r
+1ac7:   65         ROT2r
+1ac8:   2f         STH2
+1ac9:   64         SWP2r
+1aca:   6f         STH2r
+1acb:   74         LDA2r
+1acc:   79         SUB2r
+1acd:   00         BRK
+1ace:   00         BRK
+1acf:   ca         GTHkr
+1ad0:   00         BRK
+1ad1:   44         SWPr
+1ad2:   61         INC2r
+1ad3:   74         LDA2r
+1ad4:   65         ROT2r
+1ad5:   54         LDAr
+1ad6:   69         NEQ2r
+1ad7:   6d         JCN2r
+1ad8:   65         ROT2r
+1ad9:   2f         STH2
+1ada:   69         NEQ2r
+1adb:   73         STR2r
+1adc:   64         SWP2r
+1add:   73         STR2r
+1ade:   74         LDA2r

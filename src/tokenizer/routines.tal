@@ -1,0 +1,44 @@
+(
+@|tokenizer/routines )
+
+@parse-token ( t* -- )
+	LDAk ,&rune STR
+	;runes/end ;runes
+	&loop ( -- )
+		LDAk [ LIT &rune $1 ] NEQ ?{
+			NIP2 INC2 LDA2
+			( * ) JMP2 }
+		#0003 ADD2 GTH2k ?&loop
+	POP2 POP2
+	( | non-runic )
+	is-hex ?<write-rawhex>
+	is-opcode ?<write-opcode>
+	!Lib/litjsi
+
+@walk-comment ( t* -- )
+	;&c feof ?sclr
+	[ LIT2 &c $1 28 ] NEQk ?{ ;Error/nested <set-error> }
+	INC NEQ ?walk-comment
+	!sclr
+
+@Lib
+	&padabs INC2 get-any !<set-head-ptr>
+	&padrel INC2 get-any ;head-ptr LDA2 ADD2 !<set-head-ptr>
+	&toplab INC2 !<set-scope>
+	&sublab INC2 get-sublabel !<create-symbol>
+	&litrel #80 <write>
+	&rawrel INC2 get-rel !<write>
+	&litzep #80 <write>
+	&rawzep INC2 get-ref NIP !<write>
+	&litabs #a0 <write>
+	&rawabs INC2 get-ref !<write-short>
+	&litjci INC2 #20 !<write-call>
+	&litjmi INC2 #40 !<write-call>
+	&litjsi #60 !<write-call>
+	&lithex INC2 !<write-lithex>
+	&rawstr INC2 !<write-str>/
+	&lambda POP2 !Lambda/pop
+	&inc INC2k ;include STH2k scpy
+	sclr
+	STH2r !handle-file
+	&ignore POP2 JMP2r

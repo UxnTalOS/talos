@@ -1,0 +1,9 @@
+(
+@|merlin/buffers )
+
+( pointers )
+@zp-ptr $1
+@input-ptr $2
+@head-ptr $2
+@prev-head $2
+@tail-ptr $2

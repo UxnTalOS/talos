@@ -1,0 +1,223 @@
+(
+@|lib/memory/routines )
+
+(
+		@<> ( -- )
+
+	Print the Working stack and the Return stack.
+
+	# Examples
+		uxn> #1234
+
+		uxn> <>
+		WST 00 00 00 00 00 00 00 00 00 00 00 00 00 00|12 34 <
+		RST 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00|<
+)
+@<> ( -- )
+	STH2r ,&rtn STR2
+	DBG
+	[ LIT2 &rtn $2 ]
+	JMP2
+
+(
+			@<>! ( -- )
+
+	Clear the Working stack and the Return stack.
+
+	# Examples
+		uxn> #1234 LIT2r 5678
+
+		uxn> <>
+		WST 00 00 00 00 00 00 00 00 00 00 00 00 00 00|12 34 <
+		RST 00 00 00 00 00 00 00 00 00 00 00 00 00 00|56 78 <
+
+		uxn> <>!
+
+		uxn> <>
+		WST 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00|<
+		RST 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00|<
+)
+@<>! ( -- )
+	STH2r ,&rtn STR2
+	LIT2r 8000 &loop-wst [ #0000 ] INCr NEQkr STHr ?&loop-wst #0000 POP2r
+	#00 .System/wst DEO
+	#8000 &loop-rst [ LIT2r 0000 ] INC NEQk ?&loop-rst [ LIT2r 0000 ] POP2
+	#00 .System/rst DEO
+	[ LIT2 &rtn $2 ]
+	JMP2
+
+(
+@wst $fe &ptr $2
+@rst $fe &ptr $2
+
+@<print-stack> ( stack* -- )
+	;wst DUP2 #00fe ADD2 LDA DUP ,&sp STR
+	?{
+		POP2 { "Empty 0a00 } STH2r !pstr }
+	STH2
+	#2000
+	&l ( -- )
+		DUP [ LIT &sp $1 ] EQU ?&end
+		#00 OVR STH2kr ADD2 LDA2 find-symbol DUP2 #ffff EQU2 ?{
+			LIT "{ <emit>
+			INC2k INC2 pstr
+			LIT "} <emit>
+			#2020 <emit>
+			<emit> }
+		POP2
+		( byte ) #00 OVR STH2kr ADD2 LDA phex/byte
+		#20 <emit>
+		INC GTHk ?&l
+	&end POP2 POP2r JMP2r
+)
+
+@free ( -- )
+	#0100 ;zp-ptr LDA #00 SWP SUB2 STH2k
+	;&free pstr
+	;tail-ptr LDA2 ;head-ptr LDA2 SUB2 STH2kr ADD2 pdec
+	<B> <\s> <(>
+	;&ZP pstr
+	STH2kr pdec
+	<B> <)>
+	;&used pstr
+	;head-ptr LDA2 #0100 SUB2 STH2k ADD2
+	;syms ;tail-ptr LDA2 SUB2 STH2k ADD2
+	#0400 ADD2 ROT2r STH2r SUB2 pdec
+	<B> <\s> <(>
+	;&heap pstr
+	SWP2r STH2r pdec
+	<B>
+	;&syms pstr
+	STH2r pdec
+	<B> <)> <.>
+
+	JMP2r
+	    &free [ "Free: \s \0 ]
+		&used [ "/Used: \s \0 ]
+		&heap [ "heap: \s \0 ]
+		&syms [ "/syms: \s \0 ]
+		&ZP [ "ZP: \s \0 ]
+
+(
+		@<mclr> ( src* len* -- )
+
+	Clear a length of memory by filling it with zeros.
+
+	# Arguments
+	- `src*`: Starting position of memory to be cleared.
+	- `len*`: Length to be filled with zeros.
+
+	# Examples
+		uxn> @foo "This \s "is \s "a \s "test! \n \0
+
+		uxn> ;foo pmem
+		0d08  54 68 69 73 20 69 73 20  61 20 74 65 73 74 21 0a  |This.is.a.test!.|
+		⋮
+
+		uxn> ;foo #0010 <mclr>
+
+		uxn> ;foo pmem
+		0d08  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  |................|
+		⋮
+)
+
+@pobj ( addr* | {name}* -- )
+	<\n> SWP2r STH2r pstr pmem <\n> JMP2r
+
+(
+		@pmem ( addr* -- )
+
+	Print one page of memory starting from `addr*`.
+
+	# Arguments
+	- `addr*`: Starting address position to be printed.
+
+	# Examples
+		uxn> @foo "This \s "is \s "a \s "test! \n \0
+
+		uxn> ;foo pmem
+		0d08  54 68 69 73 20 69 73 20  61 20 74 65 73 74 21 0a  |This.is.a.test!.|
+		⋮
+		0df8  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  |................|
+		0e08
+)
+@pmem ( addr* -- )
+	STH2k DUP2 phex <\s> <\s> #0000
+	&>loop-bytes ( addr* i* | addr* -- )
+		ADD2k LDA phex/byte
+		DUP #0f AND DUP #07 NEQ ?{ <\s> }
+		#0f NEQ ?{
+			<\s> <\s> <|>
+			ADD2k DUP2 INC2 SWP2 #000f SUB2
+			&>loop-chars
+				LDAk DUPk SP GTH SWP #7f LTH AND ?{
+					POP LIT ". }
+				<emit> INC2 GTH2k ?&>loop-chars
+			POP2 POP2
+			<|> <\n> DUP2 INC2 STH2kr ADD2
+			phex <\s> }
+		<\s> INC NEQk ?&>loop-bytes
+	POP2 POP2 POP2r <\n> JMP2r
+
+@mfill ( length* bank* addr* value -- )
+	,&value STR  ,&addr STR2  ,&bank STR2  ,&length STR2
+	;&cmd .System/expansion DEO2
+	JMP2r
+		&cmd [ 00 &length $2 &bank $2 &addr $2 &value $1 ]
+
+@mzero ( length* bank* addr* -- )
+	,&addr STR2  ,&bank STR2  ,&length STR2
+	;&cmd .System/expansion DEO2
+	JMP2r
+		&cmd [ 00 &length $2 &bank $2 &addr $2 00 ]
+
+@mcpyl ( length* src-bank* src* dst-bank* dst* -- )
+	,&dst STR2  ,&dst-bank STR2  ,&src STR2  ,&src-bank STR2  ,&length STR2
+	;&cmd .System/expansion DEO2
+	JMP2r
+		&cmd [ 01 &length $2 &src-bank $2 &src $2 &dst-bank $2 &dst $2 ]
+
+@mcpyr ( length* src-bank* src* dst-bank* dst* -- )
+	,&dst STR2  ,&dst-bank STR2  ,&src STR2  ,&src-bank STR2  ,&length STR2
+	;&cmd .System/expansion DEO2
+	JMP2r
+		&cmd [ 02 &length $2 &src-bank $2 &src $2 &dst-bank $2 &dst $2 ]
+
+@LDBk ( bank* addr* -- bank* addr* byte )
+	DUP4
+	( >> )
+
+@LDB ( bank* addr* -- byte )
+	,&src STR2  ,&src-bank STR2
+	;&cmd .System/expansion DEO2
+	,&val LDR
+	JMP2r
+		&cmd [ CPYL BYTE &src-bank $2 &src $2 ZERO-BLOCK =&val ]
+		&val $1
+
+@LDBr ( | bank* addr* -- | byte )
+	STH2r STH2r SWP2 !LDB
+
+@LDB2 ( bank* addr* -- short* )
+	,&src STR2  ,&src-bank STR2
+	;&cmd .System/expansion DEO2
+	,&val LDR2
+	JMP2r
+		&cmd [ CPYL SHORT &src-bank $2 &src $2 ZERO-BLOCK =&val ]
+		&val $2
+
+@STB ( val bank* addr* -- )
+	,&dst STR2  ,&dst-bank STR2
+	,&val STR
+	;&cmd .System/expansion DEO2
+	JMP2r
+		&cmd [ CPYL BYTE ZERO-BLOCK =&val &dst-bank $2 &dst $2 ]
+		&val $1
+
+@STB2 ( val* bank* addr* -- )
+	,&dst STR2  ,&dst-bank STR2
+	,&val STR2
+	;&cmd .System/expansion DEO2
+	JMP2r
+		&cmd [ CPYL SHORT ZERO-BLOCK =&val &dst-bank $2 &dst $2 ]
+		&val $2

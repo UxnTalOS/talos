@@ -1,0 +1,23 @@
+(
+@|buffers )
+
+(
+&|syms )
+
+|fb40 @syms
+
+( This label is used as the initial address of the symbol table, you must
+update it's value by adding all the padding for the following buffers and then
+substracting that value to `fb4a`, which is the address at which `@syms` begin
+if no other operator defined buffers are included.
+
+## Example
+
+@syms    @buff
+0xfb4a - 0x10 = 0xfb40 ->  |fb40 @syms )
+
+(
+&|buffers )
+%BUFF { $10 }
+
+@buff BUFF

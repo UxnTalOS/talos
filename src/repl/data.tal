@@ -1,0 +1,21 @@
+(
+@|repl/data )
+
+@banner-unicode [
+	\s \s \s \s \s \s \s NAME \s "— \s VERSION \s 28 ARVELIE 29 \n
+	\s \s \s "█ "▄ \s \s DESCRIPTION \n
+	\s "▐ \s "█ \s "▌ \s "© \s COPYRIGHT \s AUTHOR "ó \s CONTRIBUTORS \n
+	\s \s "▀ "█ \s \s \s INFORMATION \n
+	\s \s \s \s \s \s \s \0
+]
+
+@banner-ascii [
+	\s \s \s \s \s \s \s "_ \n
+	\s \s \s \s \s \s "| \s "|___ \s \s \s NAME \s "-- \s VERSION \s 28 ARVELIE 29 \n
+	\s \s \s "_ \s \s "|  \s \s "_  \s \s "| \s \s DESCRIPTION \n
+	\s \s "| \s "| \s "| \s "| \s "| \s "| \s \s 28 "c 29 \s COPYRIGHT \s AUTHOR
+	"o \s CONTRIBUTORS \n
+	\s \s "| \s "|_| \s "| \s "|_| \s \s INFORMATION \n
+	\s \s "|___ \s \s "| \n
+	\s \s \s \s \s \s "|_| \s \s \s \s \s \s \0
+]

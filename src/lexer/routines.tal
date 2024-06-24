@@ -1,0 +1,96 @@
+(
+@|lexer/routines )
+
+@get-sublabel ( name* -- sublabel* )
+	DUP2 slen ;sublabel slen ADD2 #0030 LTH2 ?{ ;Error/sublabel !<set-error> }
+	[ LIT2 &ptr $2 ] scpy
+	;sublabel JMP2r
+
+@<set-scope> ( t* -- )
+	( | copy scope until sublabel )
+	DUP2 [ LIT2r =scope ]
+	&>w ( -- )
+		LDAk [ LIT "/ ] EQU ?&end
+		LDAk STH2kr STA
+		INC2r INC2 LDAk ?&>w
+
+	&end POP2 #00 STH2r STA
+		( | prepare sublabel pointer )
+		;scope ;sublabel scpy
+		[ LIT2 "/ 00 ] ;sublabel scap/
+		( ptr ) INC2k ,get-sublabel/ptr STR2
+		( cap ) STA2
+		( >> )
+
+@<create-symbol> ( name* -- )
+	;scan LDA ?{ POP2 JMP2r }
+	DUP2 ;Info/on-repl scmp ?{
+		is-hex ?&invalid
+		is-opcode ?&invalid
+		is-runic ?&invalid
+		DUP2 find-symbol INC2 ORA #00 EQU ?{
+			~logger/warn/redefinition.tal }
+		( prepend in reverse order )
+		( name[] ) DUP2 slen INC2 ;tail-ptr LDA2 SWP2 SUB2 ;tail-ptr STA2
+		;tail-ptr LDA2 scpy
+		( refs ) #00 ;tail-ptr LDA2 #0001 SUB2 DUP2 ;tail-ptr STA2 STA
+		( addr* ) ;head-ptr LDA2 ;tail-ptr LDA2k #0002 SUB2 DUP2 ROT2 STA2 STA2
+
+		[ LIT2 &count $2 ] INC2 ,&count STR2
+		JMP2r }
+	POP2 JMP2r
+
+	&invalid ( name* -- )
+		POP2 ;Error/symbol !<set-error>
+
+@find-symbol ( name* -- <addr>* )
+	,&t STR2
+	;syms ;tail-ptr LDA2
+	&loop ( -- )
+		EQU2k ?&end
+		#0003 ADD2 DUP2 [ LIT2 &t $2 ] scmp ?&found
+		scap/ INC2 GTH2k ?&loop
+	&end POP2 POP2 #ffff JMP2r
+	&found ( symbols* -- <addr>* )
+	#0003 SUB2 NIP2 JMP2r
+
+@get-any ( str* -- value* )
+	is-hex ?shex
+	!get-ref/eager
+
+@get-ref ( token* -- addr* )
+	LDAk [ LIT "{ ] NEQ ?{ POP2 Lambda/push }
+	;scan LDA ?&scan
+	&eager ( -- )
+		LDAk [ LIT "/ ] NEQ ?{ INC2 get-sublabel }
+		LDAk [ LIT "& ] NEQ ?{ INC2 get-sublabel }
+		find-symbol INC2k #0000 EQU2 ?{
+			INC2k INC2 LDAk INC ROT ROT STA
+			LDA2 JMP2r }
+		;Error/reference <set-error>
+		&scan JMP2r
+
+@get-rel ( label* -- distance )
+	get-ref ;head-ptr LDA2 INC2 INC2 SUB2
+	( ) DUP2 #0080 ADD2 POP ?{ NIP JMP2r }
+	( ) ;scan LDA ?{ ;Error/distance <set-error> }
+	POP2 #ff JMP2r
+
+@Lambda [
+	&sym "λ ( ce bb )
+	&id $3
+
+	&push ( -- name* )
+		[ LIT &count $1 ] INCk ,&count STR (
+		DUP [ LIT2 &ptr =&buf ] INC2k ,&ptr STR2
+		STA )
+		( >> )
+
+	&name ( id -- str* )
+		DUP #04 SFT hexc SWP hexc ,&id STR2
+		;&sym JMP2r
+
+	&pop ( -- )
+		,&count LDR #01 SUB DUP ,&count STR /name <create-symbol>
+		JMP2r
+]

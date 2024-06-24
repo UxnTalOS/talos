@@ -1,0 +1,4 @@
+*.rom
+*.sym
+.vscode/*
+bak/merlin*

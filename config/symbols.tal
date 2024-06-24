@@ -1,0 +1,13 @@
+(
+@|definitions )
+
+%>> { 00 }
+
+( Operator Defined Symbol Table
+
+=SYMBOL   >> NAME  \0 )
+=greeting >> "greeting \0
+=ready    >> "ready \0
+=uname    >> "uname \0
+=buff     >> "buff \0
+=DEBUG    >> "DEBUG \0

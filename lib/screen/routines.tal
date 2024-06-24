@@ -1,0 +1,17 @@
+(
+@|lib/screen/routines )
+
+@<draw-pixel> ( x* y* color -- )
+	STH
+	.Screen/y DEO2
+	.Screen/x DEO2
+	STHr .Screen/pixel DEO
+	JMP2r
+
+@<draw-sprite> ( sprite* x* y* color -- )
+	( color ) STH
+	( y* ) .Screen/y DEO2
+	( x* ) .Screen/x DEO2
+	( sprite* ) .Screen/addr DEO2
+	( color ) STHr .Screen/sprite  DEO
+	JMP2r

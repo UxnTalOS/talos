@@ -1,0 +1,15 @@
+(
+@|lexer/data )
+
+@runes [
+	"| =Lib/padabs "$ =Lib/padrel
+	"} =Lib/lambda 28 =walk-comment
+	"@ =Lib/toplab "& =Lib/sublab
+	", =Lib/litrel "_ =Lib/rawrel
+	". =Lib/litzep "- =Lib/rawzep
+	"; =Lib/litabs "= =Lib/rawabs
+	"? =Lib/litjci "! =Lib/litjmi
+	"[ =Lib/ignore "] =Lib/ignore
+	"# =Lib/lithex "" =Lib/rawstr
+	"~ =Lib/inc    &end
+]

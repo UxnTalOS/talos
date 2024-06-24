@@ -1,0 +1,10 @@
+(
+@|lib/signed/routines )
+
+@NEG ( n -- -n )
+	#ff MUL
+	JMP2r
+
+@NEG2 ( n* -- -n* )
+	#ffff MUL2
+	JMP2r

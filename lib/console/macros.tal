@@ -1,0 +1,50 @@
+(
+@|lib/console/macros )
+
+(
+		%<\s> ( -- )
+
+	Emit a space character to standard output.
+
+	# Examples
+		uxn> [ LIT "a ] <emit> <\s> [ LIT "b ] <emit> <\n>
+		a b
+)
+%<\s> ( -- ) { [ LIT2 \s -Console/write ] DEO }
+
+(
+		%<\n> ( -- )
+
+	Emit a new line character to standard output.
+
+	# Examples
+		uxn> [ LIT "a ] <emit> <\n> [ LIT "b ] <emit> <\n>
+		a
+		b
+)
+%<\n> ( -- ) { [ LIT2 \n -Console/write ] DEO }
+
+(
+		%<emit> ( c -- )
+
+	Emit a character to standard output.
+
+	# Arguments
+	- `c`: Byte representing an ASCII character.
+
+	# Examples
+		uxn> #55 <emit> <\s> [ LIT "U ] <emit> <\n>
+		U U
+)
+%<emit> ( c -- ) { #18 DEO }
+
+%<(> ( -- ) { [ LIT2 28 -Console/write ] DEO }
+%<)> ( -- ) { [ LIT2 ") -Console/write ] DEO }
+%<.> ( -- ) { [ LIT2 ". -Console/write ] DEO }
+%<,> ( -- ) { [ LIT2 ", -Console/write ] DEO }
+%<!> ( -- ) { [ LIT2 "! -Console/write ] DEO }
+%</> ( -- ) { [ LIT2 "/ -Console/write ] DEO }
+%<[> { [ LIT2 "[ -Console/write ] DEO }
+%<]> { [ LIT2 "] -Console/write ] DEO }
+%<|> { [ LIT2 "| -Console/write ] DEO }
+%<B> { [ LIT2 "B -Console/write ] DEO }

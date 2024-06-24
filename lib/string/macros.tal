@@ -1,0 +1,65 @@
+(
+@|lib/string/macros )
+
+(
+		%\0 ( -- )
+
+	Indicate the end of a raw null terminated string, used instead of the raw
+	byte: `00`, `BRK` or `$1`.
+
+	# Examples
+		uxn> @foo "This \s "is \s "a \s "test! \n \0
+		uxn> @foo "This \s "is \s "a \s "test! \n BRK
+		uxn> @foo "This \s "is \s "a \s "test! \n $1
+		uxn> @foo "This 20 "is 20 "a 20 "test! 0a 00
+)
+%\0 { 00 }
+
+(
+		%\t ( -- )
+
+	Indicate a tab in a raw string, used instead of the raw byte: `09`.
+
+	# Examples
+		uxn> @foo [
+			"This \s "is \s "the \s "first \s "line, \n
+			\t "The \s "second \s "line \s "is \s "tabbed. \n
+			09 "The \s "third \s "line \s "is \s "tabbed. \n \0
+		]
+		uxn> ;foo pstr
+		This is the first line,
+				The second line is tabbed.
+				The third line is tabbed.
+)
+%\t { 09 }
+
+(
+		%\s ( -- )
+
+	Indicate a space in a raw string, used instead of: `20`.
+
+	# Examples
+		uxn> @foo "This \s "is \s "a 20 "spaces 20 "example. \n \0
+		uxn> ;foo pstr
+		This is a spaces example.
+)
+%\s { 20 }
+
+(
+		%\n ( -- )
+
+	Indicate a newline in a raw string, used instead of the raw byte: `0a`.
+
+	 # Examples
+		uxn> @foo
+		[
+			"This \s "is \s "the \s "first \s "line, \n
+			"This \s "is \s "the \s "second \s "line. 0a
+		]
+		uxn> ;foo pstr
+		This is the first line,
+		This is the second line.
+)
+%\n { 0a }
+
+%PC { #00 JSR #0003 SUB }

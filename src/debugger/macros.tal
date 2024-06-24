@@ -1,0 +1,46 @@
+(
+@|debugger/macros )
+
+(
+		%DBG ( -- )
+
+	Send byte `01` to the `debug` port in the `System` device, the expected
+	behaviour depends on the Varvara emulator, but this will tipically print the
+	stacks or set a breakpoint if a debugger is available.
+
+	# Examples
+		uxn> DBG ( using uxncli )
+		WST 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00|<
+		RST 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00|<
+		uxn> #1337 DBG
+		WST 00 00 00 00 00 00 00 00 00 00 00 00 00 00|13 37 <
+		RST 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00|<
+)
+%DBG ( -- ) { #000e DEO }
+
+(
+		%HLT ( -- )
+
+	Send byte `01` to the `state` port in the `System` device, exiting with error
+	code 1.
+
+	# Examples
+		uxn> HLT
+		$ echo $?
+		1
+)
+%HLT ( -- ) { #010f DEO BRK }
+
+(   %DBG! ( -- )
+
+
+	Send byte `01` to the `debug` port in the `System` device and also send byte
+	`01` to the `state` port in the `System` device, exiting with error code 1.
+	# Examples
+		uxn> DBG!
+		WST 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00|<
+		RST 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00|<
+		$ echo $?
+		1
+)
+%DBG! ( -- ) { DBG HLT }

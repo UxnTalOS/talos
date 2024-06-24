@@ -1,0 +1,52 @@
+(
+@|assembler/primitives )
+
+@<write-str> ( str* -: )
+	LDAk <write>
+	INC2 & LDAk ?<write-str>
+	POP2 JMP2r
+
+@<write-opcode> ( str* -: )
+	find-opcode !<write>
+
+@<write-lithex> ( str* -: )
+	is-hex ?{ ;Error/number <set-error> }
+	DUP2 slen NIP
+	( LIT ) DUP #04 EQU #50 SFT #80 ORA <write>
+	!<write-hex>
+
+@<write-rawhex> ( str* -: )
+	DUP2 slen NIP
+	( >> )
+
+@<write-hex> ( str* len -- )
+	DUP #02 NEQ ?{ POP shex NIP !<write> }
+	#04 NEQ ?{ shex !<write-short> }
+	POP2 ;Error/number !<set-error>
+
+@<write-call> ( str* opc -: )
+	STH ( | opc )
+	get-ref INC2k ORA ?{ POPr POP2 JMP2r }
+	STHr <write>
+	;head-ptr LDA2 INC2 INC2 SUB2
+	( >> )
+
+@<write-short> ( short* -: )
+	SWP <write>
+	( >> )
+
+@<write> ( byte -: )
+	;head-ptr LDA2 INC2k STH2 ( byte head@ | head@+1 )
+	STA ( | head@+1 )
+	<set-length>
+	STH2r
+	( >> )
+
+@<set-head-ptr> ( v* -: )
+	;head-ptr STA2
+	JMP2r
+
+@<set-length> ( -- )
+	;scan LDA ?{ JMP2r }
+	;length LDA2 INC2 ;length STA2
+	JMP2r

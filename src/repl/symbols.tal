@@ -1,0 +1,167 @@
+@heap @head
+
+@tail ( Addr*, Type, Refs, Len-Code, Len-Meta, Name[], Null ) [
+	( Operator definitions )
+	~../config/symbols.tal
+
+	( Internals )
+	=meta 00 "meta \0
+	=input 00 "input \0
+	=head 00 "head \0
+	=head-ptr 00 "head* \0
+	=tail-ptr 00 "tail* \0
+	=input-ptr 00 "input* \0
+
+	=LDB 00 "LDB \0
+	=LDB2 00 "LDB2 \0
+
+	=STB 00 "STB \0
+	=STB2 00 "STB2 \0
+
+	=key 00 "key \0
+	=keys 00 "keys \0
+	=wait-enter 00 "wait \0
+	=echo 00 "echo \0
+	=<draw-pixel>  00 "pixel \0
+	=<draw-sprite> 00 "sprite \0
+	=heart         00 "heart \0
+
+	=bye 00 "bye \0
+	=NEG  00 "NEG \0
+	=NEG2 00 "NEG2 \0
+	( Library/memory/routines )
+	( =wst 00 "wst \0
+	=wst/ptr 00 "wst/ptr \0
+	=<print-stack> 00 "<print-stack> \0 )
+	=free 00 "free \0
+	=mzero 00 "mzero \0
+	=mfill 00 "mfill \0
+	=mcpyl 00 "mcpyl \0
+	=mcpyr 00 "mcpyr \0
+	=<>     00 ": \0
+	=<>!    00 ":! \0
+	=pobj 00 "pobj \0
+	=pmem 00 "pmem \0
+
+	( Library/string/routines )
+	=pstr  00 "pstr \0
+	=pstr: 00 "pstr: \0
+	=pdec  00 "pdec \0
+	=phex  00 "phex \0
+
+	=shex   00 "shex \0
+	=chex   00 "chex \0
+	=scmp   00 "scmp \0
+	=slen   00 "slen \0
+	=scap   00 "scap \0
+	=scpy 00 "scpy \0
+	=sclr 00 "sclr \0
+
+	( Library/devices )
+	=System/expansion 00 "System/expansion \0
+	=System/wst       00 "System/wst \0
+	=System/rst       00 "System/rst \0
+	=System/metadata  00 "System/metadata \0
+	=System/r         00 "System/r \0
+	=System/g         00 "System/g \0
+	=System/b         00 "System/b \0
+	=System/debug     00 "System/debug \0
+	=System/state     00 "System/state \0
+
+	=Console/vector 00 "Console/vector \0
+	=Console/read   00 "Console/read \0
+	=Console/type   00 "Console/type \0
+	=Console/write  00 "Console/write \0
+	=Console/error  00 "Console/error \0
+
+	=Screen/vector 00 "Screen/vector \0
+	=Screen/width  00 "Screen/width \0
+	=Screen/height 00 "Screen/height \0
+	=Screen/auto   00 "Screen/auto \0
+	=Screen/x      00 "Screen/x \0
+	=Screen/y      00 "Screen/y \0
+	=Screen/addr   00 "Screen/addr \0
+	=Screen/pixel  00 "Screen/pixel \0
+	=Screen/sprite 00 "Screen/sprite \0
+
+	=Audio0/vector   00 "Audio0/vector \0
+	=Audio0/position 00 "Audio0/position \0
+	=Audio0/output   00 "Audio0/output \0
+	=Audio0/adsr     00 "Audio0/adsr \0
+	=Audio0/length   00 "Audio0/length \0
+	=Audio0/addr     00 "Audio0/addr \0
+	=Audio0/volume   00 "Audio0/volume \0
+	=Audio0/pitch    00 "Audio0/pitch \0
+
+	=Audio1/vector   00 "Audio1/vector \0
+	=Audio1/position 00 "Audio1/position \0
+	=Audio1/output   00 "Audio1/output \0
+	=Audio1/adsr     00 "Audio1/adsr \0
+	=Audio1/length   00 "Audio1/length \0
+	=Audio1/addr     00 "Audio1/addr \0
+	=Audio1/volume   00 "Audio1/volume \0
+	=Audio1/pitch    00 "Audio1/pitch \0
+
+	=Audio2/vector   00 "Audio2/vector \0
+	=Audio2/position 00 "Audio2/position \0
+	=Audio2/output   00 "Audio2/output \0
+	=Audio2/adsr     00 "Audio2/adsr \0
+	=Audio2/length   00 "Audio2/length \0
+	=Audio2/addr     00 "Audio2/addr \0
+	=Audio2/volume   00 "Audio2/volume \0
+	=Audio2/pitch    00 "Audio2/pitch \0
+
+	=Audio3/vector   00 "Audio3/vector \0
+	=Audio3/position 00 "Audio3/position \0
+	=Audio3/output   00 "Audio3/output \0
+	=Audio3/adsr     00 "Audio3/adsr \0
+	=Audio3/length   00 "Audio3/length \0
+	=Audio3/addr     00 "Audio3/addr \0
+	=Audio3/volume   00 "Audio3/volume \0
+	=Audio3/pitch    00 "Audio3/pitch \0
+
+	=Control/vector 00 "Control/vector \0
+	=Control/button 00 "Control/button \0
+	=Control/key    00 "Control/key \0
+
+	=Mouse/vector     00 "Mouse/vector \0
+	=Mouse/x          00 "Mouse/x \0
+	=Mouse/y          00 "Mouse/y \0
+	=Mouse/state      00 "Mouse/state \0
+	=Mouse/chord      00 "Mouse/chord \0
+	=Mouse/scrolly    00 "Mouse/scrolly \0
+	=Mouse/scrolly-hb 00 "Mouse/scrolly-hb \0
+	=Mouse/scrolly-lb 00 "Mouse/scrolly-lb \0
+
+	=File0/vector  00 "File0/vector \0
+	=File0/success 00 "File0/success \0
+	=File0/stat    00 "File0/stat \0
+	=File0/delete  00 "File0/delete \0
+	=File0/append  00 "File0/append \0
+	=File0/name    00 "File0/name \0
+	=File0/length  00 "File0/length \0
+	=File0/read    00 "File0/read \0
+	=File0/write   00 "File0/write \0
+
+	=File1/vector  00 "File1/vector \0
+	=File1/success 00 "File1/success \0
+	=File1/stat    00 "File1/stat \0
+	=File1/delete  00 "File1/delete \0
+	=File1/append  00 "File1/append \0
+	=File1/name    00 "File1/name \0
+	=File1/length  00 "File1/length \0
+	=File1/read    00 "File1/read \0
+	=File1/write   00 "File1/write \0
+
+	=DateTime/year   00 "DateTime/year \0
+	=DateTime/month  00 "DateTime/month \0
+	=DateTime/day    00 "DateTime/day \0
+	=DateTime/hour   00 "DateTime/hour \0
+	=DateTime/minute 00 "DateTime/minute \0
+	=DateTime/second 00 "DateTime/second \0
+	=DateTime/dotw   00 "DateTime/dotw \0
+	=DateTime/doty   00 "DateTime/doty \0
+	=DateTime/isdst  00 "DateTime/isdst \0
+
+	&end
+]

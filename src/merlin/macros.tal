@@ -1,0 +1,10 @@
+(
+@|merlin/macros )
+
+%VERSION-NUMBER { "0.e }  %DATE { "2024 \s "Jun \s "23 }  %ARVELIE { "18M06 }
+
+%NAME { "Merlin }
+%VERSION { "Version \s VERSION-NUMBER }
+%DESCRIPTION { "Varvara's \s "Uxntal \s "Operating \s "System. }
+%AUTHOR { "Ismael \s "Venegas \s "Castell }
+%CONTRIBUTORS { "and \s "Contributors. }

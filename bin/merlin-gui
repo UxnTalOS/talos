@@ -1,0 +1,3 @@
+#!/usr/bin/env sh
+
+rlwrap uxn11 ~/roms/merlin.rom

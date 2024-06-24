@@ -1,0 +1,5 @@
+(
+@|lib/ops/macros )
+
+%DUP4 ( high* low* -- high* low* high* low* ) { OVR2 OVR2 }
+%NOT ( flag -- !flag ) { #00 EQU }

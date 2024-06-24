@@ -1,0 +1,120 @@
+(
+@|repl/routines )
+
+@REPL ( -> )
+	(
+	@|Read )
+	.Console/read DEI
+
+	( DUP SP NEQ ?{ POP BRK ( ignore ) } )
+	DUP LIT "@ NEQ ?{ #01 ;&expression STA }
+	DUP LIT "[ NEQ ?{
+		#00 ,&multi-line STR
+		,&brakets LDR INC ,&brakets STR }
+	DUP LIT "] NEQ ?{
+		,&brakets LDR #01 SUB ,&brakets STR }
+	DUP LIT 28 NEQ ?{ #00 ,&comment STR POP BRK }
+	DUP LIT 29 NEQ ?{ #01 ,&comment STR POP BRK }
+
+	DUP NL EQU ?{
+		[ LIT &comment 01 ] ?{
+			POP BRK }
+		;input-ptr LDA2 STA
+		;input-ptr LDA2 INC2 ;input-ptr STA2 BRK }
+
+	[ LIT &multi-line 01 ] ?{
+		[ LIT &brakets $1 ] ?{
+			#01 ,&multi-line STR
+			!&multiline-end }
+
+		.FORTH-PROMPT ?{
+			!&no-multiline-prompt }
+
+		~logger/info/multiline-prompt.tal
+
+		.UNICODE-PROMPT ?{
+			{ ".a. \s \0 } !&continue }
+		{ \s ".a. \s \0 }
+
+		&continue ( -- )
+			STH2r pstr
+		&no-multiline-prompt
+			;input-ptr LDA2 STA
+			;input-ptr LDA2 INC2 ;input-ptr STA2 BRK }
+
+	&multiline-end ( -- )
+
+	POP ( consume last newline )
+	#0000 ;length STA2
+	~debugger/routines/before-eval.tal
+
+	(
+	@|Eval )
+	;head-ptr LDA2 DUP2 ;prev-head STA2 STH2 ( | +prev-head* )
+	<assemble> ;abort LDA ?&expr-abort
+	~logger/info/summary.tal
+
+	[ LIT &expression $1 ] ?{
+		( assemble expr return jump )
+		;head-ptr LDA2 STH2 ( | prev-head* +head* )
+		[ LIT LIT2 ] STH2kr STA ( | prev-head* head* )
+		;REPL/expr-return STH2kr INC2 STA2 ( | prev-head* -head* )
+		[ LIT JMP2 ] STH2r INC2 INC2 INC2 STA ( | prev-head* )
+		( reset head-ptr )
+		STH2kr ;head-ptr STA2 ( | prev-head* )
+		;&on-eval .Console/vector DEO2
+		STH2r JMP2 } ( | -prev-head* )
+
+	POP2r ( | -prev-head* )
+
+	&expr-return ( -- )
+		;REPL .Console/vector DEO2
+		#00 ,&expression STR
+		#0400 #0000 ;input mzero
+
+	(
+	@|Print )
+	~debugger/routines/after-eval.tal
+	~logger/info/stacks.tal
+
+	(
+	@|Loop )
+	.FORTH-PROMPT ?{ <print-prompt> BRK }
+	<\n> <print-prompt> BRK
+
+&expr-abort ( | prev-head* -- )
+	~logger/error/abort.tal
+	( POP2r ( | -prev-head* ) )
+	<>!
+	#00 ;abort STA
+	!REPL/expr-return
+
+&on-eval ( -! )
+	.Console/read DEI NL NEQ ?{
+		[ LIT &count $1 ] INCk ,&count STR ( +count | )
+
+		#02 NEQ ?{ ( -count | )
+			#00 ,&count STR
+			!&expr-abort }
+
+		BRK }
+	( reset ) #00 ,&count STR
+	BRK
+
+@<print-prompt> ( -- )
+	.FORTH-PROMPT ?{
+		;&ok !pstr }
+	.UNICODE-PROMPT ?{
+		;&prompt-start-unicode !&continue }
+
+	;&prompt-start
+
+	&continue
+		pstr
+		~logger/info/prompt.tal
+		;&prompt-end !pstr
+
+	&ok [ \s \s "ok \n \0 ]
+	&prompt-start         [ "uxn \0 ]
+	&prompt-start-unicode [ "փ \s \0 ]
+	&prompt-end           [ "> \s \0 ]

@@ -1,0 +1,8 @@
+(
+@|logger/macros )
+
+%OFF { |Logger/off }
+%ERROR { |Logger/error }
+%INFO { |Logger/info }
+%WARN { |Logger/warn }
+%DEBUG { |Logger/debug }

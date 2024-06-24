@@ -1,0 +1,69 @@
+(
+@|assembler/generics )
+
+@<assemble> ( | head* -- )
+	OVR2r ( | head* rtn* head* )
+	( scan ) #01 handle-pass
+	( make ) #00 handle-pass
+	( <write-rom> )
+	( <write-sym> )
+	POP2r JMP2r ( | -head* )
+
+@handle-pass ( scan | head* -: Error )
+	;scan STA
+	OVR2r STH2r <set-head-ptr> ( | head* rtn* )
+	#00 ;Lambda/count STA
+	;Info/on-repl <set-scope>
+	handle-input JMP2r
+
+@handle-input ( str* -- )
+	;input
+	&loop ( str* -- )
+		LDAk handle-char
+		INC2 LDAk ?&loop
+	NL handle-char
+	POP2 JMP2r
+
+@handle-file ( f* -- )
+	#00 ;<print-summary>/include STA
+	.File0/name DEO2
+	#0001 .File0/length DEO2
+	#0000
+	&>s ( len* -- )
+		;&c feof ?&end
+		INC2 [ LIT &c $1 ]
+		DUP LIT "@ NEQ ?{
+			#01 ;REPL/expression STA }
+		DUP LIT "[ NEQ ?{
+			,&brakets LDR INC ,&brakets STR }
+		DUP LIT "] NEQ ?{
+			,&brakets LDR #01 SUB ,&brakets STR
+			[ LIT &brakets $1 ] ?{
+				#01 ;REPL/expression STA } }
+
+		handle-char !&>s
+	&end ( len* -- )
+	ORA ?{
+		;include ;token scpy
+		;Error/file !<set-error> }
+	JMP2r
+
+@handle-char ( c -- )
+	;token store-key ?{ JMP2r }
+	;token/buf DUP2 parse-token !sclr
+
+@<print-summary> ( -- )
+	( | result )
+	;length LDA2 #0000 EQU2 ?{
+		;Info/assembled pstr/
+		[ LIT &include 01 ] ?{
+			;include !&continue }
+		;scope
+		&continue
+			pstr/
+			#01 ,&include STR
+			( | length )
+			;Info/in pstr/
+			;length LDA2 pdec
+			;Info/bytes !pstr/ }
+	JMP2r

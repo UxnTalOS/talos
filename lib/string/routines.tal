@@ -1,0 +1,406 @@
+(
+@|lib/string/routines )
+
+(
+		@|lib
+
+	Implement standard routines for handling an visualizing memory and values.
+)
+
+(
+		@phex ( short* -- )
+
+	Print an hexadecimal short.
+
+	# Arguments
+	- `short*`: Short value to be printed.
+
+	# Examples
+		uxn> #1337 phex <newline>
+		1337
+		uxn> #1337 phex/short <newline>
+		1337
+		uxn> #42 phex/byte <newline>
+		42
+		uxn> #42 DUP phex/nibble <space> #04 SFT phex/nibble <newline>
+		2 4
+)
+@phex ( short* -- )
+	&short SWP /byte
+	&byte ( byte -- ) DUP #04 SFT /nibble
+	&nibble ( byte -- ) #0f AND DUP #09 GTH #27 MUL ADD [ LIT "0 ] ADD #18 DEO
+	JMP2r
+
+@feof ( addr* -: f )
+	.File0/read DEO2
+	.File0/success DEI2 #0000 EQU2 JMP2r
+
+(
+		@store-key
+
+	Store a char into a counted buffer and returns zero, a char < 0x21 resets the
+	counted buffer length to zero and return the length. If the input string is
+	longer than 0x30 a buffer overflow Error is shown.
+
+	# Arguments
+	- key: char
+	- buffer*: counted buffer.
+
+	# Examples
+		uxn> @foo &len $1 buf $30
+		uxn> [ LIT "f ] ;foo store-key
+		uxn> [ LIT "o ] ;foo store-key
+		uxn> [ LIT "o ] ;foo store-key
+		uxn> ;foo pmem
+		0f20  03 66 6f 6f 00 00 00 00  00 00 00 00 00 00 00 00  |.foo............|
+		⋮
+		uxn> ( newline ) NL ;foo store-key
+		uxn> <psts>
+		WST 00 00 00 00 00 00 00 00 00 00 00 00|00 00 00 03 <
+		RST 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00|<
+		uxn> ;foo pmem
+		0f20  00 66 6f 6f 00 00 00 00  00 00 00 00 00 00 00 00  |.foo............|
+		⋮
+)
+@store-key ( key buffer* -- proc )
+	ROTk NIP NIP #21 LTH ?&eval
+	LDAk #2f EQU ?&overflow
+	( write char ) STH2
+	#00 STH2kr LDAk #00 SWP ADD2 INC2 STA2
+	( incr len ) STH2r LDAk INC ROT ROT STA
+	#00 JMP2r
+
+		&overflow ( key buffer* -- proc )
+			;Error/label <set-error>
+
+		&eval ( key buffer* -- proc )
+			ROT POP LDAk #00 SWP2 STA
+			JMP2r
+
+(
+		@scap ( str* -- end* )
+
+	Return the ending address of a null terminated string (the address of it's
+	null byte).
+
+	# Arguments
+	- `str*`: Address of the first char in the string.
+
+	# Returns
+	- `end*`: Address of the null terminating byte of the string.
+
+	# Examples
+		uxn> @foo "This \s "is \s "a \s "test! \n \0
+		uxn> { "Starting \s "address: \s \0 } STH2r pstr ;foo phex <newline>
+		Starting address: 0d08
+		uxn> { "Ending \s "address: \s \0 } STH2r pstr ;foo scap phex <newline>
+		Ending address: 0d18
+		uxn> ;foo pmem
+		0d08  54 68 69 73 20 69 73 20  61 20 74 65 73 74 21 0a  |This.is.a.test!.|
+		0d18  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  |................|
+		⋮
+)
+@scap ( str* -: end* )
+	INC2 & LDAk ?scap
+	JMP2r
+
+(
+		@slen ( str* -- len* )
+
+	Return the length of the string as an hexadecimal short.
+
+	# Arguments
+	- `str*`: Starting address of the first char in the string.
+
+	# Returns
+	- `len*`: Length of the string.
+
+	# Examples
+		uxn> @foo "This \s "is \s "a \s "test! \n \0
+		uxn> ;foo slen <psts>
+		WST 00 00 00 00 00 00 00 00 00 00 00 00 00 00|00 10 <
+		RST 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00|<
+		uxn> pdec <newline>
+		16
+)
+@slen ( str* -: len* )
+	DUP2 scap/ SWP2 SUB2 JMP2r
+
+(
+		@scmp ( a* b* -- f )
+
+	Compare if two strings are equal.
+
+	# Arguments
+	- `a*`: First string to compare.
+	- `b*`: Second string to compare.
+
+	# Returns
+	- `f`: A boolean flag indicating if both strings are equal.
+
+	# Examples
+		uxn> @foo "foo \0
+		uxn> @bar "bar \0
+		uxn> @baz "foo \0
+		uxn> { "foo==bar-> \0 } STH2r pstr ;foo ;bar scmp phex/byte <newline>
+		foo==bar->00
+		uxn> { "foo==baz-> \0 } STH2r pstr ;foo ;baz scmp phex/byte <newline>
+		foo==baz->01
+)
+@scmp ( a* b* -- f )
+	STH2
+	&l ( -- )
+	LDAk ?{
+		&d LDA LDAr STHr EQU JMP2r }
+	LDAk LDAkr STHr NEQ ?&d
+	INC2 INC2r !&l
+
+(
+		@scmp3 ( a* b* -- f )
+
+	Compare two strings of length 3 for equality (used for parsing opcodes).
+
+	# Arguments
+	- `a*`: First string of length 3.
+	- `b*`: Second string of length 3.
+
+	# Returns
+	- `f`: A boolean flag indicating if both strings are equal.
+
+	# Examples
+		uxn> @foo "foo \0
+		uxn> @bar "bar \0
+		uxn> @baz "foo \0
+		uxn> { "foo==bar-> \0 } STH2r pstr ;foo ;bar scmp3 phex/byte <newline>
+		foo==bar->00
+		uxn> { "foo==baz-> \0 } STH2r pstr ;foo ;baz scmp3 phex/byte <newline>
+		foo==baz->01
+)
+@scmp3 ( a* b* -- f )
+	STH2
+	LDAkr LDAk STHr NEQ ?{ INC2r INC2 }
+	LDA2r LDA2 STH2r EQU2 JMP2r
+
+(
+		@chex ( c -- val )
+
+	Parse an hexadecimal character as a byte. Returns `ff` if there was a parsing
+	error.
+
+	# Arguments
+	- `c`: Hexadecimal char byte.
+
+	# Returns
+	- `val`: Parsed value or `ff` if the character is not an hexadecimal digit.
+
+	# Examples
+		uxn> [ LIT "7 ] chex
+		uxn> <psts>
+		WST 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00|07 <
+		RST 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00|<
+		uxn> phex/nibble <newline>
+		7
+)
+@chex ( c -: val )
+	[ LIT "0 ] SUB DUP #0a LTH ?&end
+	#27 SUB DUP #10 LTH ?&end
+	POP #ff &end JMP2r
+
+@hexc ( hex -- char )
+	#0f AND #0a LTHk ?{
+		SUB [ LIT "a ] ADD JMP2r }
+	POP [ LIT "0 ] ADD JMP2r
+
+(
+		@shex ( str* -- val* )
+
+	Parse a string in hexadecimal format and return it's value as a short.
+
+	# Arguments
+	- `str*`: String to be parsed.
+
+	# Returns
+	- `val*`: Parsed value from string as a short.
+
+	# Examples
+		uxn> @foo "1337 $1
+		uxn> ;foo <shex>
+		uxn> <psts>
+		WST 00 00 00 00 00 00 00 00 00 00 00 00 00 00|13 37 <
+		RST 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00|<
+		uxn> phex <newline>
+		1337
+)
+@shex ( str* -: value* )
+	[ LIT2r 0000 ]
+	&>w ( `i* -- )
+		( acc ) [ LITr 40 ] SFT2r
+		( res ) LDAk chex [ LITr 00 ] STH
+		ADD2r INC2 LDAk ?&>w
+	POP2 STH2r JMP2r
+
+(
+		@<scpy> ( src* dnt* -- )
+
+	Copy a string into a buffer.
+
+	# Arguments
+	- `src*`: Source string.
+	- `dst*`: Destinatdon buffer.
+
+	# Examples
+		uxn> @foo "This \s "is \s "a \s "test! \n \0
+
+		uxn> @bar $10
+
+		uxn> ;foo pmem
+		0f3e  74 68 69 73 20 69 73 20  61 20 74 65 73 74 0a 00  |This.is.a.test!.|
+		0f4e  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  |................|
+		⋮
+
+		uxn> ;foo ;bar <scpy>
+
+		uxn> ;foo pmem
+		0f3e  74 68 69 73 20 69 73 20  61 20 74 65 73 74 0a 00  |This.is.a.test!.|
+		0f4e  74 68 69 73 20 69 73 20  61 20 74 65 73 74 0a 00  |This.is.a.test!.|
+		⋮
+)
+@scpy ( src* dst* -: )
+	STH2
+	&>w ( src* `dst* -- )
+		LDAk #00 STH2kr STA2
+		INC2r INC2 LDAk ?&>w
+	POP2 POP2r JMP2r
+
+(
+		@sclr ( str* -- )
+
+	Clear a string data by filling it with zeros.
+
+	# Arguments
+	- `str*`:
+
+	# Examples
+		uxn> @foo "This \s "is \s "a \s "test! \n \0
+		uxn> ;foo pmem
+		0f4d  74 68 69 73 20 69 73 20  61 20 74 65 73 74 0a 00  |This.is.a.test!.|
+		⋮
+		uxn> ;foo sclr
+		uxn> ;foo pmem
+		0f4d  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  |................|
+		⋮
+)
+@sclr ( str* -- )
+	#00 ROT ROT
+	&>w ( -- )
+		STAk INC2 LDAk ?&>w
+	STA
+	JMP2r
+
+@key ( -- char )
+	;&on-key .Console/vector DEO2
+	BRK
+
+	&on-key ( -> ...chars )
+		.Console/read DEI DUP #0a NEQ ?{
+			JMP2r }
+		;&on-ignore .Console/vector DEO2
+		BRK
+
+	&on-ignore ( -> )
+		.Console/read DEI #0a NEQ ?{
+			JMP2r }
+		BRK
+
+@keys ( -- ...chars len )
+	[ LITr _&return ] STR2r
+	;&on-keys .Console/vector DEO2
+	BRK
+
+	&on-keys ( -> ...chars len )
+		.Console/read DEI DUP #0a NEQ ?{
+			LITr _&count LDRr LITr 00 !/
+			&loop
+				ROTr STHr
+				INCr & GTHkr STHr ?&loop
+			STHr INC POPr
+			#00 ,&count STR
+			[ LIT2r &return $2 ] JMP2r }
+		[ LIT &count $1 ] INC ,&count STR
+		STH BRK
+
+@echo
+	;&prompt pstr
+	&loop
+	key DUP #0a EQU ?{
+		#18 DEO !&loop
+	}
+	#18 DEO
+	JMP2r
+	&prompt
+		"echo> \s \0
+
+(
+		@pstr ( str* -- )
+
+	Print a null terminated string.
+
+	# Arguments
+	- `str*`: Address of the first character in the string.
+
+	# Examples
+		uxn> @hello "Hello \s "World! \n \0
+		uxn> ;hello pstr
+		Hello World!
+		uxn> { "Hola \s "Mundo! \n \0 } STH2r pstr
+		Hola Mundo!
+		uxn> @empty \0
+		uxn> ;empty pstr/ ( handle empty strings correctly )
+)
+@pstr ( str* -: )
+	LDAk .Console/write DEO
+	INC2 & LDAk ?pstr
+	POP2 JMP2r
+
+@pstr: ( -- )
+	STH2r
+	&loop
+		LDAk .Console/write DEO
+		INC2 & LDAk ?&loop
+	INC2 JMP2
+
+(
+		@pdec ( short* -- )
+
+	Print an hexadecimal short to decimal base.
+
+	# Arguments
+	- `short*`: Hexadecimal number to be printed in base 10.
+
+	# Examples
+		uxn> #ffff pdec
+		65535
+		uxn> #0080 pdec
+		128
+		uxn> #0000 pdec
+		0
+)
+@pdec ( short* -- )
+	DUP2 #0000 NEQ2 ?{
+		[ LIT "0 ] #18 DEO
+		POP2 JMP2r }
+	#2710 [ LIT2r 00fb ]
+	&>w ( -- )
+		DIV2k #000a DIV2k MUL2 SUB2 SWPr EQUk OVR STHkr EQU AND ?{
+			DUP [ LIT "0 ] ADD #18 DEO
+			INCr }
+		POP2 #000a DIV2 SWPr INCr STHkr ?&>w
+	POP2r POP2 POP2 JMP2r
+
+@wait-enter ( -- )
+    { "Type 20 "ENTER 20 "to 20 "continue... 2000 } STH2r pstr
+    key #0a NEQ ?{
+        !&end }
+    !wait-enter
+    &end
+        JMP2r

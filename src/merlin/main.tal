@@ -1,0 +1,49 @@
+(
+@|merlin/main )
+
+@Main ( -> )
+	(
+	@|setup )
+
+	(
+	&|metadata )
+	;meta #06 DEO2
+
+	(
+	&|symbols )
+	( Move the symbols before the input buffer. )
+	;tail/end ;tail SUB2 STH2k #0000 ;head #0000 ( | len* )
+	;syms STH2kr SUB2 STH2k mcpyl ( | len* dst* )
+	SWP2r STH2r #0000 ;head mzero ( | dst* )
+
+	(
+	&|pointers )
+	STH2r ;tail-ptr STA2 ( | )
+	;head ;head-ptr STA2
+	;input ;input-ptr STA2
+
+	(
+	&|theme )
+	#2ae7 .System/r DEO2
+	#0a52 .System/g DEO2
+	#2a37 .System/b DEO2
+
+	(
+	@|startup )
+	.PRINT-BANNER ?{
+		.UNICODE-BANNER ?{
+			;banner-unicode !&continue }
+		;banner-ascii
+		&continue
+			pstr
+			free
+			<\n> <\n> }
+
+	@Startup
+		~../config/startup.tal
+
+	.FORTH-PROMPT NOT ?Main/no-first-prompt
+	<print-prompt>
+@Main/no-first-prompt
+	;REPL .Console/vector DEO2
+	BRK

@@ -1,0 +1,16 @@
+(
+@|setup )
+
+( The following operator definitions will be included in the kernel image, and
+may be used from the `startup.tal` file. The symbols also need to be added to
+the dictionary in `symbols.tal` for them to become available within Merlin OS. )
+
+%READY { "Ready \n \0 }
+
+( Notify when the system is ready. )
+@ready ( -- ) ;&ready !pstr
+	&ready READY
+
+@greeting ( -- ) ;&hello pstr ;uname pstr ;&end !pstr
+	&hello [ "Welcome \s \0 ]
+	&end [ "! \n \0 ]

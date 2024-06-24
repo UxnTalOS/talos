@@ -1,0 +1,52 @@
+(
+@|lib/system/macros )
+
+%CPYL { 01 }
+%BYTE { 0001 }
+%SHORT { 0002 }
+%ZERO-BLOCK { 0000 }
+
+(
+                %NL ( -- )
+
+        Push the ASCII value of the new line character (`#0a`) to the stack.
+
+        # Examples
+                uxn> [ LIT "a ] <emit> NL <emit> [ LIT "b ] <emit> #0a <emit>
+                a
+                b
+                >
+)
+%NL { #0a }
+
+(
+                %SP ( -- )
+
+        Push the ASCII value of the space character (`#20`) to the stack.
+
+        # Examples
+                uxn> [ LIT "a ] <emit> SP <emit> [ LIT "b ] <emit> <\n>
+                a b
+                uxn> [ LIT "c ] <emit> #20 <emit> [ LIT "d ] <emit> <\n>
+                c d
+)
+%SP { #20 }
+
+(
+                %TB ( -- )
+
+        Push the ASCII value of the tabulator character (`#09`) to the stack.
+
+        # Examples
+                uxn> [ LIT "a ] <emit> <\n> TB <emit> [ LIT "b ] <emit> <\n>
+                a
+                                b
+                uxn> [ LIT "c ] <emit> <\n> #09 <emit> [ LIT "d ] <emit> <\n>
+                c
+                                d
+)
+%TB { #09 }
+
+~../lib/console/macros.tal
+~../lib/ops/macros.tal
+~../lib/string/macros.tal

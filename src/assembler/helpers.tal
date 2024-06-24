@@ -1,0 +1,42 @@
+(
+@|assembler/helpers )
+
+@is-hex ( str* -- str* f )
+	DUP2
+	&>w ( -- )
+		LDAk chex INC ?{ POP2 #00 JMP2r }
+		INC2 LDAk ?&>w
+	POP2 #01 JMP2r
+
+@is-opcode ( str* -- str* f )
+	DUP2 find-opcode ?{ DUP2 ;opcodes/brk !scmp3 }
+	#01 JMP2r
+
+@is-runic ( str* -- str* f )
+	LDAk ,&rune STR
+	;runes/end ;runes
+	&loop ( -- )
+		LDAk [ LIT &rune $1 ] EQU ?&end
+		#0003 ADD2 GTH2k ?&loop
+	&end NEQ2 JMP2r
+
+@find-opcode ( name* -- byte )
+	STH2
+	#2000
+	&loop ( -- )
+		#00 OVR #03 MUL ;opcodes ADD2 STH2kr scmp3 ?&on-found
+		INC GTHk ?&loop
+	POP2 POP2r #00 JMP2r
+	&on-found ( `name* bounds* -- byte )
+	( add keep mode to LIT ) NIP DUP #00 EQU #70 SFT ORA
+	( move to modes ) STH2r #0003 ADD2
+	( keep flag ) [ LITr 00 ]
+	&while ( -- )
+		LDAk #20 OVR [ LIT "2 ] EQU ?&end
+		DUP ADD OVR [ LIT "r ] EQU ?&end
+		DUP ADD OVR [ LIT "k ] EQU ?&end
+		DUP ADD OVR #00 EQU ?&end
+		;Error/opcode <set-error>
+		&end STH
+		POP ORAr INC2 LDAk ?&while
+	POP2 STHr ADD JMP2r
