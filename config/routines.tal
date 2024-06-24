@@ -12,5 +12,5 @@ the dictionary in `symbols.tal` for them to become available within Merlin OS. )
 	&ready READY
 
 @greeting ( -- ) ;&hello pstr ;uname pstr ;&end !pstr
-	&hello [ "Welcome \s \0 ]
+	&hello [ "Welcome \s "back \s \0 ]
 	&end [ "! \n \0 ]
