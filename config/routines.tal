@@ -6,6 +6,7 @@ may be used from the `startup.tal` file. The symbols also need to be added to
 the dictionary in `symbols.tal` for them to become available within Merlin OS. )
 
 %READY { "Ready \n \0 }
+%BYE { "Type \s "`bye` \s "to \s "exit. }
 
 ( Notify when the system is ready. )
 @ready ( -- ) ;&ready !pstr
@@ -14,3 +15,22 @@ the dictionary in `symbols.tal` for them to become available within Merlin OS. )
 @greeting ( -- ) ;&hello pstr ;uname pstr ;&end !pstr
 	&hello [ "Welcome \s "back \s \0 ]
 	&end [ "! \n \0 ]
+
+@banner ( -- )
+	.FORTH-PROMPT ?{
+		.PRINT-BANNER NOT ?{
+			.UNICODE-BANNER ?{
+				pstr:
+					SPACER "Merlin \s "OS \s "— \s "v VERSION-NUMBER \s
+					28 ARVELIE 29 \n
+					\s \s \s "փ \s \s \s "© \s "2024 \s AUTHOR "ó \n
+					SPACER BYE \n \n \0
+					!&continue }
+			pstr:
+				\n \s \s \s "|_ \s \s \s "Merlin \s "OS \s "-- \s "v VERSION-NUMBER
+				\s 28 ARVELIE 29 \n
+				\s "|_| \s "| \s \s 28 "c 29 \s "2024 \s AUTHOR "o \n
+				\s \s \s "| \s \s \s \s BYE \n \n \0
+
+			&continue } }
+	JMP2r

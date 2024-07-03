@@ -2,3 +2,4 @@
 @|config/macros )
 
 %UXN { LIT2 "փ }
+%SPACER { \s \s \s \s \s \s }

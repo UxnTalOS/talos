@@ -26,6 +26,8 @@
 	=<draw-sprite> 00 "sprite \0
 	=heart         00 "heart \0
 
+	0040 00 "FOREGROUND \0
+	0000 00 "BACKGROUND \0
 	=bye 00 "bye \0
 	=NEG  00 "NEG \0
 	=NEG2 00 "NEG2 \0
@@ -44,11 +46,12 @@
 	=pmem 00 "pmem \0
 
 	( Library/string/routines )
-	=pstr  00 "pstr \0
-	=pstr: 00 "pstr: \0
+	=pstr  00 "pzstr \0
+	=pstr: 00 "pzstr: \0
 	=pdec  00 "pdec \0
-	=phex  00 "phex \0
-
+	=phex  00 "pshrt \0
+	=phex/byte 00 "pbyte \0
+	=phex/nibble 00 "pnibl \0
 	=shex   00 "shex \0
 	=chex   00 "chex \0
 	=scmp   00 "scmp \0
