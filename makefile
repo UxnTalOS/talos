@@ -24,7 +24,7 @@ run: install
 
 test: install
 	@ echo "Testing: ~/${ROM_DIR}/${ID}.rom"
-	@ echo "~test/routines.tal \n sierpinski" | ${EMU} ~/${ROM_DIR}/${ID}.rom
+	@ echo "~test/routines.tal \n sierpinski" | ${EMU} ${ROM_DIR}/${ID}.rom
 
 setup:
 	@ echo "Setting up: ~/{${BIN_DIR},${ROMS_DIR}}"
