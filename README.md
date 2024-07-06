@@ -1,5 +1,7 @@
 # Merlin OS — Version 0.e (18M06)
 
+![example branch parameter](https://github.com/Ismael-VC/merlin/actions/workflows/makefile.yml/badge.svg?branch=main)
+
 <div align="center">
 	<img src="etc/merlin.jpg" alt="merlin" style="width: 256px;"/>
 </div>
