@@ -15,10 +15,7 @@ jobs:
     - uses: actions/checkout@v4
 
     - name: Setup
-      run: |
-        sudo apt install rlwrap
-        mkdir -p ~/bin ~/roms
-        echo ~/bin >> $GITHUB_PATH      
+      run: echo ~/bin >> $GITHUB_PATH      
 
     - name: Install UXN
       run: |
@@ -29,16 +26,10 @@ jobs:
         make install
     
     - name: Build Merlin OS
-      run: |
-        make
-        make install
+      run: make test
 
-    - name: Run Merlin OS
-      run: echo | merlin
-
-    - name: Release Merlin OS
+    - name: Upload Merlin OS
       uses: actions/upload-artifact@v4.3.4
       with:
-        name: merlin.rom
-        path: rom/merlin.rom
-          
+        name: merlin
+        path: rom/*
