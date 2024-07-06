@@ -2723,11 +2723,11 @@
 0ec6:   79         SUB2r
 0ec7:   70         LDZ2r
 0ec8:   65         ROT2r
-0ec9:   20 60 62   JCI +24674
+0ec9:   20 27 62   JCI +10082
 0ecc:   79         SUB2r
 0ecd:   65         ROT2r
-0ece:   60 20 74   JSI +8308
-0ed1:   6f         STH2r
+0ece:   27         OVR2
+0ecf:   20 74 6f   JCI +29807
 0ed2:   20 65 78   JCI +25976
 0ed5:   69         NEQ2r
 0ed6:   74         LDA2r
@@ -2795,11 +2795,11 @@
 0f34:   20 54 79   JCI +21625
 0f37:   70         LDZ2r
 0f38:   65         ROT2r
-0f39:   20 60 62   JCI +24674
+0f39:   20 27 62   JCI +10082
 0f3c:   79         SUB2r
 0f3d:   65         ROT2r
-0f3e:   60 20 74   JSI +8308
-0f41:   6f         STH2r
+0f3e:   27         OVR2
+0f3f:   20 74 6f   JCI +29807
 0f42:   20 65 78   JCI +25976
 0f45:   69         NEQ2r
 0f46:   74         LDA2r

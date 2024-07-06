@@ -6,7 +6,7 @@ may be used from the `startup.tal` file. The symbols also need to be added to
 the dictionary in `symbols.tal` for them to become available within Merlin OS. )
 
 %READY { "Ready \n \0 }
-%BYE { "Type \s "`bye` \s "to \s "exit. }
+%BYE { "Type \s "'bye' \s "to \s "exit. }
 
 ( Notify when the system is ready. )
 @ready ( -- ) ;&ready !pstr
