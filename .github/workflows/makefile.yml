@@ -13,6 +13,12 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
+
+    - name: Update Ubuntu
+      run: sudo apt -y update && sudo apt -y upgrade
+
+    - name: Install UXN
+      run: cd ~ && git clone https://git.sr.ht/~rabbits/uxn11 && cd uxn11 && make && make install
     
     - name: Build Merlin OS
       run: make
