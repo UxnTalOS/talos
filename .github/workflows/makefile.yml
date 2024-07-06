@@ -18,10 +18,12 @@ jobs:
       run: |
         mkdir -p ~/bin ~/roms
         cat ~/.bashrc | grep 'export PATH=$PATH:~/bin' || echo 'export PATH=$PATH:~/bin' >> ~/.bashrc && . ~/.bashrc
+        echo PATH=$PATH
         
 
     - name: Install UXN
       run: |
+        echo PATH=$PATH
         cd ~
         git clone https://git.sr.ht/~rabbits/uxn11
         cd uxn11
@@ -30,6 +32,7 @@ jobs:
     
     - name: Build Merlin OS
       run: |
+        echo PATH=$PATH
         make
         make install
 
