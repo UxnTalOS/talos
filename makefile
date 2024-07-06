@@ -4,6 +4,7 @@ ASM=uxnasm
 EMU=uxncli
 
 BAK_DIR=bak
+ETC_DIR=etc
 SRC_DIR=src
 BIN_DIR=bin
 ROM_DIR=rom
@@ -13,13 +14,17 @@ TAL=${ID}/${ENTRY}.tal
 ROM=${ROM_DIR}/${ID}.rom
 SYM=${ROM}.sym
 
-DIS=etc/uxndis.rom
-SYMS=etc/sym.rom
-DUMP=etc/hx.rom
+DIS=${ETC_DIR}/uxndis.rom
+SYMS=${ETC_DIR}/sym.rom
+DUMP=${ETC_DIR}/hx.rom
 
 run: install
 	@ echo "Running: ~/${BIN_DIR}/${ID}"
 	@ ${ID}
+
+test: install
+	@ echo "Testing: ~/${ROM_DIR}/${ID}.rom"
+	@ echo "~test/routines.tal \n sierpinski" | ${EMU} ~/${ROM_DIR}/${ID}.rom
 
 setup:
 	@ echo "Setting up: ~/{${BIN_DIR},${ROMS_DIR}}"
