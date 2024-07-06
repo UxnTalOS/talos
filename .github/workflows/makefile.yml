@@ -16,6 +16,7 @@ jobs:
 
     - name: Setup
       run: |
+        sudo apt install rlwrap
         mkdir -p ~/bin ~/roms
         echo ~/bin >> $GITHUB_PATH      
 
