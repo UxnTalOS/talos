@@ -8,5 +8,4 @@ Label definitions, routines, data and buffers must be defined in `setup.tal`. )
 &|forth-banner )
 
 banner
-greeting
 ready

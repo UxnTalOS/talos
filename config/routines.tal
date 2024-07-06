@@ -12,10 +12,6 @@ the dictionary in `symbols.tal` for them to become available within Merlin OS. )
 @ready ( -- ) ;&ready !pstr
 	&ready READY
 
-@greeting ( -- ) ;&hello pstr ;uname pstr ;&end !pstr
-	&hello [ "Welcome \s "back \s \0 ]
-	&end [ "! \n \0 ]
-
 @banner ( -- )
 	.FORTH-PROMPT ?{
 		.PRINT-BANNER NOT ?{

@@ -22,10 +22,6 @@ run: install
 	@ echo "Running: ~/${BIN_DIR}/${ID}"
 	@ ${ID}
 
-test: install
-	@ echo "Testing: ~/${ROM_DIR}/${ID}.rom"
-	@ echo "~test/routines.tal \n sierpinski" | ${EMU} ${ROM_DIR}/${ID}.rom
-
 setup:
 	@ echo "Setting up: ~/{${BIN_DIR},${ROMS_DIR}}"
 	@ mkdir -p ~/${BIN_DIR} ~/${ROMS_DIR}
@@ -55,6 +51,10 @@ install: setup backup build dump symbols disassemble
 	@ echo "Installing: ./{${BIN_DIR},${ROM_DIR}}/* at ~/{${BIN_DIR},${ROMS_DIR}}"
 	@ cp ${BIN_DIR}/* ~/${BIN_DIR}
 	@ cp ${ROM_DIR}/* ~/${ROMS_DIR}
+
+test: install
+	@ echo "Testing: ~/${ROM_DIR}/${ID}.rom"
+	@ echo "~test/routines.tal \n sierpinski" | ${EMU} ${ROM_DIR}/${ID}.rom
 
 cli: install
 	@ echo "Running: ~/${BIN_DIR}/${ID}-cli"
