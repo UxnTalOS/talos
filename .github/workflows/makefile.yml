@@ -14,17 +14,23 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
-    - name: Update Ubuntu
-      run: sudo apt -y update && sudo apt -y upgrade
-
     - name: Install UXN
-      run: cd ~ && git clone https://git.sr.ht/~rabbits/uxn11 && cd uxn11 && make && make install
+      run: |
+        cd ~
+        git clone https://git.sr.ht/~rabbits/uxn11
+        cd uxn11
+        make
+        mkdir -p ~/bin
+        make install
     
     - name: Build Merlin OS
-      run: make
+      run: |
+        make
+        mkdir -p ~/roms
+        make install
 
     - name: Run Merlin OS
-      run: echo | etc/uxncli rom/merlin.rom
+      run: echo | merlin
 
     - name: Release Merlin OS
       uses: actions/upload-artifact@v4.3.4
