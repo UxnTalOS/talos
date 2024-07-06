@@ -14,19 +14,23 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
+    - name: Setup
+      run: |
+        mkdir -p ~/bin ~/roms
+        cat ~/.bashrc | grep 'export PATH=$PATH:~/bin' || echo 'export PATH=$PATH:~/bin' >> ~/.bashrc && . ~/.bashrc
+        
+
     - name: Install UXN
       run: |
         cd ~
         git clone https://git.sr.ht/~rabbits/uxn11
         cd uxn11
         make
-        mkdir -p ~/bin
         make install
     
     - name: Build Merlin OS
       run: |
         make
-        mkdir -p ~/roms
         make install
 
     - name: Run Merlin OS
