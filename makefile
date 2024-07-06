@@ -21,6 +21,10 @@ run: install
 	@ echo "Running: ~/${BIN_DIR}/${ID}"
 	@ ${ID}
 
+setup:
+	@ echo "Setting up: ~/{${BIN_DIR},${ROMS_DIR}}"
+	@ mkdir -p ~/${BIN_DIR} ~/${ROMS_DIR}
+
 backup:
 	@ echo "Backing: ./{${BIN_DIR},${ROM_DIR}}/* to ./${BAK_DIR}"
 	@ cp ${BIN_DIR}/* ${BAK_DIR}
@@ -42,7 +46,7 @@ disassemble: build
 	@ echo "Disassembling: ./${ROM}.dis"
 	@ ${EMU} ${DIS} ${ROM} > ${ROM}.dis
 
-install: backup build dump symbols disassemble
+install: setup backup build dump symbols disassemble
 	@ echo "Installing: ./{${BIN_DIR},${ROM_DIR}}/* at ~/{${BIN_DIR},${ROMS_DIR}}"
 	@ cp ${BIN_DIR}/* ~/${BIN_DIR}
 	@ cp ${ROM_DIR}/* ~/${ROMS_DIR}
