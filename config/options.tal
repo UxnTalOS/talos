@@ -19,11 +19,11 @@ DISABLE @UNICODE-BANNER ( disabling this option will print an ascii banner )
 
 (
 &|logger )
-DEBUG @LOG-LEVEL ( valid values: OFF ERROR INFO WARN DEBUG ( most verbose ) )
+OFF @LOG-LEVEL ( valid values: OFF ERROR INFO WARN DEBUG ( most verbose ) )
 ENABLE @ERROR-ABORT ( print an error each time an evaluation is aborted )
 ENABLE @INFO-STACKS ( print stacks after each evaluation )
 ENABLE @INFO-PROMPT ( print the heap's `head` pointer inside the prompt )
-ENABLE @INFO-ASSEMBLER-SUMMARY ( print the assembled definition summary )
+DISABLE @INFO-ASSEMBLER-SUMMARY ( print the assembled definition summary )
 ENABLE @WARN-REDEFINITION ( warn on each redefinition )
 
 (

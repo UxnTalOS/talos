@@ -329,14 +329,26 @@
 		[ LIT &count $1 ] INC ,&count STR
 		STH BRK
 
-@echo
-	;&prompt pstr
+@psts ( chr-1 ... chr-n count -- )
+	#00
 	&loop
-	key DUP #0a EQU ?{
-		#18 DEO !&loop
-	}
-	#18 DEO
+		ROT
+		#18 DEO
+		INC GTHk ?&loop
+	POP2
 	JMP2r
+
+@echo
+	;&prompt pstr &
+	;&on-echo .Console/vector DEO2
+	BRK
+
+	&on-echo ( -> )
+		.Console/read DEI DUP #0a EQU ?{
+			#18 DEO BRK }
+		#18 DEO
+		JMP2r
+
 	&prompt
 		"echo> \s \0
 

@@ -47,6 +47,7 @@
 
 	( Library/string/routines )
 	=pstr  00 "pzstr \0
+	=psts  00 "psts \0
 	=pstr: 00 "pzstr: \0
 	=pdec  00 "pdec \0
 	=phex  00 "pshrt \0

@@ -1,8 +1,8 @@
 (
 @|test/routines )
 
-@sierpinski ( -- )
-	( mask ) [ LIT2r 0a18 ] [ LIT2r 2018 ] 
+@sierpinski ( -- ) [
+	( mask ) [ LIT2r 0a18 ] [ LIT2r 2018 ]
 	( size ) [ LIT2 &size 1001 ] SUB
 	&>ver ( -- )
 		DUP INCk
@@ -15,3 +15,4 @@
 		POP2 OVR2r DEOr
 		#01 SUB INCk ?&>ver
 	POP POP2r POP2r JMP2r
+]
