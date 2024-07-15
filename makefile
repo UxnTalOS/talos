@@ -50,7 +50,7 @@ disassemble: build
 install: setup backup build dump symbols disassemble
 	@ echo "Installing: ./{${BIN_DIR},${ROM_DIR}}/* at ~/{${BIN_DIR},${ROMS_DIR}}"
 	@ cp ${BIN_DIR}/* ~/${BIN_DIR}
-	@ cp ${ROM_DIR}/* ~/${ROMS_DIR}
+	@ cp ${ROM} ~/${ROMS_DIR}
 
 test: install
 	@ echo "Testing: ~/${ROM_DIR}/${ID}.rom"
