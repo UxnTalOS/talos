@@ -127,7 +127,7 @@ current `@dict` pointer points to.
 
 |             Environment               | 2 | 3 | 4 | 5 | 7 | 8 | 9 |
 |---------------------------------------|---|---|---|---|---|---|---|
-| *Windows 11 (__22631.3880__)</br> Windows Terminal (__1.20.11781.0__) </br> WSL2 (__2.2.4.0__) </br> Ubuntu (__22.04.4 LTS__) </br> zsh (__5.8.1__) </br> OhMyZsh! (__(5b37e21__)* | X | X | X | X | X | X | X |
+| *Windows 11 (__22631.3880__)</br> Windows Terminal (__1.20.11781.0__) </br> WSL2 (__2.2.4.0__) </br> Ubuntu (__22.04.4 LTS__) </br> dash (__0.5.11+git20210903+057cd650a4ed-3build1__)* | X | X | X | X | X | X | X |
 | *Windows 11 (__22631.3880__) </br> Chrome Browser (__126.0.6478.182__) </br> Developer Tools*     |   | X | X |   | X |   | X |
 
 
