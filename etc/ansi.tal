@@ -1,0 +1,190 @@
+( macros )
+%\dbg { #00 .System/debug DEO }   %\emit { .Console/write DEO }
+
+%\TTY:bg-black { =CSI "40m }   %\TTY:bg-red { =CSI "41m }
+%\TTY:bg-green { =CSI "42m }   %\TTY:bg-yellow { =CSI "43m }
+%\TTY:bg-blue { =CSI "44m }   %\TTY:bg-purple { =CSI "45m }
+%\TTY:bg-cyan { =CSI "46m }   %\TTY:bg-white { =CSI "47m }
+
+%\TTY:fg-black { =CSI "40m }   %\TTY:fg-red { =CSI "31m }
+%\TTY:fg-green { =CSI "32m }   %\TTY:fg-yellow { =CSI "33m }
+%\TTY:fg-blue { =CSI "34m }   %\TTY:fg-purple { =CSI "35m }
+%\TTY:fg-cyan { =CSI "36m }   %\TTY:fg-white { =CSI "37m }
+
+%\TTY:reset-colors { =CSI "m }   %\TTY:reset-cursor { =CSI "d }
+%\TTY:show-cursor { =CSI "?25h }   %\TTY:hide-cursor { =CSI "?25l }
+%\TTY:clear-screen { =CSI "2J }   %\TTY:cursor-up { =CSI "A }
+
+%\TTY:blink { =CSI "5m }
+
+
+( devices )
+|00 @System
+	&vector $2   &expansion $2   &wst $1   &rst $1   &metadata $2   &r $2
+	&g $2   &b $2   &debug $1   &state $1
+
+@Console
+	&vector $2   &read $1   &pad $4   &type $1   &write $1   &error $1
+
+
+( constants )
+|00 @NULL   |01 @NZ
+|07 @BELL   |0a @LF   |0d @CR   |20 @SP
+|1b @ESC   |5b @OPEN-BRACKET   |1b5b @CSI ( Control Sequence Introducer )
+|03 @CTRL-C   |04 @CTRL-D   |0c @CTRL-L   |12 @CTRL-R   |01 @CTRL-A
+|41 @UP   |42 @DOWN   |43 @RIGHT   |44 @LEFT
+|81 @ERROR   |80 @SUCCESS
+
+
+( program )
+|100 ( -> )
+	TTY/hide-cursor  TTY/clear-screen  TTY/reset-cursor
+	;Info/prompt Print/string
+	;on-console .Console/vector DEO2
+	BRK
+
+
+( routines )
+@on-console ( -> )
+	.Console/read DEI
+
+	[ LIT &first-loop -NULL ] ?{
+		.NZ ,&first-loop STR !&continue }
+	Print/newline
+	&continue
+
+	[ LIT &in-csi -NZ ] ?{
+		.NZ ;&in-esc STA
+		.NZ ,&in-csi STR
+
+		DUP .UP NEQ ?{    ( 1b5b 41  ^[[A   UP )
+			;Info/up Print/string
+			POP BRK }
+
+		DUP .DOWN NEQ ?{    ( 1b5b 42  ^[[B   DOWN )
+			;Info/down Print/string
+			POP BRK } }
+
+		DUP .RIGHT NEQ ?{   ( 1b5b 43  ^[[D   RIGHT )
+			;Info/right Print/string
+			POP BRK }
+
+		DUP .LEFT NEQ ?{    ( 1b5b 44  ^[[C   LEFT )
+			;Info/left Print/string
+			POP BRK }
+
+	DUP .OPEN-BRACKET NEQ  [ LIT &in-esc -NZ ] ORA ?{    ( 1b5b  ^[[   CSI )
+		.NULL ;&in-csi STA
+		;Info/csi Print/string
+		POP BRK }
+
+	DUP .ESC NEQ ?{    ( 1b  \e  ^[  ^3  ESC -> ESCAPE )
+		.NULL ,&in-esc STR
+		;Info/esc Print/string
+		POP BRK }
+
+	DUP .CTRL-C NEQ ?{    ( 03  ^C -> ETX )
+		.ERROR TTY/exit }
+
+	DUP .CTRL-D NEQ ?{    ( 04  ^D -> EOT )
+		.SUCCESS TTY/exit }
+
+	DUP .CTRL-R NEQ ?{    ( 12  ^R -> DC2 )
+		;Info/dc2 Print/string
+		POP BRK }
+
+	DUP .CTRL-A NEQ ?{    ( 01  ^A -> SOH )
+		;Info/soh Print/string
+		POP BRK }
+
+	DUP .CTRL-L NEQ ?{    ( 0c  ^L -> FORM-FEED )
+		TTY/clear-screen  TTY/reset-cursor
+		;Info/prompt Print/string
+		.NULL ;&first-loop STA
+		POP BRK }
+
+	DUP .NULL NEQ ?{    ( 00  \0  ^SPACE  ^2  ^`  ^@ -> NULL )
+		;Info/null Print/string
+		POP BRK }
+
+	DUP .CR NEQ ?{    ( 0d  \r  ENTER  ^M -> CARRIAGE-RETURN )
+		;Info/carriage-return Print/string
+		POP BRK }
+
+	DUP .LF NEQ ?{    ( 0a  \n  ^ENTER ^J -> LINE-FEED )
+		;Info/line-feed Print/string
+		POP BRK }
+
+	TTY/reset-colors
+	( print(f"'{chr(byte)}': {byte}") )
+	LIT "' \emit  DUP \emit  { "': -SP -NULL } STH2r Print/string  Print/byte
+	.BELL \emit
+	BRK
+
+
+@Print
+	&newline ( -- ) .LF \emit .CR \emit JMP2r
+
+	&string ( str* -- )
+		LDAk \emit
+		INC2 LDAk ?&string
+		POP2 JMP2r
+
+	&byte ( byte -- )
+		DUP #04 SFT /nibble
+		( >> )
+
+	&nibble ( byte -- ) #0f AND DUP #09 GTH #27 MUL ADD [ LIT "0 ] ADD \emit
+		JMP2r
+
+
+@TTY
+	&clear-screen ( -- ) ;&&clear-screen-cmd !Print/string
+	&reset-cursor ( -- ) ;&&reset-cursor-cmd !Print/string
+	&hide-cursor ( -- ) ;&&hide-cursor-cmd !Print/string
+	&reset-colors ( -- ) ;&&reset-colors-cmd !Print/string
+	&show-cursor ( -- ) ;&&show-cursor-cmd !Print/string
+	&cursor-up ( -- ) ;&&cursor-up-cmd !Print/string
+	&blink ( -- ) ;&&blink-cmd !Print/string
+
+	&exit ( exit-code -> )
+		TTY/reset-colors
+		Print/newline
+		TTY/clear-screen
+		TTY/reset-cursor
+		TTY/show-cursor
+		( exit-code ) .System/state DEO
+		BRK
+
+
+( data )
+@TTY/&clear-screen-cmd \TTY:clear-screen -NULL
+@TTY/&reset-cursor-cmd \TTY:reset-cursor -NULL
+@TTY/&hide-cursor-cmd \TTY:hide-cursor -NULL
+@TTY/&show-cursor-cmd \TTY:show-cursor -NULL
+@TTY/&reset-colors-cmd \TTY:reset-colors -NULL
+@TTY/&cursor-up-cmd \TTY:cursor-up -NULL
+@TTY/&blink-cmd \TTY:blink -NULL
+
+@Info
+	&prompt
+		=CSI "44;5;7m "Use -SP "your -SP "keyboard, -SP "^C -SP "or -SP "^D -SP
+		"to -SP "exit, -SP "^L -SP "to -SP "clear -SP "the -SP "screen, -LF -CR
+		"try -SP "Mod -SP "key -SP "combos -SP "(Ctrl/Shift/Alt) -SP "and -SP
+		"chords -SP "with -SP "all -SP "the -SP -LF -CR "number, -SP
+		"alphabetic -SP "and -SP "symbol -SP "keys -SP "(^L -SP "is -SP "equal
+		-SP "to -SP "Ctrl+L). -SP \TTY:reset-colors -LF -CR -NULL
+
+	&carriage-return
+		\TTY:bg-purple "CARRIAGE -SP "RETURN \TTY:reset-colors -NULL
+
+	&left \TTY:cursor-up \TTY:bg-black "LEFT \TTY:reset-colors -NULL
+	&right \TTY:cursor-up \TTY:bg-red "RIGHT \TTY:reset-colors -NULL
+	&up \TTY:cursor-up \TTY:bg-green "UP -SP \TTY:reset-colors -NULL
+	&down \TTY:cursor-up \TTY:bg-yellow "DOWN \TTY:reset-colors -NULL
+	&null \TTY:bg-blue "NULL \TTY:reset-colors -NULL
+	&line-feed \TTY:bg-cyan "LINE -SP "FEED \TTY:reset-colors -NULL
+	&csi \TTY:cursor-up \TTY:bg-white "CSI \TTY:reset-colors -NULL
+	&esc \TTY:bg-black "ESC \TTY:reset-colors -NULL
+	&dc2 \TTY:bg-red "^R -SP "(DC2) \TTY:reset-colors -NULL
+	&soh \TTY:bg-green "^A -SP "(SOH) \TTY:reset-colors -NULL
