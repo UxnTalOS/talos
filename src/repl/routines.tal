@@ -1,4 +1,4 @@
-(
+L(
 @|repl/routines )
 
 @REPL ( -> )
@@ -13,8 +13,8 @@
 		,&brakets LDR INC ,&brakets STR }
 	DUP LIT "] NEQ ?{
 		,&brakets LDR #01 SUB ,&brakets STR }
-	DUP LIT 28 NEQ ?{ #00 ,&comment STR POP BRK }
-	DUP LIT 29 NEQ ?{ #01 ,&comment STR POP BRK }
+	DUP #28 NEQ ?{ #00 ,&comment STR POP BRK }
+	DUP #29 NEQ ?{ #01 ,&comment STR POP BRK }
 
 	DUP NL EQU ?{
 		[ LIT &comment 01 ] ?{

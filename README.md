@@ -111,6 +111,26 @@ current `@dict` pointer points to.
 | ( primitives )
 ```
 
+## ANSI Control Codes
+
+| Feature             | Code |
+|---------------------|------|
+| Secondary color     |   2  |
+| Itallic             |   3  |
+| Underline           |   4  |
+| Blinking            |   5  |
+| Inverted background |   7  |
+| Hidden              |   8  |
+| Striked through     |   9  |
+
+### Support
+
+|             Environment               | 2 | 3 | 4 | 5 | 7 | 8 | 9 |
+|---------------------------------------|---|---|---|---|---|---|---|
+| *Windows 11 (__22631.3880__)</br> Windows Terminal (__1.20.11781.0__) </br> WSL2 (__2.2.4.0__) </br> Ubuntu (__22.04.4 LTS__) </br> zsh (__5.8.1__) </br> OhMyZsh! (__(5b37e21__)* | X | X | X | X | X | X | X |
+| *Windows 11 (__22631.3880__) </br> Chrome Browser (__126.0.6478.182__) </br> Developer Tools*     |   | X | X |   | X |   | X |
+
+
 ## Reasoning
 
 Concatenating instead of threading the routines allows for the usage of Uxntal
