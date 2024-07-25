@@ -28,7 +28,11 @@
 	#0a52 .System/g DEO2
 	#2a37 .System/b DEO2
 
-	pstr: 1b5b "48;2;51;00;34m 1b5b "38;2;170;170;170m 1b5b "2J 1b5b "d \0
+	pstr: [
+		1b5b "48;2;51;00;34m
+		1b5b "38;2;170;170;170m
+		1b5b "2J
+		1b5b "d \0 ]
 
 	(
 	@|startup )
