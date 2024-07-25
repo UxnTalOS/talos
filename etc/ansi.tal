@@ -28,8 +28,8 @@
 
 
 ( constants )
-|00 @NULL   |01 @NZ
-|07 @BELL   |0a @LF   |0d @CR   |20 @SP
+|00 @NUL   |01 @NZ
+|07 @BEL   |0a @LF   |0d @CR   |20 @SP
 |1b @ESC   |5b @OPEN-BRACKET   |1b5b @CSI ( Control Sequence Introducer )
 |03 @CTRL-C   |04 @CTRL-D   |0c @CTRL-L   |12 @CTRL-R   |01 @CTRL-A
 |41 @UP   |42 @DOWN   |43 @RIGHT   |44 @LEFT
@@ -48,7 +48,7 @@
 @on-console ( -> )
 	.Console/read DEI
 
-	[ LIT &first-loop -NULL ] ?{
+	[ LIT &first-loop -NUL ] ?{
 		.NZ ,&first-loop STR !&continue }
 	Print/newline
 	&continue
@@ -74,12 +74,12 @@
 			POP BRK }
 
 	DUP .OPEN-BRACKET NEQ  [ LIT &in-esc -NZ ] ORA ?{    ( 1b5b  ^[[   CSI )
-		.NULL ;&in-csi STA
+		.NUL ;&in-csi STA
 		;Info/csi Print/string
 		POP BRK }
 
 	DUP .ESC NEQ ?{    ( 1b  \e  ^[  ^3  ESC -> ESCAPE )
-		.NULL ,&in-esc STR
+		.NUL ,&in-esc STR
 		;Info/esc Print/string
 		POP BRK }
 
@@ -100,10 +100,10 @@
 	DUP .CTRL-L NEQ ?{    ( 0c  ^L -> FORM-FEED )
 		TTY/clear-screen  TTY/reset-cursor
 		;Info/prompt Print/string
-		.NULL ;&first-loop STA
+		.NUL ;&first-loop STA
 		POP BRK }
 
-	DUP .NULL NEQ ?{    ( 00  \0  ^SPACE  ^2  ^`  ^@ -> NULL )
+	DUP .NUL NEQ ?{    ( 00  \0  ^SPACE  ^2  ^`  ^@ -> NUL )
 		;Info/null Print/string
 		POP BRK }
 
@@ -117,8 +117,8 @@
 
 	TTY/reset-colors
 	( print(f"'{chr(byte)}': {byte}") )
-	LIT "' \emit  DUP \emit  { "': -SP -NULL } STH2r Print/string  Print/byte
-	.BELL \emit
+	LIT "' \emit  DUP \emit  { "': -SP -NUL } STH2r Print/string  Print/byte
+	.BEL \emit
 	BRK
 
 
@@ -158,13 +158,13 @@
 
 
 ( data )
-@TTY/&clear-screen-cmd \TTY:clear-screen -NULL
-@TTY/&reset-cursor-cmd \TTY:reset-cursor -NULL
-@TTY/&hide-cursor-cmd \TTY:hide-cursor -NULL
-@TTY/&show-cursor-cmd \TTY:show-cursor -NULL
-@TTY/&reset-colors-cmd \TTY:reset-colors -NULL
-@TTY/&cursor-up-cmd \TTY:cursor-up -NULL
-@TTY/&blink-cmd \TTY:blink -NULL
+@TTY/&clear-screen-cmd \TTY:clear-screen -NUL
+@TTY/&reset-cursor-cmd \TTY:reset-cursor -NUL
+@TTY/&hide-cursor-cmd \TTY:hide-cursor -NUL
+@TTY/&show-cursor-cmd \TTY:show-cursor -NUL
+@TTY/&reset-colors-cmd \TTY:reset-colors -NUL
+@TTY/&cursor-up-cmd \TTY:cursor-up -NUL
+@TTY/&blink-cmd \TTY:blink -NUL
 
 @Info
 	&prompt
@@ -173,18 +173,18 @@
 		"try -SP "Mod -SP "key -SP "combos -SP "(Ctrl/Shift/Alt) -SP "and -SP
 		"chords -SP "with -SP "all -SP "the -SP -LF -CR "number, -SP
 		"alphabetic -SP "and -SP "symbol -SP "keys -SP "(^L -SP "is -SP "equal
-		-SP "to -SP "Ctrl+L). -SP \TTY:reset-colors -LF -CR -NULL
+		-SP "to -SP "Ctrl+L). -SP \TTY:reset-colors -LF -CR -NUL
 
 	&carriage-return
-		\TTY:bg-purple "CARRIAGE -SP "RETURN \TTY:reset-colors -NULL
+		\TTY:bg-purple "CARRIAGE -SP "RETURN \TTY:reset-colors -NUL
 
-	&left \TTY:cursor-up \TTY:bg-black "LEFT \TTY:reset-colors -NULL
-	&right \TTY:cursor-up \TTY:bg-red "RIGHT \TTY:reset-colors -NULL
-	&up \TTY:cursor-up \TTY:bg-green "UP -SP \TTY:reset-colors -NULL
-	&down \TTY:cursor-up \TTY:bg-yellow "DOWN \TTY:reset-colors -NULL
-	&null \TTY:bg-blue "NULL \TTY:reset-colors -NULL
-	&line-feed \TTY:bg-cyan "LINE -SP "FEED \TTY:reset-colors -NULL
-	&csi \TTY:cursor-up \TTY:bg-white "CSI \TTY:reset-colors -NULL
-	&esc \TTY:bg-black "ESC \TTY:reset-colors -NULL
-	&dc2 \TTY:bg-red "^R -SP "(DC2) \TTY:reset-colors -NULL
-	&soh \TTY:bg-green "^A -SP "(SOH) \TTY:reset-colors -NULL
+	&left \TTY:cursor-up \TTY:bg-black "LEFT \TTY:reset-colors -NUL
+	&right \TTY:cursor-up \TTY:bg-red "RIGHT \TTY:reset-colors -NUL
+	&up \TTY:cursor-up \TTY:bg-green "UP -SP \TTY:reset-colors -NUL
+	&down \TTY:cursor-up \TTY:bg-yellow "DOWN \TTY:reset-colors -NUL
+	&null \TTY:bg-blue "NUL \TTY:reset-colors -NUL
+	&line-feed \TTY:bg-cyan "LINE -SP "FEED \TTY:reset-colors -NUL
+	&csi \TTY:cursor-up \TTY:bg-white "CSI \TTY:reset-colors -NUL
+	&esc \TTY:bg-black "ESC \TTY:reset-colors -NUL
+	&dc2 \TTY:bg-red "^R -SP "(DC2) \TTY:reset-colors -NUL
+	&soh \TTY:bg-green "^A -SP "(SOH) \TTY:reset-colors -NUL
