@@ -1,21 +1,19 @@
 (
 @|repl/data )
 
-@banner-unicode [
-	\s \s \s \s \s \s \s NAME \s "— \s VERSION \s 28 ARVELIE 29 \n
-	\s \s \s "█ "▄ \s \s DESCRIPTION \n
-	\s "▐ \s "█ \s "▌ \s "© \s COPYRIGHT \s AUTHOR "ó \s CONTRIBUTORS \n
-	\s \s "▀ "█ \s \s \s INFORMATION \n
-	\s \s \s \s \s \s \s \0
-]
+@banner [
+	\bold \bg-1 \fg-0 MARGIN \n \r
 
-@banner-ascii [
-	\s \s \s \s \s \s \s "_ \n
-	\s \s \s \s \s \s "| \s "|___ \s \s \s NAME \s "-- \s VERSION \s 28 ARVELIE 29 \n
-	\s \s \s "_ \s \s "|  \s \s "_  \s \s "| \s \s DESCRIPTION \n
-	\s \s "| \s "| \s "| \s "| \s "| \s "| \s \s 28 "c 29 \s COPYRIGHT \s AUTHOR
-	"o \s CONTRIBUTORS \n
-	\s \s "| \s "|_| \s "| \s "|_| \s \s INFORMATION \n
-	\s \s "|___ \s \s "| \n
-	\s \s \s \s \s \s "|_| \s \s \s \s \s \s \0
-]
+	\s \s \bg-2 \s \s \s \underline "/ \s \reset-console-style \bold \bg-1 \fg-0
+	\s NAME \s "— \s "v VERSION \s 28 DATE 29 \s \s \s \s \s \s \s \s \s \n \r
+
+	\s \s \bg-2 \underline "/ \s \reset-console-style \bold \bg-2 \fg-0 "/ \s "/
+	\bg-1 \s "©2024 \s AUTHOR \s \s \s \s \n \r
+
+	\s \s \bg-2 \s "/ \s \s \s \bg-1 \s "Type \s \bold \italic \fg-3 "help
+	\reset-console-style \bold \bg-1 \fg-0 \s "for \s "more \s "information. \s
+	\s \n \r
+
+	MARGIN \n \r
+
+	\reset-console-style \bg-0 \fg-1 \bold \italic \underline \fg-3 "Ready \reset-console-style \bg-0 \fg-1 \n \r \0 ]

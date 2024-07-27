@@ -1,5 +1,5 @@
 @meta $1
-	( name ) NAME \s "-- \s VERSION \s 28 ARVELIE 29 \n
+	( name ) NAME \s "— \s VERSION \n
 	( desc ) DESCRIPTION \n
-	( auth ) "By \s AUTHOR "o \s CONTRIBUTORS \n
-	( date ) DATE $1
+	( auth ) "©2024 \s AUTHOR \n
+	( date ) DATE \0

@@ -24,12 +24,12 @@ v ZPpt v          v             |               |              v @input @ptr   v
 # Operator Interaction
 
 ```
-       Merlin CLI REPL
-   █▄  Version 0.8 (06/06/2024).
- ▐ █ ▌ Concatenated Interpretive Uxntal JIT Assembler.
-  ▀█   ©MMXXIV Ismael Venegas Castelló, MIT License.
-       57865 bytes free (bytecode: 0, symbols: 1331 bytes used).
 
+     /_ Merlin OS — v0.f (18O11)
+  /_/ / ©2024 Ismael Venegas Castelló
+   /    Type help for more information.
+
+Ready
 uxn> #2a18 DEO
 *
 WST 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00|<

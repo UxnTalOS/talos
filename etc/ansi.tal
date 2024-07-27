@@ -30,7 +30,7 @@
 ( constants )
 |00 @NUL   |01 @NZ
 |07 @BEL   |0a @LF   |0d @CR   |20 @SP
-|1b @ESC   |5b @OPEN-BRACKET   |1b5b @CSI ( Control Sequence Introducer )
+|1b @ESC   |5b @OPEN-BRACKET   |\CSI @CSI ( Control Sequence Introducer )
 |03 @CTRL-C   |04 @CTRL-D   |0c @CTRL-L   |12 @CTRL-R   |01 @CTRL-A
 |41 @UP   |42 @DOWN   |43 @RIGHT   |44 @LEFT
 |81 @ERROR   |80 @SUCCESS
@@ -57,23 +57,23 @@
 		.NZ ;&in-esc STA
 		.NZ ,&in-csi STR
 
-		DUP .UP NEQ ?{    ( 1b5b 41  ^[[A   UP )
+		DUP .UP NEQ ?{    ( \CSI 41  ^[[A   UP )
 			;Info/up Print/string
 			POP BRK }
 
-		DUP .DOWN NEQ ?{    ( 1b5b 42  ^[[B   DOWN )
+		DUP .DOWN NEQ ?{    ( \CSI 42  ^[[B   DOWN )
 			;Info/down Print/string
 			POP BRK } }
 
-		DUP .RIGHT NEQ ?{   ( 1b5b 43  ^[[D   RIGHT )
+		DUP .RIGHT NEQ ?{   ( \CSI 43  ^[[D   RIGHT )
 			;Info/right Print/string
 			POP BRK }
 
-		DUP .LEFT NEQ ?{    ( 1b5b 44  ^[[C   LEFT )
+		DUP .LEFT NEQ ?{    ( \CSI 44  ^[[C   LEFT )
 			;Info/left Print/string
 			POP BRK }
 
-	DUP .OPEN-BRACKET NEQ  [ LIT &in-esc -NZ ] ORA ?{    ( 1b5b  ^[[   CSI )
+	DUP .OPEN-BRACKET NEQ  [ LIT &in-esc -NZ ] ORA ?{    ( \CSI  ^[[   CSI )
 		.NUL ;&in-csi STA
 		;Info/csi Print/string
 		POP BRK }

@@ -6,26 +6,37 @@
 	@|Read )
 	.Console/read DEI
 
+	DUP #1b NEQ ?{    ( 1b  \e  ^[  ^3  ESC -> ESCAPE )
+		#00 ;&in-esc STA
+		POP BRK }
 	( DUP SP NEQ ?{ POP BRK ( ignore ) } )
+	DUP #03 NEQ ?{    ( 03  ^C -> ETX )
+		bye }
+	DUP #04 NEQ ?{    ( 04  ^D -> EOT )
+		bye }
+	DUP #0c NEQ ?{    ( 0c  ^L -> FORM-FEED )
+		pstr: \clear-console-screen \reset-console-cursor \0
+		banner
+		POP BRK }
 	DUP LIT "@ NEQ ?{ #01 ;&expression STA }
-	DUP LIT "[ NEQ ?{
-		#00 ,&multi-line STR
-		,&brakets LDR INC ,&brakets STR }
-	DUP LIT "] NEQ ?{
-		,&brakets LDR #01 SUB ,&brakets STR }
 	DUP #28 NEQ ?{ #00 ,&comment STR POP BRK }
 	DUP #29 NEQ ?{ #01 ,&comment STR POP BRK }
 
-	DUP NL EQU ?{
+	[ LIT &in-esc 01 ] ?{
+		DUP LIT \r NEQ ?{
+			#01 ,&in-esc STR
+			#00 ;&multi-line STA } }
+
+	DUP LIT \r NEQ ?{
+		#01 ,&multi-line STR
 		[ LIT &comment 01 ] ?{
 			POP BRK }
 		;input-ptr LDA2 STA
 		;input-ptr LDA2 INC2 ;input-ptr STA2 BRK }
 
 	[ LIT &multi-line 01 ] ?{
-		[ LIT &brakets $1 ] ?{
-			#01 ,&multi-line STR
-			!&multiline-end }
+		emit BRK
+		!&multiline-end
 
 		.FORTH-PROMPT ?{
 			!&no-multiline-prompt }
@@ -33,8 +44,8 @@
 		~logger/info/multiline-prompt.tal
 
 		.UNICODE-PROMPT ?{
-			{ ".a. \s \0 } !&continue }
-		{ \s ".a. \s \0 }
+			{ "... \s \0 } !&continue }
+		{ \s "... \s \0 }
 
 		&continue ( -- )
 			STH2r pstr
@@ -42,9 +53,9 @@
 			;input-ptr LDA2 STA
 			;input-ptr LDA2 INC2 ;input-ptr STA2 BRK }
 
-	&multiline-end ( -- )
+	emit BRK
 
-	POP ( consume last newline )
+	&multiline-end ( -- )
 	#0000 ;length STA2
 	~debugger/routines/before-eval.tal
 
@@ -102,7 +113,7 @@
 	BRK
 
 @<print-prompt> ( -- )
-	pstr: 1b5b "m 1b5b "1;3;4m 1b5b "48;2;51;00;34m 1b5b "38;2;119;34;119m \0
+	pstr: \CSI "m \CSI "1;3;4m \CSI "48;2;51;00;34m \CSI "38;2;119;34;119m \0
 	.FORTH-PROMPT ?{
 		;&ok !&continue2 }
 	.UNICODE-PROMPT ?{
@@ -117,10 +128,14 @@
 
 	&continue2
 		pstr
-		pstr: 1b5b "m 1b5b "48;2;51;00;34m 1b5b "38;2;170;170;170m \n \0
+		pstr: \CSI "m \CSI "48;2;51;00;34m \CSI "38;2;170;170;170m \n \0
 		JMP2r
 
-	&ok [ \s \s \s "ok \0 ]
+	&ok [ \s \s \s "ok \n \r \0 ]
 	&prompt-start         [ "uxn \0 ]
 	&prompt-start-unicode [ "փ \s \0 ]
 	&prompt-end           [ "> \s \0 ]
+
+
+@<print-banner>
+	;banner !pstr
