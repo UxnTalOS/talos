@@ -6,6 +6,15 @@
 	<img src="etc/merlin.jpg" alt="merlin" style="width: 256px;"/>
 </div>
 
++---+-----------------+---------+-----------------+
+| # |      Name       |   RGB   |     Decimal     |
++---+-----------------+---------+-----------------+
+| 0 | Dark Aubergine  | #330022 | (51,  0,   34 ) |
+| 1 | Warm Grey       | #bbaaaa | (187, 170, 170) |
+| 2 | Ubuntu Orange   | #ee5522 | (238, 85,  34 ) |
+| 3 | Light Aubergine | #772277 | (119, 34,  119) |
++---+-----------------+---------+-----------------+
+
 ## Varavara's Uxntal Operating System
 
 Memory is organized as follows:
