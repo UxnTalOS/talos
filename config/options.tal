@@ -20,7 +20,7 @@ DEBUG @LOG-LEVEL ( valid values: OFF ERROR INFO WARN DEBUG ( most verbose ) )
 
 ENABLE @ERROR-ABORT ( print an error each time an evaluation is aborted )
 
-ENABLE @INFO-STACKS ( print stacks after each evaluation )
+DISABLE @INFO-STACKS ( print stacks after each evaluation )
 DISABLE @INFO-PROMPT ( print the heap's `head` pointer inside the prompt )
 ENABLE @INFO-ASSEMBLER-SUMMARY ( print the assembled definition summary )
 
@@ -29,7 +29,7 @@ ENABLE @WARN-REDEFINITION ( warn on each redefinition )
 DISABLE @DEBUG-LENGTH ( print the assembled bytecode `length` )
 DISABLE @DEBUG-HEAD-POINTER ( print the head pointer )
 DISABLE @DEBUG-TAIL-POINTER ( print the tail pointer )
-DISABLE @DEBUG-INPUT ( print the input buffer )
+ENABLE @DEBUG-INPUT ( print the input buffer )
 DISABLE @DEBUG-HEAP ( print the heap )
 DISABLE @DEBUG-SYMBOLS ( print the symbols )
 

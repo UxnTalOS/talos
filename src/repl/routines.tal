@@ -6,8 +6,43 @@
 	@|Read )
 	.Console/read DEI
 
-	DUP #7f NEQ ?{
-		#08 emit BRK }
+	[ LIT &comment 01 ] ?{
+		POP BRK }
+
+	DUP #7f NEQ ?{    ( DELETE )
+		;input ;input-ptr LDA2 NEQ2 ?{
+			#0718 DEO POP BRK }
+
+		#08 emit
+		<\s>
+		#08 emit
+		;input-ptr LDA2 #0001 SUB2 DUP2
+		#00 ROT ROT STA
+		;input-ptr STA2
+		POP BRK }
+
+	[ LIT &in-csi 01 ] ?{
+		#01 ;&in-esc STA
+		#01 ,&in-csi STR
+
+		DUP LIT "A NEQ ?{    ( \CSI 41  ^[[A   UP )
+			POP BRK }
+
+		DUP LIT "B NEQ ?{    ( \CSI 42  ^[[B   DOWN )
+			POP BRK } }
+
+		DUP LIT "C NEQ ?{   ( \CSI 43  ^[[D   RIGHT )
+			( pstr: \console-cursor-right \0 )
+			POP BRK }
+
+		DUP LIT "D NEQ ?{    ( \CSI 44  ^[[C   LEFT )
+			( pstr: \console-cursor-left \0
+			;input-ptr LDA2 #0001 SUB2 )
+			POP BRK }
+
+	DUP #5b NEQ  ,&in-esc LDR ORA ?{    ( \CSI  ^[[   CSI )
+		#00 ;&in-csi STA
+		POP BRK }
 
 	DUP #1b NEQ ?{    ( 1b  \e  ^[  ^3  ESC -> ESCAPE )
 		#00 ;&in-esc STA
@@ -40,11 +75,11 @@
 		&continue ( -- )
 			STH2r pstr
 			pstr: \reset-console-style \bg-0 \fg-1 \0
-			BRK }
+			POP BRK }
 
 	DUP LIT \r NEQ ?{
 		#01 ;&multi-line STA
-		[ LIT &comment 01 ] ?{
+		;&comment LDA ?{
 			POP BRK }
 		<\n> emit !&multiline-end }
 

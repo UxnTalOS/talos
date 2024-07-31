@@ -37,6 +37,9 @@
 	@|startup )
 	.PRINT-BANNER ?{
 		<print-banner> }
+		pstr: \italic \underline \bold \fg-3 \0
+		free
+		pstr: \reset-console-style \bg-0 \fg-1 \n \r \0
 
 		~../config/startup.tal
 		<print-pre-prompt>
