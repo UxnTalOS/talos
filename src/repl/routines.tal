@@ -127,16 +127,9 @@
 	&prompt-end   [ "> \s \0 ]
 
 @<print-post-prompt> ( -- )
-	pstr: \CSI "m \CSI "1;3;4m \CSI "48;2;51;00;34m \CSI "38;2;119;34;119m \0
-
-	;input ;input-ptr LDA2 NEQ2 ?{
-		pstr: \console-cursor-up \console-cursor-right \console-cursor-right
-		\console-cursor-right \console-cursor-right \0 }
-	;&ok pstr
-	pstr: \CSI "m \CSI "48;2;51;00;34m \CSI "38;2;170;170;170m \n \0
-	JMP2r
-
-	&ok [ \s \s \s "ok \n \r \0 ]
+	;ok !pstr
 
 @<print-banner>
 	;banner !pstr
+
+@help ( -- )

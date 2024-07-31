@@ -8,7 +8,7 @@
 			{ "Prompt 20 "# 00 } STH2r pstr pdec <\n> )
 			( <\n> )
 
-			pstr: \reset-console-style \bg-0 \fg-3 \0
+			pstr: \reset-console-style \italic \bg-0 \fg-3 \0
 			DBG <\n>
 			pstr: \reset-console-style \bg-0 \fg-1 \0 } }
 	;input ;input-ptr STA2 ( reset input-ptr ) }

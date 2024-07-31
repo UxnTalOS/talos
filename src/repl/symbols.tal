@@ -168,5 +168,5 @@
 	=DateTime/doty   00 "DateTime/doty \0
 	=DateTime/isdst  00 "DateTime/isdst \0
 
-	&end
+	&end ( @symbols )
 ]

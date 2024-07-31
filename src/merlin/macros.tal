@@ -1,7 +1,7 @@
 (
 @|merlin/macros )
 
-%VERSION { "0.f }   %DATE { "18O11 }
+%VERSION { "0.10 }   %DATE { "18P02 }
 
 %NAME { "Merlin \s "OS }
 %DESCRIPTION { "Uxntal \s "Operating \s "System }

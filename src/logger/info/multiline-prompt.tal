@@ -3,4 +3,4 @@
 
 .LOG-LEVEL .Logger/error GTH NOT ?{
 	.INFO-PROMPT ?{
-		{ \n \r \s \s \s \s \s \s "... \s  \0 } !&continue } }
+		{ \n \r "... \s "... \s ": \s  \0 } !&continue } }
