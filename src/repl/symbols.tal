@@ -29,6 +29,7 @@
 	0040 00 "FOREGROUND \0
 	0000 00 "BACKGROUND \0
 	=bye 00 "bye \0
+	=exit 00 "exit \0
 	=NEG  00 "NEG \0
 	=NEG2 00 "NEG2 \0
 	( Library/memory/routines )

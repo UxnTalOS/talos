@@ -3,6 +3,3 @@
 
 ( The following operator defined code will be run at every Merlin startup.
 Label definitions, routines, data and buffers must be defined in `setup.tal`. )
-
-(
-&|forth-banner )

@@ -7,7 +7,7 @@
 	&on-repl "expression \0
 	&assembled "Assembled \s \0
 	&in \s "in \s \0
-	&bytes \s "bytes. \n \0
+	&bytes \s "bytes. \n \r \0
 	&labels \s "labels 29 ". \n \0
 	&sym-ext ".sym \0
 ]

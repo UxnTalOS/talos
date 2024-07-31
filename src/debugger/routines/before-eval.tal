@@ -2,26 +2,30 @@
 @|debugger/before-eval )
 
 .LOG-LEVEL .Logger/warn GTH NOT ?{
+	pstr: \reset-console-style \bg-0 \fg-2 \0
+
 	.DEBUG-INPUT ?{
-		{ "DEBUG: \s "input \s "before \s "eval: \n \0 }
+		{ "DEBUG: \s "input \s "before \s "eval: \n \r \0 }
 		;input pobj }
 
 	.DEBUG-HEAD-POINTER ?{
 		{ "DEBUG: \s "head-ptr \s "before \s "eval: \s \0 }  STH2r pstr
-		;head-ptr LDA2 phex <\n> }
+		;head-ptr LDA2 phex <\n> <\r> }
 
 	.DEBUG-HEAP ?{
-		{ "DEBUG: \s "heap \s "before \s "eval: \n \0 }
+		{ "DEBUG: \s "heap \s "before \s "eval: \n \r \0 }
 		;heap pobj }
 
 	.DEBUG-TAIL-POINTER ?{
 		{ "DEBUG: \s "tail-ptr \s "before \s "eval: \s \0 }  STH2r pstr
-		;tail-ptr LDA2 phex <\n> }
+		;tail-ptr LDA2 phex <\n> <\r> }
 
 	.DEBUG-SYMBOLS ?{
-		{ "DEBUG: \s "symbols \s "before \s "eval: \n \0 }
+		{ "DEBUG: \s "symbols \s "before \s "eval: \n \r \0 }
 		;tail-ptr LDA2 pobj }
 
 	.DEBUG-LENGTH ?{
 		{ \n "DEBUG: \s "length \s "before \s "eval: \s \0 } STH2r pstr
-		;length LDA2 pdec <\n> } }
+		;length LDA2 pdec <\n> <\r> }
+
+		pstr: \reset-console-style \bg-0 \fg-1 \0 }

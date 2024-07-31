@@ -52,19 +52,29 @@
 %\italic { \CSI "3m }
 %\underline { \CSI "4m }
 
-%\bg-0 { \CSI "48;2;51;0;34m }
-%\bg-1 { \CSI "48;2;170;170;170m }
-%\bg-2 { \CSI "48;2;238;85;51m }
-%\bg-3 { \CSI "48;2;119;34;119m }
+%\color-0 { "51;0;34 }
+%\color-1 { "187;170;170 }
+%\color-2 { "238;85;34 }
+%\color-3 { "119;34;119 }
 
-%\fg-0 { \CSI "38;2;51;0;34m }
-%\fg-1 { \CSI "38;2;170;170;170m }
-%\fg-2 { \CSI "38;2;238;85;51m }
-%\fg-3 { \CSI "38;2;119;34;119m }
+%\bg-0 { \CSI "48;2; \color-0 "m }
+%\bg-1 { \CSI "48;2; \color-1 "m }
+%\bg-2 { \CSI "48;2; \color-2 "m }
+%\bg-3 { \CSI "48;2; \color-3 "m }
+
+%\fg-0 { \CSI "38;2; \color-0 "m }
+%\fg-1 { \CSI "38;2; \color-1 "m }
+%\fg-2 { \CSI "38;2; \color-2 "m }
+%\fg-3 { \CSI "38;2; \color-3 "m }
 
 %\reset-console-style { \CSI "m }
 %\reset-console-cursor { \CSI "d }
 %\clear-console-screen { \CSI "2J }
+%\clear-console-screen-right { \CSI "J }
+%\console-cursor-up { \CSI "A }
+%\console-cursor-down { \CSI "B }
+%\console-cursor-right { \CSI "C }
+%\console-cursor-left { \CSI "D }
 
 (
 		%\n ( -- )

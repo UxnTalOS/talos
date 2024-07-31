@@ -2,7 +2,7 @@
 @|repl/data )
 
 @banner [
-	\bold \bg-1 \fg-0 MARGIN \n \r
+	\r \bold \bg-1 \fg-0 MARGIN \n \r
 
 	\s \s \bg-2 \s \s \s \underline "/ \s \reset-console-style \bold \bg-1 \fg-0
 	\s NAME \s "— \s "v VERSION \s 28 DATE 29 \s \s \s \s \s \s \s \s \s \n \r
@@ -16,4 +16,4 @@
 
 	MARGIN \n \r
 
-	\reset-console-style \bg-0 \fg-1 \bold \italic \underline \fg-3 "Ready \reset-console-style \bg-0 \fg-1 \n \r \0 ]
+	\reset-console-style \bg-0 \fg-1 \bold \italic \underline \fg-3 "Ready \reset-console-style \bg-0 \fg-1 \n \n \r \0 ]

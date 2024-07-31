@@ -24,25 +24,23 @@
 
 	(
 	&|theme )
-	#3ae7 .System/r DEO2
+	#3be7 .System/r DEO2
 	#0a52 .System/g DEO2
-	#2a37 .System/b DEO2
+	#2a27 .System/b DEO2
 
 	pstr: [
-		\CSI "48;2;51;00;34m
-		\CSI "38;2;170;170;170m
-		\CSI "2J
-		\CSI "d \0 ]
+		\bg-0 \fg-1 \clear-console-screen-right  \n \n \n \n \n
+		\console-cursor-up \console-cursor-up \console-cursor-up
+		\console-cursor-up \console-cursor-up \0 ]
 
 	(
 	@|startup )
-	<print-banner>
+	.PRINT-BANNER ?{
+		<print-banner> }
 
-	@Startup
 		~../config/startup.tal
+		<print-pre-prompt>
 
-	.FORTH-PROMPT NOT ?Main/no-first-prompt
-	<print-prompt>
-@Main/no-first-prompt
-	;REPL .Console/vector DEO2
-	BRK
+	&no-first-prompt
+		;REPL .Console/vector DEO2
+		BRK

@@ -2,7 +2,7 @@
 @|logger/routines )
 
 @<set-error> ( name* -- )
-	pstr: \CSI "38;2;238;85;51m 00
+	pstr: \fg-2 \0
 	;Error pstr/ pstr/
 	<\s>
 	;token/buf pstr/
@@ -10,17 +10,16 @@
 	;scope pstr/
 	[ LIT2 ". -Console/write ] DEO
 	#01 ;abort STA
-	pstr: \n \r \CSI "48;2;51;00;34m "38;2;170;170;170m 00
+	pstr: \n \r \bg-0 \fg-1 \0
 	JMP2r
 
 @<set-warning> ( name* -- )
-	pstr: \CSI "38;2;238;85;51m 00
+	pstr: \fg-2 \0
 	;Warning pstr/ pstr/
 	<\s>
 	;token/buf pstr/
 	;Info/in pstr/
 	;scope pstr/
 	[ LIT2 ". -Console/write ] DEO
-	pstr: \n \r \CSI "48;2;51;00;34m 00
-	pstr: \CSI "38;2;170;170;170m 00
+	pstr: \n \r \bg-0 \fg-1 \0
 	JMP2r

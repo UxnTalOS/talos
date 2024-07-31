@@ -11,6 +11,7 @@
 		a b
 )
 %<\s> ( -- ) { [ LIT2 \s -Console/write ] DEO }
+%<\r> ( -- ) { [ LIT2 \r -Console/write ] DEO }
 
 (
 		%<\n> ( -- )

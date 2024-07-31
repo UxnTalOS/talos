@@ -154,10 +154,10 @@
 					POP LIT ". }
 				<emit> INC2 GTH2k ?&>loop-chars
 			POP2 POP2
-			<|> <\n> DUP2 INC2 STH2kr ADD2
+			<|> <\n> <\r> DUP2 INC2 STH2kr ADD2
 			phex <\s> }
 		<\s> INC NEQk ?&>loop-bytes
-	POP2 POP2 POP2r <\n> JMP2r
+	POP2 POP2 POP2r <\n> <\r> JMP2r
 
 @mfill ( length* bank* addr* value -- )
 	,&value STR  ,&addr STR2  ,&bank STR2  ,&length STR2

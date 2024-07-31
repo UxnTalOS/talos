@@ -6,54 +6,52 @@
 	@|Read )
 	.Console/read DEI
 
+	DUP #7f NEQ ?{
+		#08 emit BRK }
+
 	DUP #1b NEQ ?{    ( 1b  \e  ^[  ^3  ESC -> ESCAPE )
 		#00 ;&in-esc STA
 		POP BRK }
 	( DUP SP NEQ ?{ POP BRK ( ignore ) } )
 	DUP #03 NEQ ?{    ( 03  ^C -> ETX )
-		bye }
+		#01 exit }
 	DUP #04 NEQ ?{    ( 04  ^D -> EOT )
 		bye }
 	DUP #0c NEQ ?{    ( 0c  ^L -> FORM-FEED )
-		pstr: \clear-console-screen \reset-console-cursor \0
-		banner
+		pstr: \reset-console-cursor \clear-console-screen \0
+		<print-pre-prompt>
 		POP BRK }
 	DUP LIT "@ NEQ ?{ #01 ;&expression STA }
-	DUP #28 NEQ ?{ #00 ,&comment STR POP BRK }
-	DUP #29 NEQ ?{ #01 ,&comment STR POP BRK }
+	DUP #28 NEQ ?{ #00 ;&comment STA }
+	DUP #29 NEQ ?{ #01 ;&comment STA }
 
 	[ LIT &in-esc 01 ] ?{
 		DUP LIT \r NEQ ?{
 			#01 ,&in-esc STR
 			#00 ;&multi-line STA } }
 
-	DUP LIT \r NEQ ?{
-		#01 ,&multi-line STR
-		[ LIT &comment 01 ] ?{
-			POP BRK }
-		;input-ptr LDA2 STA
-		;input-ptr LDA2 INC2 ;input-ptr STA2 BRK }
-
 	[ LIT &multi-line 01 ] ?{
-		emit BRK
-		!&multiline-end
-
-		.FORTH-PROMPT ?{
-			!&no-multiline-prompt }
-
+		#01 ,&multi-line STR
+		pstr: \reset-console-style \bold \bg-0 \fg-3 \0
 		~logger/info/multiline-prompt.tal
 
-		.UNICODE-PROMPT ?{
-			{ "... \s \0 } !&continue }
-		{ \s "... \s \0 }
+		{ \n \r "... \s \0 }
 
 		&continue ( -- )
 			STH2r pstr
-		&no-multiline-prompt
-			;input-ptr LDA2 STA
-			;input-ptr LDA2 INC2 ;input-ptr STA2 BRK }
+			pstr: \reset-console-style \bg-0 \fg-1 \0
+			BRK }
 
-	emit BRK
+	DUP LIT \r NEQ ?{
+		#01 ;&multi-line STA
+		[ LIT &comment 01 ] ?{
+			POP BRK }
+		<\n> emit !&multiline-end }
+
+	&no-multiline-prompt
+	DUP emit
+	;input-ptr LDA2 STA
+	;input-ptr LDA2 INC2 ;input-ptr STA2 BRK
 
 	&multiline-end ( -- )
 	#0000 ;length STA2
@@ -85,13 +83,13 @@
 
 	(
 	@|Print )
+	<print-post-prompt>
 	~debugger/routines/after-eval.tal
 	~logger/info/stacks.tal
 
 	(
 	@|Loop )
-	.FORTH-PROMPT ?{ <print-prompt> BRK }
-	<\n> <print-prompt> BRK
+	<print-pre-prompt> BRK
 
 &expr-abort ( | prev-head* -- )
 	~logger/error/abort.tal
@@ -112,30 +110,33 @@
 	( reset ) #00 ,&count STR
 	BRK
 
-@<print-prompt> ( -- )
+@<print-pre-prompt> ( -- )
+	pstr: \CSI "m \bold \bg-0 \fg-3 \0
+
+
+	( ;input ;input-ptr LDA2 NEQ2 ?{
+		pstr: \console-cursor-up \0 } )
+
+	;&prompt-start pstr
+	~logger/info/prompt.tal
+	;&prompt-end pstr
+	pstr: \CSI "m \CSI "48;2;51;00;34m \CSI "38;2;170;170;170m \0
+	JMP2r
+
+	&prompt-start [ \r "փ \s \0 ]
+	&prompt-end   [ "> \s \0 ]
+
+@<print-post-prompt> ( -- )
 	pstr: \CSI "m \CSI "1;3;4m \CSI "48;2;51;00;34m \CSI "38;2;119;34;119m \0
-	.FORTH-PROMPT ?{
-		;&ok !&continue2 }
-	.UNICODE-PROMPT ?{
-		;&prompt-start-unicode !&continue }
 
-	;&prompt-start
-
-	&continue
-		pstr
-		~logger/info/prompt.tal
-		;&prompt-end
-
-	&continue2
-		pstr
-		pstr: \CSI "m \CSI "48;2;51;00;34m \CSI "38;2;170;170;170m \n \0
-		JMP2r
+	;input ;input-ptr LDA2 NEQ2 ?{
+		pstr: \console-cursor-up \console-cursor-right \console-cursor-right
+		\console-cursor-right \console-cursor-right \0 }
+	;&ok pstr
+	pstr: \CSI "m \CSI "48;2;51;00;34m \CSI "38;2;170;170;170m \n \0
+	JMP2r
 
 	&ok [ \s \s \s "ok \n \r \0 ]
-	&prompt-start         [ "uxn \0 ]
-	&prompt-start-unicode [ "փ \s \0 ]
-	&prompt-end           [ "> \s \0 ]
-
 
 @<print-banner>
 	;banner !pstr
