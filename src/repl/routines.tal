@@ -5,6 +5,8 @@
 	(
 	@|Read )
 	.Console/read DEI
+	( <\n> <\r>
+	;&in-csi LDA phex/byte <\n> <\r> DUP phex/byte LIT ": emit #20 emit )
 
 	[ LIT &comment 01 ] ?{
 		POP BRK }
@@ -22,26 +24,27 @@
 		POP BRK }
 
 	[ LIT &in-csi 01 ] ?{
-		#01 ;&in-esc STA
 		#01 ,&in-csi STR
 
 		DUP LIT "A NEQ ?{    ( \CSI 41  ^[[A   UP )
+			pstr: \console-cursor-up \0
 			POP BRK }
 
 		DUP LIT "B NEQ ?{    ( \CSI 42  ^[[B   DOWN )
-			POP BRK } }
+			pstr: \console-cursor-down \0
+			POP BRK }
 
 		DUP LIT "C NEQ ?{   ( \CSI 43  ^[[D   RIGHT )
-			( pstr: \console-cursor-right \0 )
+			pstr: \console-cursor-right \0
 			POP BRK }
 
 		DUP LIT "D NEQ ?{    ( \CSI 44  ^[[C   LEFT )
-			( pstr: \console-cursor-left \0
-			;input-ptr LDA2 #0001 SUB2 )
-			POP BRK }
+			pstr: \console-cursor-left \0
+			POP BRK } }
 
 	DUP #5b NEQ  ,&in-esc LDR ORA ?{    ( \CSI  ^[[   CSI )
 		#00 ;&in-csi STA
+		#01 ;&in-esc STA
 		POP BRK }
 
 	DUP #1b NEQ ?{    ( 1b  \e  ^[  ^3  ESC -> ESCAPE )
@@ -61,29 +64,22 @@
 	DUP #29 NEQ ?{ #01 ;&comment STA }
 
 	[ LIT &in-esc 01 ] ?{
-		DUP LIT \r NEQ ?{
-			#01 ,&in-esc STR
-			#00 ;&multi-line STA } }
+		#01 ,&in-esc STR
 
-	[ LIT &multi-line 01 ] ?{
-		#01 ,&multi-line STR
+		DUP LIT \r NEQ ?{
+			<\n> emit !&multiline-end } }
+
+	DUP LIT \r NEQ ?{
 		pstr: \reset-console-style \bold \bg-0 \fg-3 \0
 		~logger/info/multiline-prompt.tal
 
-		{ \n \r "... \s \0 }
+		;multiline-prompt
 
 		&continue ( -- )
-			STH2r pstr
+			pstr
 			pstr: \reset-console-style \bg-0 \fg-1 \0
 			POP BRK }
 
-	DUP LIT \r NEQ ?{
-		#01 ;&multi-line STA
-		;&comment LDA ?{
-			POP BRK }
-		<\n> emit !&multiline-end }
-
-	&no-multiline-prompt
 	DUP emit
 	;input-ptr LDA2 STA
 	;input-ptr LDA2 INC2 ;input-ptr STA2 BRK
@@ -127,7 +123,7 @@
 	<print-pre-prompt> BRK
 
 &expr-abort ( | prev-head* -- )
-	~logger/error/abort.tal
+	~logger/warn/abort.tal
 	( POP2r ( | -prev-head* ) )
 	<>!
 	#00 ;abort STA

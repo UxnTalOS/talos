@@ -1,40 +1,60 @@
-(
-@|config )
+( @|options )
 
-%ENABLE { |00 }
-%DISABLE { |01 }
+( &|colors
 
-(
-&|options )
-(
+Default Theme Colors <-
+	color 0 <- #302 #330022 (51,  0,   34)  Dark Purple   Background
+	color 1 <- #baa #bbaaaa (187, 170, 170) Bright Grey   Foreground
+	color 2 <- #e52 #ee5522 (238, 85,  34)  Bright Red    High Emphasis
+	color 3 <- #959 #995599 (153, 85,  153) Bright Purple Low Emphasis
+
+  GUI Screen
+           color-0
+           |color-1
+           ||color-2
+           |||color-3
+           ||||
+           vvvv )
+%\RED   { #3be9 }
+%\GREEN { #0a55 }
+%\BLUE  { #2a29 }
+
+( TUI Screen
+            RED   GREEN BLUE )
+%\color-0 { "51;  "0;   "34  }
+%\color-1 { "187; "170; "170 }
+%\color-2 { "238; "85;  "34  }
+%\color-3 { "153; "85;  "153 }
+
+
+( &|config
+
 All the options accept: `ENABLE` or `DISABLE`, except for `LOG-LEVEL` which
-accepts from least to most verbose: `OFF`, `ERROR`, `INFO`, `WARN` or `DEBUG`.
+accepts from least to most verbose: `OFF`, `INFO`, `WARN` or `DEBUG`.
 
  VALUE OPTION
 ****************************************************************************** )
-ENABLE @PRINT-BANNER ( print merlin banner on startup )
+ENABLE PRINT-BANNER ( print merlin banner on startup )
+( ENABLE LOG-FILE ( log session to a file ) )
 
 (
 &|logger )
-DEBUG @LOG-LEVEL ( valid values: OFF ERROR INFO WARN DEBUG ( most verbose ) )
+OFF LOG-LEVEL ( valid values: OFF INFO WARN DEBUG ( most verbose ) )
 
-ENABLE @ERROR-ABORT ( print an error each time an evaluation is aborted )
+ENABLE INFO-STACKS ( print stacks after each evaluation )
+ENABLE INFO-PROMPT ( print the heap's `head` pointer inside the prompt )
+ENABLE INFO-ASSEMBLER-SUMMARY ( print the assembled definition summary )
 
-DISABLE @INFO-STACKS ( print stacks after each evaluation )
-DISABLE @INFO-PROMPT ( print the heap's `head` pointer inside the prompt )
-ENABLE @INFO-ASSEMBLER-SUMMARY ( print the assembled definition summary )
-
-ENABLE @WARN-REDEFINITION ( warn on each redefinition )
-
-DISABLE @DEBUG-LENGTH ( print the assembled bytecode `length` )
-DISABLE @DEBUG-HEAD-POINTER ( print the head pointer )
-DISABLE @DEBUG-TAIL-POINTER ( print the tail pointer )
-ENABLE @DEBUG-INPUT ( print the input buffer )
-DISABLE @DEBUG-HEAP ( print the heap )
-DISABLE @DEBUG-SYMBOLS ( print the symbols )
-
+ENABLE WARN-ABORT ( warn each time an evaluation is aborted )
+ENABLE WARN-REDEFINITION ( warn on each redefinition )
 (
-ENABLE @WARN-LOW-MEMORY ( warn when there are less than 512 free bytes )
-ENABLE @WARN-LOW-ZERO-PAGE-MEMORY ( warn if there are less than 25 free bytes )
-ENABLE @LOG-FILE ( log session to a file )
+	ENABLE WARN-LOW-MEMORY ( warn when there are less than 512 free bytes )
+	ENABLE WARN-LOW-MEMORY-ZEROPAGE ( warn if less than 25 free bytes )
 )
+
+DISABLE DEBUG-LENGTH ( print the assembled bytecode `length` )
+DISABLE DEBUG-HEAD-POINTER ( print the head pointer )
+DISABLE DEBUG-TAIL-POINTER ( print the tail pointer )
+DISABLE DEBUG-INPUT ( print the input buffer )
+DISABLE DEBUG-HEAP ( print the heap )
+DISABLE DEBUG-SYMBOLS ( print the symbols )

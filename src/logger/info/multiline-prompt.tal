@@ -1,6 +1,6 @@
 (
 @|logger/info/multiline-prompt )
 
-.LOG-LEVEL .Logger/error GTH NOT ?{
+.LOG-LEVEL .Logger/off GTH NOT ?{
 	.INFO-PROMPT ?{
-		{ \n \r "... \s "... \s ": \s  \0 } !&continue } }
+		;Info/multiline-info-prompt !&continue } }

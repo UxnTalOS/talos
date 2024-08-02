@@ -1,0 +1,3 @@
+.LOG-LEVEL .Logger/info GTH NOT ?{
+	.WARN-ABORT ?{
+		;Warning/clearing-stacks pstr } }

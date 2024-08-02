@@ -24,9 +24,9 @@
 
 	(
 	&|theme )
-	#3be7 .System/r DEO2
-	#0a52 .System/g DEO2
-	#2a27 .System/b DEO2
+	\RED   .System/r DEO2
+	\GREEN .System/g DEO2
+	\BLUE  .System/b DEO2
 
 	pstr: [
 		\bg-0 \fg-1 \clear-console-screen-right  \n \n \n \n \n

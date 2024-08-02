@@ -19,3 +19,5 @@
 	\reset-console-style \bg-0 \fg-1 \0 ]
 
 @ok [ \n \r \0 ]
+
+@multiline-prompt \n \r "... \s \0

@@ -1,7 +1,7 @@
 (
 @|logger/info/prompt )
 
-.LOG-LEVEL .Logger/info GTH NOT ?{
+.LOG-LEVEL .Logger/off GTH NOT ?{
 	.INFO-PROMPT ?{
 		<[>
 		;head-ptr LDA2 phex/short

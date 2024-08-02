@@ -2,7 +2,7 @@
 @|logger/info/stacks )
 
 ;input ;input-ptr LDA2 EQU2 ?{
-	.LOG-LEVEL .Logger/error GTH NOT ?{
+	.LOG-LEVEL .Logger/off GTH NOT ?{
 		.INFO-STACKS ?{
 			( [ LIT2 &count $2 ] INC2 DUP2 ,&count STR2
 			{ "Prompt 20 "# 00 } STH2r pstr pdec <\n> )

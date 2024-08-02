@@ -52,11 +52,6 @@
 %\italic { \CSI "3m }
 %\underline { \CSI "4m }
 
-%\color-0 { "51;0;34 }
-%\color-1 { "187;170;170 }
-%\color-2 { "238;85;34 }
-%\color-3 { "119;34;119 }
-
 %\bg-0 { \CSI "48;2; \color-0 "m }
 %\bg-1 { \CSI "48;2; \color-1 "m }
 %\bg-2 { \CSI "48;2; \color-2 "m }
