@@ -2,11 +2,12 @@
 
 ( &|colors
 
-Default Theme Colors <-
-	color 0 <- #302 #330022 (51,  0,   34)  Dark Purple   Background
-	color 1 <- #baa #bbaaaa (187, 170, 170) Bright Grey   Foreground
-	color 2 <- #e52 #ee5522 (238, 85,  34)  Bright Red    High Emphasis
-	color 3 <- #959 #995599 (153, 85,  153) Bright Purple Low Emphasis
+Default Theme Colors:
+  color 0: #302 #330022 (51,  0,   34)  Dark Purple   Background Dark Theme
+  color 1: #cbb #ccbbbb (204, 187, 187) Light Grey    Foreground
+  color 2: #e75 #ee7755 (238, 119, 55)  Light Red     High Emphasis
+  color 3: #959 #995599 (153, 85,  153) Light Purple  Normal Emphasis
+  color 4: #424 #442244 (68,  34,  68)  Mid Purple    Background Light Theme
 
   GUI Screen
            color-0
@@ -15,16 +16,22 @@ Default Theme Colors <-
            |||color-3
            ||||
            vvvv )
-%\RED   { #3be9 }
-%\GREEN { #0a55 }
-%\BLUE  { #2a29 }
+%\RED   { #3ce9 }
+%\GREEN { #1b75 }
+%\BLUE  { #2b59 }
 
 ( TUI Screen
-            RED   GREEN BLUE )
-%\color-0 { "51;  "0;   "34  }
-%\color-1 { "187; "170; "170 }
-%\color-2 { "238; "85;  "34  }
-%\color-3 { "153; "85;  "153 }
+                RED   GREEN BLUE )
+%DARK-PURPLE  { "51;  "0;   "34  }
+%LIGHT-GREY   { "204; "187; "187 }
+%LIGHT-RED    { "238; "119; "55  }
+%LIGHT-PURPLE { "153; "85;  "153 }
+%MID-PURPLE   { "68;  "34;  "68  }
+
+%\color-0 { DARK-PURPLE }
+%\color-1 { LIGHT-GREY }
+%\color-2 { LIGHT-RED }
+%\color-3 { LIGHT-PURPLE }
 
 
 ( &|config

@@ -22,19 +22,36 @@
 	#0000 .Screen/y DEO2
 	;heart .Screen/addr DEO2
 	.Screen/sprite DEO
-	JMP2r
 
 	#0000 .Screen/x DEO2
 	#0000 .Screen/y DEO2
 	;heart .Screen/addr DEO2
 	.Screen/sprite DEO
-	JMP2r
 
 	#0000 .Screen/x DEO2
 	#0000 .Screen/y DEO2
 	;heart .Screen/addr DEO2
 	.Screen/sprite DEO
-	JMP2r
+
+	#0000 .Screen/x DEO2
+	#0000 .Screen/y DEO2
+	;heart .Screen/addr DEO2
+	.Screen/sprite DEO
+
+	#0000 .Screen/x DEO2
+	#0000 .Screen/y DEO2
+	;heart .Screen/addr DEO2
+	.Screen/sprite DEO
+
+	#0000 .Screen/x DEO2
+	#0000 .Screen/y DEO2
+	;heart .Screen/addr DEO2
+	.Screen/sprite DEO
+
+	#0000 .Screen/x DEO2
+	#0000 .Screen/y DEO2
+	;heart .Screen/addr DEO2
+	.Screen/sprite DEO
 
 	#0000 .Screen/x DEO2
 	#0000 .Screen/y DEO2
