@@ -29,9 +29,9 @@
 	\BLUE  .System/b DEO2
 
 	pstr: [
-		\bg-0 \fg-1 \clear-console-screen-right  \n \n \n \n \n
+		\bg-0 \fg-1 \clear-console-screen-right  \n \n \n \n \n \n
 		\console-cursor-up \console-cursor-up \console-cursor-up
-		\console-cursor-up \console-cursor-up \0 ]
+		\console-cursor-up \console-cursor-up \console-cursor-up \0 ]
 
 	(
 	@|startup )

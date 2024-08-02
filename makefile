@@ -9,7 +9,7 @@ SRC_DIR=src
 BIN_DIR=bin
 ROM_DIR=rom
 ROMS_DIR=roms
-TTY=`stty -g`
+TTY=$(shell stty -g)
 
 TAL=${ID}/${ENTRY}.tal
 ROM=${ROM_DIR}/${ID}.rom
@@ -22,8 +22,8 @@ DUMP=${ETC_DIR}/hx.rom
 run: install
 	@ stty raw -echo
 	@ echo "Running: ~/${BIN_DIR}/${ID}"
-	@ ${ID} || stty sane
-	@ stty sane
+	@ ${ID} || stty ${TTY}
+	@ stty ${TTY}
 
 setup:
 	@ echo "Setting up: ~/{${BIN_DIR},${ROMS_DIR}}"
@@ -62,11 +62,11 @@ test: install
 cli: install
 	@ echo "Running: ~/${BIN_DIR}/${ID}-cli"
 	@ stty raw -echo
-	@ ${ID}-cli || stty sane
-	@ stty sane
+	@ ${ID}-cli || stty ${TTY}
+	@ stty ${TTY}
 
 gui: install
 	@ echo "Running: ~/${BIN_DIR}/${ID}-gui"
 	@ stty raw -echo
-	@ ${ID}-gui || stty sane
-	@ stty sane
+	@ ${ID}-gui || stty ${TTY}
+	@ stty ${TTY}
