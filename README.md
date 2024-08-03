@@ -4,28 +4,44 @@
 
 # Theme
 
-+---+-----------------+---------+-----------------+
-| # |      Name       |   RGB   |     Decimal     |
-+---+-----------------+---------+-----------------+
-| 0 | Dark Aubergine  | #330022 | (51,  0,   34 ) |
-| 1 | Warm Grey       | #bbaaaa | (187, 170, 170) |
-| 2 | Ubuntu Orange   | #ee5522 | (238, 85,  34 ) |
-| 3 | Light Aubergine | #772277 | (119, 34,  119) |
-+---+-----------------+---------+-----------------+
++---+--------------+--------------+-----------------+------------------------+
+| # |     Name     |     RGB      |     Decimal     |          Use           |
++---+--------------+--------------+-----------------+------------------------+
+| 0 | Dark Purple  | #302 #330022 | (51,  0,   34 ) | Background Dark Theme  |
+| 1 | Light Grey   | #cbb #ccbbbb | (204, 187, 187) | Foreground             |
+| 2 | Light Orange | #e75 #ee7755 | (238, 119, 55 ) | High Emphasis          |
+| 3 | Light Purple | #959 #995599 | (153, 85,  153) | Normal Emphasis        |
+| 4 | Mid Purple   | #424 #442244 | (68,  34,  68 ) | Background Light Theme |
++---+--------------+--------------+-----------------+------------------------+
 
 ## Varavara's UxnTal Operating System
 
 Memory is organized as follows:
 
 ```
-0000   0100       @heap         @heap-ptr       @syms-ptr      fc00         ffff
-|      |          |             ^               ^         @syms|@buffs         |
-v ZPpt v          v             |               |              v @input @ptr   v
-+--^---+----------+-------------*---------------*--------------+-v------^------+
-| <ZP> | <kernel> | <user code> | <free memory> | <syms table> | | <input buf> |
-+--*---+----------+-------------*---------------*--------------+-+------*------+
-|==>   |##########|=============>               <==============|#|======>
- (256B)                        ( growth direction )                   (1Kb)
+               #ffff
+         +----------------+
+         |  Input Buffer  |  ( 1 Kb )
+         +----------------+
+   G     | Kernel Buffers |
+   R  +--+======@pit======+  #fc00
+   O  |  |  Symbols List  |
+   W  |  |----------------*-->@pit-ptr
+   T  |  |                |
+   H  ⋁  |                |
+         |                |
+   D     |  Free Memory   |
+   I     |                |
+   R  ⋀  |                |
+   E  |  |                |
+   C  |  |----------------*-->@heap-ptr
+   T  |  |   User Code    |
+   I  +--+=====@heap======+
+   O     |     Kernel     |
+   N     +----------------+  #0100
+         |   Zero Page    |  ( 256 B )
+         +----------------+
+               #0000
 ```
 
 # Operator Interaction
