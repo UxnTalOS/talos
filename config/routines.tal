@@ -3,4 +3,4 @@
 
 ( The following operator definitions will be included in the kernel image, and
 may be used from the `startup.tal` file. The symbols also need to be added to
-the dictionary in `symbols.tal` for them to become available within Merlin OS. )
+the dictionary in `symbols.tal` for them to become available within TalOS. )

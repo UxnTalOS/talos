@@ -1,11 +1,11 @@
 (
-@|merlin/includes )
+@|talos/includes )
 
 (
 @|macros )
 ~debugger/macros.tal
 ~logger/macros.tal
-~merlin/macros.tal
+~talos/macros.tal
 ~repl/macros.tal
 ~../lib/macros.tal
 ~../config/macros.tal
@@ -23,7 +23,7 @@
 (
 @|main )
 |0100
-	~merlin/main.tal
+	~talos/main.tal
 
 (
 @|routines )
@@ -40,7 +40,7 @@
 ~assembler/data.tal
 ~lexer/data.tal
 ~logger/data.tal
-~merlin/data.tal
+~talos/data.tal
 ~repl/data.tal
 ~../lib/screen/data.tal
 ~../config/data.tal
@@ -53,6 +53,6 @@
 @|buffers )
 ~../config/buffers.tal
 ~assembler/buffers.tal
-~merlin/buffers.tal
+~talos/buffers.tal
 ~tokenizer/buffers.tal
 ~repl/buffers.tal

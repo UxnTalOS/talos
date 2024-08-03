@@ -1,5 +1,5 @@
 (
-@|merlin/macros )
+@|talos/macros )
 
 %VERSION { "0.10 }   %DATE { "18P02 }
 

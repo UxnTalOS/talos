@@ -41,7 +41,7 @@ accepts from least to most verbose: `OFF`, `INFO`, `WARN` or `DEBUG`.
 
  VALUE OPTION
 ****************************************************************************** )
-ENABLE PRINT-BANNER ( print merlin banner on startup )
+ENABLE PRINT-BANNER ( print TalOS banner on startup )
 ( ENABLE LOG-FILE ( log session to a file ) )
 
 (

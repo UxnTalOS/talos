@@ -1,4 +1,4 @@
-ID=merlin
+ID=talos
 ENTRY=includes
 ASM=uxnasm
 EMU=uxncli

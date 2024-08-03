@@ -1,5 +1,5 @@
 (
-@|merlin/buffers )
+@|talos/buffers )
 
 ( pointers )
 @zp-ptr $1

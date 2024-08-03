@@ -1,10 +1,8 @@
-# Merlin OS — Version 0.e (18M06)
+# TalOS — Version 0.e (18M06)
 
-![example branch parameter](https://github.com/Ismael-VC/merlin/actions/workflows/makefile.yml/badge.svg?branch=main)
+![example branch parameter](https://github.com/Ismael-VC/talos/actions/workflows/makefile.yml/badge.svg?branch=main)
 
-<div align="center">
-	<img src="etc/merlin.jpg" alt="merlin" style="width: 256px;"/>
-</div>
+# Theme
 
 +---+-----------------+---------+-----------------+
 | # |      Name       |   RGB   |     Decimal     |
@@ -15,7 +13,7 @@
 | 3 | Light Aubergine | #772277 | (119, 34,  119) |
 +---+-----------------+---------+-----------------+
 
-## Varavara's Uxntal Operating System
+## Varavara's UxnTal Operating System
 
 Memory is organized as follows:
 
@@ -34,27 +32,19 @@ v ZPpt v          v             |               |              v @input @ptr   v
 
 ```
 
-     /_ Merlin OS — v0.f (18O11)
-  /_/ / ©2024 Ismael Venegas Castelló
-   /    Type help for more information.
+     /_    ⋃ ⨉ ⋂    TalOS    v0.10 (18P02)
+  /_/ /     ©2024 Ismael Venegas Castelló
+   /       Type help for more information.
 
-Ready
-uxn> #2a18 DEO
+56664 bytes free.
+
+փ > #2a18 DEO
 *
-WST 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00|<
-RST 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00|<
+փ > @star #2a18 DEO JMP2r
 
-uxn> @star #2a18 DEO JMP2r
-
-WST 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00|<
-RST 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00|<
-
-uxn> star
+փ > star
 *
-WST 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00|<
-RST 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00|<
-
-uxn>
+փ >
 ```
 
 ## Under the Hood
@@ -265,7 +255,7 @@ RST 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00|<
 
 ## Rom Visualization
 
-![merlin.rom.bmp](etc/merlin.rom.bmp)
+![talos.rom.bmp](etc/talos.rom.bmp)
 
 ## Repository Tree
 
@@ -347,7 +337,7 @@ RST 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00|<
 │   │   ├── routines.tal
 │   │   └── warn
 │   │       └── redefinition.tal
-│   ├── merlin
+│   ├── talos
 │   │   ├── buffers.tal
 │   │   ├── data.tal
 │   │   ├── includes.tal
@@ -367,12 +357,4 @@ RST 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00|<
     ├── opctest.tal
     ├── routines.tal
     └── script.tal
-```
-```
-
-  ´\|/`  Merlin OS -- v0.e (18M06)
-  (⏑⏑⏑)  (c) 2024 Ismael Venegas Castello
-    ˅    Type 'bye' to exit.
-
-Ready
 ```

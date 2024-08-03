@@ -1,5 +1,5 @@
 (
-@|merlin/main )
+@|talos/main )
 
 @Main ( -> )
 	(

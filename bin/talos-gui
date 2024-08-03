@@ -1,0 +1,11 @@
+#!/usr/bin/env sh
+
+STTY=`stty -g`
+
+# Run
+stty raw -echo
+uxnemu ~/roms/talos.rom || EXIT=`echo $?`
+
+# Exit
+stty $STTY
+exit $EXIT
