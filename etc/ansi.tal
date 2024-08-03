@@ -30,7 +30,7 @@
 ( constants )
 |00 @NUL   |01 @NZ
 |07 @BEL   |0a @LF   |0d @CR   |20 @SP
-|1b @ESC   |5b @OPEN-BRACKET   |\CSI @CSI ( Control Sequence Introducer )
+|1b @ESC   |5b @OPEN-BRACKET   |1b5b @CSI ( Control Sequence Introducer )
 |03 @CTRL-C   |04 @CTRL-D   |0c @CTRL-L   |12 @CTRL-R   |01 @CTRL-A
 |41 @UP   |42 @DOWN   |43 @RIGHT   |44 @LEFT
 |81 @ERROR   |80 @SUCCESS
@@ -38,6 +38,7 @@
 
 ( program )
 |100 ( -> )
+	{ 1b5b "?2004h 00 } STH2r Print/string
 	TTY/hide-cursor  TTY/clear-screen  TTY/reset-cursor
 	;Info/prompt Print/string
 	;on-console .Console/vector DEO2
