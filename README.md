@@ -75,20 +75,14 @@ A parent label starts assembly mode, this will do the following:
 **Note**: `[` and `]` allow multiline input.
 
 ```
-uxn> @star ( -- ) [
+փ > @star ( -- )
 ...   [ LIT2 "* -Console/write ] DEO
 ...   JMP2r
-... ]
 
-WST 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00|<
-RST 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00|<
-
-uxn> star
+փ > star
 *
-WST 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00|<
-RST 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00|<
 
-uxn>
+փ >
 ```
 
 **Doubts**:
@@ -96,34 +90,33 @@ uxn>
 to an absolute address in REPL mode?
 * How to allow multiline input without using `[ ]`?
 
-### `@here`
+### `@heap`
 
 The assembled code area will be concatenated as if assembling Uxntal normally.
 
 ```
-| @here ( 1337 )
+| @heap-ptr ( 1337 )
 | a0 2a 18 17 6c  ( #2a18 DEO JMP2r )
 |
-∨ @here ( 133c )
+∨ @heap-ptr ( 133c )
 ```
 
-### `@dict`
+### `@pit`
 
 The dictionary will grow in the contrary direction at a constant size for each
 entry. Instead of a linked list in tipycal Threaded Interpretive Languages
 (TILs), concatenating in inverse order to an array. When searching for a routine
 searching from **last entry** to first as done by TILs is accomplished by
 starting the search from the "physical beginning" of the array, where the
-current `@dict` pointer points to.
+current `@pit-ptr` points to.
 
 ```
-∧ @dict ( ????-n entry bytes )
+∧ @pit-ptr ( ????-n entry bytes )
 |
 | identifier                           addr
 | s  t  a  r  ( pad to n max bytes )   1337
 | 73 74 61 72 00 00 00 00 00 00 00 00  13 37
-| @dict ( ???? )
-| ( primitives )
+| @pit ( ???? )
 ```
 
 ## ANSI Control Codes
@@ -154,30 +147,30 @@ and not another Uxntal like language with new or different syntax though some
 semantics may need to be adapted.
 
 ```
-uxn> [
-...   @<pdec> ( dec* -- )
-...     DUP #64 DIV <pnum>/try
-...     DUP #0a DIV <pnum>/try
-...     ( >> )
-...
-...   @<pnum> ( num* -- )
-...     #0a MOD [ LIT "0 ] ADD .Console/write DEO
-...     JMP2r
-...
-...     &try ( num* -- )
-...       DUP ?<pnum>
-...       POP JMP2r
-... ]
+փ > :paste
+INFO: Multiline paste mode enabled.
 
-WST 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00|<
-RST 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00|<
+փ > @<pdec> ( dec* -- )
+...   DUP #64 DIV <pnum>/try
+...   DUP #0a DIV <pnum>/try
+...   ( >> )
+...
+... @<pnum> ( num* -- )
+...   #0a MOD [ LIT "0 ] ADD .Console/write DEO
+...   JMP2r
+...
+...   &try ( num* -- )
+...     DUP ?<pnum>
+...     POP JMP2r
+... ( Alt+Enter: Evaluate multiline input )
 
-uxn> #002a <pdec>
+փ > :paste
+INFO: Multiline paste mode disabled.
+
+փ > #002a pdec  ( Enter: Evaluate line input )
 42
-WST 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00|<
-RST 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00|<
 
-uxn>
+փ >
 ```
 
 In this case calling `<pdec>` would fall through to `<pnum>` body as in normal
