@@ -9,7 +9,6 @@ SRC_DIR=src
 BIN_DIR=bin
 ROM_DIR=rom
 ROMS_DIR=roms
-TTY=$(shell stty -g)
 
 TAL=${ID}/${ENTRY}.tal
 ROM=${ROM_DIR}/${ID}.rom
@@ -19,11 +18,15 @@ DIS=${ETC_DIR}/uxndis.rom
 SYMS=${ETC_DIR}/sym.rom
 DUMP=${ETC_DIR}/hx.rom
 
+TTY := $(shell stty -g)
+
 run: install
 	@ stty raw -echo
 	@ echo "Running: ~/${BIN_DIR}/${ID}"
-	@ ${ID} || stty ${TTY}
-	@ stty ${TTY}
+	@ ${ID}; \
+	EXIT_CODE=$$? ; \
+	stty ${TTY}; \
+	exit $$EXIT_CODE
 
 setup:
 	@ echo "Setting up: ~/{${BIN_DIR},${ROMS_DIR}}"
@@ -62,11 +65,15 @@ test: install
 cli: install
 	@ echo "Running: ~/${BIN_DIR}/${ID}-cli"
 	@ stty raw -echo
-	@ ${ID}-cli || stty ${TTY}
-	@ stty ${TTY}
+	@ ${ID}-cli; \
+	EXIT_CODE=$$? ; \
+	stty ${TTY}; \
+	exit $$EXIT_CODE
 
 gui: install
 	@ echo "Running: ~/${BIN_DIR}/${ID}-gui"
 	@ stty raw -echo
-	@ ${ID}-gui || stty ${TTY}
-	@ stty ${TTY}
+	@ ${ID}-gui; \
+	EXIT_CODE=$$? ; \
+	stty ${TTY}; \
+	exit $$EXIT_CODE
