@@ -1,4 +1,5 @@
 ./*.rom
 ./*.sym
 .vscode/*
-bak/talos*
+bak/*
+*.code-workspace

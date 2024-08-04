@@ -4,7 +4,7 @@ STTY=`stty -g`
 
 # Build
 cd src
-../etc/uxnasm talos/includes.tal ../rom/talos.rom $@ || exit 127
+../etc/uxnasm talos/includes.tal ../rom/talos.rom || exit 127
 cd ..
 
 # Run
