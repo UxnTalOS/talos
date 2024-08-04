@@ -9,8 +9,9 @@ cd ..
 
 # Run
 stty raw -echo
-uxncli rom/talos.rom || EXIT=`echo $?`
+uxncli rom/talos.rom
 
 # Exit
+ EXIT=`echo $?`
 stty $STTY
 exit $EXIT
