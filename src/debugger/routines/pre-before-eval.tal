@@ -1,6 +1,7 @@
 (
 @|debugger/before-eval )
 
+#ifdef DBG
 .LOG-LEVEL .Logger/warn GTH NOT ?{
 	pstr: \reset-console-style \bg-0 \fg-2 \0
 
@@ -29,3 +30,4 @@
 		;length LDA2 pdec <\n> <\r> }
 
 		pstr: \reset-console-style \bg-0 \fg-1 \0 }
+#endif
