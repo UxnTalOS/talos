@@ -124,7 +124,7 @@
 
 
 @Print
-	&newline ( -- ) .LF \emit .CR \emit JMP2r
+	&newline ( -- ) .LF \emit JMP2r
 
 	&string ( str* -- )
 		LDAk \emit
@@ -170,11 +170,11 @@
 @Info
 	&prompt
 		=CSI "44;5;7m "Use -SP "your -SP "keyboard, -SP "^C -SP "or -SP "^D -SP
-		"to -SP "exit, -SP "^L -SP "to -SP "clear -SP "the -SP "screen, -LF -CR
+		"to -SP "exit, -SP "^L -SP "to -SP "clear -SP "the -SP "screen, -LF
 		"try -SP "Mod -SP "key -SP "combos -SP "(Ctrl/Shift/Alt) -SP "and -SP
-		"chords -SP "with -SP "all -SP "the -SP -LF -CR "number, -SP
+		"chords -SP "with -SP "all -SP "the -SP -LF "number, -SP
 		"alphabetic -SP "and -SP "symbol -SP "keys -SP "(^L -SP "is -SP "equal
-		-SP "to -SP "Ctrl+L). -SP \TTY:reset-colors -LF -CR -NUL
+		-SP "to -SP "Ctrl+L). -SP \TTY:reset-colors -LF -NUL
 
 	&carriage-return
 		\TTY:bg-purple "CARRIAGE -SP "RETURN \TTY:reset-colors -NUL
