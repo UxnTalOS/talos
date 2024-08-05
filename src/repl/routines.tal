@@ -154,7 +154,7 @@
 	pstr: \CSI "m \CSI "48;2;51;00;34m \CSI "38;2;170;170;170m \0
 	JMP2r
 
-	&prompt-start [ \r "փ \s \0 ]
+	&prompt-start [ "փ \s \0 ]
 	&prompt-end   [ "> \s \0 ]
 
 @<print-post-prompt> ( -- )

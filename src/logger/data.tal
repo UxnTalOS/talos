@@ -7,10 +7,10 @@
 	&on-repl "expression \0
 	&assembled "Assembled \s \0
 	&in \s "in \s \0
-	&bytes \s "bytes. \n \r \0
+	&bytes \s "bytes. \n \0
 	&labels \s "labels 29 ". \n \0
 	&sym-ext ".sym \0
-	&multiline-info-prompt \n \r "... \s "... \s ": \s  \0
+	&multiline-info-prompt \n "... \s "... \s ": \s  \0
 ]
 
 @Warning [
@@ -18,7 +18,7 @@
 	&redefinition "Redefining: \0
 	&clearing-stacks [
 		\reset-console-style \bg-0 \fg-2 "WARNING: \s "Clearing \s "stacks. \n
-		\r \reset-console-style \bg-0 \fg-1 \0 ]
+		\reset-console-style \bg-0 \fg-1 \0 ]
 ]
 
 @Error [

@@ -103,7 +103,7 @@
 	&heap [ "heap: \s \0 ]
 	&syms [ "/syms: \s \0 ]
 	&ZP [ "ZP: \s \0 ] )
-	&bytes-free [ \s "bytes \s "free. \n \r \0 ]
+	&bytes-free [ \s "bytes \s "free. \n \0 ]
 
 (
 		@<mclr> ( src* len* -- )
@@ -161,10 +161,10 @@
 					POP LIT ". }
 				<emit> INC2 GTH2k ?&>loop-chars
 			POP2 POP2
-			<|> <\n> <\r> DUP2 INC2 STH2kr ADD2
+			<|> <\n> DUP2 INC2 STH2kr ADD2
 			phex <\s> }
 		<\s> INC NEQk ?&>loop-bytes
-	POP2 POP2 POP2r <\n> <\r> JMP2r
+	POP2 POP2 POP2r <\n> JMP2r
 
 @mfill ( length* bank* addr* value -- )
 	,&value STR  ,&addr STR2  ,&bank STR2  ,&length STR2

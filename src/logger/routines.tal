@@ -10,7 +10,7 @@
 	;scope pstr/
 	[ LIT2 ". -Console/write ] DEO
 	#01 ;abort STA
-	pstr: \n \r \bg-0 \fg-1 \0
+	pstr: \n \bg-0 \fg-1 \0
 	JMP2r
 
 @<set-warning> ( name* -- )
@@ -21,5 +21,5 @@
 	;Info/in pstr/
 	;scope pstr/
 	[ LIT2 ". -Console/write ] DEO
-	pstr: \n \r \bg-0 \fg-1 \0
+	pstr: \n \bg-0 \fg-1 \0
 	JMP2r
