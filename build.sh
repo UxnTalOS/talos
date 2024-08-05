@@ -19,6 +19,7 @@ cpp -P -D $DEBUG src/debugger/routines/pre-before-eval.tal \
 
 
 # Build
+mkdir -p rom
 cd src
 ../etc/uxnasm talos/includes.tal ../rom/talos.rom || exit 127
 cd ..
