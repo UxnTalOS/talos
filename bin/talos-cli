@@ -4,8 +4,9 @@ STTY=`stty -g`
 
 # Run
 stty raw -echo
-uxncli ~/roms/talos.rom || EXIT=`echo $?`
+uxncli ~/roms/talos.rom
 
 # Exit
+EXIT=`echo $?`
 stty $STTY
 exit $EXIT
