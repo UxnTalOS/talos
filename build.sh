@@ -3,6 +3,18 @@
 # Start
 STTY=`stty -g`
 
+if [ "$1" = "--uxn38" ]; then
+	EMU='uxn38 -n'
+elif [ "$1" = "--uxn38-gui" ]; then
+	EMU='uxn38 -I'
+elif [ "$1" = "--uxn11" ]; then
+	EMU=uxn11
+elif [ "$1" = "--uxnemu" ]; then
+	EMU=uxnemu
+else
+	EMU=uxncli
+fi
+
 
 # Pre-process
 if [ "$1" = "--debug" ]; then
@@ -36,7 +48,7 @@ fi
 # Run
 stty -ignbrk -brkint -ignpar -parmrk -inpck -istrip -inlcr -igncr -icrnl -ixon \
      -ixoff -icanon onlcr -echo -isig -iuclc -ixany -imaxbel -xcase min 1 time 0
-uxn38 -n rom/talos.rom
+$EMU rom/talos.rom
 EXIT=`echo $?`
 
 
