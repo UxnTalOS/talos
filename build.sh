@@ -34,7 +34,7 @@ cpp -P -w -D $DEBUG src/debugger/routines/pre-before-eval.tal \
 mkdir -p rom
 
 cd src
-../etc/uxnasm talos/includes.tal ../rom/talos.rom || exit 127
+uxnasm talos/includes.tal ../rom/talos.rom || exit 127
 cd ..
 
 # Install
