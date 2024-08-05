@@ -3,7 +3,8 @@
 STTY=`stty -g`
 
 # Run
-stty raw -echo
+stty -ignbrk -brkint -ignpar -parmrk -inpck -istrip -inlcr -igncr -icrnl -ixon \
+     -ixoff -icanon onlcr -echo -isig -iuclc -ixany -imaxbel -xcase min 1 time 0
 uxn38 -I ~/roms/talos.rom
 
 # Exit
