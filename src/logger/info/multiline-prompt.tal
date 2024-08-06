@@ -3,4 +3,4 @@
 
 .LOG-LEVEL .Logger/off GTH NOT ?{
 	.INFO-PROMPT ?{
-		;Info/multiline-info-prompt !&continue } }
+		;Info/multiline-info-prompt !&multiline-continue } }

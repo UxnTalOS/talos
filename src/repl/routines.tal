@@ -67,26 +67,33 @@
 		#01 ,&in-esc STR
 
 		DUP LIT \r NEQ ?{
-			<\n> emit !&multiline-end } }
+			,&multiline LDR #00 EQU ,&multiline STR } }
 
 	DUP LIT \r NEQ ?{
-		pstr: \reset-console-style \bold \bg-0 \fg-3 \0
-		~logger/info/multiline-prompt.tal
+		[ LIT &multiline 01 ] ?{
+			pstr: \reset-console-style \bold \bg-0 \fg-3 \0
+			~logger/info/multiline-prompt.tal
+			;multiline-prompt
 
-		;multiline-prompt
+			&multiline-continue ( -- )
+				pstr
+				pstr: \reset-console-style \bg-0 \fg-1 \0
+				!&multiline-end }
 
-		&continue ( -- )
-			pstr
-			pstr: \reset-console-style \bg-0 \fg-1 \0
-			POP BRK }
+			#01 ,&break STR
+			POP LIT \n }
 
 	DUP emit
-	;input-ptr LDA2 STA
-	;input-ptr LDA2 INC2 ;input-ptr STA2 BRK
 
-	&multiline-end ( -- )
-	#0000 ;length STA2
-	~debugger/routines/before-eval.tal
+	&multiline-end
+		;input-ptr LDA2 STA
+		;input-ptr LDA2 INC2 ;input-ptr STA2
+
+		[ LIT &break 00 ] ?{ BRK }
+		#00 ,&break STR
+
+		#0000 ;length STA2
+		~debugger/routines/before-eval.tal
 
 	(
 	@|Eval )
