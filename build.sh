@@ -11,6 +11,10 @@ elif [ "$1" = "--uxn11" ]; then
 	EMU=uxn11
 elif [ "$1" = "--uxnemu" ]; then
 	EMU=uxnemu
+elif [ "$1" = "--raven" ]; then
+	EMU=raven-cli
+elif [ "$1" = "--raven-gui" ]; then
+	EMU=raven-gui
 else
 	EMU=uxncli
 fi

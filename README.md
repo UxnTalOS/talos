@@ -1,18 +1,31 @@
-# TalOS — Version 0.e (18M06)
+# TalOS — Version 0.11 (18P07) ![example branch parameter](https://github.com/Ismael-VC/talos/actions/workflows/makefile.yml/badge.svg?branch=main)
 
-![example branch parameter](https://github.com/Ismael-VC/talos/actions/workflows/makefile.yml/badge.svg?branch=main)
+## Theme
 
-# Theme
-
-+---+--------------+--------------+-----------------+------------------------+
 | # |     Name     |     RGB      |     Decimal     |          Use           |
-+---+--------------+--------------+-----------------+------------------------+
+|---|--------------+--------------|-----------------|------------------------|
 | 0 | Dark Purple  | #302 #330022 | (51,  0,   34 ) | Background Dark Theme  |
 | 1 | Light Grey   | #cbb #ccbbbb | (204, 187, 187) | Foreground             |
 | 2 | Light Orange | #e75 #ee7755 | (238, 119, 55 ) | High Emphasis          |
 | 3 | Light Purple | #959 #995599 | (153, 85,  153) | Normal Emphasis        |
 | 4 | Mid Purple   | #424 #442244 | (68,  34,  68 ) | Background Light Theme |
-+---+--------------+--------------+-----------------+------------------------+
+
+## Tested Environments
+
+| **Android 13** | Status | Issues |
+|----------------|--------|--------|
+| Termux         | ✅     |        |
+
+| **Ubuntu (WSL2)** | Status | Issues                                            |
+|-------------------|--------|---------------------------------------------------|
+| XTerm             | ✅     | 🛈 TrueType Fonts need to be enabled for unicode. |
+| Cool Retro Term   | ✅     |                                                   |
+
+| **Windows 11**   | Status | Issues                                            |
+|------------------|----|-------------------------------------------------------|
+| Alacritty        | ✅ | 🚩 Pasting multiple lines inserts extra white space. |
+| VSCode Terminal  | ✅ | ⚠️ Sometimes deleting multiple characters rapidly while holding `Del` breaks the line editor. |
+| Windows Terminal | ✅ |                                                      |
 
 ## Varavara's UxnTal Operating System
 
@@ -367,3 +380,14 @@ RST 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00|<
     ├── routines.tal
     └── script.tal
 ```
+
+sudo apt install deepin-terminal eterm foot gnome-terminal gnome-console kgx kitty konsole lxterminal mate-terminal mlterm opencu pterm qterminal rxvt-unicode s3dvt sakura stterm terminal.app terminology termit tilda tilix yakuake zutty
+
+
+https://www.eddymens.com/blog/creating-a-browser-based-interactive-terminal-using-xtermjs-and-nodejs
+
+https://superuser.com/questions/413073/windows-console-with-ansi-colors-handling/1050078#1050078
+
+https://stackoverflow.com/questions/44447473/how-to-make-xterm-js-accept-input
+
+https://gist.github.com/mlocati/fdabcaeb8071d5c75a2d51712db24011
