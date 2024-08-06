@@ -45,5 +45,6 @@
 		<print-pre-prompt>
 
 	&no-first-prompt
+		pstr: \enable-braketed-paste \0
 		;REPL .Console/vector DEO2
 		BRK

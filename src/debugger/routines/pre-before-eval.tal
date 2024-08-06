@@ -19,7 +19,7 @@
 
 	.DEBUG-TAIL-POINTER ?{
 		{ "DEBUG: \s "tail-ptr \s "before \s "eval: \s \0 }  STH2r pstr
-		;tail-ptr LDA2 phex <\n> <\r> }
+		;tail-ptr LDA2 phex <\n> }
 
 	.DEBUG-SYMBOLS ?{
 		{ "DEBUG: \s "symbols \s "before \s "eval: \n \0 }

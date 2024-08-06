@@ -45,7 +45,7 @@
 )
 %\s { 20 }
 %\r { 0d }
-%emit { .Console/write DEO }
+%\emit { .Console/write DEO }
 %\CSI { 1b5b }
 
 %\bold { \CSI "1m }
@@ -70,6 +70,7 @@
 %\console-cursor-down { \CSI "B }
 %\console-cursor-right { \CSI "C }
 %\console-cursor-left { \CSI "D }
+%\enable-braketed-paste { \CSI "?2004h }
 
 (
 		%\n ( -- )

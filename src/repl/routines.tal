@@ -5,8 +5,8 @@
 	(
 	@|Read )
 	.Console/read DEI
-	( <\n> <\r>
-	;&in-csi LDA phex/byte <\n> <\r> DUP phex/byte LIT ": emit #20 emit )
+	( <\n>
+	;&in-csi LDA phex/byte <\n> DUP phex/byte LIT ": \emit <\s> )
 
 	[ LIT &comment 01 ] ?{
 		POP BRK }
@@ -15,16 +15,50 @@
 		;input ;input-ptr LDA2 NEQ2 ?{
 			#0718 DEO POP BRK }
 
-		#08 emit
+		#08 \emit
 		<\s>
-		#08 emit
+		#08 \emit
 		;input-ptr LDA2 #0001 SUB2 DUP2
 		#00 ROT ROT STA
 		;input-ptr STA2
 		POP BRK }
 
+	( \CSI 201~  ^[[201~   End of braketed paste off )
+	DUP LIT "~ NEQ  [ LIT &in-csi-201 01 ] ORA ?{
+			;&multiline LDA #00 EQU ;&multiline STA
+			#01 ,&in-csi-201 STR
+			POP BRK }
+
+	( \CSI 201  ^[[201   Stage 3 of braketed paste off )
+	DUP LIT "1 NEQ  ,&in-csi-20 LDR ORA ?{
+			#00 ,&in-csi-201 STR
+			#01 ,&in-csi-20 STR
+			POP BRK }
+
+	( \CSI 200~  ^[[200~   End of braketed paste on )
+	DUP LIT "~ NEQ  [ LIT &in-csi-200 01 ] ORA ?{
+			;&multiline LDA #00 EQU ;&multiline STA
+			#01 ,&in-csi-200 STR
+			POP BRK }
+
+	( \CSI 200  ^[[200   Stage 3 of braketed paste on )
+	DUP LIT "0 NEQ  [ LIT &in-csi-20 01 ] ORA ?{
+			#00 ,&in-csi-200 STR
+			#01 ,&in-csi-20 STR
+			POP BRK }
+
+	( \CSI 20  ^[[20   Stage 2 of braketed paste )
+	DUP LIT "0 NEQ  [ LIT &in-csi-2 01 ] ORA ?{
+			#00 ,&in-csi-20 STR
+			#01 ,&in-csi-2 STR
+			POP BRK }
+
 	[ LIT &in-csi 01 ] ?{
 		#01 ,&in-csi STR
+
+		DUP LIT "2 NEQ ?{    ( \CSI 2  ^[[2   Start of braketed paste )
+			#00 ,&in-csi-2 STR
+			POP BRK }
 
 		DUP LIT "A NEQ ?{    ( \CSI 41  ^[[A   UP )
 			pstr: \console-cursor-up \0
@@ -83,7 +117,7 @@
 			#01 ,&break STR
 			POP LIT \n }
 
-	DUP emit
+	DUP \emit
 
 	&multiline-end
 		;input-ptr LDA2 STA
