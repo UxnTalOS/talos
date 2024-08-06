@@ -23,6 +23,7 @@ else
 	DEBUG="NO_DBG"
 fi
 
+# Sorry
 cpp -P -w -D $DEBUG config/pre-options.tal -o config/options.tal
 cpp -P -w -D $DEBUG src/debugger/routines/pre-after-eval.tal \
 -o src/debugger/routines/after-eval.tal
