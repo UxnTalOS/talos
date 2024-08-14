@@ -9,7 +9,11 @@
 	;&in-csi LDA phex/byte <\n> DUP phex/byte LIT ": \emit <\s> )
 
 	[ LIT &comment 01 ] ?{
-		POP BRK }
+		DUP #29 NEQ ?{ #01 ;&comment STA }
+		\emit BRK }
+
+	DUP #28 NEQ ?{
+		#00 ;&comment STA \emit BRK }
 
 	DUP #7f NEQ ?{    ( DELETE )
 		;input ;input-ptr LDA2 NEQ2 ?{
@@ -94,8 +98,6 @@
 		<print-pre-prompt>
 		POP BRK }
 	DUP LIT "@ NEQ ?{ #01 ;&expression STA }
-	DUP #28 NEQ ?{ #00 ;&comment STA }
-	DUP #29 NEQ ?{ #01 ;&comment STA }
 
 	[ LIT &in-esc 01 ] ?{
 		#01 ,&in-esc STR
