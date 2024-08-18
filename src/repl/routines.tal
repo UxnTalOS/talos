@@ -94,7 +94,7 @@
 	DUP #04 NEQ ?{    ( 04  ^D -> EOT )
 		bye }
 	DUP #0c NEQ ?{    ( 0c  ^L -> FORM-FEED )
-		pstr: \reset-console-cursor \clear-console-screen \0
+		pstr: \clear-console-screen \reset-console-cursor \0
 		<print-pre-prompt>
 		POP BRK }
 	DUP LIT "@ NEQ ?{ #01 ;&expression STA }
