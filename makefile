@@ -8,7 +8,7 @@ ETC_DIR=etc
 SRC_DIR=src
 BIN_DIR=bin
 ROM_DIR=rom
-ROMS_DIR=roms
+ROMS_DIR=~/roms
 
 TAL=${ID}/${ENTRY}.tal
 ROM=${ROM_DIR}/${ID}.rom
@@ -18,7 +18,8 @@ DIS=${ETC_DIR}/uxndis.rom
 SYMS=${ETC_DIR}/sym.rom
 DUMP=${ETC_DIR}/hx.rom
 
-TTY := $(shell stty -g)
+MULTI:=$(shell printf "\e")
+TTY:=$(shell stty -g)
 
 run: install
 	@ stty raw -echo
@@ -30,7 +31,7 @@ run: install
 
 setup:
 	@ echo "Setting up: ~/{${BIN_DIR},${ROMS_DIR}}"
-	@ mkdir -p ~/${BIN_DIR} ~/${ROMS_DIR}
+	@ mkdir -p ~/${BIN_DIR} ${ROMS_DIR}
 
 build:
 	@ echo "Building: ./${ROM}*"
@@ -51,11 +52,27 @@ disassemble: build
 install: setup build dump symbols disassemble
 	@ echo "Installing: ./{${BIN_DIR},${ROM_DIR}}/* at ~/{${BIN_DIR},${ROMS_DIR}}"
 	@ cp ${BIN_DIR}/* ~/${BIN_DIR}
-	@ cp ${ROM} ~/${ROMS_DIR}
+	@ cp ${ROM} ${ROMS_DIR}
 
 test: install
 	@ echo "Testing: ~/${ROM_DIR}/${ID}.rom"
-	@ echo "~test/routines.tal\nsierpinski\nbye" | ${EMU} ${ROM_DIR}/${ID}.rom
+	@ printf "%s\n" \
+		"@sierpinski ( -- ) ${MULTI}" \
+		"	( mask ) [ LIT2r 0a18 ] [ LIT2r 2018 ]" \
+		"		( size ) [ LIT2 &size 1001 ] SUB" \
+		"		&>ver ( -- )" \
+		"			DUP INCk" \
+		"			&>pad ( length -- )" \
+		"				DEOkr" \
+		"				#01 SUB DUP ?&>pad" \
+		"			&>fill ( length i -- )" \
+		"				ANDk DUP2r ?{ POP2r ORA2kr } DEOr DEOkr" \
+		"				INC ADDk ,&size LDR LTH ?&>fill" \
+		"			POP2 OVR2r DEOr" \
+		"			#01 SUB INCk ?&>ver" \
+		"	POP POP2r POP2r JMP2r ${MULTI}" \
+		"sierpinski" \
+		"bye" | ${EMU} ${ROMS_DIR}/${ID}.rom
 
 cli: install
 	@ echo "Running: ~/${BIN_DIR}/${ID}-cli"
