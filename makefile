@@ -32,7 +32,7 @@ setup:
 	@ echo "Setting up: ~/{${BIN_DIR},${ROMS_DIR}}"
 	@ mkdir -p ~/${BIN_DIR} ~/${ROMS_DIR}
 
-build: ${ROM}
+build:
 	@ echo "Building: ./${ROM}*"
 	@ cd ${SRC_DIR} && ${ASM} ${TAL} ../${ROM}
 
