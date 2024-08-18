@@ -1,4 +1,5 @@
 (
 @|lib/system/routines )
 
-@bye ( -> ) [ LIT2 80 -System/state ] DEO BRK
+@bye ( -> ) <\n> [ LIT2 80 -System/state ] DEO BRK
+@exit ( code -> ) <\n> #80 ORA .System/state DEO BRK

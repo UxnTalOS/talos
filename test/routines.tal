@@ -16,3 +16,10 @@
 		#01 SUB INCk ?&>ver
 	POP POP2r POP2r JMP2r
 ]
+
+@<draw-heart>
+	#0000 .Screen/x DEO2
+	#0000 .Screen/y DEO2
+	;heart .Screen/addr DEO2
+	.Screen/sprite DEO
+	JMP2r

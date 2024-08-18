@@ -1,4 +1,4 @@
-ID=merlin
+ID=talos
 ENTRY=includes
 ASM=uxnasm
 EMU=uxncli
@@ -18,9 +18,15 @@ DIS=${ETC_DIR}/uxndis.rom
 SYMS=${ETC_DIR}/sym.rom
 DUMP=${ETC_DIR}/hx.rom
 
+TTY := $(shell stty -g)
+
 run: install
+	@ stty raw -echo
 	@ echo "Running: ~/${BIN_DIR}/${ID}"
-	@ ${ID}
+	@ ${ID}; \
+	EXIT_CODE=$$? ; \
+	stty ${TTY}; \
+	exit $$EXIT_CODE
 
 setup:
 	@ echo "Setting up: ~/{${BIN_DIR},${ROMS_DIR}}"
@@ -58,8 +64,16 @@ test: install
 
 cli: install
 	@ echo "Running: ~/${BIN_DIR}/${ID}-cli"
-	@ ${ID}-cli
+	@ stty raw -echo
+	@ ${ID}-cli; \
+	EXIT_CODE=$$? ; \
+	stty ${TTY}; \
+	exit $$EXIT_CODE
 
 gui: install
 	@ echo "Running: ~/${BIN_DIR}/${ID}-gui"
-	@ ${ID}-gui
+	@ stty raw -echo
+	@ ${ID}-gui; \
+	EXIT_CODE=$$? ; \
+	stty ${TTY}; \
+	exit $$EXIT_CODE

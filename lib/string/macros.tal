@@ -44,6 +44,33 @@
 		This is a spaces example.
 )
 %\s { 20 }
+%\r { 0d }
+%\emit { .Console/write DEO }
+%\CSI { 1b5b }
+
+%\bold { \CSI "1m }
+%\italic { \CSI "3m }
+%\underline { \CSI "4m }
+
+%\bg-0 { \CSI "48;2; \color-0 "m }
+%\bg-1 { \CSI "48;2; \color-1 "m }
+%\bg-2 { \CSI "48;2; \color-2 "m }
+%\bg-3 { \CSI "48;2; \color-3 "m }
+
+%\fg-0 { \CSI "38;2; \color-0 "m }
+%\fg-1 { \CSI "38;2; \color-1 "m }
+%\fg-2 { \CSI "38;2; \color-2 "m }
+%\fg-3 { \CSI "38;2; \color-3 "m }
+
+%\reset-console-style { \CSI "m }
+%\reset-console-cursor { \CSI "H }
+%\clear-console-screen { \CSI "2J }
+%\clear-console-screen-right { \CSI "J }
+%\console-cursor-up { \CSI "A }
+%\console-cursor-down { \CSI "B }
+%\console-cursor-right { \CSI "C }
+%\console-cursor-left { \CSI "D }
+%\enable-braketed-paste { \CSI "?2004h }
 
 (
 		%\n ( -- )

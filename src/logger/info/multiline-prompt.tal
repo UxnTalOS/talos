@@ -1,8 +1,6 @@
 (
 @|logger/info/multiline-prompt )
 
-.LOG-LEVEL .Logger/error GTH NOT ?{
+.LOG-LEVEL .Logger/off GTH NOT ?{
 	.INFO-PROMPT ?{
-		.UNICODE-PROMPT ?{
-			{ 2020 2020 2020 "... \s  \0 } !&continue }
-		{ 2020 2020 2020 \s "... \s  \0 } !&continue } }
+		;Info/multiline-info-prompt !&multiline-continue } }

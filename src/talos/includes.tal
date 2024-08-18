@@ -1,0 +1,58 @@
+(
+@|talos/includes )
+
+(
+@|macros )
+~debugger/macros.tal
+~logger/macros.tal
+~talos/macros.tal
+~repl/macros.tal
+~../lib/macros.tal
+~../config/macros.tal
+
+(
+@|constants )
+~logger/constants.tal
+~../lib/constants.tal
+
+(
+&|options )
+~../config/options.tal
+~../config/constants.tal
+
+(
+@|main )
+|0100
+	~talos/main.tal
+
+(
+@|routines )
+~assembler/routines.tal
+~lexer/routines.tal
+~logger/routines.tal
+~repl/routines.tal
+~../lib/routines.tal
+~tokenizer/routines.tal
+~../config/routines.tal
+
+(
+@|data )
+~assembler/data.tal
+~lexer/data.tal
+~logger/data.tal
+~talos/data.tal
+~repl/data.tal
+~../lib/screen/data.tal
+~../config/data.tal
+
+(
+@|symbols )
+~repl/symbols.tal
+
+(
+@|buffers )
+~../config/buffers.tal
+~assembler/buffers.tal
+~talos/buffers.tal
+~tokenizer/buffers.tal
+~repl/buffers.tal

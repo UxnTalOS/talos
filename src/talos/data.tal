@@ -1,0 +1,5 @@
+@meta $1
+	( name ) NAME \s "— \s VERSION \n
+	( desc ) DESCRIPTION \n
+	( auth ) "©2024 \s AUTHOR \n
+	( date ) DATE \0

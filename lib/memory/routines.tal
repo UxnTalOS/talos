@@ -72,9 +72,16 @@
 )
 
 @free ( -- )
+	#0100 #00 ;zp-ptr LDA SUB2 STH2
+	( ;&free pstr )
+	;tail-ptr LDA2 ;head-ptr LDA2 SUB2 STH2r ADD2 pdec
+	;&bytes-free !pstr
+
+	(
 	#0100 ;zp-ptr LDA #00 SWP SUB2 STH2k
 	;&free pstr
 	;tail-ptr LDA2 ;head-ptr LDA2 SUB2 STH2kr ADD2 pdec
+
 	<B> <\s> <(>
 	;&ZP pstr
 	STH2kr pdec
@@ -91,12 +98,12 @@
 	STH2r pdec
 	<B> <)> <.>
 
-	JMP2r
-	    &free [ "Free: \s \0 ]
-		&used [ "/Used: \s \0 ]
-		&heap [ "heap: \s \0 ]
-		&syms [ "/syms: \s \0 ]
-		&ZP [ "ZP: \s \0 ]
+	&free [ "Free: \s \0 ]
+	&used [ "/Used: \s \0 ]
+	&heap [ "heap: \s \0 ]
+	&syms [ "/syms: \s \0 ]
+	&ZP [ "ZP: \s \0 ] )
+	&bytes-free [ \s "bytes \s "free. \n \0 ]
 
 (
 		@<mclr> ( src* len* -- )

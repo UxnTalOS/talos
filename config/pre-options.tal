@@ -1,0 +1,69 @@
+( @|options )
+
+( &|colors
+
+Default Theme Colors:
+  color 0: #302 #330022 (51,  0,   34)  Dark Purple   Background Dark Theme
+  color 1: #cbb #ccbbbb (204, 187, 187) Light Grey    Foreground
+  color 2: #e75 #ee7755 (238, 119, 55)  Light Red     High Emphasis
+  color 3: #959 #995599 (153, 85,  153) Light Purple  Normal Emphasis
+  color 4: #424 #442244 (68,  34,  68)  Mid Purple    Background Light Theme
+
+  GUI Screen
+           color-0
+           |color-1
+           ||color-2
+           |||color-3
+           ||||
+           vvvv )
+%\RED   { #3ce9 }
+%\GREEN { #0b75 }
+%\BLUE  { #2b59 }
+
+( TUI Screen
+                RED   GREEN BLUE )
+%DARK-PURPLE  { "51;  "0;   "34  }
+%LIGHT-GREY   { "204; "187; "187 }
+%LIGHT-RED    { "238; "119; "55  }
+%LIGHT-PURPLE { "153; "85;  "153 }
+%MID-PURPLE   { "68;  "34;  "68  }
+
+%\color-0 { DARK-PURPLE }
+%\color-1 { LIGHT-GREY }
+%\color-2 { LIGHT-RED }
+%\color-3 { LIGHT-PURPLE }
+
+
+( &|config
+
+All the options accept: `ENABLE` or `DISABLE`, except for `LOG-LEVEL` which
+accepts from least to most verbose: `OFF`, `INFO`, `WARN` or `DEBUG`.
+
+ VALUE OPTION
+****************************************************************************** )
+ENABLE PRINT-BANNER ( print TalOS banner on startup )
+( ENABLE LOG-FILE ( log session to a file ) )
+
+(
+&|logger )
+DEBUG LOG-LEVEL ( valid values: OFF INFO WARN DEBUG ( most verbose ) )
+
+ENABLE INFO-STACKS ( print stacks after each evaluation )
+ENABLE INFO-PROMPT ( print the heap's `head` pointer inside the prompt )
+ENABLE INFO-ASSEMBLER-SUMMARY ( print the assembled definition summary )
+
+ENABLE WARN-ABORT ( warn each time an evaluation is aborted )
+ENABLE WARN-REDEFINITION ( warn on each redefinition )
+(
+	ENABLE WARN-LOW-MEMORY ( warn when there are less than 512 free bytes )
+	ENABLE WARN-LOW-MEMORY-ZEROPAGE ( warn if less than 25 free bytes )
+)
+
+#ifdef DBG
+DISABLE DEBUG-LENGTH ( print the assembled bytecode `length` )
+DISABLE DEBUG-HEAD-POINTER ( print the head pointer )
+DISABLE DEBUG-TAIL-POINTER ( print the tail pointer )
+ENABLE DEBUG-INPUT ( print the input buffer )
+DISABLE DEBUG-HEAP ( print the heap )
+DISABLE DEBUG-SYMBOLS ( print the symbols )
+#endif

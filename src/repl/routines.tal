@@ -5,48 +5,131 @@
 	(
 	@|Read )
 	.Console/read DEI
+	( <\n>
+	;&in-csi LDA phex/byte <\n> DUP phex/byte LIT ": \emit <\s> )
 
-	( DUP SP NEQ ?{ POP BRK ( ignore ) } )
-	DUP LIT "@ NEQ ?{ #01 ;&expression STA }
-	DUP LIT "[ NEQ ?{
-		#00 ,&multi-line STR
-		,&brakets LDR INC ,&brakets STR }
-	DUP LIT "] NEQ ?{
-		,&brakets LDR #01 SUB ,&brakets STR }
-	DUP #28 NEQ ?{ #00 ,&comment STR POP BRK }
-	DUP #29 NEQ ?{ #01 ,&comment STR POP BRK }
+	[ LIT &comment 01 ] ?{
+		DUP #29 NEQ ?{ #01 ;&comment STA }
+		\emit BRK }
 
-	DUP NL EQU ?{
-		[ LIT &comment 01 ] ?{
+	DUP #28 NEQ ?{
+		#00 ;&comment STA \emit BRK }
+
+	DUP #7f NEQ ?{    ( DELETE )
+		;input ;input-ptr LDA2 NEQ2 ?{
+			#0718 DEO POP BRK }
+
+		#08 \emit
+		<\s>
+		#08 \emit
+		;input-ptr LDA2 #0001 SUB2 DUP2
+		#00 ROT ROT STA
+		;input-ptr STA2
+		POP BRK }
+
+	( \CSI 201~  ^[[201~   End of braketed paste off )
+	DUP LIT "~ NEQ  [ LIT &in-csi-201 01 ] ORA ?{
+			;&multiline LDA #00 EQU ;&multiline STA
+			#01 ,&in-csi-201 STR
 			POP BRK }
+
+	( \CSI 201  ^[[201   Stage 3 of braketed paste off )
+	DUP LIT "1 NEQ  ,&in-csi-20 LDR ORA ?{
+			#00 ,&in-csi-201 STR
+			#01 ,&in-csi-20 STR
+			POP BRK }
+
+	( \CSI 200~  ^[[200~   End of braketed paste on )
+	DUP LIT "~ NEQ  [ LIT &in-csi-200 01 ] ORA ?{
+			;&multiline LDA #00 EQU ;&multiline STA
+			#01 ,&in-csi-200 STR
+			POP BRK }
+
+	( \CSI 200  ^[[200   Stage 3 of braketed paste on )
+	DUP LIT "0 NEQ  [ LIT &in-csi-20 01 ] ORA ?{
+			#00 ,&in-csi-200 STR
+			#01 ,&in-csi-20 STR
+			POP BRK }
+
+	( \CSI 20  ^[[20   Stage 2 of braketed paste )
+	DUP LIT "0 NEQ  [ LIT &in-csi-2 01 ] ORA ?{
+			#00 ,&in-csi-20 STR
+			#01 ,&in-csi-2 STR
+			POP BRK }
+
+	[ LIT &in-csi 01 ] ?{
+		#01 ,&in-csi STR
+
+		DUP LIT "2 NEQ ?{    ( \CSI 2  ^[[2   Start of braketed paste )
+			#00 ,&in-csi-2 STR
+			POP BRK }
+
+		DUP LIT "A NEQ ?{    ( \CSI 41  ^[[A   UP )
+			pstr: \console-cursor-up \0
+			POP BRK }
+
+		DUP LIT "B NEQ ?{    ( \CSI 42  ^[[B   DOWN )
+			pstr: \console-cursor-down \0
+			POP BRK }
+
+		DUP LIT "C NEQ ?{   ( \CSI 43  ^[[D   RIGHT )
+			pstr: \console-cursor-right \0
+			POP BRK }
+
+		DUP LIT "D NEQ ?{    ( \CSI 44  ^[[C   LEFT )
+			pstr: \console-cursor-left \0
+			POP BRK } }
+
+	DUP #5b NEQ  ,&in-esc LDR ORA ?{    ( \CSI  ^[[   CSI )
+		#00 ;&in-csi STA
+		#01 ;&in-esc STA
+		POP BRK }
+
+	DUP #1b NEQ ?{    ( 1b  \e  ^[  ^3  ESC -> ESCAPE )
+		#00 ;&in-esc STA
+		POP BRK }
+	( DUP SP NEQ ?{ POP BRK ( ignore ) } )
+	DUP #03 NEQ ?{    ( 03  ^C -> ETX )
+		#01 exit }
+	DUP #04 NEQ ?{    ( 04  ^D -> EOT )
+		bye }
+	DUP #0c NEQ ?{    ( 0c  ^L -> FORM-FEED )
+		pstr: \clear-console-screen \reset-console-cursor \0
+		<print-pre-prompt>
+		POP BRK }
+	DUP LIT "@ NEQ ?{ #01 ;&expression STA }
+
+	[ LIT &in-esc 01 ] ?{
+		#01 ,&in-esc STR
+
+		DUP LIT \r NEQ ?{
+			,&multiline LDR #00 EQU ,&multiline STR } }
+
+	DUP LIT \r NEQ ?{
+		[ LIT &multiline 01 ] ?{
+			pstr: \reset-console-style \bold \bg-0 \fg-3 \0
+			~logger/info/multiline-prompt.tal
+			;multiline-prompt
+
+			&multiline-continue ( -- )
+				pstr
+				pstr: \reset-console-style \bg-0 \fg-1 \0
+				!&multiline-end }
+
+			#01 ,&break STR
+			POP LIT \n }
+
+	DUP \emit
+
+	&multiline-end
 		;input-ptr LDA2 STA
-		;input-ptr LDA2 INC2 ;input-ptr STA2 BRK }
+		;input-ptr LDA2 INC2 ;input-ptr STA2
 
-	[ LIT &multi-line 01 ] ?{
-		[ LIT &brakets $1 ] ?{
-			#01 ,&multi-line STR
-			!&multiline-end }
+		[ LIT &break 00 ] ?{ BRK }
+		#00 ,&break STR
 
-		.FORTH-PROMPT ?{
-			!&no-multiline-prompt }
-
-		~logger/info/multiline-prompt.tal
-
-		.UNICODE-PROMPT ?{
-			{ ".a. \s \0 } !&continue }
-		{ \s ".a. \s \0 }
-
-		&continue ( -- )
-			STH2r pstr
-		&no-multiline-prompt
-			;input-ptr LDA2 STA
-			;input-ptr LDA2 INC2 ;input-ptr STA2 BRK }
-
-	&multiline-end ( -- )
-
-	POP ( consume last newline )
-	#0000 ;length STA2
-	~debugger/routines/before-eval.tal
+		#0000 ;length STA2
+		~debugger/routines/before-eval.tal
 
 	(
 	@|Eval )
@@ -74,16 +157,16 @@
 
 	(
 	@|Print )
+	<print-post-prompt>
 	~debugger/routines/after-eval.tal
 	~logger/info/stacks.tal
 
 	(
 	@|Loop )
-	.FORTH-PROMPT ?{ <print-prompt> BRK }
-	<\n> <print-prompt> BRK
+	<print-pre-prompt> BRK
 
 &expr-abort ( | prev-head* -- )
-	~logger/error/abort.tal
+	~logger/warn/abort.tal
 	( POP2r ( | -prev-head* ) )
 	<>!
 	#00 ;abort STA
@@ -101,26 +184,28 @@
 	( reset ) #00 ,&count STR
 	BRK
 
-@<print-prompt> ( -- )
-	pstr: 1b5b "m 1b5b "1;3;4m 1b5b "48;2;51;00;34m 1b5b "38;2;119;34;119m \0
-	.FORTH-PROMPT ?{
-		;&ok !&continue2 }
-	.UNICODE-PROMPT ?{
-		;&prompt-start-unicode !&continue }
+@<print-pre-prompt> ( -- )
+	pstr: \CSI "m \bold \bg-0 \fg-3 \0
 
-	;&prompt-start
 
-	&continue
-		pstr
-		~logger/info/prompt.tal
-		;&prompt-end
+	( ;input ;input-ptr LDA2 NEQ2 ?{
+		pstr: \console-cursor-up \0 } )
 
-	&continue2
-		pstr
-		pstr: 1b5b "m 1b5b "48;2;51;00;34m 1b5b "38;2;170;170;170m \n \0
-		JMP2r
+	;&prompt-start pstr
+	~logger/info/prompt.tal
+	;&prompt-end pstr
+	pstr: \CSI "m \CSI "48;2;51;00;34m \CSI "38;2;170;170;170m \0
+	JMP2r
 
-	&ok [ \s \s \s "ok \0 ]
-	&prompt-start         [ "uxn \0 ]
-	&prompt-start-unicode [ "փ \s \0 ]
-	&prompt-end           [ "> \s \0 ]
+	&prompt-start [ "փ \s \0 ]
+	&prompt-end   [ "> \s \0 ]
+
+@<print-post-prompt> ( -- )
+	;ok !pstr
+
+@<print-banner>
+	;banner !pstr
+
+@help ( -- )
+
+@toogle-paste ( -- )

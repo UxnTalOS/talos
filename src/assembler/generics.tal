@@ -55,6 +55,7 @@
 @<print-summary> ( -- )
 	( | result )
 	;length LDA2 #0000 EQU2 ?{
+		pstr: \reset-console-style \italic \bg-0 \fg-3 \0
 		;Info/assembled pstr/
 		[ LIT &include 01 ] ?{
 			;include !&continue }
@@ -65,5 +66,6 @@
 			( | length )
 			;Info/in pstr/
 			;length LDA2 pdec
-			;Info/bytes !pstr/ }
+			;Info/bytes pstr/
+			pstr: \reset-console-style \bg-0 \fg-1 \0 }
 	JMP2r

@@ -1,0 +1,8 @@
+(
+@|talos/macros )
+
+%VERSION { "0.11 }   %DATE { "18P07 }
+
+%NAME { "TalOS }
+%DESCRIPTION { "A \s "Varvara \s "operating \s "system. }
+%AUTHOR { "Ismael \s "Venegas \s "Castelló }

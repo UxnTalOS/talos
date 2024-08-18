@@ -1,10 +1,8 @@
 (
 @|definitions )
 
-%>> { 00 }
-
 ( Operator Defined Symbol Table
 
-=SYMBOL   >> NAME  \0 )
-=buff     >> "buff \0
-=DEBUG    >> "DEBUG \0
+=SYMBOL >> NAME  \0 )
+=buff   >> "buff \0
+=DEBUG  >> "DEBUG \0

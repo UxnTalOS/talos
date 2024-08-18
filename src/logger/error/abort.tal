@@ -1,6 +1,0 @@
-(
-@|logger/error/abort )
-
-.LOG-LEVEL .Logger/off GTH NOT ?{
-	.ERROR-ABORT ?{
-		{ "ERROR: \s "Aborting... \n \0 } STH2r pstr } }

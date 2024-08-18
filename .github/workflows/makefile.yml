@@ -27,11 +27,11 @@ jobs:
         make
         make install
 
-    - name: Build Merlin OS
+    - name: Build TalOS
       run: make test
 
-    - name: Upload Merlin OS
+    - name: Upload TalOS
       uses: actions/upload-artifact@v4.3.4
       with:
-        name: merlin
+        name: talos
         path: rom/*

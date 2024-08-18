@@ -1,4 +1,11 @@
 ./*.rom
 ./*.sym
 .vscode/*
-bak/merlin*
+bak/*
+rom/*
+*.code-workspace
+
+# Debugging
+config/options.tal
+src/debugger/routines/after-eval.tal
+src/debugger/routines/before-eval.tal

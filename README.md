@@ -1,51 +1,79 @@
-# Merlin OS — Version 0.e (18M06)
+# TalOS — Version 0.11 (18P07) ![example branch parameter](https://github.com/Ismael-VC/talos/actions/workflows/makefile.yml/badge.svg?branch=main)
 
-![example branch parameter](https://github.com/Ismael-VC/merlin/actions/workflows/makefile.yml/badge.svg?branch=main)
+## Theme
 
-<div align="center">
-	<img src="etc/merlin.jpg" alt="merlin" style="width: 256px;"/>
-</div>
+| # |     Name     |     RGB      |     Decimal     |          Use           |
+|---|--------------+--------------|-----------------|------------------------|
+| 0 | Dark Purple  | #302 #330022 | (51,  0,   34 ) | Background Dark Theme  |
+| 1 | Light Grey   | #cbb #ccbbbb | (204, 187, 187) | Foreground             |
+| 2 | Light Orange | #e75 #ee7755 | (238, 119, 55 ) | High Emphasis          |
+| 3 | Light Purple | #959 #995599 | (153, 85,  153) | Normal Emphasis        |
+| 4 | Mid Purple   | #424 #442244 | (68,  34,  68 ) | Background Light Theme |
 
-## Varavara's Uxntal Operating System
+## Tested Environments
+
+| **Android 13** | Status | Issues |
+|----------------|--------|--------|
+| Termux         | ✅     |        |
+
+| **Ubuntu (WSL2)** | Status | Issues                                            |
+|-------------------|--------|---------------------------------------------------|
+| XTerm             | ✅     | 🛈 TrueType Fonts need to be enabled for unicode. |
+| Cool Retro Term   | ✅     |                                                   |
+
+| **Windows 11**   | Status | Issues                                            |
+|------------------|----|-------------------------------------------------------|
+| Alacritty        | ✅ | 🚩 Pasting multiple lines inserts extra white space. |
+| VSCode Terminal  | ✅ | ⚠️ Sometimes deleting multiple characters rapidly while holding `Del` breaks the line editor. |
+| Windows Terminal | ✅ |                                                      |
+
+## Varavara's UxnTal Operating System
 
 Memory is organized as follows:
 
 ```
-0000   0100       @heap         @heap-ptr       @syms-ptr      fc00         ffff
-|      |          |             ^               ^         @syms|@buffs         |
-v ZPpt v          v             |               |              v @input @ptr   v
-+--^---+----------+-------------*---------------*--------------+-v------^------+
-| <ZP> | <kernel> | <user code> | <free memory> | <syms table> | | <input buf> |
-+--*---+----------+-------------*---------------*--------------+-+------*------+
-|==>   |##########|=============>               <==============|#|======>
- (256B)                        ( growth direction )                   (1Kb)
+               #ffff
+         +----------------+
+         |  Input Buffer  |  ( 1 Kb )
+         +----------------+
+   G     | Kernel Buffers |
+   R  +--+======@pit======+  #fc00
+   O  |  |  Symbols List  |
+   W  |  |----------------*-->@pit-ptr
+   T  |  |                |
+   H  ⋁  |                |
+         |                |
+   D     |  Free Memory   |
+   I     |                |
+   R  ⋀  |                |
+   E  |  |                |
+   C  |  |----------------*-->@heap-ptr
+   T  |  |   User Code    |
+   I  +--+=====@heap======+
+   O     |     Kernel     |
+   N     +----------------+  #0100
+         |   Zero Page    |  ( 256 B )
+         +----------------+
+               #0000
 ```
 
 # Operator Interaction
 
 ```
-       Merlin CLI REPL
-   █▄  Version 0.8 (06/06/2024).
- ▐ █ ▌ Concatenated Interpretive Uxntal JIT Assembler.
-  ▀█   ©MMXXIV Ismael Venegas Castelló, MIT License.
-       57865 bytes free (bytecode: 0, symbols: 1331 bytes used).
 
-uxn> #2a18 DEO
+     /_    ⋃ ⨉ ⋂    TalOS    v0.10 (18P02)
+  /_/ /     ©2024 Ismael Venegas Castelló
+   /       Type help for more information.
+
+56664 bytes free.
+
+փ > #2a18 DEO
 *
-WST 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00|<
-RST 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00|<
+փ > @star #2a18 DEO JMP2r
 
-uxn> @star #2a18 DEO JMP2r
-
-WST 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00|<
-RST 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00|<
-
-uxn> star
+փ > star
 *
-WST 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00|<
-RST 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00|<
-
-uxn>
+փ >
 ```
 
 ## Under the Hood
@@ -60,20 +88,14 @@ A parent label starts assembly mode, this will do the following:
 **Note**: `[` and `]` allow multiline input.
 
 ```
-uxn> @star ( -- ) [
+փ > @star ( -- )
 ...   [ LIT2 "* -Console/write ] DEO
 ...   JMP2r
-... ]
 
-WST 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00|<
-RST 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00|<
-
-uxn> star
+փ > star
 *
-WST 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00|<
-RST 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00|<
 
-uxn>
+փ >
 ```
 
 **Doubts**:
@@ -81,34 +103,33 @@ uxn>
 to an absolute address in REPL mode?
 * How to allow multiline input without using `[ ]`?
 
-### `@here`
+### `@heap`
 
 The assembled code area will be concatenated as if assembling Uxntal normally.
 
 ```
-| @here ( 1337 )
+| @heap-ptr ( 1337 )
 | a0 2a 18 17 6c  ( #2a18 DEO JMP2r )
 |
-∨ @here ( 133c )
+∨ @heap-ptr ( 133c )
 ```
 
-### `@dict`
+### `@pit`
 
 The dictionary will grow in the contrary direction at a constant size for each
 entry. Instead of a linked list in tipycal Threaded Interpretive Languages
 (TILs), concatenating in inverse order to an array. When searching for a routine
 searching from **last entry** to first as done by TILs is accomplished by
 starting the search from the "physical beginning" of the array, where the
-current `@dict` pointer points to.
+current `@pit-ptr` points to.
 
 ```
-∧ @dict ( ????-n entry bytes )
+∧ @pit-ptr ( ????-n entry bytes )
 |
 | identifier                           addr
 | s  t  a  r  ( pad to n max bytes )   1337
 | 73 74 61 72 00 00 00 00 00 00 00 00  13 37
-| @dict ( ???? )
-| ( primitives )
+| @pit ( ???? )
 ```
 
 ## ANSI Control Codes
@@ -139,30 +160,30 @@ and not another Uxntal like language with new or different syntax though some
 semantics may need to be adapted.
 
 ```
-uxn> [
-...   @<pdec> ( dec* -- )
-...     DUP #64 DIV <pnum>/try
-...     DUP #0a DIV <pnum>/try
-...     ( >> )
-...
-...   @<pnum> ( num* -- )
-...     #0a MOD [ LIT "0 ] ADD .Console/write DEO
-...     JMP2r
-...
-...     &try ( num* -- )
-...       DUP ?<pnum>
-...       POP JMP2r
-... ]
+փ > :paste
+INFO: Multiline paste mode enabled.
 
-WST 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00|<
-RST 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00|<
+փ > @<pdec> ( dec* -- )
+...   DUP #64 DIV <pnum>/try
+...   DUP #0a DIV <pnum>/try
+...   ( >> )
+...
+... @<pnum> ( num* -- )
+...   #0a MOD [ LIT "0 ] ADD .Console/write DEO
+...   JMP2r
+...
+...   &try ( num* -- )
+...     DUP ?<pnum>
+...     POP JMP2r
+... ( Alt+Enter: Evaluate multiline input )
 
-uxn> #002a <pdec>
+փ > :paste
+INFO: Multiline paste mode disabled.
+
+փ > #002a pdec  ( Enter: Evaluate line input )
 42
-WST 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00|<
-RST 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00|<
 
-uxn>
+փ >
 ```
 
 In this case calling `<pdec>` would fall through to `<pnum>` body as in normal
@@ -256,7 +277,7 @@ RST 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00|<
 
 ## Rom Visualization
 
-![merlin.rom.bmp](etc/merlin.rom.bmp)
+![talos.rom.bmp](etc/talos.rom.bmp)
 
 ## Repository Tree
 
@@ -338,7 +359,7 @@ RST 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00|<
 │   │   ├── routines.tal
 │   │   └── warn
 │   │       └── redefinition.tal
-│   ├── merlin
+│   ├── talos
 │   │   ├── buffers.tal
 │   │   ├── data.tal
 │   │   ├── includes.tal
@@ -359,11 +380,14 @@ RST 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00|<
     ├── routines.tal
     └── script.tal
 ```
-```
 
-  ´\|/`  Merlin OS -- v0.e (18M06)
-  (⏑⏑⏑)  (c) 2024 Ismael Venegas Castello
-    ˅    Type 'bye' to exit.
+sudo apt install deepin-terminal eterm foot gnome-terminal gnome-console kgx kitty konsole lxterminal mate-terminal mlterm opencu pterm qterminal rxvt-unicode s3dvt sakura stterm terminal.app terminology termit tilda tilix yakuake zutty
 
-Ready
-```
+
+https://www.eddymens.com/blog/creating-a-browser-based-interactive-terminal-using-xtermjs-and-nodejs
+
+https://superuser.com/questions/413073/windows-console-with-ansi-colors-handling/1050078#1050078
+
+https://stackoverflow.com/questions/44447473/how-to-make-xterm-js-accept-input
+
+https://gist.github.com/mlocati/fdabcaeb8071d5c75a2d51712db24011

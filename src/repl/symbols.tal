@@ -29,6 +29,7 @@
 	0040 00 "FOREGROUND \0
 	0000 00 "BACKGROUND \0
 	=bye 00 "bye \0
+	=exit 00 "exit \0
 	=NEG  00 "NEG \0
 	=NEG2 00 "NEG2 \0
 	( Library/memory/routines )
@@ -46,9 +47,9 @@
 	=pmem 00 "pmem \0
 
 	( Library/string/routines )
-	=pstr  00 "pzstr \0
+	=pstr  00 "pstr \0
 	=psts  00 "psts \0
-	=pstr: 00 "pzstr: \0
+	=pstr: 00 "pstr: \0
 	=pdec  00 "pdec \0
 	=phex  00 "pshrt \0
 	=phex/byte 00 "pbyte \0
@@ -167,5 +168,5 @@
 	=DateTime/doty   00 "DateTime/doty \0
 	=DateTime/isdst  00 "DateTime/isdst \0
 
-	&end
+	&end ( @symbols )
 ]
