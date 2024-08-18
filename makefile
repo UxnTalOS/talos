@@ -35,6 +35,12 @@ setup:
 
 build:
 	@ echo "Building: ./${ROM}*"
+	@ # Sorry
+	@ cpp -P -w -D $DEBUG config/pre-options.tal -o config/options.tal
+	@ cpp -P -w -D $DEBUG src/debugger/routines/pre-after-eval.tal \
+		-o src/debugger/routines/after-eval.tal
+	@cpp -P -w -D $DEBUG src/debugger/routines/pre-before-eval.tal \
+		-o src/debugger/routines/before-eval.tal
 	@ cd ${SRC_DIR} && ${ASM} ${TAL} ../${ROM}
 
 dump: build
@@ -58,19 +64,19 @@ test: install
 	@ echo "Testing: ~/${ROM_DIR}/${ID}.rom"
 	@ printf "%s\n" \
 		"@sierpinski ( -- ) ${MULTI}" \
-		"	( mask ) [ LIT2r 0a18 ] [ LIT2r 2018 ]" \
-		"		( size ) [ LIT2 &size 1001 ] SUB" \
-		"		&>ver ( -- )" \
-		"			DUP INCk" \
-		"			&>pad ( length -- )" \
-		"				DEOkr" \
-		"				#01 SUB DUP ?&>pad" \
-		"			&>fill ( length i -- )" \
-		"				ANDk DUP2r ?{ POP2r ORA2kr } DEOr DEOkr" \
-		"				INC ADDk ,&size LDR LTH ?&>fill" \
-		"			POP2 OVR2r DEOr" \
-		"			#01 SUB INCk ?&>ver" \
-		"	POP POP2r POP2r JMP2r ${MULTI}" \
+		"    ( mask ) [ LIT2r 0a18 ] [ LIT2r 2018 ]" \
+		"        ( size ) [ LIT2 &size 1001 ] SUB" \
+		"        &>ver ( -- )" \
+		"            DUP INCk" \
+		"            &>pad ( length -- )" \
+		"                DEOkr" \
+		"                #01 SUB DUP ?&>pad" \
+		"            &>fill ( length i -- )" \
+		"                ANDk DUP2r ?{ POP2r ORA2kr } DEOr DEOkr" \
+		"                INC ADDk ,&size LDR LTH ?&>fill" \
+		"            POP2 OVR2r DEOr" \
+		"            #01 SUB INCk ?&>ver" \
+		"    POP POP2r POP2r JMP2r ${MULTI}" \
 		"sierpinski" \
 		"bye" | ${EMU} ${ROMS_DIR}/${ID}.rom
 
@@ -89,3 +95,7 @@ gui: install
 	EXIT_CODE=$$? ; \
 	stty ${TTY}; \
 	exit $$EXIT_CODE
+
+clean:
+	@ echo "Cleaning: ${ROM_DIR}/*"
+	@ rm ${ROM_DIR}/*
