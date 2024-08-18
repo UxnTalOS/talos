@@ -32,12 +32,7 @@ setup:
 	@ echo "Setting up: ~/{${BIN_DIR},${ROMS_DIR}}"
 	@ mkdir -p ~/${BIN_DIR} ~/${ROMS_DIR}
 
-backup:
-	@ echo "Backing: ./{${BIN_DIR},${ROM_DIR}}/* to ./${BAK_DIR}"
-	@ cp ${BIN_DIR}/* ${BAK_DIR}
-	@ cp ${ROM_DIR}/* ${BAK_DIR}
-
-build: backup ${ROM}
+build: ${ROM}
 	@ echo "Building: ./${ROM}*"
 	@ cd ${SRC_DIR} && ${ASM} ${TAL} ../${ROM}
 
@@ -53,14 +48,14 @@ disassemble: build
 	@ echo "Disassembling: ./${ROM}.dis"
 	@ ${EMU} ${DIS} ${ROM} > ${ROM}.dis
 
-install: setup backup build dump symbols disassemble
+install: setup build dump symbols disassemble
 	@ echo "Installing: ./{${BIN_DIR},${ROM_DIR}}/* at ~/{${BIN_DIR},${ROMS_DIR}}"
 	@ cp ${BIN_DIR}/* ~/${BIN_DIR}
 	@ cp ${ROM} ~/${ROMS_DIR}
 
 test: install
 	@ echo "Testing: ~/${ROM_DIR}/${ID}.rom"
-	@ echo "~test/routines.tal \n sierpinski" | ${EMU} ${ROM_DIR}/${ID}.rom
+	@ echo "~test/routines.tal\nsierpinski\nbye" | ${EMU} ${ROM_DIR}/${ID}.rom
 
 cli: install
 	@ echo "Running: ~/${BIN_DIR}/${ID}-cli"

@@ -102,10 +102,10 @@
 	[ LIT &in-esc 01 ] ?{
 		#01 ,&in-esc STR
 
-		DUP LIT \r NEQ ?{
+		DUPk LIT \r NEQ SWP LIT \n NEQ AND ?{
 			,&multiline LDR #00 EQU ,&multiline STR } }
 
-	DUP LIT \r NEQ ?{
+	DUPk LIT \r NEQ SWP LIT \n NEQ AND ?{
 		[ LIT &multiline 01 ] ?{
 			pstr: \reset-console-style \bold \bg-0 \fg-3 \0
 			~logger/info/multiline-prompt.tal
