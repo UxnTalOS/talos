@@ -9,6 +9,7 @@ SRC_DIR=src
 BIN_DIR=bin
 ROM_DIR=rom
 ROMS_DIR=~/roms
+DEBUG ?= NO_DBG
 
 TAL=${ID}/${ENTRY}.tal
 ROM=${ROM_DIR}/${ID}.rom
