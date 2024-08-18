@@ -31,7 +31,7 @@ run: install
 
 setup:
 	@ echo "Setting up: ~/{${BIN_DIR},${ROMS_DIR}}"
-	@ mkdir -p ~/${BIN_DIR} ${ROMS_DIR}
+	@ mkdir -p ~/${BIN_DIR} ${ROMS_DIR} ${ROM_DIR}
 
 build:
 	@ echo "Building: ./${ROM}*"
