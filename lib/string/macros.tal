@@ -63,7 +63,7 @@
 %\fg-3 { \CSI "38;2; \color-3 "m }
 
 %\reset-console-style { \CSI "m }
-%\reset-console-cursor { \CSI "d }
+%\reset-console-cursor { \CSI "H }
 %\clear-console-screen { \CSI "2J }
 %\clear-console-screen-right { \CSI "J }
 %\console-cursor-up { \CSI "A }
