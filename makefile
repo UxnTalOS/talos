@@ -19,7 +19,7 @@ DIS=${ETC_DIR}/uxndis.rom
 SYMS=${ETC_DIR}/sym.rom
 DUMP=${ETC_DIR}/hx.rom
 
-MULTI:=$(shell printf "\e")
+MULTI:=$(shell printf '\e')
 TTY:=$(shell stty -g)
 
 run: install
