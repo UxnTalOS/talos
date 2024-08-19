@@ -20,11 +20,14 @@ SYMS=${ETC_DIR}/sym.rom
 DUMP=${ETC_DIR}/hx.rom
 
 MULTI:=$(shell printf '\e')
-TTY:=$(shell stty -g)
+TTY:=$(shell stty -ignbrk -brkint -ignpar -parmrk -inpck -istrip -inlcr -igncr \
+                  -icrnl -ixon -ixoff -icanon onlcr -echo -isig -iuclc -ixany \
+                   -imaxbel -xcase min 1 time 0)
 
 run: install
 	@ stty raw -echo
 	@ echo "Running: ~/${BIN_DIR}/${ID}"
+	echo $TTY
 	@ ${ID}; \
 	EXIT_CODE=$$? ; \
 	stty ${TTY}; \

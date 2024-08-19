@@ -80,7 +80,7 @@
 			pstr: \console-cursor-left \0
 			POP BRK } }
 
-	DUP #5b NEQ  ,&in-esc LDR ORA ?{    ( \CSI  ^[[   CSI )
+	DUP #5b NEQ  ;&in-esc LDA ORA ?{    ( \CSI  ^[[   CSI )
 		#00 ;&in-csi STA
 		#01 ;&in-esc STA
 		POP BRK }
@@ -97,6 +97,11 @@
 		pstr: \clear-console-screen \reset-console-cursor \0
 		<print-pre-prompt>
 		POP BRK }
+	DUP #13 NEQ ?{
+		pstr: \reset-console-style \bg-0 \fg-2 \bold \0
+		POP #010e DEO
+		pstr: \reset-console-style \bg-0 \fg-1 \0
+		LIT \n }
 	DUP LIT "@ NEQ ?{ #01 ;&expression STA }
 
 	[ LIT &in-esc 01 ] ?{
