@@ -59,6 +59,8 @@ Memory is organized as follows:
 
 # Operator Interaction
 
+![image](https://github.com/user-attachments/assets/8e2a198a-2a02-4326-a43e-6d7b68e4e10a)
+
 ```
 
      /_    ⋃ ⨉ ⋂    TalOS    v0.10 (18P02)
