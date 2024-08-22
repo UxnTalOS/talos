@@ -178,7 +178,7 @@
 	!REPL/expr-return
 
 &on-eval ( -! )
-	.Console/read DEI NL NEQ ?{
+	.Console/read DEI LIT \r NEQ ?{
 		[ LIT &count $1 ] INCk ,&count STR ( +count | )
 
 		#02 NEQ ?{ ( -count | )
