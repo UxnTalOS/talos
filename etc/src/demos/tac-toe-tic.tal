@@ -1,0 +1,275 @@
+|00 @System [
+    &vector $2  &expansion $2  &wst $1  &rst $1  &metadata $2  &r $2  &g $2
+    &b $2  &debug $1  &state $1 ]
+
+|10 @Console [ &vector $2  &read $1  &pad $4  &type $1  &write $1  &error $1 ]
+
+|20 @Screen [
+    &vector $2  &width $2  &height $2  &auto $1  &pad $1  &x $2  &y $2  &addr $2
+    &pixel $1  &sprite $1 ]
+
+%\n  { 0a }
+%\0  { 00 }
+%\s  { 20 }
+%\e  { 1b }
+%\e[ { \e "[ }
+
+%\PURPLE { \e[ "35m }
+%\BOLD { \e[ "1m }
+%\ITALIC { \e[ "3m ]}
+%\NORMAL { \e[ "m }
+
+%\DARK-PURPLE  { "51;  "0;   "34  }
+%\LIGHT-GREY   { "204; "187; "187 }
+%\LIGHT-RED    { "238; "119; "55  }
+%\LIGHT-PURPLE { "153; "85;  "153 }
+
+%\bg-color-0 { \e[ "48;2; \DARK-PURPLE "m }
+%\bg-color-1 { \e[ "48;2; \LIGHT-GREY "m "}
+%\bg-color-2 { \e[ "48;2; \LIGHT-RED "m "}
+%\bg-color-3 { \e[ "48;2; \LIGHT-PURPLE "m "}
+
+%\fg-color-0 { \e[ "38;2; \DARK-PURPLE "m }
+%\fg-color-1 { \e[ "38;2; \LIGHT-GREY "m "}
+%\fg-color-2 { \e[ "38;2; \LIGHT-RED "m "}
+%\fg-color-3 { \e[ "38;2; \LIGHT-PURPLE "m "}
+
+%:SQUARES { #09 }
+%:<EMIT>    { .Console/write DEO }
+%:<NEWLINE> { LIT \n :<EMIT> }
+%:<SPACE>     { LIT \s :<EMIT> }
+%:NOT     { #00 EQU }
+%:DBG     { #010e DEO }
+
+
+
+|0 @unplayed $1
+
+|100 @Main ( -> )
+    %:alternate-buffer { ;Commands/alternate-buffer print }
+    %:reset-cursor     { ;Commands/reset-cursor     print }
+    ;&mouse print
+	;on-console .Console/vector DEO2
+
+    ( hide-cursor )
+    :alternate-buffer
+    :reset-cursor
+	full-game
+    BRK
+
+    &mouse \e[ "?1000h \0
+
+@on-console
+    %:ctrl+c      { #03 }
+    %:up-arrow    { #41 }
+    %:down-arrow  { #42 }
+    %:left-arrow  { #43 }
+    %:right-arrow { #44 }
+
+    %:cursor-up    { ;Commands/up    print }
+    %:cursor-down  { ;Commands/down  print }
+    %:cursor-left  { ;Commands/left  print }
+    %:cursor-right { ;Commands/right print }
+
+    %:seen-esc  { #00 ,&in-esc STR }
+    %:seen-csi  { #00 ,&in-csi STR }
+    %:unsee-esc { #01 ,&in-esc STR }
+    %:unsee-csi { #01 ,&in-csi STR }
+
+    %:read-user-input { .Console/read DEI }
+
+    %:default-buffer { ;Commands/default-buffer print }
+    %:show-cursor    { ;Commands/show-cursor    print }
+
+    %:quit { :show-cursor :default-buffer [ LIT2 80 -System/state ] DEO BRK }
+
+    :read-user-input
+
+    [ LIT &in-csi 01 ] ?{
+        :unsee-esc
+        :unsee-csi
+
+        DUP :up-arrow NEQ ?{
+            :cursor-up
+            POP BRK }
+
+        DUP :down-arrow NEQ ?{
+            :cursor-down
+            POP BRK } }
+
+        DUP :left-arrow NEQ ?{
+            :cursor-left
+            POP BRK }
+
+        DUP :right-arrow NEQ ?{
+            :cursor-right
+            POP BRK }
+
+    DUP LIT "[ NEQ  [ LIT &in-esc 01 ] ORA ?{
+        :seen-csi
+        POP BRK }
+
+    DUP LIT \e NEQ ?{
+        :seen-esc
+        POP BRK }
+    :unsee-esc
+
+    DUP :ctrl+c NEQ ?{
+        :quit }
+
+    DUP #31 NEQ ?{
+        ;&square-1 print #01 set-X }
+
+    player-input
+    POP BRK
+
+    &square-1 \e[ "16;9H \0
+
+@set-square ( i val -- ) LIT "X :<EMIT> SWP #00 SWP ;board ADD2 STA JMP2r
+@get-square ( i -- val )   #00 SWP ;board ADD2 LDA JMP2r
+@3-newline ( i -- )   #03 AND #00 NEQ ?{ :<NEWLINE> } JMP2r
+
+@dashes-high ( -- )
+    ;&dashes !print
+    &dashes \n \s \s \s \s \s \s \PURPLE \BOLD "┌───┬───┬───┐ \NORMAL \n \0
+
+@dashes ( -- )
+    ;&dashes !print
+    &dashes \n \s \s \s \s \s \s \PURPLE \BOLD "├───┼───┼───┤  \NORMAL \n \0
+
+@dashes-low ( -- )
+    ;&dashes !print
+    &dashes \n \s \s \s \s \s \s \PURPLE \BOLD "└───┴───┴───┘ \NORMAL \n \0
+
+
+@show-square ( i -- )
+    %:space { LIT \s :<EMIT> }
+
+	DUP get-square
+	DUP #00 EQU :NOT ?{ SWP print-nibble :space !&end }
+	DUP #01 EQU :NOT ?{ ;Messages/X print POP !&end }
+	DUP #02 EQU :NOT ?{ ;Messages/O print POP !&end }
+
+	&end
+		POP JMP2r
+
+
+@3numbers ( a b c -- )
+    ;&margin print show-square ;&pipe print
+    show-square ;&pipe print
+    show-square ;&close print
+    JMP2r
+
+    &pipe \fg-color-3 "│ \NORMAL \s \0
+    &margin \s \s \s \s \s \s  \fg-color-3 "│ \NORMAL \s \0
+    &close \fg-color-3 "│ \0
+
+@show-board ( -- )
+    dashes-high
+	#0908 #0706 #0504 #0302 #01
+	3numbers dashes
+	3numbers dashes
+	3numbers dashes-low :<NEWLINE>
+    JMP2r
+
+
+@clear-game ( -- )
+	:SQUARES INC #01
+	&for
+		DUP #00 set-square
+		INC GTHk ?&for
+	POP2
+    JMP2r
+
+
+@set-X ( i -- ) %:x { #01 } :x set-square JMP2r
+@set-O ( i -- ) %:o { #02 } :o set-square JMP2r
+@start ( -- ) clear-game :SQUARES .unplayed STZ JMP2r
+@current-player ( -- f ) .unplayed LDZ #01 AND JMP2r
+@range? ( n -- ) DUP #00 LTH SWP #0a GTH ORA #00 EQU JMP2r
+@empty? ( n -- ) get-square #00 EQU JMP2r
+
+@ascii># ( char -- n )
+    %:zero { #31 }
+    :zero SUB JMP2r
+
+@place-symbol ( square -- )
+	current-player :NOT ?{ set-X !&end }
+	set-O
+	&end
+		.unplayed LDZ INC .unplayed STZ
+    JMP2r
+
+@ps ( -- )   place-symbol JMP2r
+
+@player-input ( -- )
+	ascii># DUP range? OVR empty? AND :NOT ?{ place-symbol show-board !&end }
+
+	&end
+		POP JMP2r
+
+@full-game ( -- )
+
+    start
+	;&banner print :<NEWLINE> :<NEWLINE>
+	show-board player-input
+    { \e[ "18;13H \0 } STH2r print
+    JMP2r
+
+    &banner [
+        \n \n
+        \s \s \s \s \s \s \bg-color-1 \s \s \s \s \s \s \s \s \s \s \s \s \s \s \NORMAL \n
+        \s \s \s \s \s \s \bg-color-1 \s \s \fg-color-0 \bg-color-2 \BOLD "O| "O "|O \bg-color-3 \BOLD "X| \s "|X \bg-color-1 \s \s \NORMAL \n
+        \s \s \s \s \s \s \bg-color-1 \s \s \fg-color-0 \bg-color-2 \BOLD "-| "- "|- \bg-color-3 \BOLD "-| "- "|- \bg-color-1 \s \s \NORMAL \n
+        \s \s \s \s \s \s \bg-color-1 \s \s \fg-color-0 \bg-color-2 \BOLD "O| \s "|O \bg-color-3 \BOLD \s "|X| \s \bg-color-1 \s \s \NORMAL \n
+        \s \s \s \s \s \s \bg-color-1 \s \s \fg-color-0 \bg-color-2 \BOLD "-| "- "|- \bg-color-3 \BOLD "-| "- "|- \bg-color-1 \s \s \NORMAL \n
+        \s \s \s \s \s \s \bg-color-1 \s \s \fg-color-0 \bg-color-2 \BOLD "O| "O "|O \bg-color-3 \BOLD "X| \s "|X \bg-color-1 \s \s \NORMAL \s \NORMAL \n
+        \s \s \s \s \s \s \bg-color-1 \s \s \s \s \s \s \s \s \s \s \s \s \s \s \NORMAL \n \n \n
+        \s \s \s \s \s \s "CTRL+C \s "to \s "exit \0 ]
+
+
+
+@print ( str^ -- )
+    &while
+        LDAk :<EMIT>
+        INC2 LDAk ?&while
+    POP2 JMP2r
+
+@<phex> ( short* -: )
+    SWP /b
+    &b ( byte -: )
+        DUP #04 SFT /c
+    &c ( byte -: )
+        #0f AND DUP #09 GTH #27 MUL ADD [ LIT "0 ] ADD #18 DEO
+        JMP2r
+
+@print-nibble ( u -- )
+	#0f AND DUP #09 GTH #27 MUL ADD
+	[ LIT "0 ] ADD :<EMIT>
+    JMP2r
+
+@board [
+	&00 00 &10 00 &20 00
+	&01 00 &11 00 &21 00
+	&02 00 &12 00 &22 00 ]
+
+@Messages
+    &exiting "Exiting \n
+
+    &X \e[ "32m "X \NORMAL \s \0
+    &O "O \s \0
+
+
+    &pick-another "Pick \s "another \s "square. \0
+
+@Commands
+    &cls \e[ "2J \0
+    &reset-cursor \e[ "H \0
+    &alternate-buffer \e[ "?1049h \0
+    &default-buffer \e[ "?1049l \0
+    &hide-cursor \e[ "?25l \0
+    &show-cursor \e[ "?25h \0
+    &up \e[ "A \e[ "A \0
+    &down \e[ "B \e[ "B \0
+    &left \e[ "C \e[ "C \e[ "C \e[ "C \0
+    &right \e[ "D \e[ "D \e[ "D \e[ "D \0

@@ -1,0 +1,46 @@
+( uxnasm uxnsh.tal uxnsh.rom && uxn11 uxnsh.rom )
+
+%emit { .Console/write DEO }
+
+|10 @Console [
+    &vector $2 &read $1 &pad0 $2 &live $1 &exit $1 &type $1
+    &write $1  &error $1 &pad1 $2 &addr $2 &mode $1 &exec $1 ]
+
+|0100
+    reset
+    ;prompt/first print
+    ;on-console .Console/vector DEO2
+    BRK
+
+@print ( str* -- )
+    LDAk emit
+    INC2 LDAk ?print
+    POP2 JMP2r
+
+@on-console ( -> )
+    .Console/read DEI STHk #0a EQU ?newline
+    ;Command/pos LDA2k STH2k STAr
+    INC2 SWP2 STA2 BRK
+
+@newline ( -> )
+        POP
+        #00 ;Command/pos LDA2 STA
+        ;Command/buf syscall-sync
+        ;prompt print
+        reset
+        BRK
+
+@syscall-sync ( cmd* -- )
+        .Console/addr DEO2
+        #01 .Console/exec DEO
+
+        &sync
+                .Console/live DEI #ff NEQ ?&sync
+
+@reset ( -- )
+        ;Command/buf ;Command/pos STA2
+        JMP2r
+
+@prompt 0a &first "փsh> 2000
+
+@Command &pos $2 &buf

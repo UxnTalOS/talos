@@ -1,0 +1,24 @@
+|00 @System &vector $2 &expansion $2 &wst $1 &rst $1 &metadata $2
+    &r $2 &g $2 &b $2 &debug $1 &state $1
+
+|20 @Screen &vector $2 &width $2 &height $2 &auto $1 &pad $1
+    &x $2 &y $2 &addr $2 &pixel $1 &sprite $1
+
+|100
+	#000a DUP2
+	.Screen/width DEO2
+	.Screen/height DEO2
+
+    #3ce9 .System/r DEO2
+    #0b75 .System/g DEO2
+    #2b59 .System/b DEO2
+
+	#0000 DUP2
+	.Screen/x DEO2
+	.Screen/y DEO2
+
+	;heart .Screen/addr DEO2
+	#02 .Screen/sprite DEO
+    BRK
+
+@heart [ 0066 ffff ff7e 3c18 ]
