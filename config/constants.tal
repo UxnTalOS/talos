@@ -1,5 +1,3 @@
 (
 @|config/constants )
 
-( Operator defined label constants )
-ENABLE @DEBUG
