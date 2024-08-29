@@ -75,9 +75,14 @@
 
 	=Console/vector 00 "Console/vector \0
 	=Console/read   00 "Console/read \0
+	=Console/live   00 "Console/live \0
+	=Console/exit   00 "Console/exit \0
 	=Console/type   00 "Console/type \0
 	=Console/write  00 "Console/write \0
 	=Console/error  00 "Console/error \0
+	=Console/addr   00 "Console/addr \0
+	=Console/mode   00 "Console/mode \0
+	=Console/exec   00 "Console/exec \0
 
 	=Screen/vector 00 "Screen/vector \0
 	=Screen/width  00 "Screen/width \0
