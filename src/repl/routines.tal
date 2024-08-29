@@ -7,7 +7,6 @@
 	.Console/read DEI
 	( <\n>
 	;&in-csi LDA phex/byte <\n> DUP phex/byte LIT ": \emit <\s> )
-
 	[ LIT &comment 01 ] ?{
 		DUP #29 NEQ ?{ #01 ;&comment STA }
 		\emit BRK }
@@ -88,20 +87,40 @@
 	DUP #1b NEQ ?{    ( 1b  \e  ^[  ^3  ESC -> ESCAPE )
 		#00 ;&in-esc STA
 		POP BRK }
+
 	( DUP SP NEQ ?{ POP BRK ( ignore ) } )
-	DUP #03 NEQ ?{    ( 03  ^C -> ETX )
+
+	DUP #03 NEQ ?{    ( 03  ^C -> ETX  END-OF-TEXT )
 		#01 exit }
-	DUP #04 NEQ ?{    ( 04  ^D -> EOT )
+
+	DUP #04 NEQ ?{    ( 04  ^D -> EOT  END-OF-TRANSMIT )
 		bye }
-	DUP #0c NEQ ?{    ( 0c  ^L -> FORM-FEED )
+
+	DUP #0c NEQ ?{    ( 0c  ^L -> FF  FORM-FEED )
 		pstr: \clear-console-screen \reset-console-cursor \0
 		<print-pre-prompt>
 		POP BRK }
-	DUP #13 NEQ ?{
+
+	DUP #13 NEQ ?{    ( 0c  ^S -> DEVICE-CONTROL-3 )
 		pstr: \reset-console-style \bg-0 \fg-2 \bold \0
 		POP #010e DEO
 		pstr: \reset-console-style \bg-0 \fg-1 \0
 		LIT \n }
+
+	DUP #0e NEQ ?{    ( 0c  ^N -> SO  SHIFT-OUT )
+		;&shell-mode LDA #00 EQU ;&shell-mode STA POP
+
+		;&shell-mode LDA ?{
+			pstr:
+				\r \s \s \s \s \s \s \s \s \s \r \bg-0 \fg-2 \bold "փsh> \s
+				\reset-console-style \bg-0 \fg-1 \0
+			BRK }
+
+		pstr:
+			\r \s \s \s \s \r \bg-0 \fg-3 \bold "փ \s "> \s
+			\reset-console-style \bg-0 \fg-1 \0
+		BRK }
+
 	DUP LIT "@ NEQ ?{ #01 ;&expression STA }
 
 	[ LIT &in-esc 01 ] ?{
@@ -138,6 +157,11 @@
 
 	(
 	@|Eval )
+	[ LIT &shell-mode 01 ] ?{
+		;input syscall-sync
+
+		POP !&shell-return }
+
 	;head-ptr LDA2 DUP2 ;prev-head STA2 STH2 ( | +prev-head* )
 	<assemble> ;abort LDA ?&expr-abort
 	~logger/info/summary.tal
@@ -158,6 +182,8 @@
 	&expr-return ( -- )
 		;REPL .Console/vector DEO2
 		#00 ,&expression STR
+
+	&shell-return
 		#0400 #0000 ;input mzero
 
 	(
@@ -190,6 +216,10 @@
 	BRK
 
 @<print-pre-prompt> ( -- )
+	;REPL/shell-mode ?{
+
+	JMP2r }
+
 	pstr: \CSI "m \bold \bg-0 \fg-3 \0
 
 
@@ -213,4 +243,12 @@
 
 @help ( -- )
 
-@toogle-paste ( -- )
+@toogle-shell ( -- )
+
+@syscall-sync ( cmd* -- )
+	.Console/addr DEO2
+	#01 .Console/exec DEO
+
+	&sync
+		.Console/live DEI #ff NEQ ?&sync
+		JMP2r
