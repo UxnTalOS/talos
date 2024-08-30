@@ -158,6 +158,7 @@
 	(
 	@|Eval )
 	[ LIT &shell-mode 01 ] ?{
+		#01 ,&shell-mode STR
 		;input syscall-sync
 
 		POP !&shell-return }
