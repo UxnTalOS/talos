@@ -1,24 +1,51 @@
 #!/usr/bin/env sh
 
+OS_TYPE=$(uname)
+
 # Start
 STTY=`stty -g`
 
-if [ "$1" = "--uxn38" ]; then
-	EMU='uxn38 -n'
-elif [ "$1" = "--uxn38-gui" ]; then
-	EMU='uxn38 -I'
-elif [ "$1" = "--uxn11" ]; then
-	EMU=uxn11
-elif [ "$1" = "--uxnemu" ]; then
-	EMU=uxnemu
-elif [ "$1" = "--raven" ]; then
-	EMU=raven-cli
-elif [ "$1" = "--raven-gui" ]; then
-	EMU=raven-gui
-else
-	EMU=uxncli
+if [ -z "$EMU" ]; then
+	for arg in "$@"; do
+    	case "$arg" in
+			"--uxn38-cli")
+				EMU="uxn38 -n"
+				;;
+			"--uxn38-gui")
+				EMU="uxn38 -I"
+				;;
+			"--uxn11")
+				EMU="uxn11"
+				;;
+			"--raven-cli")
+				EMU="raven-cli"
+				;;
+			"--raven-gui")
+				EMU="raven-gui"
+				;;
+			"--uxnemu")
+				EMU="uxnemu"
+				;;
+			"--uxncli")
+				EMU="uxncli"
+				;;
+			"--uxntui")
+				EMU="uxntui"
+				;;
+		esac
+	done
 fi
 
+if [ -z "$EMU" ]; then
+	EMU="uxntui"
+fi
+
+EMU_PATH=$(which "$EMU" 2>/dev/null)
+
+if [ -z "$EMU_PATH" ]; then
+    echo "Error: '$EMU' not found in PATH."
+    exit 1
+fi
 
 # Pre-process
 if [ "$1" = "--debug" ]; then
@@ -34,12 +61,37 @@ cpp -P -w -D $DEBUG src/debugger/routines/pre-after-eval.tal \
 cpp -P -w -D $DEBUG src/debugger/routines/pre-before-eval.tal \
 -o src/debugger/routines/before-eval.tal
 
-
 # Build
 mkdir -p rom
 
+if [ -z "$ASM" ]; then
+	for arg in "$@"; do
+    	case "$arg" in
+    		"--drifblim")
+    			ASM="uxncli ~/rom/drifblim.rom"
+    			;;
+    		"--uxnasm")
+    			ASM="uxnasm"
+    			;;
+    	esac
+    done
+fi
+
+if [ -z "$ASM" ]; then
+	ASM="uxnasm"
+fi
+
+ASM_PATH=$(which "$ASM" 2>/dev/null)
+
+if [ -z "$ASM_PATH" ]; then
+    echo "Error: '$ASM' not found in PATH."
+    exit 1
+fi
+
+echo "Using assembler: $ASM_PATH"
+
 cd src
-uxnasm talos/includes.tal ../rom/talos.rom || exit 127
+$ASM talos/includes.tal ../rom/talos.rom || exit 127
 cd ..
 
 # Install
@@ -49,10 +101,16 @@ if [ "$1" = "--install" ]; then
 	cp rom/talos.rom ~/roms
 fi
 
-
 # Run
-stty -ignbrk -brkint -ignpar -parmrk -inpck -istrip -inlcr -igncr -icrnl -ixon \
-     -ixoff -icanon onlcr -echo -isig -iuclc -ixany -imaxbel -xcase min 1 time 0
+if echo "$OS_TYPE" | grep -qi "mingw"; then
+	stty -ignbrk -brkint -ignpar -parmrk -inpck -istrip -inlcr -igncr -icrnl -ixon \
+		-ixoff -icanon onlcr -echo -isig -iuclc -ixany -imaxbel min 1 time 0
+else
+	stty -ignbrk  -brkint  -ignpar -parmrk -inpck -istrip -inlcr -igncr -icrnl -ixon \
+		-ixoff -icanon onlcr -opost -isig -iuclc -ixany -imaxbel -xcase min 1 time 0
+fi
+
+echo "Using emulator: $EMU_PATH"
 $EMU rom/talos.rom
 EXIT=`echo $?`
 
