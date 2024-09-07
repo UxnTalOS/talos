@@ -1,10 +1,13 @@
 #!/usr/bin/env sh
 
 OS_TYPE=$(uname)
+ROM=rom/talos.rom
 
 # Start
+# Save TTY settings.
 STTY=`stty -g`
 
+# Select emulator.
 if [ -z "$EMU" ]; then
 	for arg in "$@"; do
     	case "$arg" in
@@ -49,8 +52,10 @@ fi
 
 # Pre-process
 if [ "$1" = "--debug" ]; then
+	echo "Debugging Enabled."
 	DEBUG="DBG"
 else
+	echo "Debugging Disabled."
 	DEBUG="NO_DBG"
 fi
 
@@ -64,11 +69,12 @@ cpp -P -w -D $DEBUG src/debugger/routines/pre-before-eval.tal \
 # Build
 mkdir -p rom
 
+# Select assembler.
 if [ -z "$ASM" ]; then
 	for arg in "$@"; do
     	case "$arg" in
     		"--drifblim")
-    			ASM="uxncli ~/rom/drifblim.rom"
+    			ASM="uxncli ~/roms/drifblim.rom"
     			;;
     		"--uxnasm")
     			ASM="uxnasm"
@@ -102,19 +108,25 @@ if [ "$1" = "--install" ]; then
 fi
 
 # Run
+	HOST=`uname -a`
+	echo "Host: $HOST"
 if echo "$OS_TYPE" | grep -qi "mingw"; then
-	stty -ignbrk -brkint -ignpar -parmrk -inpck -istrip -inlcr -igncr -icrnl -ixon \
-		-ixoff -icanon onlcr -echo -isig -iuclc -ixany -imaxbel min 1 time 0
+	# Does not support -xcase
+	stty -ignbrk -brkint -ignpar -parmrk -inpck -istrip -inlcr -igncr -icrnl \
+	-ixon -ixoff -icanon onlcr -echo -isig -iuclc -ixany -imaxbel min 1 time 0
 else
-	stty -ignbrk  -brkint  -ignpar -parmrk -inpck -istrip -inlcr -igncr -icrnl -ixon \
-		-ixoff -icanon onlcr -opost -isig -iuclc -ixany -imaxbel -xcase min 1 time 0
+	stty -ignbrk -brkint -ignpar -parmrk -inpck -istrip -inlcr -igncr -icrnl   \
+	-ixon -ixoff -icanon onlcr -echo -isig -iuclc -ixany -imaxbel -xcase min 1 \
+	time 0
 fi
 
 echo "Using emulator: $EMU_PATH"
-$EMU rom/talos.rom
+$EMU $ROM
 EXIT=`echo $?`
+echo "Exit Code: $EXIT"
 
 
 # Exit
+# Restore TTY settings.
 stty $STTY
 exit $EXIT
