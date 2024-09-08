@@ -2,6 +2,8 @@
 
 OS_TYPE=$(uname)
 ROM=rom/talos.rom
+HOST=`uname -a`
+echo "Host: $HOST"
 
 # Start
 # Save TTY settings.
@@ -51,11 +53,16 @@ if [ -z "$EMU_PATH" ]; then
 fi
 
 # Pre-process
-if [ "$1" = "--debug" ]; then
-	echo "Debugging Enabled."
-	DEBUG="DBG"
-else
-	echo "Debugging Disabled."
+for arg in "$@"; do
+   	case "$arg" in
+		"--debug")
+			echo "Debugging enabled."
+			DEBUG="DBG"
+			;;
+	esac
+done
+
+if [ -z "$DEBUG" ]; then
 	DEBUG="NO_DBG"
 fi
 
@@ -101,15 +108,18 @@ $ASM talos/includes.tal ../rom/talos.rom || exit 127
 cd ..
 
 # Install
-if [ "$1" = "--install" ]; then
-	echo "Installing ./{bin,rom} at ~/{bin,roms}"
-	cp bin/* ~/bin
-	cp rom/talos.rom ~/roms
-fi
+for arg in "$@"; do
+   	case "$arg" in
+		"--install")
+			echo "Installing ./{bin,rom} at ~/{.local/bin,roms}"
+			mkdir -p ~/roms
+			cp bin/* ~/.local/bin
+			cp rom/talos.rom ~/roms
+			;;
+	esac
+done
 
 # Run
-	HOST=`uname -a`
-	echo "Host: $HOST"
 if echo "$OS_TYPE" | grep -qi "mingw"; then
 	# Does not support -xcase
 	stty -ignbrk -brkint -ignpar -parmrk -inpck -istrip -inlcr -igncr -icrnl \
@@ -123,7 +133,7 @@ fi
 echo "Using emulator: $EMU_PATH"
 $EMU $ROM
 EXIT=`echo $?`
-echo "Exit Code: $EXIT"
+echo "Exit code: $EXIT"
 
 
 # Exit
