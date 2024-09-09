@@ -64,6 +64,9 @@ Memory is organized as follows:
   * MINGW64_NT-10.0-22631 3.5.4-0bc1222b.x86_64 x86_64 Msys
 - Android 13/Termux
   * Linux 4.14.186-27210951 #1 SMP PREEMPT armv8l Android
+- Android Go
+  * Linux 4.14.193-ab21113 #1 SMP PREEMPT armv7l Android
+
 # Operator Interaction
 
 ![image](https://github.com/user-attachments/assets/8e2a198a-2a02-4326-a43e-6d7b68e4e10a)
