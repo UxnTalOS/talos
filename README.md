@@ -56,7 +56,14 @@ Memory is organized as follows:
          +----------------+
                #0000
 ```
+# Hosts
 
+- Windows 11/WSL2
+  * Linux 5.15.153.1-microsoft-standard-WSL2 #1 SMP x86_64 GNU/Linux
+- Windows 11/MSYS2
+  * MINGW64_NT-10.0-22631 3.5.4-0bc1222b.x86_64 x86_64 Msys
+- Android 13/Termux
+  * Linux 4.14.186-27210951 #1 SMP PREEMPT armv8l Android
 # Operator Interaction
 
 ![image](https://github.com/user-attachments/assets/8e2a198a-2a02-4326-a43e-6d7b68e4e10a)
