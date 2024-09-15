@@ -289,7 +289,7 @@ RST 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00|<
 
 ## Rom Visualization
 
-![talos.rom.bmp](etc/talos.rom.bmp)
+![talos.rom.bmp](etc/assets/talos.rom.bmp)
 
 ## Repository Tree
 
