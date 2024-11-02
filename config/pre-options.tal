@@ -48,9 +48,9 @@ ENABLE @PRINT-BANNER ( print TalOS banner on startup )
 &|logger )
 DEBUG @LOG-LEVEL ( valid values: OFF INFO WARN DEBUG ( most verbose ) )
 
-DISABLE @INFO-STACKS ( print stacks after each evaluation )
+ENABLE @INFO-STACKS ( print stacks after each evaluation )
 DISABLE @INFO-PROMPT ( print the heap's `head` pointer inside the prompt )
-DISABLE @INFO-ASSEMBLER-SUMMARY ( print the assembled definition summary )
+ENABLE @INFO-ASSEMBLER-SUMMARY ( print the assembled definition summary )
 
 ENABLE @WARN-ABORT ( warn each time an evaluation is aborted )
 ENABLE @WARN-REDEFINITION ( warn on each redefinition )

@@ -19,6 +19,6 @@
 
 	\reset-console-style \bg-0 \fg-1 \0 ]
 
-@ok [ \n \0 ]
+@ok [ \underline \fg-3 \s \s \s \s "ok \n \n \0 ]
 
-@multiline-prompt \n "... \s \0
+@multiline-prompt [ \n "... \s \0 ]
