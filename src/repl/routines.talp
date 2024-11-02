@@ -226,11 +226,19 @@
 	( ;input ;input-ptr LDA2 NEQ2 ?{
 		pstr: \console-cursor-up \0 } )
 
-	;prompt-start pstr
+	;&prompt-start pstr
 	~logger/info/prompt.tal
-	;prompt-end pstr
+	;&prompt-end pstr
 	pstr: \CSI "m \CSI "48;2;51;00;34m \CSI "38;2;170;170;170m \0
 	JMP2r
+
+	#ifdef ANSI
+		&prompt-start [ "փ \s \0 ]
+	#else
+		&prompt-start [ "uxn \0 ]
+	#endif
+	
+	&prompt-end   [ "> \s \0 ]
 
 @<print-post-prompt> ( -- )
 	;ok !pstr

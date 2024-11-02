@@ -42,6 +42,7 @@
 	;Command/buf ;Command/pos STA2
 	JMP2r
 
+
 @prompt 0a &first "փsh> 2000
 
 @Command &pos $2 &buf

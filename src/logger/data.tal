@@ -5,9 +5,9 @@
 	"INFO: \s \0
 	&unused "-- \s "Unused: \s \0
 	&on-repl "expression \0
-	&assembled "Assembled \s \0
-	&in \s "in \s \0
-	&bytes \s "bytes. \n \0
+	&assembled \n "Assembled \fg-2 \s \0
+	&in \s \fg-3 "in \s \0
+	&bytes \s "bytes. \0
 	&labels \s "labels 29 ". \n \0
 	&sym-ext ".sym \0
 	&multiline-info-prompt \n "... \s "... \s ": \s  \0

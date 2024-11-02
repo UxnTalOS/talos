@@ -67,11 +67,14 @@ if [ -z "$DEBUG" ]; then
 fi
 
 # Sorry
-cpp -P -w -D $DEBUG config/pre-options.tal -o config/options.tal
-cpp -P -w -D $DEBUG src/debugger/routines/pre-after-eval.tal \
--o src/debugger/routines/after-eval.tal
-cpp -P -w -D $DEBUG src/debugger/routines/pre-before-eval.tal \
--o src/debugger/routines/before-eval.tal
+cpp -P -w -D $DEBUG config/options.talp -o config/options.tal
+cpp -P -w -D $DEBUG src/debugger/routines/after-eval.talp \
+	-o src/debugger/routines/after-eval.tal
+cpp -P -w -D $DEBUG src/debugger/routines/before-eval.talp \
+	-o src/debugger/routines/before-eval.tal
+cpp -P -w -D $DEBUG src/repl/data.talp -o src/repl/data.tal
+cpp -P -w -D $DEBUG src/talos/main.talp -o src/talos/main.tal
+cpp -P -w -D $DEBUG src/talos/macros.talp -o src/talos/macros.tal
 
 # Build
 mkdir -p rom
