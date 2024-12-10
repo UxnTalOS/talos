@@ -3,7 +3,7 @@
 ./*.sym
 .vscode/*
 bak/*
-rom/.rom*
+rom/.rom.*
 *.code-workspace
 
 # Debugging
