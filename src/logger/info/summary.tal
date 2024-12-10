@@ -2,5 +2,5 @@
 @|logger/info/summary )
 
 .LOG-LEVEL .Logger/off GTH NOT ?{
-	.INFO-ASSEMBLER-SUMMARY ?{
+	.INFO-SUMMARY ?{
 	<print-summary> } }

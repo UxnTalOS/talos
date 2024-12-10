@@ -6,8 +6,8 @@
 %NAME { "TalOS }
 %DESCRIPTION { "A \s "Varvara \s "operating \s "system. }
 
-#ifdef ANSI
+{% if ansi_escapes %}	
 	%AUTHOR { "Ismael \s "Venegas \s "Castelló }
-#else
+{% else %}
 	%AUTHOR { "Ismael \s "Venegas \s "Castello }
-#endif
+{% endif %}

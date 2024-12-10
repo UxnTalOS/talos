@@ -1,7 +1,7 @@
 (
 @|repl/data )
 
-#ifdef ANSI
+{% if ansi_escapes %}
 	@banner [
 		\bold \bg-1 \fg-0 MARGIN \n
 
@@ -20,7 +20,7 @@
 
 		\reset-console-style \bg-0 \fg-1 \0 ]
 
-	@ok [ \underline \fg-3 \s \s \s \s "ok \n \n \0 ]
+	@ok [ \underline \fg-3 \n \n \0 ]
 
 	@shell-prompt [
 		\r \s \s \s \s \s \s \s \s \s \r \bg-0 \fg-2 \bold "փsh> \s
@@ -32,7 +32,7 @@
 
 	@prompt-start [ "փ \s \0 ]
 	@multiline-prompt [ \n "... \s \0 ]
-#else
+{% else %}
 	@banner [
 		\n \s \s \s \s \s "/_ \s \s "UXN \s \s \s \s \s NAME \s \s \s \s 
 		\s "v VERSION \s 28 DATE 29 \n
@@ -42,13 +42,13 @@
 		\s \s \s "/ \s \s \s \s \s "Type \s "help \s "for \s "more \s 
 		"information. \n \n \0 ]
 
-	@ok [ "____ok \n \n \0 ]	
+	@ok [ \n \n \0 ]	
 
 	@shell-prompt \n \n "uxnsh> \s \0
 
 	@prompt [ "uxn \s "> \s \0 ]
 	@prompt-start [ "uxn \0 ]
 	@multiline-prompt [ \n \s "... \s \0 ]
-#endif
+{% endif %}
 
 @prompt-end   [ "> \s \0 ]

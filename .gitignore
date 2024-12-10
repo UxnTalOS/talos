@@ -8,5 +8,9 @@ rom/*
 
 # Debugging
 config/options.tal
+src/repl/routines.tal
 src/debugger/routines/after-eval.tal
 src/debugger/routines/before-eval.tal
+src/repl/data.tal
+src/talos/main.tal
+src/talos/macros.tal

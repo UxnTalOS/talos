@@ -220,8 +220,9 @@
 
 	JMP2r }
 
-	pstr: \CSI "m \bold \bg-0 \fg-3 \0
-
+	{% if ansi_escapes %}
+		pstr: \CSI "m \bold \bg-0 \fg-3 \0
+	{% endif %}
 
 	( ;input ;input-ptr LDA2 NEQ2 ?{
 		pstr: \console-cursor-up \0 } )
@@ -229,14 +230,18 @@
 	;&prompt-start pstr
 	~logger/info/prompt.tal
 	;&prompt-end pstr
-	pstr: \CSI "m \CSI "48;2;51;00;34m \CSI "38;2;170;170;170m \0
+	
+	{% if ansi_escapes %}
+		pstr: \CSI "m \CSI "48;2;51;00;34m \CSI "38;2;170;170;170m \0
+	{% endif %}
+	
 	JMP2r
 
-	#ifdef ANSI
-		&prompt-start [ "փ \s \0 ]
-	#else
-		&prompt-start [ "uxn \0 ]
-	#endif
+	{% if ansi_escapes %}
+	    &prompt-start [ "փ \s \0 ]
+	{% else %}
+	    &prompt-start [ "uxn \0 ]
+	{% endif %}
 	
 	&prompt-end   [ "> \s \0 ]
 

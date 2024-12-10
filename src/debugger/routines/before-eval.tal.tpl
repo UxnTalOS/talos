@@ -1,7 +1,7 @@
 (
 @|debugger/before-eval )
 
-#ifdef DBG
+{% if logger.level == "debug" %}
 .LOG-LEVEL .Logger/warn GTH NOT ?{
 	pstr: \reset-console-style \bg-0 \fg-2 \0
 
@@ -9,19 +9,19 @@
 		{ "DEBUG: \s "input \s "before \s "eval: \n \0 }
 		;input pobj }
 
-	.DEBUG-HEAD-POINTER ?{
+	.DEBUG-HEAD-PTR ?{
 		{ "DEBUG: \s "head-ptr \s "before \s "eval: \s \0 }  STH2r pstr
 		;head-ptr LDA2 phex <\n> }
 
-	.DEBUG-HEAP ?{
+	.DEBUG-HEAD ?{
 		{ "DEBUG: \s "heap \s "before \s "eval: \n \0 }
 		;heap pobj }
 
-	.DEBUG-TAIL-POINTER ?{
+	.DEBUG-TAIL-PTR ?{
 		{ "DEBUG: \s "tail-ptr \s "before \s "eval: \s \0 }  STH2r pstr
 		;tail-ptr LDA2 phex <\n> }
 
-	.DEBUG-SYMBOLS ?{
+	.DEBUG-TAIL ?{
 		{ "DEBUG: \s "symbols \s "before \s "eval: \n \0 }
 		;tail-ptr LDA2 pobj }
 
@@ -30,4 +30,4 @@
 		;length LDA2 pdec <\n> }
 
 		pstr: \reset-console-style \bg-0 \fg-1 \0 }
-#endif
+{% endif %}

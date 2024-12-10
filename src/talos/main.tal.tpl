@@ -28,34 +28,34 @@
 	\GREEN .System/g DEO2
 	\BLUE  .System/b DEO2
 
-	#ifdef ANSI
+	{% if ansi_escapes %}
 		pstr: [
 			\bg-0 \fg-1 \clear-console-screen-right  \n \n \n \n \n \n
 			\console-cursor-up \console-cursor-up \console-cursor-up
 			\console-cursor-up \console-cursor-up \console-cursor-up \0 ]
-	#endif
+	{% endif %}
 	
 	(
 	@|startup )
 	.PRINT-BANNER ?{
 		<print-banner> }
 		
-		#ifdef ANSI
+		{% if ansi_escapes %}
 			pstr: \italic \underline \bold \fg-3 \0
-		#endif
+		{% endif %}
 		
 		free
 
-		#ifdef ANSI
+		{% if ansi_escapes %}
 			pstr: \reset-console-style \bg-0 \fg-1 \n \0
-		#endif
+		{% endif %}
 
 		~../config/startup.tal
 		<print-pre-prompt>
 
 	&no-first-prompt
-		#ifdef ANSI
+		{% if ansi_escapes %}
 			pstr: \enable-braketed-paste \0
-		#endif
+		{% endif %}
 		;REPL .Console/vector DEO2
 		BRK

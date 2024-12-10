@@ -1,0 +1,64 @@
+print_banner:    true   # Print TalOS banner on startup.
+ansi_escapes:    false  # Support for ANSI escape sequences.
+redstone_device: true   # Define MineCraft's Redstone device.  
+
+logger: 
+    level: debug  # From least to most verbose: `off` `info` `warn` or `debug`.
+
+    info: 
+        stacks:   true   # Print stacks after each evaluation.
+        prompt:   true   # Print the heap's `head` pointer inside the prompt.
+        summary:  true   # Print the assembled definition summary.
+    
+    warn: 
+        abort:    true   # Warn each time an evaluation is aborted.
+        redef:    true   # Warn on each redefinition.
+    
+    debug: 
+        input:    false  # Print the input buffer.
+        length:   false  # Print the assembled bytecode `length`.
+        head:     false  # Print the head bytecode.
+        head_ptr: false  # Print the head pointer.
+        tail:     false  # Print the tail symbols.
+        tail_ptr: false  # Print the tail pointer.
+
+theme: 
+    # RGB in decimal.
+    tui: 
+        red: 
+            #          16-bit  32-bit    Decimal
+            # Default: 3ce9    33ccee99  (51, 204, 238, 153)
+            background: 51
+            foreground: 204
+            emphasis:   238
+            error:      153
+
+        green: 
+            #          16-bit  32-bit    Decimal
+            # Default: 0b75    00bb7755  (0, 187, 119, 34)
+            background: 0
+            foreground: 187
+            emphasis:   119
+            error:      85
+    
+        blue: 
+            #          16-bit  32-bit    Decimal
+            # Default: 2b59    22bb5599  (34, 187, 55, 68)
+            background: 34
+            foreground: 187
+            emphasis:   55
+            error:      153
+
+    # RGB in hexadecimal.
+    gui:
+        #                            Default
+        #                  16-bit  24-bit   Decimal
+        #      background  #302    #330022  (51,  0,   34)
+        #      |foreground #cbb    #ccbbbb  (204, 187, 187)
+        #      ||emphasis  #e75    #ee7755  (238, 119, 55)
+        #      |||error    #959    #995599  (153,  0,   68)
+        #      ||||
+        #      vvvv )
+        red:   3ce9
+        green: 0b75
+        blue:  2b59

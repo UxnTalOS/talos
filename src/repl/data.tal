@@ -1,14 +1,23 @@
 (
 @|repl/data )
- @banner [
-  \n \s \s \s \s \s "/_ \s \s "UXN \s \s \s \s \s NAME \s \s \s \s
-  \s "v VERSION \s 28 DATE 29 \n
-  \s \s "/_/ \s "/ \s \s "(c)2024 \s AUTHOR \n
-  \s \s \s "/ \s \s \s \s \s "Type \s "help \s "for \s "more \s 
-  "information. \n \n \0 ]
- @ok [ "____ok \n \n \0 ]	
- @shell-prompt \n \n "uxnsh> \s \0
- @prompt [ "uxn \s "> \s \0 ]
- @prompt-start [ "uxn \0 ]
- @multiline-prompt [ \n \s "... \s \0 ]
-@prompt-end [ "> \s \0 ]
+
+
+	@banner [
+		\n \s \s \s \s \s "/_ \s \s "UXN \s \s \s \s \s NAME \s \s \s \s 
+		\s "v VERSION \s 28 DATE 29 \n
+
+		\s \s "/_/ \s "/ \s \s "(c)2024 \s AUTHOR \n
+
+		\s \s \s "/ \s \s \s \s \s "Type \s "help \s "for \s "more \s 
+		"information. \n \n \0 ]
+
+	@ok [ \n \n \0 ]	
+
+	@shell-prompt \n \n "uxnsh> \s \0
+
+	@prompt [ "uxn \s "> \s \0 ]
+	@prompt-start [ "uxn \0 ]
+	@multiline-prompt [ \n \s "... \s \0 ]
+
+
+@prompt-end   [ "> \s \0 ]

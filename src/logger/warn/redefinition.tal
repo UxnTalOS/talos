@@ -2,5 +2,5 @@
 @|logger/warn/redefinition )
 
 .LOG-LEVEL .Logger/info GTH NOT ?{
-	.WARN-REDEFINITION ?{
+	.WARN-REDEF ?{
 		;Warning/redefinition <set-warning> } }

@@ -66,15 +66,20 @@ if [ -z "$DEBUG" ]; then
 	DEBUG="NO_DBG"
 fi
 
-# Sorry
-cpp -P -w -D $DEBUG config/options.talp -o config/options.tal
-cpp -P -w -D $DEBUG src/debugger/routines/after-eval.talp \
-	-o src/debugger/routines/after-eval.tal
-cpp -P -w -D $DEBUG src/debugger/routines/before-eval.talp \
-	-o src/debugger/routines/before-eval.tal
-cpp -P -w -D $DEBUG src/repl/data.talp -o src/repl/data.tal
-cpp -P -w -D $DEBUG src/talos/main.talp -o src/talos/main.tal
-cpp -P -w -D $DEBUG src/talos/macros.talp -o src/talos/macros.tal
+jinja2 --format yaml config/options.tal.tpl \
+	-o config/options.tal config.yaml
+jinja2 --format yaml src/repl/routines.tal.tpl \
+	-o src/repl/routines.tal config.yaml
+jinja2 --format yaml src/debugger/routines/after-eval.tal.tpl \
+	-o src/debugger/routines/after-eval.tal config.yaml
+jinja2 --format yaml src/debugger/routines/before-eval.tal.tpl \
+	-o src/debugger/routines/before-eval.tal config.yaml
+jinja2 --format yaml src/repl/data.tal.tpl \
+	-o src/repl/data.tal config.yaml
+jinja2 --format yaml src/talos/main.tal.tpl \
+	-o src/talos/main.tal config.yaml
+jinja2 --format yaml src/talos/macros.tal.tpl \
+	-o src/talos/macros.tal config.yaml
 
 # Build
 mkdir -p rom
