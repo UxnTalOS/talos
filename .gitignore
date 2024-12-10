@@ -1,8 +1,9 @@
 .venv/*
-./.rom*
+./.rom
 ./*.sym
 .vscode/*
 bak/*
+rom/.rom*
 *.code-workspace
 
 # Debugging
