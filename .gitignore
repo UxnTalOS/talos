@@ -1,5 +1,5 @@
 .venv/*
-./*.rom
+./.rom*
 ./*.sym
 .vscode/*
 bak/*
