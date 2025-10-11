@@ -19,13 +19,13 @@ find_in_path() {
 }
 
 # Setup virtual environment for jinja2-cli
-if [ ! -d pyenv ]; then
+if [ ! -d .venv ]; then
     echo "Creating virtual environment..."
-    python -m venv pyenv
-    . pyenv/bin/activate
-    pip install jinja2-cli
+    python -m venv .venv
+    . .venv/bin/activate
+    pip install "jinja2-cli[yaml]"
 else
-    . pyenv/bin/activate
+    . .venv/bin/activate
 fi
 
 # Start
