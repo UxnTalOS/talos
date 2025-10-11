@@ -18,6 +18,16 @@ find_in_path() {
     IFS="$old_ifs"
 }
 
+# Setup virtual environment for jinja2-cli
+if [ ! -d pyenv ]; then
+    echo "Creating virtual environment..."
+    python -m venv pyenv
+    . pyenv/bin/activate
+    pip install jinja2-cli
+else
+    . pyenv/bin/activate
+fi
+
 # Start
 # Save TTY settings.
 STTY=$(stty -g)
