@@ -2,12 +2,25 @@
 
 OS_TYPE=$(uname)
 ROM=rom/talos.rom
-HOST=`uname -a`
-echo "Host: $HOST"
+echo "Host: $OS_TYPE"
+
+# Portable find-in-PATH function (replaces 'which')
+find_in_path() {
+    cmd="$1"
+    old_ifs="$IFS"
+    IFS=:
+    for dir in $PATH; do
+        if [ -x "$dir/$cmd" ]; then
+            printf '%s\n' "$dir/$cmd"
+            break
+        fi
+    done
+    IFS="$old_ifs"
+}
 
 # Start
 # Save TTY settings.
-STTY=`stty -g`
+STTY=$(stty -g)
 
 # Select emulator.
 if [ -z "$EMU" ]; then
@@ -45,7 +58,7 @@ if [ -z "$EMU" ]; then
 	EMU="uxncli"
 fi
 
-EMU_PATH="/data/data/com.termux/files/home/bin/uxncli" # $(which "$EMU" 2>/dev/null)
+EMU_PATH=$(find_in_path "$EMU")
 
 if [ -z "$EMU_PATH" ]; then
     echo "Error: '$EMU' not found in PATH."
@@ -102,7 +115,7 @@ if [ -z "$ASM" ]; then
 	ASM="uxnasm"
 fi
 
-ASM_PATH="/data/data/com.termux/files/home/bin/uxnasm" # $(which "$ASM" 2>/dev/null)
+ASM_PATH=$(find_in_path "$ASM")
 
 if [ -z "$ASM_PATH" ]; then
     echo "Error: '$ASM' not found in PATH."
@@ -140,11 +153,10 @@ fi
 
 echo "Using emulator: $EMU_PATH"
 $EMU $ROM
-EXIT=`echo $?`
+EXIT=$?
 echo "Exit code: $EXIT"
-
 
 # Exit
 # Restore TTY settings.
-stty $STTY
-exit $EXIT
+stty "$STTY"
+exit "$EXIT"
