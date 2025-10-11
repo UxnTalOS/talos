@@ -42,10 +42,10 @@ if [ -z "$EMU" ]; then
 fi
 
 if [ -z "$EMU" ]; then
-	EMU="uxntui"
+	EMU="uxncli"
 fi
 
-EMU_PATH=$(which "$EMU" 2>/dev/null)
+EMU_PATH="/data/data/com.termux/files/home/bin/uxncli" # $(which "$EMU" 2>/dev/null)
 
 if [ -z "$EMU_PATH" ]; then
     echo "Error: '$EMU' not found in PATH."
@@ -102,7 +102,7 @@ if [ -z "$ASM" ]; then
 	ASM="uxnasm"
 fi
 
-ASM_PATH=$(which "$ASM" 2>/dev/null)
+ASM_PATH="/data/data/com.termux/files/home/bin/uxnasm" # $(which "$ASM" 2>/dev/null)
 
 if [ -z "$ASM_PATH" ]; then
     echo "Error: '$ASM' not found in PATH."

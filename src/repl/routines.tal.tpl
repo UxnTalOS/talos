@@ -151,7 +151,7 @@
 		#0000 ;length STA2
 		~debugger/routines/before-eval.tal
 
-	POP ( consume newline)
+	POP ( consume newline )
 
 	(
 	@|Eval )

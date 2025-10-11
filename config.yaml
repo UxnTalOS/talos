@@ -1,5 +1,5 @@
 print_banner:    true   # Print TalOS banner on startup.
-ansi_escapes:    false  # Support for ANSI escape sequences.
+ansi_escapes:    true  # Support for ANSI escape sequences.
 redstone_device: true   # Define MineCraft's Redstone device.  
 
 logger: 
