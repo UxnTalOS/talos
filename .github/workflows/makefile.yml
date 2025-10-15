@@ -24,8 +24,8 @@ jobs:
         cd ~
         git clone https://git.sr.ht/~rabbits/uxn11
         cd uxn11
-        make
-        make install
+        make uxncli
+        cp bin/uxncli ~/bin
 
     - name: Build TalOS
       run: make test
