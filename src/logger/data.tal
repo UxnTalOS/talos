@@ -17,12 +17,12 @@
 	"WARNING: \s \0
 	&redefinition "Redefining: \0
 	&clearing-stacks [
-		\reset-console-style \bg-0 \fg-2 "WARNING: \s "Clearing \s "stacks. \n
+		\reset-console-style \bg-0 \fg-2 "WARNING: \s "Clearing \s "stacks.
 		\reset-console-style \bg-0 \fg-1 \0 ]
 ]
 
 @Error [
-	"ERROR: \s \0
+	\n "ERROR: \s \0
 	&file "File \0
 	&number "Number \0
 	&length "Length \0
