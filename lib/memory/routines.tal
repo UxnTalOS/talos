@@ -149,7 +149,7 @@
 		0e08
 )
 @pmem ( addr* -- )
-	STH2k DUP2 phex <\s> <\s> #0000
+	<\n> STH2k DUP2 phex <\s> <\s> #0000
 	&>loop-bytes ( addr* i* | addr* -- )
 		ADD2k LDA phex/byte
 		DUP #0f AND DUP #07 NEQ ?{ <\s> }
