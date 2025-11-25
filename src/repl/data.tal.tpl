@@ -20,7 +20,7 @@
 
 		\reset-console-style \bg-0 \fg-1 \0 ]
 
-	@ok [ ( \underline \fg-3 ) \n \n \0 ]
+	@ok [ ( \underline \fg-3 ) \n \0 ]
 
 	@shell-prompt [
 		\r \s \s \s \s \s \s \s \s \s \r \bg-0 \fg-2 \bold "sh \s "> \s

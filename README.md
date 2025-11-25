@@ -245,12 +245,14 @@ implementation.
 - [ ] Integrate disassembler.
 - [ ] Restore stacks without `:!` when aborting from all errors!
 - [ ] Fix: abort early.
+- [ ] add a console vector when syscall awaiting to kill child process??
 - [ ] Crear destroys previoszshell log history instead of just "advancing" the screen
 - [ ] translate tabs to n spaces.
 - [ ] make shell mode a config option so as not to have to recover 
 from BRK if not using uxn11's uxncli extension.
 - [ ] allow capturing syscall output out/err or ignore it.
 - [ ] fix unable to delete in comment CRITICAL!!!
+- [ ] get exit code of child
 - [ ] during syscall signals are ignored because talos starts in raw
 tty mode, probably solved by saving tty settisgs, setting stty sane, and then restoring the tty settings in uxn11's uxncli...
 
