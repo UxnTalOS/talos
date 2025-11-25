@@ -23,7 +23,7 @@
 	@ok [ ( \underline \fg-3 ) \n \n \0 ]
 
 	@shell-prompt [
-		\r \s \s \s \s \s \s \s \s \s \r \bg-0 \fg-2 \bold "փsh> \s
+		\r \s \s \s \s \s \s \s \s \s \r \bg-0 \fg-2 \bold "sh \s "> \s
 		\reset-console-style \bg-0 \fg-1 \0 ]
 
 	@prompt [
@@ -44,7 +44,7 @@
 
 	@ok [ \n \n \0 ]	
 
-	@shell-prompt \n \n "uxnsh> \s \0
+	@shell-prompt \n \n "sh \s "> \s \0
 
 	@prompt [ "uxn \s "> \s \0 ]
 	@prompt-start [ "uxn \0 ]

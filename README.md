@@ -247,6 +247,18 @@ implementation.
 - [ ] Fix: abort early.
 - [ ] Crear destroys previoszshell log history instead of just "advancing" the screen
 - [ ] translate tabs to n spaces.
+- [ ] make shell mode a config option so as not to have to recover 
+from BRK if not using uxn11's uxncli extension.
+- [ ] allow capturing syscall output out/err or ignore it.
+- [ ] fix unable to delete in comment CRITICAL!!!
+- [ ] during syscall signals are ignored because talos starts in raw
+tty mode, probably solved by saving tty settisgs, setting stty sane, and then restoring the tty settings in uxn11's uxncli...
+
+...exiting htop is possible in the following command with ^C but it exits talos as well, need to test if passing through signals while awaiting the child process to finish, would kill talos as well or just the child as desired.
+```
+sh > STTY=$(stty -g) && stty sane && htop && stty "$STTY"
+```
+but wait I can exit
 ```
 փ [140e]> snathoue
 ERROR: Unknown reference: snathoue in expression.
