@@ -245,6 +245,7 @@ implementation.
 - [ ] Integrate disassembler.
 - [ ] Restore stacks without `:!` when aborting from all errors!
 - [ ] Fix: abort early.
+- [ ] Crear destroys previoszshell log history instead of just "advancing" the screen
 ```
 փ [140e]> snathoue
 ERROR: Unknown reference: snathoue in expression.
