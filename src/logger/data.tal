@@ -14,7 +14,7 @@
 ]
 
 @Warning [
-	"WARNING: \s \0
+	\n "WARNING: \s \0
 	&redefinition "Redefining: \0
 	&clearing-stacks [
 		\reset-console-style \bg-0 \fg-2 "WARNING: \s "Clearing \s "stacks.

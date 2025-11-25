@@ -21,5 +21,5 @@
 	;Info/in pstr/
 	;scope pstr/
 	[ LIT2 ". -Console/write ] DEO
-	pstr: \n \bg-0 \fg-1 \0
+	pstr: \bg-0 \fg-1 \0
 	JMP2r
