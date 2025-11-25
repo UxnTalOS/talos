@@ -105,9 +105,9 @@
 
 	DUP #13 NEQ ?{    ( 0c  ^S -> DEVICE-CONTROL-3 )
 		pstr: \reset-console-style \bg-0 \fg-2 \bold \0
-		POP #010e DEO
-		pstr: \reset-console-style \bg-0 \fg-1 \0
-		LIT \n }
+		POP <\n> #010e DEO
+		pstr: \console-cursor-up \reset-console-style \bg-0 \fg-1 \0
+		LIT \n  }
 
 	DUP #0e NEQ ?{    ( 0c  ^N -> SO  SHIFT-OUT )
 		;&shell-mode LDA #00 EQU ;&shell-mode STA POP
