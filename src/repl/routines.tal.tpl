@@ -99,7 +99,7 @@
 	DUP #0c NEQ ?{    ( 0c  ^L -> FF  FORM-FEED )
 		pstr: \clear-console-screen \reset-console-cursor \0
 		<print-pre-prompt>
-		POP BRK }
+		POP POP BRK }
 
 	DUP #13 NEQ ?{    ( 0c  ^S -> DEVICE-CONTROL-3 )
 		pstr: \reset-console-style \bg-0 \fg-2 \bold \0
