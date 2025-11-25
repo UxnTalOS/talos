@@ -158,10 +158,11 @@
 	(
 	@|Eval )
 	[ LIT &shell-mode 01 ] ?{
-		#01 ,&shell-mode STR
-		;input syscall-sync
-
-		POP !&shell-return }
+		#01 ,&shell-mode STR 
+		<\n>
+		;input syscall/sync
+		pstr: \console-cursor-up \0
+		!&shell-return }
 
 	;head-ptr LDA2 DUP2 ;prev-head STA2 STH2 ( | +prev-head* )
 	<assemble> ;abort LDA ?&expr-abort
@@ -257,10 +258,13 @@
 
 @toogle-shell ( -- )
 
-@syscall-sync ( cmd* -- )
+@syscall/async ( cmd* -- )
 	.Console/addr DEO2
 	#01 .Console/exec DEO
+	JMP2r
 
-	&sync
-		.Console/live DEI #ff NEQ ?&sync
-		JMP2r
+@syscall/sync ( cmd* -- )
+	/async
+	&await
+		.Console/live DEI #ff NEQ ?&await
+	JMP2r
