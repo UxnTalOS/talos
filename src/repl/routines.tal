@@ -63,6 +63,8 @@
 			#00 ,&in-csi-2 STR
 			POP BRK }
 
+		POP BRK
+		(
 		DUP LIT "A NEQ ?{    ( \CSI 41  ^[[A   UP )
 			pstr: \console-cursor-up \0
 			POP BRK }
@@ -77,7 +79,7 @@
 
 		DUP LIT "D NEQ ?{    ( \CSI 44  ^[[C   LEFT )
 			pstr: \console-cursor-left \0
-			POP BRK } }
+			POP BRK } ) }
 
 	DUP #5b NEQ  ;&in-esc LDA ORA ?{    ( \CSI  ^[[   CSI )
 		#00 ;&in-csi STA
