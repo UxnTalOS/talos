@@ -6,13 +6,13 @@
 		\bold \bg-1 \fg-0 MARGIN \n
 
 		\s \s \bg-2 \s \s \s \underline "/ \s \reset-console-style \bold \bg-1 \fg-0
-		\s \s \bg-3 \fg-1 \s \s "⋃ \s "⨉ \s "⋂ \s \s \bg-0 \fg-3 \s \s NAME \s
+		\s \s \bg-3 \fg-1 \s \s "⋃ \s "⨉ \s "⋂ \s \s \bg-0 \fg-2 \s \s NAME \s
 		\s \bg-2 \fg-0 \s \s "v VERSION \s 28 DATE 29 \s \s \bg-1 \fg-0 \s \s \n
 
 		\s \s \bg-2 \underline "/ \s \reset-console-style \bold \bg-2 \fg-0 "/ \s "/
 		\bg-1 \s \s \s \s \s "©2024 \s AUTHOR \s \s \s \s \s \n
 
-		\s \s \bg-2 \s "/ \s \s \s \bg-1 \s \s \s \s "Type \s \bold \italic \fg-3 "help
+		\s \s \bg-2 \s "/ \s \s \s \bg-1 \s \s \s \s "Type \s \bold \italic \fg-2 "help
 		\reset-console-style \bold \bg-1 \fg-0 \s "for \s "more \s "information. \s \s
 		\s \s \n
 
@@ -20,14 +20,14 @@
 
 		\reset-console-style \bg-0 \fg-1 \0 ]
 
-	@ok [ ( \underline \fg-3 ) \n \0 ]
+	@ok [ ( \underline \fg-2 ) \n \0 ]
 
 	@shell-prompt [
-		\r \s \s \s \s \s \s \s \s \s \r \bg-0 \fg-2 \bold "sh \s "> \s
+		\r \s \s \s \s \s \s \s \s \s \r \bg-0 \fg-3 \bold "sh \s "> \s
 		\reset-console-style \bg-0 \fg-1 \0 ]
 
 	@prompt [
-		\r \s \s \s \s \r \bg-0 \fg-3 \bold "փ \s "> \s
+		\r \s \s \s \s \r \bg-0 \fg-2 \bold "փ \s "> \s
 		\reset-console-style \bg-0 \fg-1 \0 ]
 
 	@prompt-start [ "փ \s \0 ]

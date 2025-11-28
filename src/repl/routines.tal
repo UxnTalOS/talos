@@ -261,8 +261,9 @@
 	#01 .Console/exec DEO
 	JMP2r
 
-@syscall/sync ( cmd* -- )
+@syscall/sync ( cmd* -- code )
 	/async
 	&await
 		.Console/live DEI #ff NEQ ?&await
+	.Console/exit DEI
 	JMP2r
